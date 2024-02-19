@@ -4,13 +4,13 @@ class UsuariosController
     //Incuimos los modelos que vamos a utilizar
     public function __construct()
     {
-        require_once "Models/UsuariosModel.php";
+        require_once "models/UsuariosModel.php";
     }
 
 
     public function index()
     {
-        require_once "Views/login/index.php";
+        require_once "views/login/index.php";
     }
 
     public function iniciarSesion()
