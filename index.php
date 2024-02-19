@@ -1,5 +1,5 @@
 <?php
-	//Importar sus controladores
+	//Importar sus controladores que se van creando
 	require_once "config/config.php";
 	require_once "core/routes.php";
 	require_once "config/database.php";
