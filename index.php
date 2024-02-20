@@ -4,6 +4,7 @@
 	require_once "core/routes.php";
 	require_once "config/database.php";
 	require_once "controllers/Usuarios.php";
+	require_once "Controllers/Docentes.php";
 
 	
 	//Mediante la url vamos a saber que controlador se usa
