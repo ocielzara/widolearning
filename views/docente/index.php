@@ -440,10 +440,6 @@
                 <span>Registrarse</span>
             </button>
             <br>
-            <button class="ver-cursos">
-                <span>Ver cursos</span>
-            </button>
-            <br>
             <div class="iconos">
                 <div class="border-icon">
                     <i class="bx bxl-facebook-circle"></i>

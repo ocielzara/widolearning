@@ -1,5 +1,5 @@
 <?php
-class DocenteController
+class DocentesController
 {
     //Incuimos los modelos que vamos a utilizar
     public function __construct()
