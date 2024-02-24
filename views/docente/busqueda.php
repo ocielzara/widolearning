@@ -54,53 +54,6 @@
             /* Posiciona la parte izquierda de la imagen en el 50% del contenedor */
         }
 
-        .custom-text {
-            font-family: 'Arial', sans-serif;
-            font-size: 24px;
-            font-weight: bold;
-            text-transform: uppercase;
-            color: black;
-            padding: 5px;
-            margin-top: 0px;
-        }
-
-        #section1 {
-            display: flex;
-            height: 2px;
-            color: black;
-            border: 1px solid orange;
-            box-sizing: border-box;
-            margin-right: 65%;
-            margin-top: 0px;
-            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Estilos del contenedor */
-        .image-container {
-            width: 700px;
-            /* Ancho del contenedor */
-            height: 400px;
-            /* Altura del contenedor */
-            border-radius: 20px;
-            /* Bordes redondeados */
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
-            /* Sombra */
-            overflow: hidden;
-            /* Oculta el contenido que se desborda */
-            margin: 3% auto;
-            /* Centra enmedio de la pagina */
-        }
-
-        /* Estilos de la imagen */
-        .image-container img {
-            width: 100%;
-            /* La imagen ocupa todo el ancho del contenedor */
-            height: 100%;
-            /* La imagen ocupa todo el alto del contenedor */
-            object-fit: cover;
-            /* La imagen se ajusta para cubrir el contenedor */
-        }
-
         .contenedor-1 {
             width: 800px;
             /* Ancho del contenedor */
@@ -110,38 +63,64 @@
             /* Bordes redondeados */
             overflow: hidden;
             /* Oculta el contenido que se desborda */
-            margin: 3% auto;
+            margin: 0% auto;
             /* Centra en medio de la página */
-            background-image: linear-gradient(to top, orange 100%, transparent 100%),
-                linear-gradient(to left, orange 100%, transparent 100%),
-                linear-gradient(to top, orange 50%, transparent 50%);
-            /* Combina tres gradientes lineales para pintar las partes superior, izquierda e inferior */
-            background-size: 100% 2px, 2px 100%, 100% 2px;
-            /* Tamaño de cada gradiente (ancho x alto) */
-            background-repeat: no-repeat;
-            /* Evita que los gradientes se repitan */
-            padding: 30px;
+            padding: 0px;
         }
 
-        .saludo {
-            font-family: 'Arial', sans-serif;
-            font-size: 20px;
-            font-weight: bold;
-            color: black;
-            padding: 5px;
-            margin-top: 0px;
+        /* Estilos para el formulario de búsqueda */
+
+        #search-form {
+            margin: 10px;
         }
+
+        #search-input {
+            padding: 10px;
+            width: 600px;
+            border: 1px;
+            border-radius: 25px;
+            font-size: 16px;
+            background-color: #D4EBFF;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #D4EBFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Estilos para los resultados de la búsqueda */
+        #search-results {
+            margin: 20px;
+            padding: 10px;
+            /* border: 1px solid #ccc;
+            border-radius: 5px;*/
+        }
+
+        /* Estilos para los elementos de resultado */
+        .result-item {
+            margin-bottom: 10px;
+        }
+
+
+
 
         .cursos-p {
             font-family: 'Arial', sans-serif;
             font-size: 19px;
             font-weight: bold;
-            color: #50D2FF;
+            color: orange;
             padding: 5px;
             margin-top: 0px;
             margin-left: 5%;
             /* Centra en medio de la página */
         }
+
+
+
 
         .prices-1 {
             padding: 5px;
@@ -278,19 +257,18 @@
             <img src="../../images/logo-aerobotlearning.png" alt="Descripción de la imagen" />
         </div>
     </header>
-    <p class="custom-text">Portal de leana</p>
-    <div id="section1"></div>
     <div class="prices-1">
-        <div class="image-container">
-            <img src="../../images/imagen-prueba2.jpg" alt="Descripción de la imagen">
-        </div>
         <div class="contenedor-1">
-            <p class="saludo">¡Hola, soy Leana!</p>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi quasi officiis praesentium quo
-                accusamus inventore tempora aperiam labore ex. Id commodi numquam quis corporis ab? Sint numquam veniam
-                amet unde.</p>
+            <!--El error es el id-->
+            <form id="search-form" action="index.php?c=usuarios&a=motorBusqueda" method="post">
+                <input type="text" id="search-input" placeholder="¿Qué deseas aprender?" name="keyword" />
+                <button type="submit">Buscar</button>
+            </form>
+            <div id="search-results">
+                <!-- Aquí se mostrarán los resultados de la búsqueda -->
+            </div>
         </div>
-        <p class="cursos-p">¿Qué otros cursos imparte Leana?</p>
+        <p class="cursos-p">CURSOS TOP (con mayor demanda)</p>
         <div class="container mt-4 bg-primary">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
@@ -498,44 +476,216 @@
             </div>
 
         </div>
-        <div class="container col-md-10 mt-4 bg-primary">
-            <div class="row">
-                <div class="col-md-4 mt-4 mb-2">
-                    <!-- Calendar -->
-                    <div id="calendar" class="p-3">
-                        <input type="date" name="" id="">
+        <br><br>
+        <p class="cursos-p">ASESORÍAS</p>
+        <div class="container mt-4 bg-primary">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="d-flex flex-wrap justify-content-around">
+                            <div class="cardCarrusel">
+                                <div class="card-body">
+                                    <div class="prices-1">
+                                        <!-- Cuadrado con sombra -->
+                                        <div id="image-box">
+                                            <!-- Mitad superior para la imagen -->
+                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <!-- Mitad inferior para el título de la imagen -->
+                                            <button class="clase-muestra">
+                                                <span>Clase muestra</span>
+                                            </button>
+                                            <button class="suscripcion">
+                                                <span>proximamente</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cardCarrusel">
+                                <div class="card-body">
+                                    <div class="prices-1">
+                                        <!-- Cuadrado con sombra -->
+                                        <div id="image-box">
+                                            <!-- Mitad superior para la imagen -->
+                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <!-- Mitad inferior para el título de la imagen -->
+                                            <button class="clase-muestra">
+                                                <span>Clase muestra</span>
+                                            </button>
+                                            <button class="suscripcion">
+                                                <span>proximamente</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cardCarrusel">
+                                <div class="card-body">
+                                    <div class="prices-1">
+                                        <!-- Cuadrado con sombra -->
+                                        <div id="image-box">
+                                            <!-- Mitad superior para la imagen -->
+                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <!-- Mitad inferior para el título de la imagen -->
+                                            <button class="clase-muestra">
+                                                <span>Clase muestra</span>
+                                            </button>
+                                            <button class="suscripcion">
+                                                <span>proximamente</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cardCarrusel">
+                                <div class="card-body">
+                                    <div class="prices-1">
+                                        <!-- Cuadrado con sombra -->
+                                        <div id="image-box">
+                                            <!-- Mitad superior para la imagen -->
+                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <!-- Mitad inferior para el título de la imagen -->
+                                            <button class="clase-muestra">
+                                                <span>Clase muestra</span>
+                                            </button>
+                                            <button class="suscripcion">
+                                                <span>proximamente</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cardCarrusel">
+                                <div class="card-body">
+                                    <div class="prices-1">
+                                        <!-- Cuadrado con sombra -->
+                                        <div id="image-box">
+                                            <!-- Mitad superior para la imagen -->
+                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <!-- Mitad inferior para el título de la imagen -->
+                                            <button class="clase-muestra">
+                                                <span>Clase muestra</span>
+                                            </button>
+                                            <button class="suscripcion">
+                                                <span>proximamente</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4 mt-4  mb-2">
-                    <!-- Card: Horas disponibles -->
-                    <div class="card text-center">
-                        <div class="card-header">
-                            Horas disponibles
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">10:00 am</p>
-                            <p class="card-text">12:00 pm</p>
-                            <p class="card-text">12:00 pm</p>
-                            <p class="card-text">12:00 pm</p>
-                            <!-- Agrega más horas disponibles aquí -->
+                    <!-- dxsadas -->
+                    <div class="carousel-item">
+                        <div class="d-flex flex-wrap justify-content-around">
+                            <div class="cardCarrusel">
+                                <div class="card-body">
+                                    <div class="prices-1">
+                                        <!-- Cuadrado con sombra -->
+                                        <div id="image-box">
+                                            <!-- Mitad superior para la imagen -->
+                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <!-- Mitad inferior para el título de la imagen -->
+                                            <button class="clase-muestra">
+                                                <span>Clase muestra</span>
+                                            </button>
+                                            <button class="suscripcion">
+                                                <span>proximamente</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cardCarrusel">
+                                <div class="card-body">
+                                    <div class="prices-1">
+                                        <!-- Cuadrado con sombra -->
+                                        <div id="image-box">
+                                            <!-- Mitad superior para la imagen -->
+                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <!-- Mitad inferior para el título de la imagen -->
+                                            <button class="clase-muestra">
+                                                <span>Clase muestra</span>
+                                            </button>
+                                            <button class="suscripcion">
+                                                <span>proximamente</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cardCarrusel">
+                                <div class="card-body">
+                                    <div class="prices-1">
+                                        <!-- Cuadrado con sombra -->
+                                        <div id="image-box">
+                                            <!-- Mitad superior para la imagen -->
+                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <!-- Mitad inferior para el título de la imagen -->
+                                            <button class="clase-muestra">
+                                                <span>Clase muestra</span>
+                                            </button>
+                                            <button class="suscripcion">
+                                                <span>proximamente</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cardCarrusel">
+                                <div class="card-body">
+                                    <div class="prices-1">
+                                        <!-- Cuadrado con sombra -->
+                                        <div id="image-box">
+                                            <!-- Mitad superior para la imagen -->
+                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <!-- Mitad inferior para el título de la imagen -->
+                                            <button class="clase-muestra">
+                                                <span>Clase muestra</span>
+                                            </button>
+                                            <button class="suscripcion">
+                                                <span>proximamente</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cardCarrusel">
+                                <div class="card-body">
+                                    <div class="prices-1">
+                                        <!-- Cuadrado con sombra -->
+                                        <div id="image-box">
+                                            <!-- Mitad superior para la imagen -->
+                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <!-- Mitad inferior para el título de la imagen -->
+                                            <button class="clase-muestra">
+                                                <span>Clase muestra</span>
+                                            </button>
+                                            <button class="suscripcion">
+                                                <span>proximamente</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
+
                 </div>
-                <div class="col-md-4 mt-4  mb-2">
-                    <!-- Card: Resumen -->
-                    <div class="card">
-                        <div class="card-header">
-                            Resumen
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <button class="btn btn-primary">registrarse</button>
-                        </div>
-                    </div>
-                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
+
         </div>
+        
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

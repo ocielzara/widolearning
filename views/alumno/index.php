@@ -33,7 +33,7 @@
     }
 
     .header {
-        background-image: url(images/header-alumnos.png), url(images/image.png);
+        background-image: url(../../images/header-alumnos.png), url(../../images/image.png);
         background-position: center top;
         background-repeat: no-repeat;
         background-size: 100%, cover;

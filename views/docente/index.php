@@ -486,17 +486,17 @@
 </body>
 <script>
     // Mi espacio
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         var botonMiEspacio = document.querySelector(".mi-espacio");
         var formularioInicioSesion = document.getElementById("formulario-inicio-sesion");
         var botonCerrarFormulario = document.getElementById("cerrar-formulario");
 
-        botonMiEspacio.addEventListener("click", function(event) {
+        botonMiEspacio.addEventListener("click", function (event) {
             event.preventDefault(); // Evita el comportamiento predeterminado del botón (enviar formulario)
             formularioInicioSesion.style.display = "block";
         });
 
-        botonCerrarFormulario.addEventListener("click", function(event) {
+        botonCerrarFormulario.addEventListener("click", function (event) {
             event.preventDefault(); // Evita el comportamiento predeterminado del botón (enviar formulario)
             formularioInicioSesion.style.display = "none";
         });
@@ -505,17 +505,17 @@
     });
 
     // Registrarse
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         var botonMiEspacio = document.querySelector(".registrarse");
         var formularioInicioSesion = document.getElementById("formulario-registro");
         var botonCerrarFormulario = document.getElementById("cerrar-formulario2");
 
-        botonMiEspacio.addEventListener("click", function(event) {
+        botonMiEspacio.addEventListener("click", function (event) {
             event.preventDefault(); // Evita el comportamiento predeterminado del botón (enviar formulario)
             window.location.href = "https://forms.gle/eHubU3NkYJx1Zqqb8";
         });
 
-        botonCerrarFormulario.addEventListener("click", function(event) {
+        botonCerrarFormulario.addEventListener("click", function (event) {
             event.preventDefault(); // Evita el comportamiento predeterminado del botón (enviar formulario)
             formularioInicioSesion.style.display = "none";
         });
@@ -523,4 +523,3 @@
 </script>
 
 </html>
-hola
