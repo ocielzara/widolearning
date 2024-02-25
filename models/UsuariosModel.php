@@ -15,7 +15,7 @@ class UsuarioModel
 {
     $con_MD5 = md5($contraseña);
     // Preparar la consulta SQL
-    $query = mysqli_query($this->db, "INSERT INTO usuarios (nombre, correo_electronico, contraseña, tipo) VALUES ('$nombre', '$correo', '$con_MD5', 2)");
+    $query = mysqli_query($this->db, "INSERT INTO usuarios (nombre, correo_electronico, contraseña) VALUES ('$nombre', '$correo', '$con_MD5')");
     return true; // La inserción fue exitosa
 }
 

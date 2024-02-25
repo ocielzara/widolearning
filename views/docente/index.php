@@ -428,7 +428,7 @@
 <body>
     <header class="header">
         <div class="menu container">
-            <img src="../../images/titulo.png" alt="Descripción de la imagen" />
+            <img src="images/titulo.png" alt="Descripción de la imagen" />
         </div>
         <div class="bloque1">
             <h2>Tu experiencia de aprendizaje te espera</h2>
@@ -470,7 +470,7 @@
     <div id="formulario-inicio-sesion" class="formulario-inicio-sesion">
         <button id="cerrar-formulario" style="position: absolute; top: 10px; right: 10px; cursor: pointer;">X</button>
         <h2>¡Hola de nuevo!</h2>
-        <form action="index.php?c=docente&a=iniciarSesion" method="post">
+        <form action="index.php?c=docentes&a=iniciarSesion" method="post">
             <!-- Aquí puedes agregar los campos de usuario y contraseña -->
             <p>Correo electronico:</p>
             <input type="text" name="correo" required>
