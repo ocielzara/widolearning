@@ -55,7 +55,7 @@ CREATE TABLE MotorBusqueda (
     palabrasClave VARCHAR(255)
 );
 
-INSERT INTO `motorBusqueda` (`idCurso`, `titulo`, `contenido`, `palabrasClave`) VALUES
+INSERT INTO `motorBusqueda` (`id_curso`, `titulo`, `contenido`, `palabrasClave`) VALUES
 (1, 'Programacion web', 'https://grupoaerobot.com/Ciberseguridad.php', 'html css web'),
 (2, 'Ciberseguridad', 'https://grupoaerobot.com/Ciberseguridad.php', 'seguridad hacker'),
 (3, 'Minecraft', '', 'minecraft steve alex videjuegos programacion animacion 3d desarrollo juego codigo'),

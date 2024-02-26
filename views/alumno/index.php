@@ -742,8 +742,7 @@
     }
 </style>
 <script>
-
-    $('#carouselExample').on('slide.bs.carousel', function (e) {
+    $('#carouselExample').on('slide.bs.carousel', function(e) {
 
 
         var $e = $(e.relatedTarget);
@@ -757,8 +756,7 @@
                 // append slides to end
                 if (e.direction == "left") {
                     $('.carousel-item').eq(i).appendTo('.carousel-inner');
-                }
-                else {
+                } else {
                     $('.carousel-item').eq(0).appendTo('.carousel-inner');
                 }
             }
@@ -771,16 +769,18 @@
     });
 
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         /* show lightbox when clicking a thumbnail */
-        $('a.thumb').click(function (event) {
+        $('a.thumb').click(function(event) {
             event.preventDefault();
             var content = $('.modal-body');
             content.empty();
             var title = $(this).attr("title");
             $('.modal-title').html(title);
             content.html($(this).html());
-            $(".modal-profile").modal({ show: true });
+            $(".modal-profile").modal({
+                show: true
+            });
         });
 
     });
@@ -812,14 +812,55 @@
                 <p class="custom-text-nombre">Arturo!</p>
             </div>
         </div>
+        <!-- Motor de busqueda -->
         <div id="section2">
-            <!--El error es el id-->
-            <form id="search-form" action="index.php?c=usuarios&a=motorBusqueda" method="post">
-                <input type="text" id="search-input" placeholder="Busca tu nuevo curso" name="keyword" />
-                <button type="submit">Buscar</button>
+            <!-- Formulario para buscar -->
+            <form class="form">
+                <input type="text" id="busqueda" class="form-control mr-sm-2" placeholder="Buscar cursos">
+                <button type="button" id="buscar" class="btn btn-primary">Buscar</button>
             </form>
-            <div id="search-results">
-                <!-- Aquí se mostrarán los resultados de la búsqueda -->
+            <!-- Codigo de ajax -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#buscar').click(function() {
+                        var busqueda = $('#busqueda').val();
+                        $.ajax({
+                            type: "POST",
+                            url: "index.php?c=cursos&a=cursos",
+                            data: {
+                                busqueda: busqueda
+                            },
+                            dataType: 'json',
+                            success: function(response) {
+                                console.log(response);
+                                $('#resultados').empty(); // Limpiamos el contenedor de resultados antes de agregar nuevos resultados
+
+                               
+
+                                // Verificamos si se encontraron cursos
+                                if (response.length > 0) {
+                                    // Iteramos sobre cada curso y creamos un elemento h3 para mostrarlo
+                                    response.forEach(function(curso) {
+                                        //Aca modifica para que tenga link
+                                        $('#resultados').append('<a href="www.google.com">' + curso.titulo + '</a><br>');
+                                    });
+                                } else {
+                                    // Si no se encontraron cursos, mostramos un mensaje
+                                    $('#resultados').append('<p>No se encontraron cursos.</p>');
+                                }
+
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    });
+                });
+            </script>
+
+            <div id="resultados">
+
             </div>
         </div>
         <div id="section3">
@@ -1024,48 +1065,5 @@
         </div>
     </div>
 </body>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const searchForm = document.getElementById("search-form");
-        const searchInput = document.getElementById("search-input");
-        const searchResults = document.getElementById("search-results");
-
-        searchForm.addEventListener("submit", function (event) {
-            event.preventDefault(); // Evita que se envíe el formulario
-
-            const searchTerm = searchInput.value.trim().toLowerCase(); // Convertir a minúsculas
-
-            if (searchTerm !== "") {
-                // Realizar la solicitud AJAX al servidor
-                const xhr = new XMLHttpRequest();
-                xhr.open("POST", "index.php?c=usuarios&a=motorBusqueda", true);
-                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhr.onload = function () {
-                    if (xhr.status === 200) {
-                        // Parsear la respuesta JSON y mostrar los resultados
-                        const resultados = JSON.parse(xhr.responseText);
-                        if (resultados.length > 0) {
-                            searchResults.innerHTML = "";
-                            resultados.forEach(result => {
-                                const resultItem = document.createElement("div");
-                                resultItem.classList.add("result-item");
-                                // Se envuelve el título en un enlace <a> con el atributo href que apunta a la URL correspondiente
-                                resultItem.innerHTML = `<h3><a href="${result.contenido}">${result.titulo}</a></h3>`;
-                                searchResults.appendChild(resultItem);
-                            });
-                        } else {
-                            searchResults.innerHTML = "<p>No se encontraron resultados</p>";
-                        }
-                    } else {
-                        searchResults.innerHTML = "<p>Error al obtener los datos del servidor</p>";
-                    }
-                };
-                xhr.send("keyword=" + searchTerm);
-            } else {
-                searchResults.innerHTML = "<p>Por favor, ingresa una palabra clave</p>";
-            }
-        });
-    });
-</script>
 
 </html>
