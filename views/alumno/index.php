@@ -1,3 +1,17 @@
+<?php
+session_start(); // Es importante iniciar la sesión en la vista
+
+// Verificar si la variable de sesión existe antes de usarla para evitar errores
+if (isset($_SESSION['nombreAlumno'])) {
+    $nombreAlumno = $_SESSION['nombreAlumno'];
+    // Dividir el nombre completo en partes
+    $parts = explode(" ", $nombreAlumno);
+    // Mostrar solo el primer nombre
+    $primerNombre = $parts[0];
+} else {
+    echo "No se ha iniciado sesión"; // En caso de que la sesión no esté iniciada o la variable de sesión no esté definida
+}
+?>
 <html lang="en">
 
 <head>
@@ -792,12 +806,20 @@
             <img src="images/logo-blanco.png" alt="Descripción de la imagen" />
         </div>
         <div class="right-section-1">
-            <h3>3</h3>
+            <?php if ($countCompletado > 0) : ?>
+                <h3><?php echo $countCompletado; ?></h3>
+            <?php else : ?>
+                <h3>0</h3>
+            <?php endif; ?>
             <br>
             <p class="p-circulo">cursos completados</p>
         </div>
         <div class="right-section-2">
-            <h3>2</h3>
+            <?php if ($countCursando > 0) : ?>
+                <h3><?php echo $countCursando; ?></h3>
+            <?php else : ?>
+                <h3>0</h3>
+            <?php endif; ?>
             <br>
             <p class="p-circulo">cursos en progreso</p>
         </div>
@@ -809,7 +831,7 @@
                 <p class="custom-text">¡Bienvenido</p>
             </div>
             <div>
-                <p class="custom-text-nombre">Arturo!</p>
+                <p class="custom-text-nombre"><?php echo $primerNombre; ?>!</p>
             </div>
         </div>
         <!-- Motor de busqueda -->
@@ -1065,5 +1087,51 @@
         </div>
     </div>
 </body>
+<<<<<<< Updated upstream
+=======
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchForm = document.getElementById("search-form");
+        const searchInput = document.getElementById("search-input");
+        const searchResults = document.getElementById("search-results");
+
+        searchForm.addEventListener("submit", function(event) {
+            event.preventDefault(); // Evita que se envíe el formulario
+
+            const searchTerm = searchInput.value.trim().toLowerCase(); // Convertir a minúsculas
+
+            if (searchTerm !== "") {
+                // Realizar la solicitud AJAX al servidor
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "index.php?c=usuarios&a=motorBusqueda", true);
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        // Parsear la respuesta JSON y mostrar los resultados
+                        const resultados = JSON.parse(xhr.responseText);
+                        if (resultados.length > 0) {
+                            searchResults.innerHTML = "";
+                            resultados.forEach(result => {
+                                const resultItem = document.createElement("div");
+                                resultItem.classList.add("result-item");
+                                // Se envuelve el título en un enlace <a> con el atributo href que apunta a la URL correspondiente
+                                resultItem.innerHTML = `<h3><a href="${result.contenido}">${result.titulo}</a></h3>`;
+                                searchResults.appendChild(resultItem);
+                            });
+                        } else {
+                            searchResults.innerHTML = "<p>No se encontraron resultados</p>";
+                        }
+                    } else {
+                        searchResults.innerHTML = "<p>Error al obtener los datos del servidor</p>";
+                    }
+                };
+                xhr.send("keyword=" + searchTerm);
+            } else {
+                searchResults.innerHTML = "<p>Por favor, ingresa una palabra clave</p>";
+            }
+        });
+    });
+</script>
+>>>>>>> Stashed changes
 
 </html>

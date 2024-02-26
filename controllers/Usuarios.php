@@ -15,6 +15,37 @@ class UsuariosController
 
     public function miEspacio()
     {
+        // Verificar si se ha pasado el parámetro 'n' en la URL
+        if (isset($_GET['n'])) {
+            // Obtener el valor de 'n' de la URL y asignarlo a una variable
+            $nombre = $_GET['n'];
+        } else {
+            echo "No se ha proporcionado un nombre.";
+            return; // Terminar la ejecución de la función si no se proporciona un nombre
+        }
+
+        $usuario = new UsuarioModel();
+        $resultado = $usuario->datosUsuarios($nombre);
+
+        // Contadores para inscripciones cursando y completadas
+        $countCursando = 0;
+        $countCompletado = 0;
+
+        // Procesar el resultado de la consulta
+        if ($resultado) {
+            // Contar inscripciones cursando y completadas
+            while ($fila = mysqli_fetch_assoc($resultado)) {
+                if ($fila['estado'] == 'cursando') {
+                    $countCursando++;
+                } else {
+                    $countCompletado++;
+                }
+            }
+        } else {
+            echo "No se encontraron inscripciones para el usuario con el nombre proporcionado.";
+        }
+
+        // Incluir la vista y pasar los datos
         require_once "Views/alumno/index.php";
     }
 
@@ -38,8 +69,7 @@ class UsuariosController
                 $_SESSION['nombreAlumno'] = $nombre;
 
                 // Redirigir a la página de miEspacio
-                header('location:  index.php?c=usuarios&a=miEspacio');
-
+                header("location:  index.php?c=usuarios&a=miEspacio&n=$nombre");
             } else {
                 // Inicio de sesión fallido, redirigir al login _
                 header('location: index.php');
@@ -96,9 +126,6 @@ class UsuariosController
             }
             // Devolver los resultados como un objeto JSON
             echo json_encode($resultados);
-
-
-
         } else {
             // Redirigir si se intenta acceder directamente a través de GET
             //MENSAJE DE ERROR
