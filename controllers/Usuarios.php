@@ -132,6 +132,18 @@ class UsuariosController
         }
     }
 
+    // Método para obtener información de la base de datos
+    public function obtenerInformacionDesdeBD() {
+        $titulo = $_POST['titulo'];
+        // Lógica para obtener la información de la base de datos utilizando el modelo
+        $model = new UsuarioModel();
+        $informacion = $model->informacionCursos($titulo);
+
+        // Devolver la información como JSON
+        header('Content-Type: application/json');
+        echo json_encode($informacion);
+    }
+
 
     public function prueba()
     {

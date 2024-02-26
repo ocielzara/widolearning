@@ -42,6 +42,7 @@ class UsuarioModel
         return mysqli_fetch_array($resultado);
     }
 
+
     public function datosUsuarios($nombre)
     {
         // Escapar el nombre para evitar inyección SQL (aunque no es lo ideal, es mejor que nada)
@@ -64,4 +65,22 @@ class UsuarioModel
             return false; // Retornar false en caso de error
         }
     }
+
+
+public function informacionCursos($titulo)
+{
+    $query = "SELECT descripcion FROM cursos WHERE nombre = '$titulo'";
+    $resultado = mysqli_query($this->db, $query);
+
+    // Verificar si la consulta fue exitosa
+    if ($resultado) {
+        // Devolver el resultado como un arreglo asociativo
+        return mysqli_fetch_assoc($resultado);
+    } else {
+        // Manejar el error si la consulta falla
+        return false;
+    }
+}
+
+
 }

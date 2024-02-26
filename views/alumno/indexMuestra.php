@@ -93,6 +93,39 @@
         height: 50px;
     }
 
+    #section3 {
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-size: 50%, cover;
+        /* Ajusta el tamaño de las imágenes de fondo */
+
+        display: block;
+        align-items: center;
+
+
+        flex: 1;
+        /* Cambia el tamaño de la sección 1 */
+        /*border: 1px solid #ccc;*/
+        height: 700px;
+        margin-top: -100px;
+
+    }
+
+    #info-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 300px;
+    background-color: #A7A7A7;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999; /* Asegura que esté por encima de otros elementos */
+}
+
+
     .boton-escuelas-azul {
         border-radius: 20px;
         /* Bordes redondeados */
@@ -619,6 +652,12 @@
                 <!-- Aquí se mostrarán los resultados de la búsqueda -->
             </div>
         </div>
+        <div id="section3">
+            <div id="info-container" style="display: none;">
+            <button id="close-btn" style="position: absolute; top: 10px; right: 10px; cursor: pointer; background-color:#676767; padding: 5px;">X</button>
+                <!-- Aquí se mostrará la información -->
+            </div>
+        </div>
     </div>
     <div id="section4">
         <p class="custom-text-interesarte">Podría interesante...</p>
@@ -639,7 +678,7 @@
                                         <!-- Mitad superior para la imagen -->
                                         <img src="images/11.png" alt="Descripción de la imagen">
                                         <!-- Mitad inferior para el título de la imagen -->
-                                        <p>Título de la Imagen</p>
+                                        <p id="informacion">prueba</p>
                                     </div>
                                 </div>
                             </div>
@@ -652,7 +691,7 @@
                                         <!-- Mitad superior para la imagen -->
                                         <img src="images/11.png" alt="Descripción de la imagen">
                                         <!-- Mitad inferior para el título de la imagen -->
-                                        <p>Título de la Imagen</p>
+                                        <p>titulo</p>
                                     </div>
                                 </div>
                             </div>
@@ -849,6 +888,58 @@
             }
         });
     });
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+    // Obtener el elemento del título de la imagen
+    const tituloImagen = document.querySelectorAll("#image-box p");
+    // Obtener el contenedor de información
+    const infoContainer = document.getElementById("info-container");
+
+    // Agregar un evento de clic a cada título de imagen
+    tituloImagen.forEach(function (titulo) {
+        titulo.addEventListener("click", function () {
+            // Obtener el texto del elemento <p>
+            const tituloTexto = titulo.textContent.trim();
+
+            // Realizar la solicitud AJAX al endpoint en tu aplicación
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "index.php?c=usuarios&a=obtenerInformacionDesdeBD", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    // Obtener la información obtenida de la base de datos
+                    const informacion = JSON.parse(xhr.responseText);
+                    const descripcion = informacion.descripcion;
+                    console.error("si ", descripcion);
+                    // Mostrar la información en el contenedor
+                    infoContainer.innerHTML = descripcion;
+                    // Mostrar el contenedor de información
+                    infoContainer.style.display = "block";
+                } else {
+                    // Manejar errores si es necesario
+                    console.error("Error al obtener la información de la base de datos");
+                }
+            };
+            // Enviar el texto del título como datos de la solicitud
+            xhr.send("titulo=" + encodeURIComponent(tituloTexto));
+        });
+    });
+
+    // Agregar un evento de clic al documento para cerrar el contenedor cuando se hace clic fuera de él
+    document.addEventListener("click", function (event) {
+        // Verificar si el clic ocurrió fuera del contenedor de información
+        if (!infoContainer.contains(event.target)) {
+            // Ocultar el contenedor de información
+            infoContainer.style.display = "none";
+        }
+    });
+});
+
+    
+
 </script>
 
 </html>

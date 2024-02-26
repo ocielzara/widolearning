@@ -1,5 +1,5 @@
 <?php
-	
+
 	function cargarControlador($controlador){
 		
 		$nombreControlador = ucwords($controlador)."Controller";
