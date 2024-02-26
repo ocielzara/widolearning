@@ -901,7 +901,7 @@ if (isset($_SESSION['nombreAlumno'])) {
         </div>
     </div>
     <div id="section4">
-        <p class="custom-text-interesarte">Podría interesante...</p>
+        <p class="custom-text-interesarte">Podría interesante....</p>
         <div id="section5"></div>
         <br>
         <div class="cursos">
