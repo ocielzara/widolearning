@@ -12,6 +12,10 @@ class CursosController
     {
         require_once "views/alumno/index.php";
     }
+    public function index2()
+    {
+        require_once "views/docente/busqueda.php";
+    }
 
     public function cursos() {
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['busqueda'])) {

@@ -254,13 +254,18 @@
 
     <header class="header">
         <div class="menu container">
-            <img src="../../images/logo-aerobotlearning.png" alt="Descripción de la imagen" />
+            <img src="images/logo-aerobotlearning.png" alt="Descripción de la imagen" />
         </div>
     </header>
     <div class="prices-1">
         <div class="contenedor-1">
+<<<<<<< Updated upstream
            <!-- Formulario para buscar -->
            <form class="form">
+=======
+            <!-- Formulario para buscar -->
+            <form  >
+>>>>>>> Stashed changes
                 <input type="text" id="busqueda" class="form-control mr-sm-2" placeholder="Buscar cursos">
                 <button type="button" id="buscar" class="btn btn-primary">Buscar</button>
             </form>
@@ -281,7 +286,11 @@
                                 console.log(response);
                                 $('#resultados').empty(); // Limpiamos el contenedor de resultados antes de agregar nuevos resultados
 
+<<<<<<< Updated upstream
                                
+=======
+
+>>>>>>> Stashed changes
 
                                 // Verificamos si se encontraron cursos
                                 if (response.length > 0) {
@@ -320,7 +329,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -338,7 +347,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -356,7 +365,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -725,7 +734,7 @@
             </div>
 
         </div>
-        
+
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

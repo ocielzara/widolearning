@@ -590,8 +590,7 @@
     }
 </style>
 <script>
-
-    $('#carouselExample').on('slide.bs.carousel', function (e) {
+    $('#carouselExample').on('slide.bs.carousel', function(e) {
 
 
         var $e = $(e.relatedTarget);
@@ -605,8 +604,7 @@
                 // append slides to end
                 if (e.direction == "left") {
                     $('.carousel-item').eq(i).appendTo('.carousel-inner');
-                }
-                else {
+                } else {
                     $('.carousel-item').eq(0).appendTo('.carousel-inner');
                 }
             }
@@ -619,16 +617,18 @@
     });
 
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         /* show lightbox when clicking a thumbnail */
-        $('a.thumb').click(function (event) {
+        $('a.thumb').click(function(event) {
             event.preventDefault();
             var content = $('.modal-body');
             content.empty();
             var title = $(this).attr("title");
             $('.modal-title').html(title);
             content.html($(this).html());
-            $(".modal-profile").modal({ show: true });
+            $(".modal-profile").modal({
+                show: true
+            });
         });
 
     });
@@ -643,8 +643,13 @@
 
     <div id="container">
         <div id="section2">
+<<<<<<< Updated upstream
           <!-- Formulario para buscar -->
           <form class="form">
+=======
+            <!-- Formulario para buscar -->
+            <form class="form">
+>>>>>>> Stashed changes
                 <input type="text" id="busqueda" class="form-control mr-sm-2" placeholder="Buscar cursos">
                 <button type="button" id="buscar" class="btn btn-primary">Buscar</button>
             </form>
@@ -665,7 +670,11 @@
                                 console.log(response);
                                 $('#resultados').empty(); // Limpiamos el contenedor de resultados antes de agregar nuevos resultados
 
+<<<<<<< Updated upstream
                                
+=======
+
+>>>>>>> Stashed changes
 
                                 // Verificamos si se encontraron cursos
                                 if (response.length > 0) {
@@ -690,12 +699,15 @@
 
             <div id="resultados">
 
+<<<<<<< Updated upstream
             </div>
         </div>
         <div id="section3">
             <div id="info-container" style="display: none;">
             <button id="close-btn" style="position: absolute; top: 10px; right: 10px; cursor: pointer; background-color:#676767; padding: 5px;">X</button>
                 <!-- Aquí se mostrará la información -->
+=======
+>>>>>>> Stashed changes
             </div>
         </div>
     </div>
@@ -887,12 +899,12 @@
     </div>
 </body>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         const searchForm = document.getElementById("search-form");
         const searchInput = document.getElementById("search-input");
         const searchResults = document.getElementById("search-results");
 
-        searchForm.addEventListener("submit", function (event) {
+        searchForm.addEventListener("submit", function(event) {
             event.preventDefault(); // Evita que se envíe el formulario
 
             const searchTerm = searchInput.value.trim().toLowerCase(); // Convertir a minúsculas
@@ -902,7 +914,7 @@
                 const xhr = new XMLHttpRequest();
                 xhr.open("POST", "index.php?c=usuarios&a=motorBusqueda", true);
                 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhr.onload = function () {
+                xhr.onload = function() {
                     if (xhr.status === 200) {
                         // Parsear la respuesta JSON y mostrar los resultados
                         const resultados = JSON.parse(xhr.responseText);
