@@ -643,13 +643,8 @@
 
     <div id="container">
         <div id="section2">
-<<<<<<< Updated upstream
           <!-- Formulario para buscar -->
           <form class="form">
-=======
-            <!-- Formulario para buscar -->
-            <form class="form">
->>>>>>> Stashed changes
                 <input type="text" id="busqueda" class="form-control mr-sm-2" placeholder="Buscar cursos">
                 <button type="button" id="buscar" class="btn btn-primary">Buscar</button>
             </form>
@@ -670,11 +665,7 @@
                                 console.log(response);
                                 $('#resultados').empty(); // Limpiamos el contenedor de resultados antes de agregar nuevos resultados
 
-<<<<<<< Updated upstream
                                
-=======
-
->>>>>>> Stashed changes
 
                                 // Verificamos si se encontraron cursos
                                 if (response.length > 0) {
@@ -699,15 +690,12 @@
 
             <div id="resultados">
 
-<<<<<<< Updated upstream
             </div>
         </div>
         <div id="section3">
             <div id="info-container" style="display: none;">
             <button id="close-btn" style="position: absolute; top: 10px; right: 10px; cursor: pointer; background-color:#676767; padding: 5px;">X</button>
                 <!-- Aquí se mostrará la información -->
-=======
->>>>>>> Stashed changes
             </div>
         </div>
     </div>

@@ -259,63 +259,7 @@
     </header>
     <div class="prices-1">
         <div class="contenedor-1">
-<<<<<<< Updated upstream
-           <!-- Formulario para buscar -->
-           <form class="form">
-=======
-            <!-- Formulario para buscar -->
-            <form  >
->>>>>>> Stashed changes
-                <input type="text" id="busqueda" class="form-control mr-sm-2" placeholder="Buscar cursos">
-                <button type="button" id="buscar" class="btn btn-primary">Buscar</button>
-            </form>
-            <!-- Codigo de ajax -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script>
-                $(document).ready(function() {
-                    $('#buscar').click(function() {
-                        var busqueda = $('#busqueda').val();
-                        $.ajax({
-                            type: "POST",
-                            url: "index.php?c=cursos&a=cursos",
-                            data: {
-                                busqueda: busqueda
-                            },
-                            dataType: 'json',
-                            success: function(response) {
-                                console.log(response);
-                                $('#resultados').empty(); // Limpiamos el contenedor de resultados antes de agregar nuevos resultados
-
-<<<<<<< Updated upstream
-                               
-=======
-
->>>>>>> Stashed changes
-
-                                // Verificamos si se encontraron cursos
-                                if (response.length > 0) {
-                                    // Iteramos sobre cada curso y creamos un elemento h3 para mostrarlo
-                                    response.forEach(function(curso) {
-                                        //Aca modifica para que tenga link
-                                        $('#resultados').append('<a href="www.google.com">' + curso.titulo + '</a><br>');
-                                    });
-                                } else {
-                                    // Si no se encontraron cursos, mostramos un mensaje
-                                    $('#resultados').append('<p>No se encontraron cursos.</p>');
-                                }
-
-                            },
-                            error: function(xhr, status, error) {
-                                console.error(xhr.responseText);
-                            }
-                        });
-                    });
-                });
-            </script>
-
-            <div id="resultados">
-
-            </div>
+           
         </div>
         <p class="cursos-p">CURSOS TOP (con mayor demanda)</p>
         <div class="container mt-4 bg-primary">

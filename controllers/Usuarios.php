@@ -107,31 +107,7 @@ class UsuariosController
         }
     }
 
-    public function motorBusqueda()
-    {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Validar y sanar los datos de entrada
-            $keyword = $_POST['keyword'];
-
-            // Aquí se pueden realizar más validaciones si es necesario
-
-            // Procesar los datos, por ejemplo, guardarlos en la base de datos
-            $model = new UsuarioModel();
-            $resultado = $model->motorBusqueda($keyword);
-            // Crear un array para almacenar los resultados
-            $resultados = array();
-            // Obtener los resultados de la consulta y agregarlos al array
-            while ($fila = $resultado->fetch_assoc()) {
-                $resultados[] = $fila;
-            }
-            // Devolver los resultados como un objeto JSON
-            echo json_encode($resultados);
-        } else {
-            // Redirigir si se intenta acceder directamente a través de GET
-            //MENSAJE DE ERROR
-        }
-    }
-
+    
     // Método para obtener información de la base de datos
     public function obtenerInformacionDesdeBD() {
         $titulo = $_POST['titulo'];
