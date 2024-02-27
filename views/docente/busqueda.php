@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carousel con Bootstrap</title>
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +31,7 @@
         }
 
         .header {
-            background-image: url(../../images/header-docentes.png);
+            background-image: url(images/header-docentes.png);
             background-position: center top;
             background-repeat: no-repeat;
             background-size: 100%, cover;
@@ -235,7 +236,7 @@
         }
 
         .carousel {
-            background-image: url(../../images/home-opaco.png);
+            background-image: url(images/home-opaco.png);
             background-position: center top;
             background-repeat: no-repeat;
             background-size: 100%, cover;
@@ -259,7 +260,52 @@
     </header>
     <div class="prices-1">
         <div class="contenedor-1">
-           
+            <!-- Formulario para buscar -->
+            <form>
+                <input type="text" id="busqueda" class="form-control mr-sm-2" placeholder="Buscar cursos">
+                <button type="button" id="buscar" class="btn btn-primary">Buscar</button>
+            </form>
+            <!-- Codigo de ajax -->
+            
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $('#buscar').click(function() {
+                        var busqueda = $('#busqueda').val();
+                        $.ajax({
+                            type: "POST",
+                            url: "index.php?c=cursos&a=cursos",
+                            data: {
+                                busqueda: busqueda
+                            },
+                            dataType: 'json',
+                            success: function(response) {
+                                console.log(response);
+                                $('#resultados').empty(); // Limpiamos el contenedor de resultados antes de agregar nuevos resultados
+                                // Verificamos si se encontraron cursos
+                                if (response.length > 0) {
+                                    // Iteramos sobre cada curso y creamos un elemento h3 para mostrarlo
+                                    response.forEach(function(curso) {
+                                        //Aca modifica para que tenga link
+                                        $('#resultados').append('<a href="www.google.com">' + curso.titulo + '</a><br>');
+                                    });
+                                } else {
+                                    // Si no se encontraron cursos, mostramos un mensaje
+                                    $('#resultados').append('<p>No se encontraron cursos.</p>');
+                                }
+
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    });
+                });
+            </script>
+
+            <div id="resultados">
+
+            </div>
         </div>
         <p class="cursos-p">CURSOS TOP (con mayor demanda)</p>
         <div class="container mt-4 bg-primary">
@@ -327,7 +373,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -345,7 +391,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -369,7 +415,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -387,7 +433,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -405,7 +451,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -423,7 +469,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -441,7 +487,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -482,7 +528,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -500,7 +546,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -518,7 +564,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -536,7 +582,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -554,7 +600,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -578,7 +624,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -596,7 +642,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -614,7 +660,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -632,7 +678,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -650,7 +696,7 @@
                                         <!-- Cuadrado con sombra -->
                                         <div id="image-box">
                                             <!-- Mitad superior para la imagen -->
-                                            <img src="../../images/11.png" alt="Descripción de la imagen">
+                                            <img src="images/11.png" alt="Descripción de la imagen">
                                             <!-- Mitad inferior para el título de la imagen -->
                                             <button class="clase-muestra">
                                                 <span>Clase muestra</span>
@@ -679,10 +725,11 @@
 
         </div>
 
-
+<!-- 
+    Checa si usas estas porque estas marcan error con el ajax si las descomento deja de jalar hasta aqui mi reporte joaquin
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
 
 </body>
 
