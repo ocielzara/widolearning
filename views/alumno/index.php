@@ -1087,8 +1087,7 @@ if (isset($_SESSION['nombreAlumno'])) {
         </div>
     </div>
 </body>
-<<<<<<< Updated upstream
-=======
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const searchForm = document.getElementById("search-form");
@@ -1132,6 +1131,5 @@ if (isset($_SESSION['nombreAlumno'])) {
         });
     });
 </script>
->>>>>>> Stashed changes
 
 </html>

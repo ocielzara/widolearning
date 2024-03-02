@@ -10,6 +10,11 @@ class UsuariosController
 
     public function index()
     {
+        require_once "Views/main/index.php";
+    }
+
+    public function login()
+    {
         require_once "Views/login/index.php";
     }
 

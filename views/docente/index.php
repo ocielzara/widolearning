@@ -29,7 +29,7 @@
     }
 
     .header {
-        background-image: url(../../images/home.png);
+        background-image: url(images/home.png);
         background-position: center top;
         background-repeat: no-repeat;
         background-size: cover;
@@ -459,7 +459,7 @@
             </div>
             <br />
             <div class="frace">
-                <img src="../../images/frace.png" alt="Descripción de la imagen" />
+                <img src="images/frace.png" alt="Descripción de la imagen" />
             </div>
         </div>
         <div class="informacion">

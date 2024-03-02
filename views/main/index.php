@@ -9,7 +9,6 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-
     <style>
         * {
             margin: 0;
@@ -43,18 +42,243 @@
             position: relative;
         }
 
+        .contenedor-1 {
+            width: 800px;
+            /* Ancho del contenedor */
+            height: 200px;
+            /* Altura del contenedor */
+            border-radius: 20px;
+            /* Bordes redondeados */
+            overflow: hidden;
+            /* Oculta el contenido que se desborda */
+            margin: 0% auto;
+            /* Centra en medio de la página */
+            padding: 0px;
+        }
+
+        .cursos-p {
+            font-family: 'Arial', sans-serif;
+            font-size: 19px;
+            font-weight: bold;
+            color: orange;
+            padding: 5px;
+            margin-top: 0px;
+            margin-left: 5%;
+            /* Centra en medio de la página */
+        }
+
+        .welcome {
+            display: flex;
+            margin-top: -15%;
+        }
+
+        .welcome-1 {
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 50%;
+            /*border: 1px solid #ccc;*/
+        }
+
         .menu.container img {
-            width: 350px;
+            width: 650px;
             /* Establece el ancho deseado para la imagen */
             height: auto;
             /* Hace que la altura se ajuste automáticamente para mantener la proporción original */
-            position: absolute;
-            /* Establece el posicionamiento absoluto para la imagen dentro del contenedor */
-            top: 10%;
+            top: 0%;
             /* Posiciona la parte superior de la imagen en el 50% del contenedor */
             left: 2%;
             /* Posiciona la parte izquierda de la imagen en el 50% del contenedor */
         }
+
+        .section-1 {
+            /*border: 1px solid #ccc;*/
+            box-sizing: border-box;
+            height: 50px;
+            margin: -18% 28% auto;
+            /* Centra en medio de la página */
+            padding: 5px;
+            width: 70%;
+        }
+
+        .frace-azul {
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ABDAFF;
+            padding: 5px;
+            margin-top: 0px;
+            margin-left: 5%;
+            /* Centra en medio de la página */
+        }
+
+        .section-2 {
+            /*border: 1px solid #ccc;*/
+            box-sizing: border-box;
+            height: 50px;
+            margin: 0% auto;
+            /* Centra en medio de la página */
+            padding: 5px;
+            width: 60%;
+        }
+
+        .frace-negra {
+            font-family: 'Arial', sans-serif;
+            font-size: 21px;
+            font-weight: bold;
+            color: black;
+            padding: 5px;
+            margin-top: 0px;
+            margin-left: 5%;
+            /* Centra en medio de la página */
+        }
+
+        .section-3 {
+            /*border: 1px solid #ccc;*/
+            box-sizing: border-box;
+            height: 50px;
+            margin: 5% auto;
+            /* Centra en medio de la página */
+            padding: 5px;
+            width: 60%;
+        }
+
+        .button {
+            padding: 10px 20px;
+            width: 100%;
+            margin: 0% auto;
+            border-radius: 20px;
+            border: none;
+            background-color: orange;
+            /* Color de fondo azul */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            /* Transición suave del color de fondo */
+        }
+
+        .button:hover {
+            background-color: #096dad;
+            /* Color de fondo azul más oscuro */
+        }
+
+        .welcome-2 {
+            width: 50%;
+            padding: 150px 250px 150px 100px;
+        }
+
+        .imagen img {
+            width: 120%;
+            height: auto;
+            /* Hace que la altura se ajuste automáticamente para mantener la proporción original */
+            /* border: 1px solid #ccc;*/
+            margin: -35% auto;
+            /* Centra en medio de la página */
+        }
+
+        .after-footer {
+            background-image: url(images/header-docentes-2.png);
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-size: 100%, cover;
+            /* Ajusta el tamaño de las imágenes de fondo */
+            min-height: 73vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin: -9% auto;
+        }
+
+        .degradado-1 {
+            position: relative;
+            z-index: 2;
+            /* Asegura que el footer esté por encima de after-footer */
+            background-image: linear-gradient(to top, rgba(255, 255, 255, 10), rgba(255, 255, 255, 0));
+            width: 100%;
+            min-height: 23vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin: -10% auto;
+        }
+
+        .degradado-2 {
+            position: relative;
+            z-index: 2;
+            /* Asegura que el footer esté por encima de after-footer */
+            background-image: linear-gradient(to top, rgba(255, 255, 255, 10), rgba(255, 255, 255, 0));
+            width: 100%;
+            min-height: 23vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin: -10% auto;
+        }
+
+        .degradado-3 {
+            position: relative;
+            z-index: 2;
+            /* Asegura que el footer esté por encima de after-footer */
+            background-image: linear-gradient(to top, rgba(255, 255, 255, 10), rgba(255, 255, 255, 0));
+            width: 100%;
+            min-height: 23vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin: -10% auto;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: center;
+            margin-top: 10%;
+        }
+
+        .b1 {
+            padding: 10px 20px;
+            width: 20%;
+            margin: 0% auto;
+            border-radius: 20px;
+            border: none;
+            background-color: #000000;
+            /* Color de fondo azul */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            /* Transición suave del color de fondo */
+        }
+
+        .b1:hover {
+            background-color: #343434;
+            /* Color de fondo azul más oscuro */
+        }
+
+        .b2 {
+            padding: 10px 20px;
+            width: 20%;
+            margin: 0% auto;
+            border-radius: 20px;
+            border: none;
+            background-color: #7B7B7B;
+            /* Color de fondo azul */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            /* Transición suave del color de fondo */
+        }
+
+        .b2:hover {
+            background-color: #7B7B7B;
+            /* Color de fondo azul más oscuro */
+        }
+
+        .footer .button {
+            margin: 0 20px;
+            /* Ajusta el espacio entre los botones en el footer */
+        }
+
+
+        /*********************************************************************************************/
 
         .contenedor-1 {
             width: 800px;
@@ -250,17 +474,6 @@
             /* Redondea los bordes más */
         }
 
-
-
-
-
-
-
-
-
-
-
-
         @media (min-width: 768px) {
 
             /* show 3 items */
@@ -365,33 +578,30 @@
         }
     </style>
 
+    <!--AREAS APRENDISAJE CARRUCEL-->
     <script>
-        $('#carouselExample').on('slide.bs.carousel', function (e) {
-
-
-            var $e = $(e.relatedTarget);
-            var idx = $e.index();
-            var itemsPerSlide = 4;
-            var totalItems = $('.carousel-item').length;
-
-            if (idx >= totalItems - (itemsPerSlide - 1)) {
-                var it = itemsPerSlide - (totalItems - idx);
-                for (var i = 0; i < it; i++) {
-                    // append slides to end
-                    if (e.direction == "left") {
-                        $('.carousel-item').eq(i).appendTo('.carousel-inner');
-                    } else {
-                        $('.carousel-item').eq(0).appendTo('.carousel-inner');
+        $('.carousel').each(function () {
+            var $carousel = $(this);
+            $carousel.on('slide.bs.carousel', function (e) {
+                var $e = $(e.relatedTarget);
+                var idx = $e.index();
+                var itemsPerSlide = 4;
+                var totalItems = $('.carousel-item', $carousel).length;
+                if (idx >= totalItems - (itemsPerSlide - 1)) {
+                    var it = itemsPerSlide - (totalItems - idx);
+                    for (var i = 0; i < it; i++) {
+                        if (e.direction == "left") {
+                            $('.carousel-item', $carousel).eq(i).appendTo('.carousel-inner', $carousel);
+                        } else {
+                            $('.carousel-item', $carousel).eq(0).appendTo('.carousel-inner', $carousel);
+                        }
                     }
                 }
-            }
+            });
+            $carousel.carousel({
+                interval: 2000
+            });
         });
-
-
-        $('#carouselExample').carousel({
-            interval: 2000
-        });
-
 
         $(document).ready(function () {
             /* show lightbox when clicking a thumbnail */
@@ -406,7 +616,6 @@
                     show: true
                 });
             });
-
         });
     </script>
 
@@ -415,11 +624,46 @@
 <body>
 
     <header class="header">
-        <div class="menu container">
-            <img src="images/logo-aerobotlearning.png" alt="Descripción de la imagen" />
-        </div>
     </header>
-    <div class="prices-1">
+    <div class="welcome">
+        <div class="welcome-1">
+            <div class="menu container">
+                <img src="images/logo-aerobotlearning.png" alt="Descripción de la imagen" />
+            </div>
+            <div class="section-1">
+                <p class="frace-azul">El aprendizaje personalizado a tus necesidades</p>
+            </div>
+            <div class="section-2">
+                <p class="frace-negra">Accede a diferentes cursos con un mentor por videollamada</p>
+            </div>
+            <div class="section-3">
+                <!--index.php?c=usuarios&a=login-->
+                <a href="" class="button">Clase muestra gratuita</a>
+            </div>
+        </div>
+        <div class="welcome-2">
+            <div class="imagen"><img src="images/imagen-1.png" alt=""></div>
+        </div>
+    </div>
+
+    <div class="after-footer">
+    </div>
+    <div class="degradado-1"></div>
+    <div class="degradado-2"></div>
+    <div class="degradado-3"></div>
+    <div class="footer">
+        <button class="b1" type="button" onclick="mostrarContenidoAreas()">Areas de aprendizaje</button>
+
+        <button class="b1" type="button" onclick="mostrarContenidoMasterTeach()">Master Teach</button>
+
+
+        <button class="b2" type="submit">Reels (proximamente)</button>
+
+    </div>
+    <br><br>
+
+    <!--Areas aprendizaje-->
+    <div id="contenido-areas" class="prices-1" style="display: none;">
         <div class="contenedor-1">
             <!-- Formulario para buscar -->
             <form>
@@ -786,7 +1030,8 @@
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only">Previous</span>
                     </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample2" role="button" data-slide="next">
+                    <a class="carousel-control-next text-faded" href="#carouselExample2" role="button"
+                        data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only">Next</span>
                     </a>
@@ -796,12 +1041,252 @@
         <br>
     </div>
 
-        <!-- 
-    Checa si usas estas porque estas marcan error con el ajax si las descomento deja de jalar hasta aqui mi reporte joaquin
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+    <!--Master teach-->
+    <div id="contenido-master-teach" class="prices-1" style="display: none;">
+        <div class="contenedor-1">
+            <!-- Formulario para buscar -->
+            <form>
+                <input type="text" id="busqueda" class="form-control mr-sm-2" placeholder="Buscar cursos">
+                <button type="button" id="buscar" class="btn btn-primary">Buscar</button>
+            </form>
+            <!-- Codigo de ajax -->
 
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#buscar').click(function () {
+                        var busqueda = $('#busqueda').val();
+                        $.ajax({
+                            type: "POST",
+                            url: "index.php?c=cursos&a=cursos",
+                            data: {
+                                busqueda: busqueda
+                            },
+                            dataType: 'json',
+                            success: function (response) {
+                                console.log(response);
+                                $('#resultados').empty(); // Limpiamos el contenedor de resultados antes de agregar nuevos resultados
+                                // Verificamos si se encontraron cursos
+                                if (response.length > 0) {
+                                    // Iteramos sobre cada curso y creamos un elemento h3 para mostrarlo
+                                    response.forEach(function (curso) {
+                                        //Aca modifica para que tenga link
+                                        $('#resultados').append('<a href="www.google.com">' + curso.titulo + '</a><br>');
+                                    });
+                                } else {
+                                    // Si no se encontraron cursos, mostramos un mensaje
+                                    $('#resultados').append('<p>No se encontraron cursos.</p>');
+                                }
+
+                            },
+                            error: function (xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    });
+                });
+            </script>
+
+            <div id="resultados">
+
+            </div>
+        </div>
+        <p class="cursos-p">DOCENTES</p>
+        <div id="cursos-slider">
+            <div class="container-fluid">
+                <div id="carouselExample3" class="carousel slide" data-ride="carousel" data-interval="9000">
+                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                        <div class="carousel-item col-md-3  active">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <form action="index.php?c=docentes&a=perfilDocente" method="post">
+                                            <!-- Campo oculto para enviar información -->
+                                            <input type="hidden" name="nombre" value="carlos zarate gutierrez">
+                                            <button class="clase-muestra" style="width: 100%;">
+                                                <span>Ver perfil</span>
+                                            </button>
+                                        </form>
+                                        <button class="suscripcion">
+                                            <span>Carlos</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/prueba/imagen-prueba-3.jpg" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <form action="index.php?c=docentes&a=perfilDocente" method="post">
+                                            <!-- Campo oculto para enviar información -->
+                                            <input type="hidden" name="nombre" value="leana deep deep">
+                                            <button class="clase-muestra" style="width: 100%;">
+                                                <span>Ver perfil</span>
+                                            </button>
+                                        </form>
+                                        <button class="suscripcion">
+                                            <span>Leana</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/prueba/imagen-prueba-4.jpg" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <form action="index.php?c=docentes&a=perfilDocente" method="post">
+                                            <!-- Campo oculto para enviar información -->
+                                            <input type="hidden" name="nombre" value="carlos zarate gutierrez">
+                                            <button class="clase-muestra" style="width: 100%;">
+                                                <span>Ver perfil</span>
+                                            </button>
+                                        </form>
+                                        <button class="suscripcion">
+                                            <span>carlos</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Ver perfil</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Ver perfil</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Ver perfil</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Ver perfil</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3  ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Clase muestra</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExample3" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next text-faded" href="#carouselExample3" role="button"
+                        data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
 </body>
+<script>
+    function mostrarContenidoAreas() {
+        var contenidoAdicional = document.getElementById("contenido-areas");
+        contenidoAdicional.style.display = "block";
+
+        // Oculta el contenido adicional de Master Teach si está visible
+        var contenidoMasterTeach = document.getElementById("contenido-master-teach");
+        contenidoMasterTeach.style.display = "none";
+    }
+
+    function mostrarContenidoMasterTeach() {
+        var contenidoMasterTeach = document.getElementById("contenido-master-teach");
+        contenidoMasterTeach.style.display = "block";
+
+        // Oculta el contenido adicional de "Areas de aprendizaje" si está visible
+        var contenidoAdicional = document.getElementById("contenido-areas");
+        contenidoAdicional.style.display = "none";
+    }
+</script>
 
 </html>
