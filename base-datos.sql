@@ -92,6 +92,14 @@ CREATE TABLE Usuarios
                         (255)
 );
 
+-- Crear tabla para disponibilidadMaestro
+CREATE TABLE disponibilidadMaestro (
+    id_disponibilidad INT AUTO_INCREMENT PRIMARY KEY,
+    id_maestro INT,
+    fecha DATE,
+    hora TIME,
+    FOREIGN KEY (id_maestro) REFERENCES Maestros(id_maestro)
+);
 
 INSERT INTO `motorBusqueda` (`id_curso`, `titulo`, `contenido`, `palabrasClave`) VALUES
 (1, 'Programacion web', 'https://grupoaerobot.com/Ciberseguridad.php', 'html css web'),
@@ -109,3 +117,13 @@ INSERT INTO `maestros` (`id_maestro`, `nombre`, `foto`, `descripcion`, `correo_e
 INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `precio`) VALUES (null,'unity','images/curso/unity.png','cursos de videojuegos','100');
 
 INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `precio`) VALUES (null,'blender','images/curso/blender.png','cursos de modelaod','200');
+
+
+
+
+
+INSERT INTO `disponibilidadmaestro`(`id_disponibilidad`, `id_maestro`, `fecha`, `hora`) VALUES (null,2,'2024-03-10','15:00:00');
+
+INSERT INTO `disponibilidadmaestro`(`id_disponibilidad`, `id_maestro`, `fecha`, `hora`) VALUES (null,2,'2024-03-10','16:00:00');
+
+INSERT INTO `disponibilidadmaestro`(`id_disponibilidad`, `id_maestro`, `fecha`, `hora`) VALUES (null,2,'2024-03-12','16:00:00');

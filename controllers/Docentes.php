@@ -34,6 +34,7 @@ class DocentesController
         $docente = new DocenteModel();
         $informacion = $docente->informacionDocente($nombre);
         if ($informacion) {
+            $idDocente = $informacion['id_maestro'];
             $nombreDocente = $informacion['nombre'];
             $fotoDocente = $informacion['foto'];
             $descripcionDocente = $informacion['descripcion'];
@@ -55,6 +56,17 @@ class DocentesController
                 // Si no se encontraron cursos asignados, inicializar el array como vacío
                 $fotosCursos = array();
             }
+
+            //Obetenemos los dias y horarios disponibles del maestro
+            $informacionDisponibilidad = $docente->disponibilidadMaestro($idDocente);
+            // Inicializar un array para almacenar las fechas disponibles
+            $fechasDisponibles = array();
+
+            // Iterar sobre las fechas disponibles y agregarlas al array
+            foreach ($informacionDisponibilidad as $disponibilidad) {
+                $fechasDisponibles[] = $disponibilidad['fecha'];
+            }
+
             require_once "views/docente/perfilDocente.php";
         } else {
             require_once "views/docente/index.php";

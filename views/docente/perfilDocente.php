@@ -569,24 +569,113 @@
             border-radius: 4px 4px 0 0;
         }
 
-        .carousel-control-next, .carousel-control-prev {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    width: 5%;
-    color: black;
-    text-align: center;
-    opacity: .;
-}
+        .carousel-control-next,
+        .carousel-control-prev {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            width: 5%;
+            color: black;
+            text-align: center;
+            opacity: .;
+        }
+
+        /**************************************************************************************************** */
+
+        .disponibilidad {
+            width: 90%;
+            height: auto;
+            background-color: white;
+            border-radius: 20px;
+            margin: 3% auto;
+            /* Centra en medio de la página */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            display: flex;
+            padding: 10px;
+        }
+
+        /* Estilos para cada zona */
+        .calendarioZona,
+        .horarioZona,
+        .resumenZona {
+            flex: 1;
+            /* Ocupa el mismo espacio */
+            margin: 0 10px;
+            /* Margen entre las zonas */
+            background-color: white;
+            /* Color de fondo */
+            padding: 20px;
+            /* Espacio interno */
+            border-radius: 10px;
+            /* Bordes redondeados */
+            /*border: 1px solid #ccc;*/
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            cursor: pointer;
+        }
+
+        td:hover {
+            background-color: #f0f0f0;
+        }
+
+        .boton-iniciar {
+            border-radius: 20px;
+            /* Bordes redondeados */
+            background-color: #4BD3FF;
+            /* Color de fondo azul */
+            color: white;
+            /* Color del texto blanco */
+            padding: 1px 5px;
+            /* Espacio interno */
+            border: none;
+            /* Sin borde */
+            cursor: pointer;
+            /* Cursor de puntero */
+            transition: background-color 0.3s;
+            /* Transición suave del color de fondo */
+            width: 20%;
+            margin-top: 10px;
+        }
+
+        /* Cambiar el color de fondo cuando el cursor pasa sobre el botón */
+        .boton-iniciar:hover {
+            background-color: #4B94FF;
+            /* Color de fondo azul más oscuro */
+        }
+
+        .unavailable-day {
+            background-color: #C6C6C6;
+        }
+
+        .available-day {
+            background-color: #80FF7C ;
+        }
     </style>
 
     <!--AREAS APRENDISAJE CARRUCEL-->
@@ -639,99 +728,212 @@
             <img src="images/logo-aerobotlearning.png" alt="Descripción de la imagen" />
         </div>
     </header>
-    <p class="custom-text">Portal de <?php echo $nombreDocente; ?></p>
+    <p class="custom-text">Portal de
+        <?php echo $nombreDocente; ?>
+    </p>
     <div id="section1"></div>
     <div class="prices-1">
         <div class="image-container">
             <img src="<?php echo $fotoDocente; ?>" alt="Descripción de la imagen">
         </div>
         <div class="contenedor-1a">
-            <p class="saludo">¡Hola, soy <?php echo $nombreDocente; ?>!</p>
-            <p><?php echo $descripcionDocente;?></p>
+            <p class="saludo">¡Hola, soy
+                <?php echo $nombreDocente; ?>!
+            </p>
+            <p>
+                <?php echo $descripcionDocente; ?>
+            </p>
         </div>
-        <p class="cursos-p1">¿Qué otros cursos imparte <?php echo $nombreDocente; ?>?</p>
+        <p class="cursos-p1">¿Qué otros cursos imparte
+            <?php echo $nombreDocente; ?>?
+        </p>
         <div id="cursos-slider">
-    <div class="container-fluid">
-        <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="9000">
-            <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                <?php foreach ($fotosCursos as $index => $fotoCurso) : ?>
-                    <div class="carousel-item col-md-3 <?php echo $index === 0 ? 'active' : ''; ?>">
-                        <div class="panel panel-default">
-                            <div class="prices-1">
-                                <div id="image-box">
-                                    <img src="<?php echo $fotoCurso; ?>" alt="Descripción de la imagen">
-                                    <button class="clase-muestra">
-                                        <span>Clase muestra</span>
-                                    </button>
-                                    <button class="suscripcion">
-                                        <span>proximamente</span>
-                                    </button>
+            <div class="container-fluid">
+                <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="9000">
+                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                        <?php foreach ($fotosCursos as $index => $fotoCurso): ?>
+                            <div class="carousel-item col-md-3 <?php echo $index === 0 ? 'active' : ''; ?>">
+                                <div class="panel panel-default">
+                                    <div class="prices-1">
+                                        <div id="image-box">
+                                            <img src="<?php echo $fotoCurso; ?>" alt="Descripción de la imagen">
+                                            <button class="clase-muestra">
+                                                <span>Clase muestra</span>
+                                            </button>
+                                            <button class="suscripcion">
+                                                <span>proximamente</span>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
-                <?php endforeach; ?>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-        
-        <div class="container col-md-10 mt-4 bg-primary">
-            <div class="row">
-                <div class="col-md-4 mt-4 mb-2">
-                    <!-- Calendar -->
-                    <div id="calendar" class="p-3">
-                        <input type="date" name="" id="">
-                    </div>
-                </div>
-                <div class="col-md-4 mt-4  mb-2">
-                    <!-- Card: Horas disponibles -->
-                    <div class="card text-center">
-                        <div class="card-header">
-                            Horas disponibles
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">10:00 am</p>
-                            <p class="card-text">12:00 pm</p>
-                            <p class="card-text">12:00 pm</p>
-                            <p class="card-text">12:00 pm</p>
-                            <!-- Agrega más horas disponibles aquí -->
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-4  mb-2">
-                    <!-- Card: Resumen -->
-                    <div class="card">
-                        <div class="card-header">
-                            Resumen
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua.</p>
-                            <button class="btn btn-primary">registrarse</button>
-                        </div>
-                    </div>
+                    <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
             </div>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <!--DISPONIBILIDAD-->
+        <div class="disponibilidad">
+            <div class="calendarioZona">
+                <div class="encuesta " id="calendar"></div>
+                <center>
+                    <button onclick="prevMonth()" class="boton-iniciar">Anterior</button>
+                    <button onclick="nextMonth()" class="boton-iniciar">Siguiente</button>
+                </center>
+
+            </div>
+            <div class="horarioZona">
+                
+            </div>
+            <div class="resumenZona">
+                <form action="agendar.php" method="post" enctype="multipart/form-data">
+                    <div class="encuesta3 inline">
+                        <b>Resumen</b>
+                        <hr>
+                        <p id="p1">Fecha</p>
+                        <p id="p2">Hora</p>
+                    </div>
+                    <input class="boton-iniciar2" type="submit" name="Agendar" value="Agendar" />
+                </form>
+            </div>
+        </div>
+
+
+
+
+
+        <script>
+            //CALENDARIO
+            const fechasDisponibles = <?php echo json_encode($fechasDisponibles); ?>;
+            console.log(fechasDisponibles);
+
+            function createCalendar(year, month) {
+                const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                const currentDate = new Date(year, month - 1, 1);
+                const firstDayOfMonth = currentDate.getDay();
+                const daysInMonth = new Date(year, month, 0).getDate();
+
+                let html = '<h2>' + monthNames[month - 1] + ' ' + year + '</h2>';
+                html += '<table>';
+                html += '<tr><th>Domingo</th><th>Lunes</th><th>Martes</th><th>Miércoles</th><th>Jueves</th><th>Viernes</th><th>Sábado</th></tr>';
+                html += '<tr>';
+
+                let dayCounter = 1;
+
+                for (let i = 0; i < 7; i++) {
+                    if (i < firstDayOfMonth) {
+                        html += '<td></td>';
+                    } else {
+                        // Extraer el día actual del bucle
+                        const currentDate = new Date(year, month - 1, dayCounter);
+                        const currentDay = currentDate.getDate();
+                        //Convierto formato Fri Mar 01 2024 00:00:00 GMT-0600 (hora estándar central) a YYYY-MM-DD
+                        var fechaFormateada = formatearFecha(currentDate);
+                        // Verificar si el día está disponible
+                        const isAvailable = fechasDisponibles.includes(fechaFormateada);
+                        console.log(fechaFormateada);
+                        console.log(fechasDisponibles.includes(fechaFormateada));
+                        if (isAvailable) {
+                            html += '<td class="available-day" onclick="showDay(' + dayCounter + ', ' + month + ', ' + year + ')">' + dayCounter + '</td>';
+                        } else {
+                            html += '<td class="unavailable-day">' + dayCounter + '</td>';
+                        }
+                        dayCounter++;
+                    }
+                }
+
+                html += '</tr>';
+
+                for (let i = 0; i < 5; i++) {
+                    html += '<tr>';
+                    for (let j = 0; j < 7; j++) {
+                        if (dayCounter <= daysInMonth) {
+                            const currentDate = new Date(year, month - 1, dayCounter);
+                            const currentDay = currentDate.getDate();
+                            //Convierto formato Fri Mar 01 2024 00:00:00 GMT-0600 (hora estándar central) a YYYY-MM-DD
+                        var fechaFormateada = formatearFecha(currentDate);
+                        // Verificar si el día está disponible
+                        const isAvailable = fechasDisponibles.includes(fechaFormateada);
+                        console.log(fechaFormateada);
+                        console.log(fechasDisponibles.includes(fechaFormateada));
+                            if (isAvailable) {
+                                html += '<td class="available-day" onclick="showDay(' + dayCounter + ', ' + month + ', ' + year + ')">' + dayCounter + '</td>';
+                            } else {
+                                html += '<td class="unavailable-day">' + dayCounter + '</td>';
+                            }
+                            dayCounter++;
+                        } else {
+                            html += '<td></td>';
+                        }
+                    }
+                    html += '</tr>';
+                }
+
+                html += '</table>';
+                return html;
+            }
+
+            function showDay(day, month, year) {
+                const fecha = document.getElementById('p1');
+                fecha.innerHTML = "Seleccionaste el: " + day + ' / ' + month + ' / ' + year;
+            }
+
+            function updateCalendar(year, month) {
+                const calendarDiv = document.getElementById('calendar');
+                calendarDiv.innerHTML = createCalendar(year, month);
+            }
+
+            const currentDate = new Date();
+            let currentYear = currentDate.getFullYear();
+            let currentMonth = currentDate.getMonth() + 1;
+
+            updateCalendar(currentYear, currentMonth);
+
+            function prevMonth() {
+                currentMonth--;
+                if (currentMonth < 1) {
+                    currentMonth = 12;
+                    currentYear--;
+                }
+                updateCalendar(currentYear, currentMonth);
+            }
+
+            function nextMonth() {
+                currentMonth++;
+                if (currentMonth > 12) {
+                    currentMonth = 1;
+                    currentYear++;
+                }
+                updateCalendar(currentYear, currentMonth);
+            }
+
+            //Nuevas funciones 
+
+            function formatearFecha(fechaString) {
+    // Crear un objeto Date a partir de la cadena de fecha
+    var fecha = new Date(fechaString);
+
+    // Obtener los componentes de la fecha
+    var año = fecha.getFullYear();
+    var mes = ('0' + (fecha.getMonth() + 1)).slice(-2); // Se agrega 1 al mes ya que enero es 0
+    var dia = ('0' + fecha.getDate()).slice(-2);
+
+    // Formatear la fecha en el formato deseado (YYYY-MM-DD)
+    var fechaFormateada = año + '-' + mes + '-' + dia;
+
+    return fechaFormateada;
+}
+
+        </script>
 
 </body>
 
