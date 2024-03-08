@@ -83,4 +83,35 @@ public function informacionCursos($titulo)
 }
 
 
+public function informacionBusqueda($nombre)
+{
+    $query = "SELECT * FROM cursos WHERE nombre = '$nombre'";
+    $resultado = mysqli_query($this->db, $query);
+
+    // Verificar si la consulta fue exitosa
+    if ($resultado) {
+        // Devolver el resultado como un arreglo asociativo
+        return mysqli_fetch_assoc($resultado);
+    } else {
+        // Manejar el error si la consulta falla
+        return false;
+    }
+}
+
+
+public function match($fecha)
+{
+    $query = "SELECT m.nombre, m.descripcion, m.foto
+    FROM maestros m
+    JOIN disponibilidadmaestro d ON m.id_maestro = d.id_maestro
+    WHERE d.fecha = '$fecha'";
+    $resultado = mysqli_query($this->db, $query);
+
+        if ($resultado && mysqli_num_rows($resultado) > 0) {
+            return mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+        }
+
+        return false;
+}
+
 }

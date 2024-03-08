@@ -112,9 +112,10 @@ class UsuariosController
         }
     }
 
-    
+
     // Método para obtener información de la base de datos
-    public function obtenerInformacionDesdeBD() {
+    public function obtenerInformacionDesdeBD()
+    {
         $titulo = $_POST['titulo'];
         // Lógica para obtener la información de la base de datos utilizando el modelo
         $model = new UsuarioModel();
@@ -123,6 +124,60 @@ class UsuariosController
         // Devolver la información como JSON
         header('Content-Type: application/json');
         echo json_encode($informacion);
+    }
+
+    //**********************Nuevos*/
+    public function claseMuestraNavegacion()
+    {
+        $nombre = $_POST['nombreCurso'];
+
+        $model = new UsuarioModel();
+        $informacion = $model->informacionBusqueda($nombre);
+        if ($informacion) {
+            $nombreCurso = $informacion['nombre'];
+            $fotoCurso = $informacion['foto'];
+            $descripcionCurso = $informacion['descripcion'];
+            $precioCurso = $informacion['precio'];
+
+            require_once "views/alumno/busqueda.php";
+        } else {
+            //IMPLEMENTAR PANTALLA DE ERROR
+            require_once "views/docente/index.php";
+        }
+    }
+
+    public function matchMaestro()
+    {
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Validar y sanar los datos de entrada
+            $fecha = $_POST['fecha'];
+            $hora = $_POST['hora'];
+            //echo $fecha, " ", $hora;
+            $model = new UsuarioModel();
+            $informacion2 = $model->match($fecha);
+            // Verificar si se encontraron cursos asignados
+            if ($informacion2) {
+                // Inicializar un array para almacenar las fotos de los cursos
+                $fotos = array();
+
+                // Iterar sobre los resultados de los cursos asignados
+                foreach ($informacion2 as $curso) {
+                    // Agregar la foto del curso al array de fotos de cursos
+                    $fotos[] = $curso['foto'];
+                }
+            } else {
+                // Si no se encontraron cursos asignados, inicializar el array como vacío
+                $fotos = array();
+            }
+
+            require_once "views/alumno/matchMaestro.php";
+
+        } else {
+            // Redirigir si se intenta acceder directamente a través de GET
+            header('Location: index.php');
+        }
+
     }
 
 

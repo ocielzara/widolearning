@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carousel con Bootstrap</title>
+    <title>Home</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -374,6 +374,28 @@
             justify-content: center;
         }
 
+        /* Estilo del cuadrado con sombra */
+        #video-box {
+            width: 220px;
+            /* Ajusta el ancho según tus necesidades */
+            height: 250px;
+            /* Ajusta la altura según tus necesidades */
+            background-color: #50B2FF;
+            /* Color de fondo del cuadrado */
+            border-radius: 20px;
+            /* Redondea los bordes más */
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+            /* Sombra */
+            /* margin-left: 10px;*/
+            margin-top: 3px;
+            /* */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+           
+        }
+
         #image-box img {
             width: 100%;
             /* La imagen ocupa el 100% del ancho del contenedor */
@@ -383,6 +405,17 @@
             border-radius: 20px 20px 0 0;
             /* Bordes redondeados solo arriba */
             margin-top: -40px;
+        }
+
+        #video-box video {
+            width: 100%;
+            /* La imagen ocupa el 100% del ancho del contenedor */
+            height: 100%;
+            flex: 0.2;
+            /* La imagen ocupa la mitad superior */
+            border-radius: 20px 20px 0 0;
+            /* Bordes redondeados solo arriba */
+            margin-top: -60px;
         }
 
         #image-box p {
@@ -576,6 +609,35 @@
         #profile-grid .img-rounded {
             border-radius: 4px 4px 0 0;
         }
+
+        .carousel-control-next,
+        .carousel-control-prev {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            width: 5%;
+            color: black;
+            text-align: center;
+            opacity: .;
+        }
+
+        .botones-carrucel {
+            width: 75%;
+        }
+
+        .botones-carrucel-cursos {
+            width: 100%;
+            margin-left: 25%;
+        }
     </style>
 
     <!--AREAS APRENDISAJE CARRUCEL-->
@@ -723,11 +785,16 @@
                                     <!-- Cuadrado con sombra -->
                                     <div id="image-box">
                                         <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <img src="images/curso/unity.png" alt="Descripción de la imagen">
                                         <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
+                                        <form class="botones-carrucel-cursos" action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                            method="post">
+                                            <!-- Campo oculto para enviar información -->
+                                            <input type="hidden" name="nombreCurso" value="unity">
+                                            <button class="clase-muestra">
+                                                <span>Clase muestra</span>
+                                            </button>
+                                        </form>
                                         <button class="suscripcion">
                                             <span>proximamente</span>
                                         </button>
@@ -741,7 +808,7 @@
                                     <!-- Cuadrado con sombra -->
                                     <div id="image-box">
                                         <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <img src="images/curso/blender.png" alt="Descripción de la imagen">
                                         <!-- Mitad inferior para el título de la imagen -->
                                         <button class="clase-muestra">
                                             <span>Clase muestra</span>
@@ -1044,12 +1111,11 @@
     <!--Master teach-->
     <div id="contenido-master-teach" class="prices-1" style="display: none;">
         <div class="contenedor-1">
-            <!-- Formulario para buscar -->
+            <!-- Formulario para buscar 
             <form>
                 <input type="text" id="busqueda" class="form-control mr-sm-2" placeholder="Buscar cursos">
                 <button type="button" id="buscar" class="btn btn-primary">Buscar</button>
             </form>
-            <!-- Codigo de ajax -->
 
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
             <script>
@@ -1090,7 +1156,9 @@
             <div id="resultados">
 
             </div>
+            -->
         </div>
+        
         <p class="cursos-p">DOCENTES</p>
         <div id="cursos-slider">
             <div class="container-fluid">
@@ -1100,19 +1168,22 @@
                             <div class="panel panel-default">
                                 <div class="prices-1">
                                     <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
+                                    <div id="video-box">
                                         <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <video id="video" controls>
+                                        <source src="images/docente/alondraF.mp4" type="video/mp4">
+                                        </video>
                                         <!-- Mitad inferior para el título de la imagen -->
-                                        <form action="index.php?c=docentes&a=perfilDocente" method="post">
+                                        <form class="botones-carrucel" action="index.php?c=docentes&a=perfilDocente"
+                                            method="post">
                                             <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombre" value="carlos zarate gutierrez">
+                                            <input type="hidden" name="nombre" value="master teach alondra">
                                             <button class="clase-muestra" style="width: 100%;">
                                                 <span>Ver perfil</span>
                                             </button>
                                         </form>
                                         <button class="suscripcion">
-                                            <span>Carlos</span>
+                                            <span>Alondra</span>
                                         </button>
                                     </div>
                                 </div>
@@ -1126,7 +1197,8 @@
                                         <!-- Mitad superior para la imagen -->
                                         <img src="images/prueba/imagen-prueba-3.jpg" alt="Descripción de la imagen">
                                         <!-- Mitad inferior para el título de la imagen -->
-                                        <form action="index.php?c=docentes&a=perfilDocente" method="post">
+                                        <form class="botones-carrucel" action="index.php?c=docentes&a=perfilDocente"
+                                            method="post">
                                             <!-- Campo oculto para enviar información -->
                                             <input type="hidden" name="nombre" value="leana deep deep">
                                             <button class="clase-muestra" style="width: 100%;">
@@ -1148,7 +1220,7 @@
                                         <!-- Mitad superior para la imagen -->
                                         <img src="images/prueba/imagen-prueba-4.jpg" alt="Descripción de la imagen">
                                         <!-- Mitad inferior para el título de la imagen -->
-                                        <form action="index.php?c=docentes&a=perfilDocente" method="post">
+                                        <form class="botones-carrucel" action="index.php?c=docentes&a=perfilDocente" method="post">
                                             <!-- Campo oculto para enviar información -->
                                             <input type="hidden" name="nombre" value="carlos zarate gutierrez">
                                             <button class="clase-muestra" style="width: 100%;">
@@ -1287,6 +1359,31 @@
         var contenidoAdicional = document.getElementById("contenido-areas");
         contenidoAdicional.style.display = "none";
     }
+
+
+
+    //FUNCIONES PARA LA PREVISUALIZACION DE VIDEO EN SLIDER***********************************************************++
+    // Obtener el video y la imagen de previsualización por sus ID
+    const video = document.getElementById('video');
+    const preview = document.getElementById('preview');
+
+    // Escuchar el evento 'loadedmetadata' para asegurarse de que el video esté cargado
+    video.addEventListener('loadedmetadata', function() {
+        // Obtener el cuadro del video en el segundo 0 (puedes ajustar esto si lo deseas)
+        video.currentTime = 1;
+    });
+
+    // Escuchar el evento 'canplay' para asegurarse de que el video pueda reproducirse
+    video.addEventListener('canplay', function() {
+        // Capturar un cuadro del video y mostrarlo como una previsualización
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        preview.src = canvas.toDataURL();
+        preview.style.display = 'block';
+    });
 </script>
 
 </html>

@@ -26,8 +26,7 @@ CREATE TABLE Usuarios
         (255) NOT NULL,
     foto VARCHAR
         (255) NOT NULL,
-    descripcion VARCHAR
-        (255) NOT NULL,
+    descripcion TEXT NOT NULL,
     correo_electronico VARCHAR
         (255) NOT NULL,
     contraseña VARCHAR
@@ -127,3 +126,12 @@ INSERT INTO `disponibilidadmaestro`(`id_disponibilidad`, `id_maestro`, `fecha`, 
 INSERT INTO `disponibilidadmaestro`(`id_disponibilidad`, `id_maestro`, `fecha`, `hora`) VALUES (null,2,'2024-03-10','16:00:00');
 
 INSERT INTO `disponibilidadmaestro`(`id_disponibilidad`, `id_maestro`, `fecha`, `hora`) VALUES (null,2,'2024-03-12','16:00:00');
+
+INSERT INTO `disponibilidadmaestro`(`id_disponibilidad`, `id_maestro`, `fecha`, `hora`) VALUES (null,1,'2024-03-12','18:00:00');
+
+INSERT INTO `disponibilidadmaestro`(`id_disponibilidad`, `id_maestro`, `fecha`, `hora`) VALUES (null,1,'2024-03-14','10:00:00');
+
+
+
+-- DATOS OFICIALES 
+INSERT INTO `maestros`(`id_maestro`, `nombre`, `foto`, `descripcion`, `correo_electronico`, `contraseña`) VALUES (null,'master teach alondra','images/docente/alondraF.mp4','¿En qué áreas te puedo ayudar?: Curso: finanzas personales, inversiones, emprendimiento, administracion empresarial. ¡Conoce a tu Master Teach Alondra! Hola Soy Alo, Lic. en Economía y Finanzas. Candidata de MBA y Figura 3 como Asesora en estrategias de inversión por la AMIB. Actualmente soy Analista de Inversiones en WTW en Chicago. Hobbies de Alo bailar, escuchar musica, leer, viajar, escuchar podcasts financieros y corporativos, ir de shopping.','null','null');

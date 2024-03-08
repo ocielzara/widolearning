@@ -61,10 +61,27 @@ class DocentesController
             $informacionDisponibilidad = $docente->disponibilidadMaestro($idDocente);
             // Inicializar un array para almacenar las fechas disponibles
             $fechasDisponibles = array();
+            $fechasHorasDisponibles = array();
 
-            // Iterar sobre las fechas disponibles y agregarlas al array
-            foreach ($informacionDisponibilidad as $disponibilidad) {
-                $fechasDisponibles[] = $disponibilidad['fecha'];
+            // Verificar si hay disponibilidad antes de intentar iterar sobre ella
+            if (is_array($informacionDisponibilidad) && count($informacionDisponibilidad) > 0) {
+                // Iterar sobre las fechas disponibles y agregarlas al array
+                foreach ($informacionDisponibilidad as $disponibilidad) {
+                    $fechasDisponibles[] = $disponibilidad['fecha'];
+                }
+
+                // Iterar sobre las fechas disponibles y agregarlas al array
+                foreach ($informacionDisponibilidad as $disponibilidad) {
+                    // Agregar tanto la fecha como la hora al array
+                    $fechasHorasDisponibles[] = array(
+                        $disponibilidad['fecha'],
+                        $disponibilidad['hora']
+                    );
+                }
+            } else {
+                // Si no hay disponibilidad, inicializar los arrays como vacíos
+                $fechasDisponibles = [];
+                $fechasHorasDisponibles = [];
             }
 
             require_once "views/docente/perfilDocente.php";

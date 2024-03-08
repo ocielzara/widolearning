@@ -102,10 +102,20 @@
             /* La imagen se ajusta para cubrir el contenedor */
         }
 
+        /* Estilos de la imagen */
+        .image-container video {
+            width: 100%;
+            /* La imagen ocupa todo el ancho del contenedor */
+            height: 100%;
+            /* La imagen ocupa todo el alto del contenedor */
+            object-fit: cover;
+            /* La imagen se ajusta para cubrir el contenedor */
+        }
+
         .contenedor-1a {
             width: 800px;
             /* Ancho del contenedor */
-            height: 200px;
+            height: 300px;
             /* Altura del contenedor */
             border-radius: 20px;
             /* Bordes redondeados */
@@ -674,7 +684,44 @@
         }
 
         .available-day {
-            background-color: #80FF7C ;
+            background-color: #80FF7C;
+        }
+
+        /* Estilo para los botones de horarios */
+        .button-horario {
+            background-color: white;
+            color: black;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            /* Ajusta el radio según lo necesites */
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            /* Efecto de sombreado */
+        }
+
+        .button-horario:hover {
+            background-color: #f0f0f0;
+            /* Cambia el color de fondo al pasar el ratón */
+        }
+
+        .button-agendar {
+            background-color: #FF8C1F;
+            color: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            /* Ajusta el radio según lo necesites */
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            /* Efecto de sombreado */
+        }
+
+        .button-agendar:hover {
+            background-color: #FF8008;
+            /* Cambia el color de fondo al pasar el ratón */
         }
     </style>
 
@@ -734,7 +781,14 @@
     <div id="section1"></div>
     <div class="prices-1">
         <div class="image-container">
-            <img src="<?php echo $fotoDocente; ?>" alt="Descripción de la imagen">
+            <?php if (pathinfo($fotoDocente, PATHINFO_EXTENSION) === 'mp4'): ?>
+                <video id="video" controls>
+                    <source src="<?php echo $fotoDocente; ?>" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            <?php else: ?>
+                <img src="<?php echo $fotoDocente; ?>" alt="Descripción de la imagen">
+            <?php endif; ?>
         </div>
         <div class="contenedor-1a">
             <p class="saludo">¡Hola, soy
@@ -792,17 +846,17 @@
 
             </div>
             <div class="horarioZona">
-                
+
             </div>
             <div class="resumenZona">
                 <form action="agendar.php" method="post" enctype="multipart/form-data">
                     <div class="encuesta3 inline">
-                        <b>Resumen</b>
+                        <h3>Resumen</h3>
                         <hr>
                         <p id="p1">Fecha</p>
-                        <p id="p2">Hora</p>
+                        <p id="p2">Hora: [Seleccionar]</p>
                     </div>
-                    <input class="boton-iniciar2" type="submit" name="Agendar" value="Agendar" />
+                    <button class="button-agendar" name="Agendar" value="Agendar">Agendar</button>
                 </form>
             </div>
         </div>
@@ -815,6 +869,8 @@
             //CALENDARIO
             const fechasDisponibles = <?php echo json_encode($fechasDisponibles); ?>;
             console.log(fechasDisponibles);
+            const fechasHorasDisponibles = <?php echo json_encode($fechasHorasDisponibles); ?>;
+            console.log(fechasHorasDisponibles);
 
             function createCalendar(year, month) {
                 const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
@@ -860,11 +916,11 @@
                             const currentDate = new Date(year, month - 1, dayCounter);
                             const currentDay = currentDate.getDate();
                             //Convierto formato Fri Mar 01 2024 00:00:00 GMT-0600 (hora estándar central) a YYYY-MM-DD
-                        var fechaFormateada = formatearFecha(currentDate);
-                        // Verificar si el día está disponible
-                        const isAvailable = fechasDisponibles.includes(fechaFormateada);
-                        console.log(fechaFormateada);
-                        console.log(fechasDisponibles.includes(fechaFormateada));
+                            var fechaFormateada = formatearFecha(currentDate);
+                            // Verificar si el día está disponible
+                            const isAvailable = fechasDisponibles.includes(fechaFormateada);
+                            console.log(fechaFormateada);
+                            console.log(fechasDisponibles.includes(fechaFormateada));
                             if (isAvailable) {
                                 html += '<td class="available-day" onclick="showDay(' + dayCounter + ', ' + month + ', ' + year + ')">' + dayCounter + '</td>';
                             } else {
@@ -885,6 +941,8 @@
             function showDay(day, month, year) {
                 const fecha = document.getElementById('p1');
                 fecha.innerHTML = "Seleccionaste el: " + day + ' / ' + month + ' / ' + year;
+                // Llamar a una función para mostrar los horarios disponibles
+                showAvailableTimes(day, month, year);
             }
 
             function updateCalendar(year, month) {
@@ -919,20 +977,72 @@
             //Nuevas funciones 
 
             function formatearFecha(fechaString) {
-    // Crear un objeto Date a partir de la cadena de fecha
-    var fecha = new Date(fechaString);
+                // Crear un objeto Date a partir de la cadena de fecha
+                var fecha = new Date(fechaString);
 
-    // Obtener los componentes de la fecha
-    var año = fecha.getFullYear();
-    var mes = ('0' + (fecha.getMonth() + 1)).slice(-2); // Se agrega 1 al mes ya que enero es 0
-    var dia = ('0' + fecha.getDate()).slice(-2);
+                // Obtener los componentes de la fecha
+                var año = fecha.getFullYear();
+                var mes = ('0' + (fecha.getMonth() + 1)).slice(-2); // Se agrega 1 al mes ya que enero es 0
+                var dia = ('0' + fecha.getDate()).slice(-2);
 
-    // Formatear la fecha en el formato deseado (YYYY-MM-DD)
-    var fechaFormateada = año + '-' + mes + '-' + dia;
+                // Formatear la fecha en el formato deseado (YYYY-MM-DD)
+                var fechaFormateada = año + '-' + mes + '-' + dia;
 
-    return fechaFormateada;
-}
+                return fechaFormateada;
+            }
 
+            function showAvailableTimes(day, month, year) {
+                // Formatear la fecha seleccionada en el formato YYYY-MM-DD
+                const selectedDate = year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day);
+
+                // Filtrar los horarios disponibles para la fecha seleccionada
+                const availableTimes = fechasHorasDisponibles.filter(item => item[0] === selectedDate);
+
+                // Mostrar los horarios disponibles en el div horarioZona
+                const horarioZona = document.querySelector('.horarioZona');
+                horarioZona.innerHTML = '<h3>Horarios Disponibles:</h3>';
+                if (availableTimes.length > 0) {
+                    const div = document.createElement('div');
+                    div.classList.add('horario-buttons');
+                    availableTimes.forEach(item => {
+                        const button = document.createElement('button');
+                        button.classList.add('button-horario');
+                        button.textContent = item[1];
+                        button.onclick = function () {
+                            // Al hacer clic en un horario, actualizar el elemento <p id="p2">Hora</p>
+                            document.getElementById('p2').textContent = 'Hora: ' + item[1];
+                        };
+                        div.appendChild(button);
+                    });
+                    horarioZona.appendChild(div);
+                } else {
+                    horarioZona.innerHTML += '<p>No hay horarios disponibles para este día.</p>';
+                }
+            }
+
+
+            //FUNCIONES PARA LA PREVISUALIZACION DE VIDEO EN SLIDER***********************************************************++
+            // Obtener el video y la imagen de previsualización por sus ID
+            const video = document.getElementById('video');
+            const preview = document.getElementById('preview');
+
+            // Escuchar el evento 'loadedmetadata' para asegurarse de que el video esté cargado
+            video.addEventListener('loadedmetadata', function () {
+                // Obtener el cuadro del video en el segundo 0 (puedes ajustar esto si lo deseas)
+                video.currentTime = 1;
+            });
+
+            // Escuchar el evento 'canplay' para asegurarse de que el video pueda reproducirse
+            video.addEventListener('canplay', function () {
+                // Capturar un cuadro del video y mostrarlo como una previsualización
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                preview.src = canvas.toDataURL();
+                preview.style.display = 'block';
+            });
         </script>
 
 </body>
