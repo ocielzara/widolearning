@@ -26,7 +26,9 @@ CREATE TABLE Usuarios
         (255) NOT NULL,
     foto VARCHAR
         (255) NOT NULL,
+    areas TEXT NOT NULL,
     descripcion TEXT NOT NULL,
+    hobies TEXT NOT NULL,
     correo_electronico VARCHAR
         (255) NOT NULL,
     contraseña VARCHAR
@@ -43,6 +45,9 @@ CREATE TABLE Usuarios
     foto VARCHAR
             (255) NOT NULL,
     descripcion TEXT,
+    temario TEXT,
+    requerimientos TEXT,
+    pdf TEXT,
     precio DECIMAL
             (10, 2) NOT NULL
 );
@@ -108,14 +113,96 @@ INSERT INTO `motorBusqueda` (`id_curso`, `titulo`, `contenido`, `palabrasClave`)
 (5, 'Robotica', '', 'robotica circuitos electricidad fisica motores robot robots mecanica ingenieria armado lego programacion desarrollo aplicaciones arduino'),
 (6, 'Dibujo', '', 'dibujo diseño personajes ilustracion animacion tableta grafica ipad procreate krita'),
 (7, 'Programacion', '', 'python c++ lenguajes programacion paginas web html java aplicaciones moviles');
-                
-INSERT INTO `maestros` (`id_maestro`, `nombre`, `foto`, `descripcion`, `correo_electronico`, `contraseña`) VALUES
-(1, 'leana deep deep', 'images/docente/leanad.jpg', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi quasi officiis praesentium quo accusamus inventore tempora aperiam labore ex. Id commodi numquam quis corporis ab? Sint numquam veniam amet unde. leana', 'leana@gmail.com', '12345678'),
-(2, 'carlos zarate gutierrez', 'images/docente/carlosz.jpg', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Excepturi quasi officiis praesentium quo accusamus inventore tempora aperiam labore ex. Id commodi numquam quis corporis ab? Sint numquam veniam amet unde. carlos', 'carlos@gmail.com', '12345678');
 
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `precio`) VALUES (null,'unity','images/curso/unity.png','cursos de videojuegos','100');
 
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `precio`) VALUES (null,'blender','images/curso/blender.png','cursos de modelaod','200');
+
+
+
+INSERT INTO `maestros`(`id_maestro`, `nombre`, `foto`, `areas`, `descripcion`, `hobies`, `correo_electronico`, `contraseña`) VALUES (null,'master teach alexia','images/docente/leanad.jpg','Curso: dibujo Tradicional 
+
+
+Arte tradicional (dibujo) 
+-Photoshop, Clip studio. 
+-Arte digital','Hola Soy Alexia, Lic. En Diseño, Animación y Arte digital. 
+Actualmente me dedico a Ilustrar por medio digital de manera Freelance.','Escuchar música 
+Ilustrar 
+Pintar con Acuarelas
+Ver series y películas animadas ','null','null');
+
+INSERT INTO `maestros`(`id_maestro`, `nombre`, `foto`, `areas`, `descripcion`, `hobies`, `correo_electronico`, `contraseña`) VALUES (null,'master teach eric','images/docente/carlosz.jpg','Cursos:
+-Desarrollo de un brazo robótico
+
+-Curso de Robótica (brazo robótico)
+
+-Robótica (Carrito)
+
+-Electrónica
+
+-Programación (Python y C)','Hola, soy Eric, Ingeniero en Mecatrónica. Actualmente estudio la maestría en Electrónica y colaboro en distintos proyectos de investigación.','-Deportes
+-Jugar videojuegos
+-Leer','null','null');
+
+INSERT INTO `maestros`(`id_maestro`, `nombre`, `foto`, `areas`, `descripcion`, `hobies`, `correo_electronico`, `contraseña`) VALUES (null,'master teach alondra','images/docente/alondraF.mp4','Curso: Finanzas personales 
+
+
+-Finanzas personales
+
+-Inversiones
+
+-Emprendimiento
+
+-Administración empresarial','Hola Soy Alo, Lic. en Economía y Finanzas. Candidata de MBA y Figura 3 como Asesora en estrategias de inversión por la AMIB.
+Actualmente soy Analista de Inversiones en WTW en Chicago. ','-Bailar
+-Escuchar música
+-Leer
+-Viajar
+-Escuchar podcasts financieros y corporativos.
+-Ir de Shopping
+','null','null');
+
+
+
+
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'finanzas personales','images/curso/finanzas-personales.png','null','null','null','finanzas-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'emprendimiento e innovacion','images/curso/emprendimiento-e-innovacion.png','null','null','null','emprendimiento-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'robotica proyecto brazo robotico','images/curso/robotica-brazo.png','null','null','null','roboticabrazo-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'dibujo tradicional','images/curso/dibujo.png','null','null','null','dibujo-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'photoshop','images/curso/photoshop.png','null','null','null','photoshop-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'illustrator','images/curso/illustrator.png','null','null','null','illustrator-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'blender','images/curso/blender.png','null','null','null','blender-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'gdevelop','images/curso/gdevelop.png','null','null','null','gdevelop-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'unity 2d','images/curso/unity2d.png','null','null','null','unity2d-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'unity 3d','images/curso/unity3d.png','null','null','null','unity3d-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'minecraft','images/curso/minecraft.png','null','null','null','minecraft-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'doblaje','images/curso/doblaje.png','null','null','null','doblaje-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'databricks','images/curso/databricks.png','null','null','null','databricks-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'ajedrez','images/curso/ajedrez.png','null','null','null','ajedrez-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'ia','images/curso/ia.png','null','null','null','ia-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'inversion','images/curso/inversion.png','null','null','null','inversion-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'robotica','images/curso/robotica.png','null','null','null','robotica-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'thunkable','images/curso/thunkable.png','null','null','null','thunkable-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'excel','images/curso/excel.png','null','null','null','excel-pdf.pdf','null');
+
+INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'ap teach','images/curso/ap-teach.png','null','null','null','ap-teach-pdf.pdf','null');
 
 
 
@@ -133,5 +220,3 @@ INSERT INTO `disponibilidadmaestro`(`id_disponibilidad`, `id_maestro`, `fecha`, 
 
 
 
--- DATOS OFICIALES 
-INSERT INTO `maestros`(`id_maestro`, `nombre`, `foto`, `descripcion`, `correo_electronico`, `contraseña`) VALUES (null,'master teach alondra','images/docente/alondraF.mp4','¿En qué áreas te puedo ayudar?: Curso: finanzas personales, inversiones, emprendimiento, administracion empresarial. ¡Conoce a tu Master Teach Alondra! Hola Soy Alo, Lic. en Economía y Finanzas. Candidata de MBA y Figura 3 como Asesora en estrategias de inversión por la AMIB. Actualmente soy Analista de Inversiones en WTW en Chicago. Hobbies de Alo bailar, escuchar musica, leer, viajar, escuchar podcasts financieros y corporativos, ir de shopping.','null','null');
