@@ -113,9 +113,9 @@
         }
 
         .contenedor-1a {
-            width: 800px;
+            width: 850px;
             /* Ancho del contenedor */
-            height: 300px;
+            height: 550px;
             /* Altura del contenedor */
             border-radius: 20px;
             /* Bordes redondeados */
@@ -684,7 +684,14 @@
         }
 
         .available-day {
-            background-color: #80FF7C;
+            background-color: #C1FFA2;
+        }
+
+        .diasDisponibles {
+            background-color: #C1FFA2;
+            width: 20px;
+            height: 20px;
+            border-radius: 20px;
         }
 
         /* Estilo para los botones de horarios */
@@ -723,6 +730,12 @@
             background-color: #FF8008;
             /* Cambia el color de fondo al pasar el ratón */
         }
+
+        .line-spacing {
+            line-height: 0.5;
+    }
+
+
     </style>
 
     <!--AREAS APRENDISAJE CARRUCEL-->
@@ -797,6 +810,14 @@
             <p>
                 <?php echo $descripcionDocente; ?>
             </p>
+            <p class="saludo">¿En qué áreas te puedo ayudar?</p>
+            <p class="line-spacing">
+            <?php echo nl2br($texto_con_saltos_areasDocente); ?>
+            </p>
+            <p class="saludo">Hobbies</p>
+            <p class="line-spacing">
+            <?php echo nl2br($texto_con_saltos_hobiesDocente); ?>
+            </p>
         </div>
         <p class="cursos-p1">¿Qué otros cursos imparte
             <?php echo $nombreDocente; ?>?
@@ -843,6 +864,8 @@
                     <button onclick="prevMonth()" class="boton-iniciar">Anterior</button>
                     <button onclick="nextMonth()" class="boton-iniciar">Siguiente</button>
                 </center>
+
+                <div class="diasDisponibles"></div><p>Dias disponibles</p>
 
             </div>
             <div class="horarioZona">

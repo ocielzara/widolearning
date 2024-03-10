@@ -38,6 +38,13 @@ class DocentesController
             $nombreDocente = $informacion['nombre'];
             $fotoDocente = $informacion['foto'];
             $descripcionDocente = $informacion['descripcion'];
+            $areasDocente = $informacion['areas'];
+            $hobiesDocente = $informacion['hobies'];
+
+            // Reemplazar los guiones por saltos de línea
+            $texto_con_saltos_areasDocente = str_replace('-', "\n", $areasDocente);
+            // Reemplazar los guiones por saltos de línea
+            $texto_con_saltos_hobiesDocente = str_replace('-', "\n", $hobiesDocente);  
 
             // Obtener todas las fotos de los cursos asignados al docente
             $informacionCursos = $docente->cursosAsignados($nombre);

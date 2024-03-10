@@ -138,6 +138,7 @@ class UsuariosController
             $fotoCurso = $informacion['foto'];
             $descripcionCurso = $informacion['descripcion'];
             $precioCurso = $informacion['precio'];
+            $pdfCurso = $informacion['pdf'];
 
             require_once "views/alumno/busqueda.php";
         } else {
