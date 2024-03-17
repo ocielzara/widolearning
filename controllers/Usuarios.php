@@ -76,8 +76,8 @@ class UsuariosController
                 // Redirigir a la página de miEspacio
                 header("location:  index.php?c=usuarios&a=miEspacio&n=$nombre");
             } else {
-                // Inicio de sesión fallido, redirigir al login _
-                header('location: index.php');
+                echo '<script>alert("Inicio de sesión fallido. Por favor, verifica tu correo electrónico o contraseña.");';
+                echo 'window.location.href = "index.php";</script>';
             }
         } else {
             // Redirigir si se intenta acceder directamente a través de GET
@@ -89,9 +89,9 @@ class UsuariosController
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Validar y sanar los datos de entrada
-            $nombre = $_POST['nombre'];
-            $correo = filter_var($_POST['correo'], FILTER_SANITIZE_EMAIL);
-            $celular = $_POST['celular']; // No necesitas filtrar la contraseña aquí
+            $nombre = strtolower($_POST['nombre']);
+            $correo = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+            $celular = $_POST['contraseña']; // No necesitas filtrar la contraseña aquí
 
             // Aquí se pueden realizar más validaciones si es necesario
 
@@ -140,10 +140,10 @@ class UsuariosController
             $precioCurso = $informacion['precio'];
             $pdfCurso = $informacion['pdf'];
 
-            require_once "views/alumno/busqueda.php";
+            require_once "Views/alumno/busqueda.php";
         } else {
             //IMPLEMENTAR PANTALLA DE ERROR
-            require_once "views/docente/index.php";
+            require_once "Views/docente/index.php";
         }
     }
 
@@ -172,7 +172,7 @@ class UsuariosController
                 $fotos = array();
             }
 
-            require_once "views/alumno/matchMaestro.php";
+            require_once "Views/alumno/matchMaestro.php";
 
         } else {
             // Redirigir si se intenta acceder directamente a través de GET

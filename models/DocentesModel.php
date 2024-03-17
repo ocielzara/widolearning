@@ -13,7 +13,8 @@ class DocenteModel
 
     public function validarDocente($correo, $contrasena)
     {
-        $contrasena = md5($contrasena);
+
+        //$contrasena = md5($contrasena);
 
         $query = "SELECT * FROM maestros WHERE correo_electronico = '$correo' AND contraseña = '$contrasena'";
         $resultado = mysqli_query($this->db, $query);
@@ -73,4 +74,83 @@ class DocenteModel
             return false;
         }
     }
+
+
+    public function disponibilidadConsulta($idMaestro)
+    {
+        $query = "SELECT * FROM disponibilidadMaestro WHERE id_maestro = '$idMaestro'";
+        $resultado = mysqli_query($this->db, $query);
+
+        // Verificar si se encontraron resultados
+        if ($resultado->num_rows > 0) {
+            // Inicializar un array para almacenar la disponibilidad
+            $disponibilidad = array();
+
+            // Iterar sobre los resultados y almacenarlos en el array de disponibilidad
+            while ($row = $resultado->fetch_assoc()) {
+                $disponibilidad[] = $row;
+            }
+
+            // Devolver el array de disponibilidad
+            return $disponibilidad;
+        } else {
+            // Si no se encontraron resultados, devolver false
+            return false;
+        }
+    }
+
+    public function insertarDisponibilidad($id, $date, $time)
+    {
+        // Preparar la consulta SQL
+        $query = mysqli_query($this->db, "INSERT INTO disponibilidadMaestro (id_maestro, fecha, hora) VALUES ('$id', '$date', '$time')");
+        return true; // La inserción fue exitosa
+    }
+
+    public function eliminarDisponibilidad($id)
+    {
+        // Preparar la consulta SQL
+        $query = "DELETE FROM disponibilidadMaestro WHERE id_disponibilidad = $id";
+
+        // Ejecutar la consulta
+        $result = mysqli_query($this->db, $query);
+
+        // Verificar si la eliminación fue exitosa
+        if ($result) {
+            return true; // La eliminación fue exitosa
+        } else {
+            return false; // Hubo un error al eliminar
+        }
+    }
+
+    public function consultaDisponibilidadAgenda($id)
+    {
+        $query = "SELECT * FROM disponibilidadMaestro WHERE id_disponibilidad = '$id'";
+        $resultado = mysqli_query($this->db, $query);
+
+        if (mysqli_num_rows($resultado) > 0) {
+            return mysqli_fetch_array($resultado);
+        }
+
+        return false;
+    }
+
+    
+    public function actualizarDisponibilidad($id, $date, $time)
+{
+    // Preparar la consulta SQL de actualización
+    $query = "UPDATE disponibilidadMaestro SET fecha = '$date', hora = '$time' WHERE id_disponibilidad = '$id'";
+
+    // Ejecutar la consulta
+    $resultado = mysqli_query($this->db, $query);
+
+    // Verificar si la actualización fue exitosa
+    if ($resultado) {
+        return true; // La actualización fue exitosa
+    } else {
+        return false; // Hubo un error al actualizar
+    }
+}
+
+
+
 }

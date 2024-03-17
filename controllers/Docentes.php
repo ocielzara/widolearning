@@ -10,7 +10,12 @@ class DocentesController
 
     public function index()
     {
-        require_once "views/docente/index.php";
+        require_once "Views/docente/index.php";
+    }
+
+    public function login()
+    {
+        require_once "Views/login/indexDocente.php";
     }
 
     public function iniciarSesion()
@@ -21,9 +26,33 @@ class DocentesController
         $docente = new DocenteModel();
         $maestro = $docente->validarDocente($correo, $contraseña);
         if ($maestro) {
-            require_once "views/docente/vista.php";
+            $idDocente = $maestro['id_maestro'];
+            $disponibilidadInformacion = $docente->disponibilidadConsulta($idDocente);
+            // Verificar si se encontraron cursos asignados
+            if ($disponibilidadInformacion) {
+                // Inicializar un array para almacenar las fotos de los cursos
+                $consulta = array();
+                // Verificar si hay disponibilidad antes de intentar iterar sobre ella
+                if (is_array($disponibilidadInformacion) && count($disponibilidadInformacion) > 0) {
+
+                    foreach ($disponibilidadInformacion as $disponibilidad) {
+                        // Agregar los datos como un array asociativo a $consulta
+                        $consulta[] = array(
+                            'id_disponibilidad' => $disponibilidad['id_disponibilidad'],
+                            'fecha' => $disponibilidad['fecha'],
+                            'hora' => $disponibilidad['hora']
+                        );
+                    }
+                } else {
+                    // Si no hay disponibilidad, inicializar los arrays como vacíos
+                    $consulta = [];
+                }
+            } else {
+            
+            }
+            require_once "Views/docente/index.php";
         } else {
-            require_once "views/docente/index.php";
+            require_once "Views/error/index.php";
         }
     }
 
@@ -44,7 +73,7 @@ class DocentesController
             // Reemplazar los guiones por saltos de línea
             $texto_con_saltos_areasDocente = str_replace('-', "\n", $areasDocente);
             // Reemplazar los guiones por saltos de línea
-            $texto_con_saltos_hobiesDocente = str_replace('-', "\n", $hobiesDocente);  
+            $texto_con_saltos_hobiesDocente = str_replace('-', "\n", $hobiesDocente);
 
             // Obtener todas las fotos de los cursos asignados al docente
             $informacionCursos = $docente->cursosAsignados($nombre);
@@ -91,9 +120,107 @@ class DocentesController
                 $fechasHorasDisponibles = [];
             }
 
-            require_once "views/docente/perfilDocente.php";
+            require_once "Views/docente/perfilDocente.php";
         } else {
-            require_once "views/docente/index.php";
+            require_once "Views/docente/index.php";
+        }
+    }
+
+    public function agendaIndex()
+    {
+        require_once "Views/docente/agenda/crear.php";
+    }
+
+    public function agendaCrear()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Validar y sanar los datos de entrada
+            $date = $_POST['date'];
+            $time = $_POST['time'];
+            $id = $_POST['id_maestro']; 
+
+            // Aquí se pueden realizar más validaciones si es necesario
+
+            // Procesar los datos, por ejemplo, guardarlos en la base de datos
+            $model = new DocenteModel();
+            if ($model->insertarDisponibilidad($id, $date, $time)) {
+                // Redirigir a alguna página después de registrar al usuario
+                echo '<script>window.location.replace(document.referrer);</script>';
+            } else {
+                // Manejar el caso en que la inserción falla
+                // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
+                // Por ejemplo:
+                echo "Error al registrar el usuario.";
+            }
+        } else {
+            // Redirigir si se intenta acceder directamente a través de GET
+            header('Location: index.php');
+        }
+    }
+
+    public function agendaEliminar()
+    {
+       
+        $id_disponibilidad = $_GET['id']; 
+
+        // Procesar los datos, por ejemplo, guardarlos en la base de datos
+        $model = new DocenteModel();
+        if ($model->eliminarDisponibilidad($id_disponibilidad)) {
+                // Redirigir a alguna página después de registrar al usuario
+               
+        } else {
+                // Manejar el caso en que la inserción falla
+                // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
+                // Por ejemplo:
+                echo "Error al registrar el usuario.";
+        }
+    }
+
+    public function agendaEditar()
+    {
+        $id_disponibilidad = $_GET['id']; 
+
+        // Procesar los datos, por ejemplo, guardarlos en la base de datos
+        $model = new DocenteModel();
+        $informacion = $model->consultaDisponibilidadAgenda($id_disponibilidad);
+        if ($informacion) {
+                // Redirigir a alguna página después de registrar al usuario
+                $fecha = $informacion['fecha'];
+                $hora = $informacion['hora'];
+                require_once "Views/docente/agenda/editar.php";
+               
+        } else {
+                // Manejar el caso en que la inserción falla
+                // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
+                // Por ejemplo:
+                echo "Error al registrar el usuario.";
+        }
+    }
+
+    public function actualizarDisponibilidad()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Validar y sanar los datos de entrada
+            $date = $_POST['nuevaFecha'];
+            $time = $_POST['nuevaHora'];
+            $id = $_POST['id']; 
+
+            // Aquí se pueden realizar más validaciones si es necesario
+
+            // Procesar los datos, por ejemplo, guardarlos en la base de datos
+            $model = new DocenteModel();
+            if ($model->actualizarDisponibilidad($id, $date, $time)) {
+                // Redirigir a alguna página después de registrar al usuario
+                echo '<script>window.location.replace(document.referrer);</script>';
+            } else {
+                // Manejar el caso en que la inserción falla
+                // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
+                // Por ejemplo:
+                echo "Error al registrar el usuario.";
+            }
+        } else {
+            // Redirigir si se intenta acceder directamente a través de GET
+            header('Location: index.php');
         }
     }
 }

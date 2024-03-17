@@ -4,17 +4,17 @@ class CursosController
     //Incuimos los modelos que vamos a utilizar
     public function __construct()
     {
-        require_once "models/CursosModel.php";
+        require_once "Models/CursosModel.php";
     }
 
 
     public function index()
     {
-        require_once "views/alumno/index.php";
+        require_once "Views/alumno/index.php";
     }
     public function index2()
     {
-        require_once "views/docente/busqueda.php";
+        require_once "Views/docente/busqueda.php";
     }
 
     public function cursos() {

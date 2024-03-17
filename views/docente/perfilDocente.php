@@ -783,11 +783,15 @@
 
 <body>
 
+<!--
     <header class="header">
         <div class="menu container">
             <img src="images/logo-aerobotlearning.png" alt="Descripción de la imagen" />
         </div>
     </header>
+--->
+
+    <?php include 'Views/contenido/header.php'; ?>
     <p class="custom-text">Portal de
         <?php echo $nombreDocente; ?>
     </p>

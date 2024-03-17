@@ -1,8 +1,8 @@
 <?php
 	//Importar sus controladores
-	require_once "config/config.php";
-	require_once "core/routes.php";
-	require_once "config/database.php";
+	require_once "Config/config.php";
+	require_once "Core/routes.php";
+	require_once "Config/database.php";
 	require_once "Controllers/Usuarios.php";
 	require_once "Controllers/Docentes.php";
 	require_once "Controllers/Cursos.php";
