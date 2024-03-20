@@ -20,15 +20,16 @@
         }
 
         .header {
-            background-image: url(images/header-docentes.png);
+            background-image: url(images/wido/header.png);
             background-position: center top;
             background-repeat: no-repeat;
             background-size: 100%, cover;
             /* Ajusta el tamaño de las imágenes de fondo */
-            min-height: 73vh;
+            min-height: 160vh;
             display: flex;
             align-items: center;
             position: relative;
+            z-index: 1; /* Establece un valor de z-index para el header */
         }
 
         .menu.container img {
@@ -47,7 +48,9 @@
 </style>
 
 <header class="header">
+    <!--
         <div class="menu container">
             <img src="images/logo-aerobotlearning.png" alt="Descripción de la imagen" />
         </div>
+    -->
 </header>

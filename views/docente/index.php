@@ -1,5 +1,5 @@
-<html lang="en">
 
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +27,8 @@
             <?php include 'Views/contenido/header.php'; ?>
             <div class="container">
                 <!-- Otras partes de tu código aquí -->
-                <a href="index.php?c=Docentes&a=agendaIndex&id=<?php echo $idDocente; ?>" class="btn btn-dark mb-3">Crear</a>
+                <a href="index.php?c=Docentes&a=agendaIndex&id=<?php echo $idDocente; ?>"
+                    class="btn btn-dark mb-3">Crear</a>
                 <table class="table table-hover text-center">
                     <thead class="table-dark">
                         <tr>
@@ -38,25 +39,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($consulta as $fila): ?>
+                        <?php if (isset ($consulta) && is_array($consulta)): ?>
+                            <?php foreach ($consulta as $fila): ?>
+                                <tr>
+                                    <td>
+                                        <?php echo $fila['id_disponibilidad']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $fila['fecha']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $fila['hora']; ?>
+                                    </td>
+                                    <td>
+                                        <a href="index.php?c=Docentes&a=agendaEditar&id=<?php echo $fila['id_disponibilidad']; ?>"
+                                            class="link-dark"><i class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
+                                        <a href="index.php?c=Docentes&a=agendaEliminar&id=<?php echo $fila['id_disponibilidad']; ?>"
+                                            class="link-dark"><i class="fa-solid fa-trash fs-5"></i></a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
                             <tr>
-                                <td>
-                                    <?php echo $fila['id_disponibilidad']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $fila['fecha']; ?>
-                                </td>
-                                <td>
-                                    <?php echo $fila['hora']; ?>
-                                </td>
-                                <td>
-                                    <a href="index.php?c=Docentes&a=agendaEditar&id=<?php echo $fila['id_disponibilidad']; ?>" class="link-dark"><i
-                                            class="fa-solid fa-pen-to-square fs-5 me-3"></i></a>
-                                    <a href="index.php?c=Docentes&a=agendaEliminar&id=<?php echo $fila['id_disponibilidad']; ?>" class="link-dark"><i
-                                            class="fa-solid fa-trash fs-5"></i></a>
-                                </td>
+                                <td colspan="4">No hay datos disponibles</td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php endif; ?>
+
                     </tbody>
                 </table>
             </div>

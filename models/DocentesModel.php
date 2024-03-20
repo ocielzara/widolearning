@@ -151,6 +151,28 @@ class DocenteModel
     }
 }
 
+public function consultaNotificaciones($idMaestro)
+    {
+        $query = "SELECT * FROM notificaciones WHERE id_maestro = '$idMaestro'";
+        $resultado = mysqli_query($this->db, $query);
+
+        // Verificar si se encontraron resultados
+        if ($resultado->num_rows > 0) {
+            // Inicializar un array para almacenar la disponibilidad
+            $consultaNotificacionDatos = array();
+
+            // Iterar sobre los resultados y almacenarlos en el array de disponibilidad
+            while ($row = $resultado->fetch_assoc()) {
+                $consultaNotificacionDatos[] = $row;
+            }
+
+            // Devolver el array de disponibilidad
+            return $consultaNotificacionDatos;
+        } else {
+            // Si no se encontraron resultados, devolver false
+            return false;
+        }
+    }
 
 
 }

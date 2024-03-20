@@ -11,11 +11,11 @@ class UsuarioModel
         $this->usuario = array();
     }
 
-    public function insertarUsuario($nombre, $correo, $contraseña)
+    public function insertarUsuario($nombre, $correo, $edad, $telefono, $interesesComoTexto, $contraseña)
     {
         $con_MD5 = md5($contraseña);
         // Preparar la consulta SQL
-        $query = mysqli_query($this->db, "INSERT INTO usuarios (nombre, correo_electronico, contraseña) VALUES ('$nombre', '$correo', '$con_MD5')");
+        $query = mysqli_query($this->db, "INSERT INTO usuarios (nombre, edad, telefono, interes, correo_electronico, contraseña) VALUES ('$nombre', '$edad', '$telefono', '$interesesComoTexto', '$correo', '$con_MD5')");
         return true; // La inserción fue exitosa
     }
 

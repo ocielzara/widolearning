@@ -42,6 +42,10 @@
             position: relative;
         }
 
+        .prices-1 {
+
+        }
+
         .menu.container img {
             width: 350px;
             /* Establece el ancho deseado para la imagen */
@@ -60,9 +64,13 @@
             font-size: 24px;
             font-weight: bold;
             text-transform: uppercase;
-            color: black;
+            color: #FEC400;
             padding: 5px;
-            margin-top: 0px;
+            left: 30%;
+            top: 59%;
+            transform: translate(-50%, -50%);
+            z-index: 2; /* Un valor mayor de z-index para que se superponga sobre el header */
+            position: absolute;
         }
 
         #section1 {
@@ -88,8 +96,11 @@
             /* Sombra */
             overflow: hidden;
             /* Oculta el contenido que se desborda */
-            margin: 3% auto;
-            /* Centra enmedio de la pagina */
+            z-index: 2;
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            transform: translate(-50%, -50%);
         }
 
         /* Estilos de la imagen */
@@ -123,9 +134,9 @@
             /* Oculta el contenido que se desborda */
             margin: 3% auto;
             /* Centra en medio de la página */
-            background-image: linear-gradient(to top, orange 100%, transparent 100%),
-                linear-gradient(to left, orange 100%, transparent 100%),
-                linear-gradient(to top, orange 50%, transparent 50%);
+            background-image: linear-gradient(to top, #4F7CAC 100%, transparent 100%),
+                linear-gradient(to left, #4F7CAC 100%, transparent 100%),
+                linear-gradient(to top, #4F7CAC 50%, transparent 50%);
             /* Combina tres gradientes lineales para pintar las partes superior, izquierda e inferior */
             background-size: 100% 2px, 2px 100%, 100% 2px;
             /* Tamaño de cada gradiente (ancho x alto) */
@@ -147,7 +158,7 @@
             font-family: 'Arial', sans-serif;
             font-size: 19px;
             font-weight: bold;
-            color: #50D2FF;
+            color: #2E3532;
             padding: 5px;
             margin-top: 0px;
             margin-left: 5%;
@@ -202,9 +213,9 @@
         .clase-muestra {
             border-radius: 20px;
             /* Bordes redondeados */
-            background-color: #FF8000;
+            background-color: #FEC400;
             /* Color de fondo azul */
-            color: white;
+            color: #2E3532;
             /* Color del texto blanco */
             padding: 1px 5px;
             /* Espacio interno */
@@ -221,7 +232,7 @@
 
         /* Cambiar el color de fondo cuando el cursor pasa sobre el botón */
         .clase-muestra:hover {
-            background-color: #FFC500;
+            background-color: white;
             /* Color de fondo azul más oscuro */
         }
 
@@ -264,20 +275,6 @@
         .bg-primary {
             --bs-bg-opacity: 1;
             background-color: white !important;
-        }
-
-        .carousel {
-            background-image: url(images/home-opaco.png);
-            background-position: center top;
-            background-repeat: no-repeat;
-            background-size: 100%, cover;
-            /* Ajusta el tamaño de las imágenes de fondo */
-            min-height: 50vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            border-radius: 30px;
-            /* Redondea los bordes más */
         }
 
         /*********************************************************************************************/
@@ -361,7 +358,7 @@
             /* Ajusta el ancho según tus necesidades */
             height: 230px;
             /* Ajusta la altura según tus necesidades */
-            background-color: #50B2FF;
+            background-color: #2E3532;
             /* Color de fondo del cuadrado */
             border-radius: 20px;
             /* Redondea los bordes más */
@@ -393,32 +390,6 @@
             margin: 0px 0;
             /*text-align: center;*/
             font-size: 11px;
-        }
-
-        .clase-muestra {
-            border-radius: 20px;
-            /* Bordes redondeados */
-            background-color: #FF8000;
-            /* Color de fondo azul */
-            color: white;
-            /* Color del texto blanco */
-            padding: 1px 5px;
-            /* Espacio interno */
-            border: none;
-            /* Sin borde */
-            cursor: pointer;
-            /* Cursor de puntero */
-            transition: background-color 0.3s;
-            /* Transición suave del color de fondo */
-            width: 75%;
-            margin-top: 10px;
-            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Cambiar el color de fondo cuando el cursor pasa sobre el botón */
-        .clase-muestra:hover {
-            background-color: #FFC500;
-            /* Color de fondo azul más oscuro */
         }
 
         .suscripcion {
@@ -463,7 +434,7 @@
         }
 
         .carousel {
-            background-image: url(images/home-opaco.png);
+            /*background-image: url(images/home-opaco.png);*/
             background-position: center top;
             background-repeat: no-repeat;
             background-size: 100%, cover;
@@ -579,6 +550,16 @@
             border-radius: 4px 4px 0 0;
         }
 
+        .carousel-control-prev-icon {
+            background-image: url(images/wido/boton-slider-prev.png);
+            padding: 25px;
+        }
+
+        .carousel-control-next-icon {
+            background-image: url(images/wido/boton-slider.png);
+            padding: 25px;
+        }
+
         .carousel-control-next,
         .carousel-control-prev {
             position: absolute;
@@ -593,7 +574,7 @@
             -webkit-box-pack: center;
             -ms-flex-pack: center;
             justify-content: center;
-            width: 5%;
+            width: 2%;
             color: black;
             text-align: center;
             opacity: .;
@@ -657,7 +638,7 @@
         .boton-iniciar {
             border-radius: 20px;
             /* Bordes redondeados */
-            background-color: #4BD3FF;
+            background-color: #4F7CAC;
             /* Color de fondo azul */
             color: white;
             /* Color del texto blanco */
@@ -675,7 +656,7 @@
 
         /* Cambiar el color de fondo cuando el cursor pasa sobre el botón */
         .boton-iniciar:hover {
-            background-color: #4B94FF;
+            background-color: #2E3532;
             /* Color de fondo azul más oscuro */
         }
 
@@ -714,7 +695,7 @@
         }
 
         .button-agendar {
-            background-color: #FF8C1F;
+            background-color: #4F7CAC;
             color: white;
             border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 20px;
@@ -727,7 +708,7 @@
         }
 
         .button-agendar:hover {
-            background-color: #FF8008;
+            background-color: #2E3532;
             /* Cambia el color de fondo al pasar el ratón */
         }
 
@@ -792,11 +773,13 @@
 --->
 
     <?php include 'Views/contenido/header.php'; ?>
+
     <p class="custom-text">Portal de
         <?php echo $nombreDocente; ?>
     </p>
+    <!--
     <div id="section1"></div>
-    <div class="prices-1">
+    -->
         <div class="image-container">
             <?php if (pathinfo($fotoDocente, PATHINFO_EXTENSION) === 'mp4'): ?>
                 <video id="video" controls>
@@ -887,8 +870,6 @@
                 </form>
             </div>
         </div>
-
-
 
 
 

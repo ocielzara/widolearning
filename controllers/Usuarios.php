@@ -90,14 +90,20 @@ class UsuariosController
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Validar y sanar los datos de entrada
             $nombre = strtolower($_POST['nombre']);
+            $edad = $_POST['edad'];
+            $telefono = $_POST['telefono'];
             $correo = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
             $celular = $_POST['contraseña']; // No necesitas filtrar la contraseña aquí
+            $interesesSeleccionados = $_POST['intereses'];
+            // Convertir el array de intereses en una cadena separada por comas
+            $interesesComoTexto = implode(" ", $interesesSeleccionados);
+
 
             // Aquí se pueden realizar más validaciones si es necesario
 
             // Procesar los datos, por ejemplo, guardarlos en la base de datos
             $model = new UsuarioModel();
-            if ($model->insertarUsuario($nombre, $correo, $celular)) {
+            if ($model->insertarUsuario($nombre, $correo, $edad, $telefono, $interesesComoTexto, $celular)) {
                 // Redirigir a alguna página después de registrar al usuario
                 header('Location: index.php');
             } else {

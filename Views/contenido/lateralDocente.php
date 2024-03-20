@@ -1,3 +1,12 @@
+<?php
+// Verificar si la variable de sesión existe antes de usarla para evitar errores
+if (isset ($_SESSION['idDocente'])) {
+    $inicioDocente = $_SESSION['idDocente'];
+} else {
+    echo "No se ha iniciado sesión"; // En caso de que la sesión no esté iniciada o la variable de sesión no esté definida
+}
+?>
+
 <html lang="en">
 
 <head>
@@ -297,6 +306,30 @@
             opacity: 1;
         }
     }
+
+    /****************************************************************************** */
+
+    .cerrar {
+        background-color: var(--first-color);
+        /* Color de fondo del botón */
+        color: white;
+        /* Color del texto */
+        padding: 0.5rem 1rem;
+        /* Espaciado interno */
+        border: none;
+        /* Eliminar borde */
+        border-radius: 5px;
+        /* Borde redondeado */
+        cursor: pointer;
+        /* Cambiar el cursor al pasar por encima */
+        transition: background-color 0.3s ease;
+        /* Efecto de transición */
+    }
+
+    .cerrar:hover {
+        background-color: #5318a8;
+        /* Cambiar el color de fondo al pasar por encima */
+    }
 </style>
 
 <body>
@@ -305,7 +338,7 @@
         <nav class="nav__container">
             <div>
                 <a href="#" class="nav__link nav__logo">
-                    <span class="nav__logo-name">Aerobot</span>
+                    <span class="nav__logo-name">Wido</span>
                 </a>
 
                 <div class="nav__list">
@@ -324,13 +357,27 @@
 
                             <div class="nav__dropdown-collapse">
                                 <div class="nav__dropdown-content">
-                                    <a href="#" class="nav__dropdown-item">Lorem, ipsum dolor sit amet consectetur
-                                        adipisicing elit. Necessitatibus, delectus minus dicta.</a>
-                                    <a href="#" class="nav__dropdown-item">Lorem ipsum dolor, sit amet consectetur
-                                        adipisicing elit. Amet, a consequuntur assumenda expedita dicta nulla deserunt
-                                        placeat possimus ipsam fugiat, aliquam esse veritatis quod aspernatur magni,
-                                        voluptates ea perferendis minima.</a>
-                                    <a href="#" class="nav__dropdown-item">Accounts</a>
+                                    <?php
+                                    // Verificar si hay notificaciones
+                                    if (!empty ($consultaNotificacion)) {
+                                        // Iterar sobre las notificaciones y mostrarlas
+                                        foreach ($consultaNotificacion as $notificacion) {
+                                            // Obtener los campos de la notificación
+                                            $mensaje = $notificacion['mensaje'];
+                                            $estado = $notificacion['estado'];
+                                            $fecha_creacion = $notificacion['fecha_creacion'];
+
+                                            // Generar el HTML para la notificación
+                                            echo "<a href='#' class='nav__dropdown-item'>";
+                                            echo "<span class='mensaje'>$mensaje </span>";
+                                            echo "<span class='fecha'>$fecha_creacion</span>";
+                                            echo "</a>";
+                                        }
+                                    } else {
+                                        // Si no hay notificaciones, mostrar un mensaje indicando que no hay notificaciones disponibles
+                                        echo "<p>No hay notificaciones disponibles</p>";
+                                    }
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -340,9 +387,11 @@
                 </div>
             </div>
 
-            <a href="#" class="nav__link nav__logout">
+            <a class="nav__link nav__logout">
                 <i class='bx bx-log-out nav__icon'></i>
-                <span class="nav__name">Log Out</span>
+                <form action="index.php?c=Docentes&a=cerrarSesion" method="post">
+                    <button class="cerrar" type="submit" name="cerrar_sesion">Cerrar sesión</button>
+                </form>
             </a>
         </nav>
     </div>

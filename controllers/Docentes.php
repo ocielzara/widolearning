@@ -20,39 +20,88 @@ class DocentesController
 
     public function iniciarSesion()
     {
-        $correo = $_POST['correo'];
-        $contraseña = $_POST['contraseña'];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $correo = $_POST['correo'];
+            $contraseña = $_POST['contraseña'];
 
-        $docente = new DocenteModel();
-        $maestro = $docente->validarDocente($correo, $contraseña);
-        if ($maestro) {
-            $idDocente = $maestro['id_maestro'];
-            $disponibilidadInformacion = $docente->disponibilidadConsulta($idDocente);
-            // Verificar si se encontraron cursos asignados
-            if ($disponibilidadInformacion) {
-                // Inicializar un array para almacenar las fotos de los cursos
-                $consulta = array();
-                // Verificar si hay disponibilidad antes de intentar iterar sobre ella
-                if (is_array($disponibilidadInformacion) && count($disponibilidadInformacion) > 0) {
+            $docente = new DocenteModel();
+            $maestro = $docente->validarDocente($correo, $contraseña);
+            if ($maestro) {
+                $idDocente = $maestro['id_maestro'];
+                session_start();
+                $_SESSION['idDocente'] = $idDocente;
+                $disponibilidadInformacion = $docente->disponibilidadConsulta($idDocente);
+                // Verificar si se encontraron cursos asignados
+                if ($disponibilidadInformacion) {
+                    // Inicializar un array para almacenar las fotos de los cursos
+                    $consulta = array();
+                    // Verificar si hay disponibilidad antes de intentar iterar sobre ella
+                    if (is_array($disponibilidadInformacion) && count($disponibilidadInformacion) > 0) {
 
-                    foreach ($disponibilidadInformacion as $disponibilidad) {
-                        // Agregar los datos como un array asociativo a $consulta
-                        $consulta[] = array(
-                            'id_disponibilidad' => $disponibilidad['id_disponibilidad'],
-                            'fecha' => $disponibilidad['fecha'],
-                            'hora' => $disponibilidad['hora']
-                        );
+                        foreach ($disponibilidadInformacion as $disponibilidad) {
+                            // Agregar los datos como un array asociativo a $consulta
+                            $consulta[] = array(
+                                'id_disponibilidad' => $disponibilidad['id_disponibilidad'],
+                                'fecha' => $disponibilidad['fecha'],
+                                'hora' => $disponibilidad['hora']
+                            );
+                        }
+                    } else {
+                        // Si no hay disponibilidad, inicializar los arrays como vacíos
+                        $consulta = [];
                     }
                 } else {
-                    // Si no hay disponibilidad, inicializar los arrays como vacíos
-                    $consulta = [];
+
                 }
+
+                $notificaciones = $docente->consultaNotificaciones($idDocente);
+                if ($notificaciones) {
+                    // Inicializar un array para almacenar las fotos de los cursos
+                    $consultaNotificacion = array();
+                    // Verificar si hay disponibilidad antes de intentar iterar sobre ella
+                    if (is_array($notificaciones) && count($notificaciones) > 0) {
+
+                        foreach ($notificaciones as $totalNotificaciones) {
+                            // Agregar los datos como un array asociativo a $consulta
+                            $consultaNotificacion[] = array(
+                                'id_usuario' => $totalNotificaciones['id_usuario'],
+                                'mensaje' => $totalNotificaciones['mensaje'],
+                                'estado' => $totalNotificaciones['estado'],
+                                'fecha_creacion' => $totalNotificaciones['fecha_creacion']
+                            );
+                        }
+                    } else {
+                        // Si no hay disponibilidad, inicializar los arrays como vacíos
+                        $consultaNotificacion = [];
+                    }
+                } else {
+
+                }
+                
+
+                require_once "Views/docente/index.php";
             } else {
-            
+                require_once "Views/error/index.php";
             }
-            require_once "Views/docente/index.php";
         } else {
-            require_once "Views/error/index.php";
+            // Redirigir si se intenta acceder directamente a través de GET
+            header('Location: index.php');
+        }
+    }
+
+    public function cerrarSesion()
+    {
+        // Verificar si se ha iniciado una sesión
+        session_start();
+
+        // Comprobar si se ha enviado una solicitud POST para cerrar sesión
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset ($_POST['cerrar_sesion'])) {
+            // Destruir la sesión actual
+            session_destroy();
+
+            // Redirigir a la página de inicio de sesión o a otra página relevante
+            header("Location: index.php");
+            exit; // Importante para asegurarse de que no se ejecute más código después de la redirección
         }
     }
 
@@ -137,7 +186,7 @@ class DocentesController
             // Validar y sanar los datos de entrada
             $date = $_POST['date'];
             $time = $_POST['time'];
-            $id = $_POST['id_maestro']; 
+            $id = $_POST['id_maestro'];
 
             // Aquí se pueden realizar más validaciones si es necesario
 
@@ -160,40 +209,40 @@ class DocentesController
 
     public function agendaEliminar()
     {
-       
-        $id_disponibilidad = $_GET['id']; 
+
+        $id_disponibilidad = $_GET['id'];
 
         // Procesar los datos, por ejemplo, guardarlos en la base de datos
         $model = new DocenteModel();
         if ($model->eliminarDisponibilidad($id_disponibilidad)) {
-                // Redirigir a alguna página después de registrar al usuario
-               
+            // Redirigir a alguna página después de registrar al usuario
+
         } else {
-                // Manejar el caso en que la inserción falla
-                // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
-                // Por ejemplo:
-                echo "Error al registrar el usuario.";
+            // Manejar el caso en que la inserción falla
+            // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
+            // Por ejemplo:
+            echo "Error al registrar el usuario.";
         }
     }
 
     public function agendaEditar()
     {
-        $id_disponibilidad = $_GET['id']; 
+        $id_disponibilidad = $_GET['id'];
 
         // Procesar los datos, por ejemplo, guardarlos en la base de datos
         $model = new DocenteModel();
         $informacion = $model->consultaDisponibilidadAgenda($id_disponibilidad);
         if ($informacion) {
-                // Redirigir a alguna página después de registrar al usuario
-                $fecha = $informacion['fecha'];
-                $hora = $informacion['hora'];
-                require_once "Views/docente/agenda/editar.php";
-               
+            // Redirigir a alguna página después de registrar al usuario
+            $fecha = $informacion['fecha'];
+            $hora = $informacion['hora'];
+            require_once "Views/docente/agenda/editar.php";
+
         } else {
-                // Manejar el caso en que la inserción falla
-                // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
-                // Por ejemplo:
-                echo "Error al registrar el usuario.";
+            // Manejar el caso en que la inserción falla
+            // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
+            // Por ejemplo:
+            echo "Error al registrar el usuario.";
         }
     }
 
@@ -203,7 +252,7 @@ class DocentesController
             // Validar y sanar los datos de entrada
             $date = $_POST['nuevaFecha'];
             $time = $_POST['nuevaHora'];
-            $id = $_POST['id']; 
+            $id = $_POST['id'];
 
             // Aquí se pueden realizar más validaciones si es necesario
 

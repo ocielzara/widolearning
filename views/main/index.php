@@ -171,12 +171,6 @@
             /* Centra en medio de la página */
         }
 
-        .footer {
-            display: flex;
-            justify-content: center;
-            margin-top: 10%;
-        }
-
         .b1 {
             padding: 10px 20px;
             width: 20%;
@@ -192,6 +186,26 @@
         }
 
         .b1:hover {
+            background-color: #4F7CAC;
+            color: #FEC400;
+            /* Color de fondo azul más oscuro */
+        }
+
+        .button-mas {
+            padding: 10px 20px;
+            width: 20%;
+            margin: 0% auto;
+            border-radius: 20px;
+            border: none;
+            background-color: #000000;
+            /* Color de fondo azul */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            /* Transición suave del color de fondo */
+        }
+
+        .button-mas:hover {
             background-color: #4F7CAC;
             color: #FEC400;
             /* Color de fondo azul más oscuro */
@@ -215,6 +229,23 @@
             background-color: #4F7CAC;
             color: #FEC400;
             /* Color de fondo azul más oscuro */
+        }
+
+        .sub-footer {
+            display: flex;
+            justify-content: center;
+            margin-top: 10%;
+        }
+
+        .sub-footer .button {
+            margin: 0 20px;
+            /* Ajusta el espacio entre los botones en el footer */
+        }
+
+        .footer {
+            display: flex;
+            justify-content: center;
+            margin-top: 10%;
         }
 
         .footer .button {
@@ -649,7 +680,7 @@
         </div>
         -->
 
-    <div class="footer">
+    <div class="sub-footer">
         <button class="b1" type="button" onclick="mostrarContenidoAreas()">Areas de aprendizaje</button>
 
         <button class="b1" type="button" onclick="mostrarContenidoMasterTeach()">Master Teach</button>
@@ -1192,7 +1223,412 @@
             </div>
         </div>
         <br><br>
-        <p class="cursos-p">Otro</p>
+        <p class="cursos-p">ASESORÍAS</p>
+        <div id="cursos-slider">
+            <div class="container-fluid">
+                <div id="carouselExample3" class="carousel slide" data-ride="carousel" data-interval="9000">
+                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                        <div class="carousel-item col-md-3  active">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Clase muestra</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Clase muestra</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Clase muestra</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Clase muestra</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Clase muestra</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Clase muestra</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Clase muestra</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3  ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Clase muestra</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExample3" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next text-faded" href="#carouselExample3" role="button"
+                        data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Master teach-->
+    <div id="contenido-master-teach" class="prices-1" style="display: none;">
+        <div class="contenedor-1">
+            <!-- Formulario para buscar 
+            <form>
+                <input type="text" id="busqueda" class="form-control mr-sm-2" placeholder="Buscar cursos">
+                <button type="button" id="buscar" class="btn btn-primary">Buscar</button>
+            </form>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#buscar').click(function () {
+                        var busqueda = $('#busqueda').val();
+                        $.ajax({
+                            type: "POST",
+                            url: "index.php?c=cursos&a=cursos",
+                            data: {
+                                busqueda: busqueda
+                            },
+                            dataType: 'json',
+                            success: function (response) {
+                                console.log(response);
+                                $('#resultados').empty(); // Limpiamos el contenedor de resultados antes de agregar nuevos resultados
+                                // Verificamos si se encontraron cursos
+                                if (response.length > 0) {
+                                    // Iteramos sobre cada curso y creamos un elemento h3 para mostrarlo
+                                    response.forEach(function (curso) {
+                                        //Aca modifica para que tenga link
+                                        $('#resultados').append('<a href="www.google.com">' + curso.titulo + '</a><br>');
+                                    });
+                                } else {
+                                    // Si no se encontraron cursos, mostramos un mensaje
+                                    $('#resultados').append('<p>No se encontraron cursos.</p>');
+                                }
+
+                            },
+                            error: function (xhr, status, error) {
+                                console.error(xhr.responseText);
+                            }
+                        });
+                    });
+                });
+            </script>
+
+            <div id="resultados">
+
+            </div>
+            -->
+        </div>
+
+        <p class="cursos-p">DOCENTES</p>
+        <div id="cursos-slider">
+            <div class="container-fluid">
+                <div id="carouselExample15" class="carousel slide" data-ride="carousel" data-interval="9000">
+                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                        <div class="carousel-item col-md-3  active">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="video-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <video id="video" controls>
+                                            <source src="images/docente/alondraF.mp4" type="video/mp4">
+                                        </video>
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <form class="botones-carrucel" action="index.php?c=docentes&a=perfilDocente"
+                                            method="post">
+                                            <!-- Campo oculto para enviar información -->
+                                            <input type="hidden" name="nombre" value="master teach Alondra">
+                                            <button class="clase-muestra" style="width: 100%;">
+                                                <span>Ver perfil</span>
+                                            </button>
+                                        </form>
+                                        <button class="suscripcion">
+                                            <span>Alondra</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/prueba/imagen-prueba-3.jpg" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <form class="botones-carrucel" action="index.php?c=docentes&a=perfilDocente"
+                                            method="post">
+                                            <!-- Campo oculto para enviar información -->
+                                            <input type="hidden" name="nombre" value="master teach Alexia">
+                                            <button class="clase-muestra" style="width: 100%;">
+                                                <span>Ver perfil</span>
+                                            </button>
+                                        </form>
+                                        <button class="suscripcion">
+                                            <span>Alexia</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/prueba/imagen-prueba-4.jpg" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <form class="botones-carrucel" action="index.php?c=docentes&a=perfilDocente"
+                                            method="post">
+                                            <!-- Campo oculto para enviar información -->
+                                            <input type="hidden" name="nombre" value="master teach Eric">
+                                            <button class="clase-muestra" style="width: 100%;">
+                                                <span>Ver perfil</span>
+                                            </button>
+                                        </form>
+                                        <button class="suscripcion">
+                                            <span>Eric</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Ver perfil</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Ver perfil</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Ver perfil</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3 ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Ver perfil</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-md-3  ">
+                            <div class="panel panel-default">
+                                <div class="prices-1">
+                                    <!-- Cuadrado con sombra -->
+                                    <div id="image-box">
+                                        <!-- Mitad superior para la imagen -->
+                                        <img src="images/11.png" alt="Descripción de la imagen">
+                                        <!-- Mitad inferior para el título de la imagen -->
+                                        <button class="clase-muestra">
+                                            <span>Clase muestra</span>
+                                        </button>
+                                        <button class="suscripcion">
+                                            <span>proximamente</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExample15" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next text-faded" href="#carouselExample15" role="button"
+                        data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+
+    <div id="footer" class="footer">
+        <button class="button-mas" type="button" onclick="mostrarMas()">Mostrar más categorías</button>
+    </div>
+    <br>
+
+    <div id="contenido-mas" class="prices-1" style="display: none;">
+    <p class="cursos-p">Otro</p>
         <div id="cursos-slider">
             <div class="container-fluid">
                 <div id="carouselExample2" class="carousel slide" data-ride="carousel" data-interval="9000">
@@ -1841,411 +2277,14 @@
                 </div>
             </div>
         </div>
-        <br><br>
-        <p class="cursos-p">ASESORÍAS</p>
-        <div id="cursos-slider">
-            <div class="container-fluid">
-                <div id="carouselExample3" class="carousel slide" data-ride="carousel" data-interval="9000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                        <div class="carousel-item col-md-3  active">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3  ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExample3" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample3" role="button"
-                        data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <br>
-    </div>
-
-    <!--Master teach-->
-    <div id="contenido-master-teach" class="prices-1" style="display: none;">
-        <div class="contenedor-1">
-            <!-- Formulario para buscar 
-            <form>
-                <input type="text" id="busqueda" class="form-control mr-sm-2" placeholder="Buscar cursos">
-                <button type="button" id="buscar" class="btn btn-primary">Buscar</button>
-            </form>
-
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script>
-                $(document).ready(function () {
-                    $('#buscar').click(function () {
-                        var busqueda = $('#busqueda').val();
-                        $.ajax({
-                            type: "POST",
-                            url: "index.php?c=cursos&a=cursos",
-                            data: {
-                                busqueda: busqueda
-                            },
-                            dataType: 'json',
-                            success: function (response) {
-                                console.log(response);
-                                $('#resultados').empty(); // Limpiamos el contenedor de resultados antes de agregar nuevos resultados
-                                // Verificamos si se encontraron cursos
-                                if (response.length > 0) {
-                                    // Iteramos sobre cada curso y creamos un elemento h3 para mostrarlo
-                                    response.forEach(function (curso) {
-                                        //Aca modifica para que tenga link
-                                        $('#resultados').append('<a href="www.google.com">' + curso.titulo + '</a><br>');
-                                    });
-                                } else {
-                                    // Si no se encontraron cursos, mostramos un mensaje
-                                    $('#resultados').append('<p>No se encontraron cursos.</p>');
-                                }
-
-                            },
-                            error: function (xhr, status, error) {
-                                console.error(xhr.responseText);
-                            }
-                        });
-                    });
-                });
-            </script>
-
-            <div id="resultados">
-
-            </div>
-            -->
-        </div>
-
-        <p class="cursos-p">DOCENTES</p>
-        <div id="cursos-slider">
-            <div class="container-fluid">
-                <div id="carouselExample3" class="carousel slide" data-ride="carousel" data-interval="9000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                        <div class="carousel-item col-md-3  active">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="video-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <video id="video" controls>
-                                            <source src="images/docente/alondraF.mp4" type="video/mp4">
-                                        </video>
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel" action="index.php?c=docentes&a=perfilDocente"
-                                            method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombre" value="master teach Alondra">
-                                            <button class="clase-muestra" style="width: 100%;">
-                                                <span>Ver perfil</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>Alondra</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/prueba/imagen-prueba-3.jpg" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel" action="index.php?c=docentes&a=perfilDocente"
-                                            method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombre" value="master teach Alexia">
-                                            <button class="clase-muestra" style="width: 100%;">
-                                                <span>Ver perfil</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>Alexia</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/prueba/imagen-prueba-4.jpg" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel" action="index.php?c=docentes&a=perfilDocente"
-                                            method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombre" value="master teach Eric">
-                                            <button class="clase-muestra" style="width: 100%;">
-                                                <span>Ver perfil</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>Eric</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Ver perfil</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Ver perfil</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Ver perfil</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Ver perfil</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3  ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExample3" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample3" role="button"
-                        data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <br>
     </div>
 </body>
 <script>
     function mostrarContenidoAreas() {
         var contenidoAdicional = document.getElementById("contenido-areas");
         contenidoAdicional.style.display = "block";
+        var contenidoFooter = document.getElementById("footer");
+        contenidoFooter.style.display = "flex";
 
         // Oculta el contenido adicional de Master Teach si está visible
         var contenidoMasterTeach = document.getElementById("contenido-master-teach");
@@ -2259,6 +2298,17 @@
         // Oculta el contenido adicional de "Areas de aprendizaje" si está visible
         var contenidoAdicional = document.getElementById("contenido-areas");
         contenidoAdicional.style.display = "none";
+        // Oculta el contenido footer si está visible
+        var contenidoFooter = document.getElementById("footer");
+        contenidoFooter.style.display = "none";
+        // Oculta el contenido adicional de "contenido-mas" si está visible
+        var contenidoMas = document.getElementById("contenido-mas");
+        contenidoMas.style.display = "none";
+    }
+
+    function mostrarMas() {
+        var contenidoMas = document.getElementById("contenido-mas");
+        contenidoMas.style.display = "block";
     }
 
 

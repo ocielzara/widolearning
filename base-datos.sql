@@ -5,12 +5,18 @@ CREATE DATABASE aerobotLearning;
 USE aerobotLearning;
 
 -- Crear la tabla de Usuarios
-CREATE TABLE Usuarios
+CREATE TABLE usuarios
 (
     id_usuario INT
     AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR
     (255) NOT NULL,
+    edad VARCHAR
+    (3) NOT NULL,
+    telefono VARCHAR
+    (11),
+    interes VARCHAR
+    (255),
     correo_electronico VARCHAR
     (255) NOT NULL,
     contraseña VARCHAR
@@ -18,7 +24,7 @@ CREATE TABLE Usuarios
 );
 
     -- Crear la tabla de Maestros
-    CREATE TABLE Maestros
+    CREATE TABLE maestros
     (
         id_maestro INT
         AUTO_INCREMENT PRIMARY KEY,
@@ -36,7 +42,7 @@ CREATE TABLE Usuarios
 );
 
         -- Crear la tabla de Cursos
-        CREATE TABLE Cursos
+        CREATE TABLE cursos
         (
             id_curso INT
             AUTO_INCREMENT PRIMARY KEY,
@@ -53,7 +59,7 @@ CREATE TABLE Usuarios
 );
 
             -- Crear tabla de Inscripciones para la relación Usuario-Curso
-            CREATE TABLE Inscripciones
+            CREATE TABLE inscripciones
             (
                 id_inscripcion INT
                 AUTO_INCREMENT PRIMARY KEY,
@@ -70,7 +76,7 @@ CREATE TABLE Usuarios
 );
 
                 -- Crear tabla de Asignaciones para la relación Maestro-Curso
-                CREATE TABLE Asignaciones
+                CREATE TABLE asignaciones
                 (
                     id_asignacion INT
                     AUTO_INCREMENT PRIMARY KEY,
@@ -85,7 +91,7 @@ CREATE TABLE Usuarios
 );
 
                     -- Crear tabla para motor de búsqueda de cursos
-                    CREATE TABLE MotorBusqueda
+                    CREATE TABLE motorBusqueda
                     (
                         id_curso INT
                         AUTO_INCREMENT PRIMARY KEY,
@@ -105,6 +111,20 @@ CREATE TABLE disponibilidadMaestro (
     FOREIGN KEY (id_maestro) REFERENCES Maestros(id_maestro)
 );
 
+
+CREATE TABLE notificaciones (
+    id_notificacion INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT,
+    id_maestro INT,
+    mensaje TEXT,
+    estado ENUM('leida', 'noLeida') DEFAULT 'noLeida',
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario),
+    FOREIGN KEY (id_maestro) REFERENCES maestros(id_maestro)
+);
+
+
+
 INSERT INTO `motorBusqueda` (`id_curso`, `titulo`, `contenido`, `palabrasClave`) VALUES
 (1, 'Programacion web', 'https://grupoaerobot.com/Ciberseguridad.php', 'html css web'),
 (2, 'Ciberseguridad', 'https://grupoaerobot.com/Ciberseguridad.php', 'seguridad hacker'),
@@ -115,111 +135,49 @@ INSERT INTO `motorBusqueda` (`id_curso`, `titulo`, `contenido`, `palabrasClave`)
 (7, 'Programacion', '', 'python c++ lenguajes programacion paginas web html java aplicaciones moviles');
 
 
+INSERT INTO `maestros` (`id_maestro`, `nombre`, `foto`, `areas`, `descripcion`, `hobies`, `correo_electronico`, `contraseña`) VALUES
+(1, 'master teach Alexia', 'images/docente/leanad.jpg', 'Curso: dibujo Tradicional \n\n\n-Arte tradicional (dibujo) \n-Photoshop, Clip studio. \n-Arte digital', 'Hola Soy Alexia, Lic. En Diseño, Animación y Arte digital. \r\nActualmente me dedico a Ilustrar por medio digital de manera Freelance.', '-Escuchar música \n-Ilustrar \n-Pintar con Acuarelas\n-Ver series y películas animadas ', 'alexia@gmail.com', '12345678'),
+(2, 'master teach Eric', 'images/docente/carlosz.jpg', 'Cursos:\r\n-Desarrollo de un brazo robótico\r\n\r\n-Curso de Robótica (brazo robótico)\r\n\r\n-Robótica (Carrito)\r\n\r\n-Electrónica\r\n\r\n-Programación (Python y C)', 'Hola, soy Eric, Ingeniero en Mecatrónica. Actualmente estudio la maestría en Electrónica y colaboro en distintos proyectos de investigación.', '-Deportes\r\n-Jugar videojuegos\r\n-Leer', 'null', 'null'),
+(3, 'master teach Alondra', 'images/docente/alondraF.mp4', 'Curso: Finanzas personales \r\n\r\n\r\n-Finanzas personales\r\n\r\n-Inversiones\r\n\r\n-Emprendimiento\r\n\r\n-Administración empresarial', 'Hola Soy Alo, Lic. en Economía y Finanzas. Candidata de MBA y Figura 3 como Asesora en estrategias de inversión por la AMIB.\r\nActualmente soy Analista de Inversiones en WTW en Chicago. ', '-Bailar\r\n-Escuchar música\r\n-Leer\r\n-Viajar\r\n-Escuchar podcasts financieros y corporativos.\r\n-Ir de Shopping\r\n', 'alondra@gmail.com', '12345678');
+
+
+INSERT INTO `cursos` (`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES
+(1, 'finanzas personales', 'images/curso/finanzas-personales.png', 'null', 'null', 'null', 'images/curso-pdf/finanzas-pdf.pdf', 0.00),
+(2, 'emprendimiento e innovacion', 'images/curso/emprendimiento-e-innovacion.png', 'null', 'null', 'null', 'images/curso-pdf/emprendimiento-pdf.pdf', 0.00),
+(3, 'robotica proyecto brazo robotico', 'images/curso/robotica-brazo.png', 'null', 'null', 'null', 'images/curso-pdf/roboticabrazo-pdf.pdf', 0.00),
+(4, 'dibujo tradicional', 'images/curso/dibujo.png', 'null', 'null', 'null', 'images/curso-pdf/dibujo-pdf.pdf', 0.00),
+(5, 'photoshop', 'images/curso/photoshop.png', 'null', 'null', 'null', 'images/curso-pdf/photoshop-pdf.pdf', 0.00),
+(6, 'illustrator', 'images/curso/illustrator.png', 'null', 'null', 'null', 'images/curso-pdf/illustrator-pdf.pdf', 0.00),
+(7, 'blender', 'images/curso/blender.png', 'null', 'null', 'null', 'images/curso-pdf/blender-pdf.pdf', 0.00),
+(8, 'gdevelop', 'images/curso/gdevelop.png', 'null', 'null', 'null', 'images/curso-pdf/gdevelop-pdf.pdf', 0.00),
+(9, 'unity 2d', 'images/curso/unity2d.png', 'null', 'null', 'null', 'images/curso-pdf/unity2d-pdf.pdf', 0.00),
+(10, 'unity 3d', 'images/curso/unity3d.png', 'null', 'null', 'null', 'images/curso-pdf/unity3d-pdf.pdf', 0.00),
+(11, 'minecraft', 'images/curso/minecraft.png', 'null', 'null', 'null', 'images/curso-pdf/minecraft-pdf.pdf', 0.00),
+(12, 'doblaje', 'images/curso/doblaje.png', 'null', 'null', 'null', 'images/curso-pdf/doblaje-pdf.pdf', 0.00),
+(13, 'databricks', 'images/curso/databricks.png', 'null', 'null', 'null', 'images/curso-pdf/databricks-pdf.pdf', 0.00),
+(14, 'ajedrez', 'images/curso/ajedrez.png', 'null', 'null', 'null', 'images/curso-pdf/ajedrez-pdf.pdf', 0.00),
+(15, 'ia', 'images/curso/ia.png', 'null', 'null', 'null', 'images/curso-pdf/ia-pdf.pdf', 0.00),
+(16, 'inversion', 'images/curso/inversion.png', 'null', 'null', 'null', 'images/curso-pdf/inversion-pdf.pdf', 0.00),
+(17, 'robotica', 'images/curso/robotica.png', 'null', 'null', 'null', 'images/curso-pdf/robotica-pdf.pdf', 0.00),
+(18, 'thunkable', 'images/curso/thunkable.png', 'null', 'null', 'null', 'images/curso-pdf/thunkable-pdf.pdf', 0.00),
+(19, 'excel', 'images/curso/excel.png', 'null', 'null', 'null', 'images/curso-pdf/excel-pdf.pdf', 0.00),
+(20, 'ap teach', 'images/curso/ap-teach.png', 'null', 'null', 'null', 'images/curso-pdf/ap-teach-pdf.pdf', 0.00);
 
 
 
-INSERT INTO `maestros`(`id_maestro`, `nombre`, `foto`, `areas`, `descripcion`, `hobies`, `correo_electronico`, `contraseña`) VALUES (null,'master teach alexia','images/docente/leanad.jpg','Curso: dibujo Tradicional 
-
-
-Arte tradicional (dibujo) 
--Photoshop, Clip studio. 
--Arte digital','Hola Soy Alexia, Lic. En Diseño, Animación y Arte digital. 
-Actualmente me dedico a Ilustrar por medio digital de manera Freelance.','Escuchar música 
-Ilustrar 
-Pintar con Acuarelas
-Ver series y películas animadas ','null','null');
-
-INSERT INTO `maestros`(`id_maestro`, `nombre`, `foto`, `areas`, `descripcion`, `hobies`, `correo_electronico`, `contraseña`) VALUES (null,'master teach eric','images/docente/carlosz.jpg','Cursos:
--Desarrollo de un brazo robótico
-
--Curso de Robótica (brazo robótico)
-
--Robótica (Carrito)
-
--Electrónica
-
--Programación (Python y C)','Hola, soy Eric, Ingeniero en Mecatrónica. Actualmente estudio la maestría en Electrónica y colaboro en distintos proyectos de investigación.','-Deportes
--Jugar videojuegos
--Leer','null','null');
-
-INSERT INTO `maestros`(`id_maestro`, `nombre`, `foto`, `areas`, `descripcion`, `hobies`, `correo_electronico`, `contraseña`) VALUES (null,'master teach alondra','images/docente/alondraF.mp4','Curso: Finanzas personales 
-
-
--Finanzas personales
-
--Inversiones
-
--Emprendimiento
-
--Administración empresarial','Hola Soy Alo, Lic. en Economía y Finanzas. Candidata de MBA y Figura 3 como Asesora en estrategias de inversión por la AMIB.
-Actualmente soy Analista de Inversiones en WTW en Chicago. ','-Bailar
--Escuchar música
--Leer
--Viajar
--Escuchar podcasts financieros y corporativos.
--Ir de Shopping
-','null','null');
+INSERT INTO `disponibilidadmaestro` (`id_disponibilidad`, `id_maestro`, `fecha`, `hora`) VALUES
+(2, 3, '2024-03-15', '16:00:00'),
+(3, 3, '2024-03-15', '17:00:00'),
+(4, 3, '2024-03-15', '11:00:00'),
+(7, 3, '2024-03-20', '10:35:00');
 
 
 
-
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'finanzas personales','images/curso/finanzas-personales.png','null','null','null','images/curso-pdf/finanzas-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'emprendimiento e innovacion','images/curso/emprendimiento-e-innovacion.png','null','null','null','images/curso-pdf/emprendimiento-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'robotica proyecto brazo robotico','images/curso/robotica-brazo.png','null','null','null','roboticabrazo-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'dibujo tradicional','images/curso/dibujo.png','null','null','null','dibujo-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'photoshop','images/curso/photoshop.png','null','null','null','photoshop-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'illustrator','images/curso/illustrator.png','null','null','null','illustrator-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'blender','images/curso/blender.png','null','null','null','blender-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'gdevelop','images/curso/gdevelop.png','null','null','null','gdevelop-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'unity 2d','images/curso/unity2d.png','null','null','null','unity2d-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'unity 3d','images/curso/unity3d.png','null','null','null','unity3d-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'minecraft','images/curso/minecraft.png','null','null','null','minecraft-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'doblaje','images/curso/doblaje.png','null','null','null','doblaje-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'databricks','images/curso/databricks.png','null','null','null','databricks-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'ajedrez','images/curso/ajedrez.png','null','null','null','ajedrez-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'ia','images/curso/ia.png','null','null','null','ia-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'inversion','images/curso/inversion.png','null','null','null','inversion-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'robotica','images/curso/robotica.png','null','null','null','robotica-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'thunkable','images/curso/thunkable.png','null','null','null','thunkable-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'excel','images/curso/excel.png','null','null','null','excel-pdf.pdf','null');
-
-INSERT INTO `cursos`(`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES (null,'ap teach','images/curso/ap-teach.png','null','null','null','ap-teach-pdf.pdf','null');
-
-
-
-
-
-INSERT INTO `disponibilidadmaestro`(`id_disponibilidad`, `id_maestro`, `fecha`, `hora`) VALUES (null,2,'2024-03-10','15:00:00');
-
-INSERT INTO `disponibilidadmaestro`(`id_disponibilidad`, `id_maestro`, `fecha`, `hora`) VALUES (null,2,'2024-03-10','16:00:00');
-
-INSERT INTO `disponibilidadmaestro`(`id_disponibilidad`, `id_maestro`, `fecha`, `hora`) VALUES (null,2,'2024-03-12','16:00:00');
-
-INSERT INTO `disponibilidadmaestro`(`id_disponibilidad`, `id_maestro`, `fecha`, `hora`) VALUES (null,1,'2024-03-12','18:00:00');
-
-INSERT INTO `disponibilidadmaestro`(`id_disponibilidad`, `id_maestro`, `fecha`, `hora`) VALUES (null,1,'2024-03-14','10:00:00');
-
-
-
+INSERT INTO `asignaciones` (`id_asignacion`, `id_maestro`, `id_curso`) VALUES
+(1, 3, 1),
+(2, 2, 3),
+(3, 1, 4),
+(4, 1, 5);
 
 
 
