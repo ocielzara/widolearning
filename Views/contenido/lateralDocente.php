@@ -330,6 +330,30 @@ if (isset ($_SESSION['idDocente'])) {
         background-color: #5318a8;
         /* Cambiar el color de fondo al pasar por encima */
     }
+
+    .button-cr {
+        background-color: var(--first-color);
+        /* Color de fondo del botón */
+        color: white;
+        /* Color del texto */
+        padding: 0.5rem 1rem;
+        /* Espaciado interno */
+        border: none;
+        /* Eliminar borde */
+        border-radius: 5px;
+        /* Borde redondeado */
+        cursor: pointer;
+        /* Cambiar el cursor al pasar por encima */
+        transition: background-color 0.3s ease;
+        /* Efecto de transición */
+        width: 90%;
+        font-size: 12px;
+    }
+
+    .button-cr:hover {
+        background-color: #5318a8;
+        /* Cambiar el color de fondo al pasar por encima */
+    }
 </style>
 
 <body>
@@ -367,11 +391,36 @@ if (isset ($_SESSION['idDocente'])) {
                                             $estado = $notificacion['estado'];
                                             $fecha_creacion = $notificacion['fecha_creacion'];
 
+                                            // Obtener el primer carácter del mensaje
+                                            $primerCaracter = substr($mensaje, 0, 1);
+                                            // Obtener el resto del mensaje sin el primer carácter
+                                            $restoMensaje = substr($mensaje, 1);
+
+                                            // Dividir la cadena en un array de palabras
+                                            $palabras = explode(' ', $mensaje);
+
+                                            // Obtener la penúltima palabra
+                                            $penultimaPalabra = $palabras[count($palabras) - 3];
+
                                             // Generar el HTML para la notificación
                                             echo "<a href='#' class='nav__dropdown-item'>";
-                                            echo "<span class='mensaje'>$mensaje </span>";
+                                            //echo "<span class='mensaje'>$penultimaPalabra</span>";
+                                            echo "<span class='mensaje'>$restoMensaje</span>";
                                             echo "<span class='fecha'>$fecha_creacion</span>";
                                             echo "</a>";
+                                            ?>
+                                            <form action="index.php?c=Docentes&a=confirmarCita" method="post">
+                                                <input type="hidden" name="idUsuario" value="<?php echo $primerCaracter; ?>">
+                                                <input type="hidden" name="fecha" value="<?php echo $penultimaPalabra; ?>">
+                                                <button class="button-cr">Confirmar</button>
+                                            </form>
+                                            <form action="index.php?c=Docentes&a=rechazarCita" method="post">
+                                                <input type="hidden" name="idUsuario" value="<?php echo $primerCaracter; ?>">
+                                                <input type="hidden" name="fecha" value="<?php echo $penultimaPalabra; ?>">
+                                                <button class="button-cr">Rechazar</button>
+                                            </form>
+                                            <br>
+                                            <?php
                                         }
                                     } else {
                                         // Si no hay notificaciones, mostrar un mensaje indicando que no hay notificaciones disponibles

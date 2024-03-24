@@ -10,6 +10,59 @@ class DocentesController
 
     public function index()
     {
+        session_start();
+        if (isset ($_SESSION['idDocente'])) {
+            $docente = new DocenteModel();
+            $idDocente = $_SESSION['idDocente'];
+            $disponibilidadInformacion = $docente->disponibilidadConsulta($idDocente);
+            // Verificar si se encontraron cursos asignados
+            if ($disponibilidadInformacion) {
+                // Inicializar un array para almacenar las fotos de los cursos
+                $consulta = array();
+                // Verificar si hay disponibilidad antes de intentar iterar sobre ella
+                if (is_array($disponibilidadInformacion) && count($disponibilidadInformacion) > 0) {
+
+                    foreach ($disponibilidadInformacion as $disponibilidad) {
+                        // Agregar los datos como un array asociativo a $consulta
+                        $consulta[] = array(
+                            'id_disponibilidad' => $disponibilidad['id_disponibilidad'],
+                            'fecha' => $disponibilidad['fecha'],
+                            'hora' => $disponibilidad['hora']
+                        );
+                    }
+                } else {
+                    // Si no hay disponibilidad, inicializar los arrays como vacíos
+                    $consulta = [];
+                }
+            } else {
+
+            }
+
+            $notificaciones = $docente->consultaNotificaciones($idDocente);
+            if ($notificaciones) {
+                // Inicializar un array para almacenar las fotos de los cursos
+                $consultaNotificacion = array();
+                // Verificar si hay disponibilidad antes de intentar iterar sobre ella
+                if (is_array($notificaciones) && count($notificaciones) > 0) {
+
+                    foreach ($notificaciones as $totalNotificaciones) {
+                        // Agregar los datos como un array asociativo a $consulta
+                        $consultaNotificacion[] = array(
+                            'id_usuario' => $totalNotificaciones['id_usuario'],
+                            'mensaje' => $totalNotificaciones['mensaje'],
+                            'estado' => $totalNotificaciones['estado'],
+                            'fecha_creacion' => $totalNotificaciones['fecha_creacion']
+                        );
+                    }
+                } else {
+                    // Si no hay disponibilidad, inicializar los arrays como vacíos
+                    $consultaNotificacion = [];
+                }
+            } else {
+
+            }
+        }
+
         require_once "Views/docente/index.php";
     }
 
@@ -30,56 +83,8 @@ class DocentesController
                 $idDocente = $maestro['id_maestro'];
                 session_start();
                 $_SESSION['idDocente'] = $idDocente;
-                $disponibilidadInformacion = $docente->disponibilidadConsulta($idDocente);
-                // Verificar si se encontraron cursos asignados
-                if ($disponibilidadInformacion) {
-                    // Inicializar un array para almacenar las fotos de los cursos
-                    $consulta = array();
-                    // Verificar si hay disponibilidad antes de intentar iterar sobre ella
-                    if (is_array($disponibilidadInformacion) && count($disponibilidadInformacion) > 0) {
-
-                        foreach ($disponibilidadInformacion as $disponibilidad) {
-                            // Agregar los datos como un array asociativo a $consulta
-                            $consulta[] = array(
-                                'id_disponibilidad' => $disponibilidad['id_disponibilidad'],
-                                'fecha' => $disponibilidad['fecha'],
-                                'hora' => $disponibilidad['hora']
-                            );
-                        }
-                    } else {
-                        // Si no hay disponibilidad, inicializar los arrays como vacíos
-                        $consulta = [];
-                    }
-                } else {
-
-                }
-
-                $notificaciones = $docente->consultaNotificaciones($idDocente);
-                if ($notificaciones) {
-                    // Inicializar un array para almacenar las fotos de los cursos
-                    $consultaNotificacion = array();
-                    // Verificar si hay disponibilidad antes de intentar iterar sobre ella
-                    if (is_array($notificaciones) && count($notificaciones) > 0) {
-
-                        foreach ($notificaciones as $totalNotificaciones) {
-                            // Agregar los datos como un array asociativo a $consulta
-                            $consultaNotificacion[] = array(
-                                'id_usuario' => $totalNotificaciones['id_usuario'],
-                                'mensaje' => $totalNotificaciones['mensaje'],
-                                'estado' => $totalNotificaciones['estado'],
-                                'fecha_creacion' => $totalNotificaciones['fecha_creacion']
-                            );
-                        }
-                    } else {
-                        // Si no hay disponibilidad, inicializar los arrays como vacíos
-                        $consultaNotificacion = [];
-                    }
-                } else {
-
-                }
-                
-
-                require_once "Views/docente/index.php";
+                // Redirigir a la página de miEspacio
+                header("location:  index.php?c=Docentes&a=index&n=$idDocente");
             } else {
                 require_once "Views/error/index.php";
             }
@@ -194,7 +199,7 @@ class DocentesController
             $model = new DocenteModel();
             if ($model->insertarDisponibilidad($id, $date, $time)) {
                 // Redirigir a alguna página después de registrar al usuario
-                echo '<script>window.location.replace(document.referrer);</script>';
+                header("location:  index.php?c=Docentes&a=index");
             } else {
                 // Manejar el caso en que la inserción falla
                 // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
@@ -216,7 +221,7 @@ class DocentesController
         $model = new DocenteModel();
         if ($model->eliminarDisponibilidad($id_disponibilidad)) {
             // Redirigir a alguna página después de registrar al usuario
-
+            header("location:  index.php?c=Docentes&a=index");
         } else {
             // Manejar el caso en que la inserción falla
             // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
@@ -260,7 +265,67 @@ class DocentesController
             $model = new DocenteModel();
             if ($model->actualizarDisponibilidad($id, $date, $time)) {
                 // Redirigir a alguna página después de registrar al usuario
-                echo '<script>window.location.replace(document.referrer);</script>';
+                header("location:  index.php?c=Docentes&a=index");
+            } else {
+                // Manejar el caso en que la inserción falla
+                // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
+                // Por ejemplo:
+                echo "Error al registrar el usuario.";
+            }
+        } else {
+            // Redirigir si se intenta acceder directamente a través de GET
+            header('Location: index.php');
+        }
+    }
+
+    public function confirmarCita()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Validar y sanar los datos de entrada
+            $idUsuario = $_POST['idUsuario'];
+            $fecha = $_POST['fecha'];
+
+            // Aquí se pueden realizar más validaciones si es necesario
+            session_start();
+            $inicioDocente = $_SESSION['idDocente'];
+            $model = new DocenteModel();
+            $informacion = $model->informacionDocente2($inicioDocente);
+            $idDocente = $informacion['id_maestro'];
+            $nombreDocente = $informacion['nombre'];
+            if ($model->insertarConfirmar($idUsuario, $nombreDocente, $fecha)) {
+                // Redirigir a alguna página después de registrar al usuario
+                echo '<script>alert("Se ha aceptado la cita");';
+                echo 'window.location.href = "index.php?c=Docentes&a=index";</script>';
+            } else {
+                // Manejar el caso en que la inserción falla
+                // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
+                // Por ejemplo:
+                echo "Error al registrar el usuario.";
+            }
+        } else {
+            // Redirigir si se intenta acceder directamente a través de GET
+            header('Location: index.php');
+        }
+    }
+
+    public function rechazarCita()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Validar y sanar los datos de entrada
+            $idUsuario = $_POST['idUsuario'];
+            $fecha = $_POST['fecha'];
+
+            // Aquí se pueden realizar más validaciones si es necesario
+            session_start();
+            $inicioDocente = $_SESSION['idDocente'];
+            $model = new DocenteModel();
+            $informacion = $model->informacionDocente2($inicioDocente);
+            $idDocente = $informacion['id_maestro'];
+            $nombreDocente = $informacion['nombre'];
+            if ($model->insertarRechazar($idUsuario, $nombreDocente, $fecha)) {
+                // Redirigir a alguna página después de registrar al usuario
+                echo '<script>alert("Se ha rechazado la cita");';
+                echo 'window.location.href = "index.php?c=Docentes&a=index";</script>';
             } else {
                 // Manejar el caso en que la inserción falla
                 // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página

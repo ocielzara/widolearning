@@ -114,4 +114,68 @@ public function match($fecha)
         return false;
 }
 
+public function informacionUsario($idUsuario)
+    {
+        $query = "SELECT * FROM usuarios WHERE id_usuario = '$idUsuario'";
+        $resultado = mysqli_query($this->db, $query);
+
+        if (mysqli_num_rows($resultado) > 0) {
+            return mysqli_fetch_array($resultado);
+        }
+
+        return false;
+    }
+
+public function consultaNotificaciones($idUsuario)
+    {
+        $query = "SELECT * FROM notificaciones WHERE id_usuario = '$idUsuario' ORDER BY fecha_creacion DESC";
+        $resultado = mysqli_query($this->db, $query);
+
+        // Verificar si se encontraron resultados
+        if ($resultado->num_rows > 0) {
+            // Inicializar un array para almacenar la disponibilidad
+            $consultaNotificacionDatos = array();
+
+            // Iterar sobre los resultados y almacenarlos en el array de disponibilidad
+            while ($row = $resultado->fetch_assoc()) {
+                $consultaNotificacionDatos[] = $row;
+            }
+
+            // Devolver el array de disponibilidad
+            return $consultaNotificacionDatos;
+        } else {
+            // Si no se encontraron resultados, devolver false
+            return false;
+        }
+    }
+
+    public function agendaCitaDocente($idDocente, $fecha, $hora, $inicioUsuario, $nombreUsuario, $edadUsuario, $interesUsuario)
+    {
+        $query = mysqli_query($this->db, "INSERT INTO notificaciones (id_usuario, id_maestro, mensaje, estado, fecha_creacion) VALUES (null, '$idDocente', '$inicioUsuario Hola soy $nombreUsuario con edad de $edadUsuario y mantengo intereses en $interesUsuario y me gustaria agendar una cita para $fecha $hora gracias.', 'noLeida', null)");
+        return true; // La inserción fue exitosa
+    }
+
+    public function consultaDocentesInformacion()
+    {
+        $query = "SELECT * FROM maestros";
+        $resultado = mysqli_query($this->db, $query);
+
+        // Verificar si se encontraron resultados
+        if ($resultado->num_rows > 0) {
+            // Inicializar un array para almacenar la disponibilidad
+            $consultaNotificacionDatos = array();
+
+            // Iterar sobre los resultados y almacenarlos en el array de disponibilidad
+            while ($row = $resultado->fetch_assoc()) {
+                $consultaNotificacionDatos[] = $row;
+            }
+
+            // Devolver el array de disponibilidad
+            return $consultaNotificacionDatos;
+        } else {
+            // Si no se encontraron resultados, devolver false
+            return false;
+        }
+    }
+
 }

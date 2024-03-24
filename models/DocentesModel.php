@@ -153,7 +153,7 @@ class DocenteModel
 
 public function consultaNotificaciones($idMaestro)
     {
-        $query = "SELECT * FROM notificaciones WHERE id_maestro = '$idMaestro'";
+        $query = "SELECT * FROM notificaciones WHERE id_maestro = '$idMaestro' ORDER BY fecha_creacion DESC";
         $resultado = mysqli_query($this->db, $query);
 
         // Verificar si se encontraron resultados
@@ -174,5 +174,28 @@ public function consultaNotificaciones($idMaestro)
         }
     }
 
+    public function informacionDocente2($idDocente)
+    {
+        $query = "SELECT * FROM maestros WHERE id_maestro = '$idDocente'";
+        $resultado = mysqli_query($this->db, $query);
+
+        if (mysqli_num_rows($resultado) > 0) {
+            return mysqli_fetch_array($resultado);
+        }
+
+        return false;
+    }
+
+    public function insertarConfirmar($idUsuario, $nombreDocente, $fecha)
+    {
+        $query = mysqli_query($this->db, "INSERT INTO notificaciones (id_usuario, id_maestro, mensaje, estado, fecha_creacion) VALUES ('$idUsuario', null, 'Ha sido aceptada tu cita del $fecha por el mentor $nombreDocente.', 'noLeida', null)");
+        return true; // La inserción fue exitosa
+    }
+    
+    public function insertarRechazar($idUsuario, $nombreDocente, $fecha)
+    {
+        $query = mysqli_query($this->db, "INSERT INTO notificaciones (id_usuario, id_maestro, mensaje, estado, fecha_creacion) VALUES ('$idUsuario', null, 'Hups! a sido rechazada tu cita del $fecha por el mentor $nombreDocente.', 'noLeida', null)");
+        return true; // La inserción fue exitosa
+    }
 
 }

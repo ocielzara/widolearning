@@ -10,6 +10,52 @@ class UsuariosController
 
     public function index()
     {
+        session_start();
+        $model = new UsuarioModel();
+        if (isset ($_SESSION['idUsuario'])) {
+            $idUsuario = $_SESSION['idUsuario'];
+
+            $notificaciones = $model->consultaNotificaciones($idUsuario);
+            if ($notificaciones) {
+                // Inicializar un array para almacenar las fotos de los cursos
+                $consultaNotificacion = array();
+                // Verificar si hay disponibilidad antes de intentar iterar sobre ella
+                if (is_array($notificaciones) && count($notificaciones) > 0) {
+
+                    foreach ($notificaciones as $totalNotificaciones) {
+                        // Agregar los datos como un array asociativo a $consulta
+                        $consultaNotificacion[] = array(
+                            'id_maestro' => $totalNotificaciones['id_maestro'],
+                            'mensaje' => $totalNotificaciones['mensaje'],
+                            'estado' => $totalNotificaciones['estado'],
+                            'fecha_creacion' => $totalNotificaciones['fecha_creacion']
+                        );
+                    }
+                } else {
+                    // Si no hay disponibilidad, inicializar los arrays como vacíos
+                    $consultaNotificacion = [];
+                }
+            } else {
+
+            }
+        }
+        $docentes = $model->consultaDocentesInformacion();
+        // Inicializar un array para almacenar las fotos de los cursos
+        $consultaDocentes = array();
+        // Verificar si hay disponibilidad antes de intentar iterar sobre ella
+        if (is_array($docentes) && count($docentes) > 0) {
+
+            foreach ($docentes as $totalDocentes) {
+                // Agregar los datos como un array asociativo a $consulta
+                $consultaDocentes[] = array(
+                    'nombre' => $totalDocentes['nombre'],
+                    'foto' => $totalDocentes['foto']
+                );
+            }
+        } else {
+            // Si no hay disponibilidad, inicializar los arrays como vacíos
+            $consultaDocentes = [];
+        }
         require_once "Views/main/index.php";
     }
 
@@ -21,7 +67,7 @@ class UsuariosController
     public function miEspacio()
     {
         // Verificar si se ha pasado el parámetro 'n' en la URL
-        if (isset($_GET['n'])) {
+        if (isset ($_GET['n'])) {
             // Obtener el valor de 'n' de la URL y asignarlo a una variable
             $nombre = $_GET['n'];
         } else {
@@ -69,12 +115,12 @@ class UsuariosController
 
             if ($usuario) {
                 // Inicio de sesión exitoso
-                $nombre = $usuario['nombre'];
+                $idUsuario = $usuario['id_usuario'];
                 session_start();
-                $_SESSION['nombreAlumno'] = $nombre;
+                $_SESSION['idUsuario'] = $idUsuario;
 
                 // Redirigir a la página de miEspacio
-                header("location:  index.php?c=usuarios&a=miEspacio&n=$nombre");
+                header("location:  index.php?c=Usuarios&a=index&n=$idUsuario");
             } else {
                 echo '<script>alert("Inicio de sesión fallido. Por favor, verifica tu correo electrónico o contraseña.");';
                 echo 'window.location.href = "index.php";</script>';
@@ -82,6 +128,22 @@ class UsuariosController
         } else {
             // Redirigir si se intenta acceder directamente a través de GET
             header('Location: index.php');
+        }
+    }
+
+    public function cerrarSesion()
+    {
+        // Verificar si se ha iniciado una sesión
+        session_start();
+
+        // Comprobar si se ha enviado una solicitud POST para cerrar sesión
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset ($_POST['cerrar_sesion'])) {
+            // Destruir la sesión actual
+            session_destroy();
+
+            // Redirigir a la página de inicio de sesión o a otra página relevante
+            header("Location: index.php");
+            exit; // Importante para asegurarse de que no se ejecute más código después de la redirección
         }
     }
 
@@ -179,6 +241,48 @@ class UsuariosController
             }
 
             require_once "Views/alumno/matchMaestro.php";
+
+        } else {
+            // Redirigir si se intenta acceder directamente a través de GET
+            header('Location: index.php');
+        }
+
+    }
+
+    public function apartarCita()
+    {
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Validar y sanar los datos de entrada
+            $fecha = $_POST['fecha_seleccionada'];
+            $hora = $_POST['hora_seleccionada'];
+            $idDocente = $_POST['idDocente'];
+            //echo $fecha, " ", $idUsuario;
+            session_start();
+            // Verificar si la variable de sesión existe antes de usarla para evitar errores
+            if (isset ($_SESSION['idUsuario'])) {
+                $inicioUsuario = $_SESSION['idUsuario'];
+                $model = new UsuarioModel();
+                $informacion = $model->informacionUsario($inicioUsuario);
+                $idUsuarioInicio = $informacion['id_usuario'];
+                $nombreUsuario = $informacion['nombre'];
+                $edadUsuario = $informacion['edad'];
+                $interesUsuario = $informacion['interes'];
+                if ($model->agendaCitaDocente($idDocente, $fecha, $hora, $inicioUsuario, $nombreUsuario, $edadUsuario, $interesUsuario)) {
+                    // Redirigir a alguna página después de registrar al usuario
+                    echo '<script>alert("Se ha agendado la cita, espera a que el docente confirme la cita.");';
+                    echo 'window.location.href = "index.php?c=Usuarios&a=index";</script>';
+                } else {
+                    // Manejar el caso en que la inserción falla
+                    // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
+                    // Por ejemplo:
+                    echo "Error al registrar el usuario.";
+                }
+            } else {
+                //echo "Para agendar cita, debes iniciar sesion";
+                echo '<script>alert("Para agendar cita, debes iniciar sesion");';
+                echo 'window.location.href = "index.php?c=Usuarios&a=login";</script>';
+            }
 
         } else {
             // Redirigir si se intenta acceder directamente a través de GET

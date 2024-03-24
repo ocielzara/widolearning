@@ -40,6 +40,20 @@
             display: flex;
             align-items: center;
             position: relative;
+            margin-top: -7%;
+        }
+
+        .informacion {
+            background-image: url(images/wido/informacion.png);
+            background-position: center top;
+            background-repeat: no-repeat;
+            background-size: 100%, cover;
+            /* Ajusta el tamaño de las imágenes de fondo */
+            min-height: 340vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-top: 0%;
         }
 
         .contenedor-1 {
@@ -608,6 +622,91 @@
             width: 100%;
             margin-left: 25%;
         }
+
+
+
+
+
+
+
+
+        /* Estilos para la vista previa del video */
+        .video-preview {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Estilos para el ícono de reproducción */
+        .play-icon {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            /* Ajusta el tamaño del icono según sea necesario */
+            height: 70px;
+            background-image: url('images/boton/boton.png');
+            /* Ruta del ícono de reproducción */
+            background-size: cover;
+            cursor: pointer;
+            /* Cambia el cursor al pasar sobre el ícono */
+        }
+
+        /* Estilos para la ventana emergente */
+
+        .video-popup {
+            position: fixed;
+            top: 0;
+            left: 15%;
+            width: 70%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            /* Fondo oscuro semi-transparente */
+            display: none;
+            z-index: 9999;
+            /* Asegura que esté por encima de otros elementos */
+            border-radius: 20px;
+            /* Bordes redondeados */
+        }
+
+        .video-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            /* Ancho del contenedor de video */
+            height: 100%;
+            /* Altura del contenedor de video */
+            border-radius: 20px;
+            /* Bordes redondeados */
+            overflow: hidden;
+            /* Oculta el contenido que se desborda */
+        }
+
+
+
+
+        #video-popup-player {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            /* Ajusta la posición vertical según sea necesario */
+            right: 10px;
+            /* Ajusta la posición horizontal según sea necesario */
+            background-color: black;
+            border: none;
+            color: #fff;
+            font-size: 15px;
+            cursor: pointer;
+            z-index: 10000;
+            /* Asegura que esté por encima del video */
+        }
     </style>
 
     <!--AREAS APRENDISAJE CARRUCEL-->
@@ -655,10 +754,14 @@
 
 <body>
 
-    <header class="header">
-    </header>
-    <div class="welcome-1">
-        <!--
+    <?php include 'Views/contenido/lateralUsuario.php'; ?>
+    <!--========== CONTENTS ==========-->
+    <main>
+        <section>
+            <header class="header">
+            </header>
+            <div class="welcome-1">
+                <!--
             <div class="menu container">
                 <img src="images/logo-aerobotlearning.png" alt="Descripción de la imagen" />
             </div>
@@ -669,729 +772,753 @@
                 <p class="frace-negra">Accede a diferentes cursos con un mentor por videollamada</p>
             </div>
             -->
-        <div class="section-3">
-            <!--index.php?c=usuarios&a=login-->
-            <a href="index.php?c=usuarios&a=login" class="button">Clase muestra gratuita</a>
-        </div>
-    </div>
-    <!--
+                <div class="section-3">
+                    <!--index.php?c=usuarios&a=login-->
+                    <a href="index.php?c=usuarios&a=login" class="button">Clase muestra gratuita</a>
+                </div>
+            </div>
+            <!--
         <div class="welcome-2">
             <div class="imagen"><img src="images/imagen-1.png" alt=""></div>
         </div>
         -->
 
-    <div class="sub-footer">
-        <button class="b1" type="button" onclick="mostrarContenidoAreas()">Areas de aprendizaje</button>
+            <div class="sub-footer">
+                <button class="b1" type="button" onclick="mostrarContenidoAreas()">Areas de aprendizaje</button>
 
-        <button class="b1" type="button" onclick="mostrarContenidoMasterTeach()">Master Teach</button>
+                <button class="b1" type="button" onclick="mostrarContenidoMasterTeach()">Master Teach</button>
 
 
-        <button class="b2" type="submit">Reels (proximamente)</button>
+                <button class="b2" type="submit">Reels (proximamente)</button>
 
-    </div>
-    <br><br>
+            </div>
+            <br><br>
 
-    <!--Areas aprendizaje style="display: none;"-->
-    <div id="contenido-areas" class="prices-1">
-        <div class="contenedor-1">
-            <!-- Formulario para buscar -->
-            <form>
-                <input type="text" id="busqueda" class="form-control mr-sm-2" placeholder="Buscar cursos">
-                <button type="button" id="buscar" class="btn btn-primary">Buscar</button>
-            </form>
-            <!-- Codigo de ajax -->
+            <!--Areas aprendizaje style="display: none;"-->
+            <div id="contenido-areas" class="prices-1">
+                <div class="contenedor-1">
+                    <!-- Formulario para buscar -->
+                    <form>
+                        <input type="text" id="busqueda" class="form-control mr-sm-2" placeholder="Buscar cursos">
+                        <button type="button" id="buscar" class="btn btn-primary">Buscar</button>
+                    </form>
+                    <!-- Codigo de ajax -->
 
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script>
-                $(document).ready(function () {
-                    $('#buscar').click(function () {
-                        var busqueda = $('#busqueda').val();
-                        $.ajax({
-                            type: "POST",
-                            url: "index.php?c=cursos&a=cursos",
-                            data: {
-                                busqueda: busqueda
-                            },
-                            dataType: 'json',
-                            success: function (response) {
-                                console.log(response);
-                                $('#resultados').empty(); // Limpiamos el contenedor de resultados antes de agregar nuevos resultados
-                                // Verificamos si se encontraron cursos
-                                if (response.length > 0) {
-                                    // Iteramos sobre cada curso y creamos un elemento h3 para mostrarlo
-                                    response.forEach(function (curso) {
-                                        //Aca modifica para que tenga link
-                                        $('#resultados').append('<a href="www.google.com">' + curso.titulo + '</a><br>');
-                                    });
-                                } else {
-                                    // Si no se encontraron cursos, mostramos un mensaje
-                                    $('#resultados').append('<p>No se encontraron cursos.</p>');
-                                }
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function () {
+                            $('#buscar').click(function () {
+                                var busqueda = $('#busqueda').val();
+                                $.ajax({
+                                    type: "POST",
+                                    url: "index.php?c=cursos&a=cursos",
+                                    data: {
+                                        busqueda: busqueda
+                                    },
+                                    dataType: 'json',
+                                    success: function (response) {
+                                        console.log(response);
+                                        $('#resultados').empty(); // Limpiamos el contenedor de resultados antes de agregar nuevos resultados
+                                        // Verificamos si se encontraron cursos
+                                        if (response.length > 0) {
+                                            // Iteramos sobre cada curso y creamos un elemento h3 para mostrarlo
+                                            response.forEach(function (curso) {
+                                                //Aca modifica para que tenga link
+                                                $('#resultados').append('<a href="www.google.com">' + curso.titulo + '</a><br>');
+                                            });
+                                        } else {
+                                            // Si no se encontraron cursos, mostramos un mensaje
+                                            $('#resultados').append('<p>No se encontraron cursos.</p>');
+                                        }
 
-                            },
-                            error: function (xhr, status, error) {
-                                console.error(xhr.responseText);
-                            }
+                                    },
+                                    error: function (xhr, status, error) {
+                                        console.error(xhr.responseText);
+                                    }
+                                });
+                            });
                         });
-                    });
-                });
-            </script>
+                    </script>
 
-            <div id="resultados">
-
-            </div>
-        </div>
-        <p class="cursos-p">CURSOS TOP (con mayor demanda)</p>
-        <div id="cursos-slider">
-            <div class="container-fluid">
-                <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="9000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                        <div class="carousel-item col-md-3  active">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/finanzas-personales.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="finanzas personales">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/emprendimiento-e-innovacion.png"
-                                            alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="emprendimiento e innovacion">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/robotica-brazo.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso"
-                                                value="robotica proyecto brazo robotico">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/dibujo.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="dibujo tradicional">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/photoshop.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="photoshop">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/illustrator.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="illustrator">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/blender.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="blender">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3  ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/gdevelop.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="gdevelop">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/unity2d.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="unity 2d">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/unity3d.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="unity 3d">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/minecraft.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="minecraft">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/doblaje.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="doblaje">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/databricks.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="databricks">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/ajedrez.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="ajedrez">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/ia.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="ia">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/inversion.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="inversion">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/robotica.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="robotica">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/thunkable.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="thunkable">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/excel.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="excel">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/ap-teach.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="ap teach">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div id="resultados">
 
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
                 </div>
-            </div>
-        </div>
-        <br><br>
-        <p class="cursos-p">ASESORÍAS</p>
-        <div id="cursos-slider">
-            <div class="container-fluid">
-                <div id="carouselExample3" class="carousel slide" data-ride="carousel" data-interval="9000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                        <div class="carousel-item col-md-3  active">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                <p class="cursos-p">CURSOS TOP (con mayor demanda)</p>
+                <div id="cursos-slider">
+                    <div class="container-fluid">
+                        <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="9000">
+                            <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                                <div class="carousel-item col-md-3  active">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/finanzas-personales.png"
+                                                    alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="finanzas personales">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/emprendimiento-e-innovacion.png"
+                                                    alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso"
+                                                        value="emprendimiento e innovacion">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/robotica-brazo.png"
+                                                    alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso"
+                                                        value="robotica proyecto brazo robotico">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/dibujo.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="dibujo tradicional">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/photoshop.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="photoshop">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/illustrator.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="illustrator">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/blender.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="blender">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3  ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                <div class="carousel-item col-md-3  ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/gdevelop.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="gdevelop">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/unity2d.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="unity 2d">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/unity3d.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="unity 3d">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/minecraft.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="minecraft">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/doblaje.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="doblaje">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/databricks.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="databricks">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/ajedrez.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="ajedrez">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/ia.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="ia">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/inversion.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="inversion">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/robotica.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="robotica">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/thunkable.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="thunkable">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/excel.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="excel">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/curso/ap-teach.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
+                                                    <!-- Campo oculto para enviar información -->
+                                                    <input type="hidden" name="nombreCurso" value="ap teach">
+                                                    <button class="clase-muestra">
+                                                        <span>Clase muestra</span>
+                                                    </button>
+                                                </form>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
                             </div>
+                            <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next text-faded" href="#carouselExample" role="button"
+                                data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
                         </div>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExample3" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample3" role="button"
-                        data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+                </div>
+                <br><br>
+                <p class="cursos-p">ASESORÍAS</p>
+                <div id="cursos-slider">
+                    <div class="container-fluid">
+                        <div id="carouselExample3" class="carousel slide" data-ride="carousel" data-interval="9000">
+                            <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                                <div class="carousel-item col-md-3  active">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/11.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <button class="clase-muestra">
+                                                    <span>Clase muestra</span>
+                                                </button>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/11.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <button class="clase-muestra">
+                                                    <span>Clase muestra</span>
+                                                </button>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/11.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <button class="clase-muestra">
+                                                    <span>Clase muestra</span>
+                                                </button>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/11.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <button class="clase-muestra">
+                                                    <span>Clase muestra</span>
+                                                </button>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/11.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <button class="clase-muestra">
+                                                    <span>Clase muestra</span>
+                                                </button>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/11.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <button class="clase-muestra">
+                                                    <span>Clase muestra</span>
+                                                </button>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3 ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/11.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <button class="clase-muestra">
+                                                    <span>Clase muestra</span>
+                                                </button>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item col-md-3  ">
+                                    <div class="panel panel-default">
+                                        <div class="prices-1">
+                                            <!-- Cuadrado con sombra -->
+                                            <div id="image-box">
+                                                <!-- Mitad superior para la imagen -->
+                                                <img src="images/11.png" alt="Descripción de la imagen">
+                                                <!-- Mitad inferior para el título de la imagen -->
+                                                <button class="clase-muestra">
+                                                    <span>Clase muestra</span>
+                                                </button>
+                                                <button class="suscripcion">
+                                                    <span>proximamente</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExample3" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next text-faded" href="#carouselExample3" role="button"
+                                data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!--Master teach-->
-    <div id="contenido-master-teach" class="prices-1" style="display: none;">
-        <div class="contenedor-1">
-            <!-- Formulario para buscar 
+            <!--Master teach-->
+            <div id="contenido-master-teach" class="prices-1" style="display: none;">
+                <div class="contenedor-1">
+                    <!-- Formulario para buscar 
             <form>
                 <input type="text" id="busqueda" class="form-control mr-sm-2" placeholder="Buscar cursos">
                 <button type="button" id="buscar" class="btn btn-primary">Buscar</button>
@@ -1437,847 +1564,789 @@
 
             </div>
             -->
-        </div>
+                </div>
 
-        <p class="cursos-p">DOCENTES</p>
-        <div id="cursos-slider">
-            <div class="container-fluid">
-                <div id="carouselExample15" class="carousel slide" data-ride="carousel" data-interval="9000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                        <div class="carousel-item col-md-3  active">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="video-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <video id="video" controls>
-                                            <source src="images/docente/alondraF.mp4" type="video/mp4">
-                                        </video>
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel" action="index.php?c=docentes&a=perfilDocente"
-                                            method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombre" value="master teach Alondra">
-                                            <button class="clase-muestra" style="width: 100%;">
-                                                <span>Ver perfil</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>Alondra</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/prueba/imagen-prueba-3.jpg" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel" action="index.php?c=docentes&a=perfilDocente"
-                                            method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombre" value="master teach Alexia">
-                                            <button class="clase-muestra" style="width: 100%;">
-                                                <span>Ver perfil</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>Alexia</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/prueba/imagen-prueba-4.jpg" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel" action="index.php?c=docentes&a=perfilDocente"
-                                            method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombre" value="master teach Eric">
-                                            <button class="clase-muestra" style="width: 100%;">
-                                                <span>Ver perfil</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>Eric</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Ver perfil</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Ver perfil</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Ver perfil</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Ver perfil</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3  ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/11.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <button class="clase-muestra">
-                                            <span>Clase muestra</span>
-                                        </button>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
-                                    </div>
-                                </div>
+                <p class="cursos-p">DOCENTES</p>
+                <div id="cursos-slider">
+                    <div class="container-fluid">
+                        <div id="carouselExample15" class="carousel slide" data-ride="carousel" data-interval="9000">
+                            <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                                <?php foreach ($consultaDocentes as $key => $docente): ?>
+                                    <div class="carousel-item col-md-3 <?php echo $key === 0 ? 'active' : ''; ?>">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <?php if (pathinfo($docente['foto'], PATHINFO_EXTENSION) === 'mp4'): ?>
+                                                    <!-- Vista previa del video con ícono de reproducción -->
+                                                    <div class="video-preview" id="video-box">
+                                                        <video id="video">
+                                                            <source src="<?php echo $docente['foto']; ?>" type="video/mp4">
+                                                            Your browser does not support the video tag.
+                                                        </video>
+                                                        <div class="play-icon"></div>
+                                                        <!-- Ventana emergente para reproducir el video -->
+                                                        <div class="play-icon" data-video-src="<?php echo $docente['foto']; ?>">
+                                                        </div>
 
+                                                    <?php else: ?>
+                                                        <div id="image-box">
+                                                            <!-- Es una imagen -->
+                                                            <img src="<?php echo $docente['foto']; ?>"
+                                                                alt="Foto de <?php echo $docente['nombre']; ?>">
+                                                        <?php endif; ?>
+                                                        <!-- Mitad inferior para el título de la imagen o video -->
+                                                        <form class="botones-carrucel"
+                                                            action="index.php?c=docentes&a=perfilDocente" method="post">
+                                                            <!-- Campo oculto para enviar información -->
+                                                            <input type="hidden" name="nombre"
+                                                                value="<?php echo $docente['nombre']; ?>">
+                                                            <button class="clase-muestra" style="width: 100%;">
+                                                                <span>Ver perfil</span>
+                                                            </button>
+                                                        </form>
+                                                        <button class="suscripcion">
+                                                            <span>
+                                                                proximamente
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExample15" role="button"
+                                    data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next text-faded" href="#carouselExample15" role="button"
+                                    data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExample15" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample15" role="button"
-                        data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+
+                    <br>
                 </div>
-            </div>
-        </div>
-        <br>
-    </div>
 
-    <div id="footer" class="footer">
-        <button class="button-mas" type="button" onclick="mostrarMas()">Mostrar más categorías</button>
-    </div>
-    <br>
+                <div id="footer" class="footer">
+                    <button class="button-mas" type="button" onclick="mostrarMas()">Mostrar más categorías</button>
+                </div>
+                <br>
 
-    <div id="contenido-mas" class="prices-1" style="display: none;">
-    <p class="cursos-p">Otro</p>
-        <div id="cursos-slider">
-            <div class="container-fluid">
-                <div id="carouselExample2" class="carousel slide" data-ride="carousel" data-interval="9000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                        <div class="carousel-item col-md-3 active">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/ajedrez.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="ajedrez">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                <div id="contenido-mas" class="prices-1" style="display: none;">
+                    <p class="cursos-p">Otro</p>
+                    <div id="cursos-slider">
+                        <div class="container-fluid">
+                            <div id="carouselExample2" class="carousel slide" data-ride="carousel" data-interval="9000">
+                                <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                                    <div class="carousel-item col-md-3 active">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/ajedrez.png" alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso" value="ajedrez">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </div>
+                                <a class="carousel-control-prev" href="#carouselExample2" role="button"
+                                    data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next text-faded" href="#carouselExample2" role="button"
+                                    data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
                             </div>
                         </div>
-
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExample2" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample2" role="button"
-                        data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <br><br>
-        <p class="cursos-p">Cursos de voz</p>
-        <div id="cursos-slider">
-            <div class="container-fluid">
-                <div id="carouselExample3" class="carousel slide" data-ride="carousel" data-interval="9000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                        <div class="carousel-item col-md-3  active">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/doblaje.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="doblaje">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                    <br><br>
+                    <p class="cursos-p">Cursos de voz</p>
+                    <div id="cursos-slider">
+                        <div class="container-fluid">
+                            <div id="carouselExample3" class="carousel slide" data-ride="carousel" data-interval="9000">
+                                <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                                    <div class="carousel-item col-md-3  active">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/doblaje.png" alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso" value="doblaje">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+
+
                                 </div>
+                                <a class="carousel-control-prev" href="#carouselExample3" role="button"
+                                    data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next text-faded" href="#carouselExample3" role="button"
+                                    data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
                             </div>
                         </div>
-
-
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExample3" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample3" role="button"
-                        data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <br><br>
-        <p class="cursos-p">Cursos de videojuegos</p>
-        <div id="cursos-slider">
-            <div class="container-fluid">
-                <div id="carouselExample4" class="carousel slide" data-ride="carousel" data-interval="9000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                        <div class="carousel-item col-md-3  active">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/minecraft.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="minecraft">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                    <br><br>
+                    <p class="cursos-p">Cursos de videojuegos</p>
+                    <div id="cursos-slider">
+                        <div class="container-fluid">
+                            <div id="carouselExample4" class="carousel slide" data-ride="carousel" data-interval="9000">
+                                <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                                    <div class="carousel-item col-md-3  active">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/minecraft.png"
+                                                        alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso" value="minecraft">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/unity3d.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="unity 3d">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                    <div class="carousel-item col-md-3 ">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/unity3d.png" alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso" value="unity 3d">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/unity2d.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="unity 2d">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                    <div class="carousel-item col-md-3 ">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/unity2d.png" alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso" value="unity 2d">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/gdevelop.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="gdevelop">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                    <div class="carousel-item col-md-3 ">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/gdevelop.png" alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso" value="gdevelop">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
 
 
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExample4" role="button"
+                                    data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next text-faded" href="#carouselExample4" role="button"
+                                    data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExample4" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample4" role="button"
-                        data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <br><br>
-        <p class="cursos-p">Cursos de robótica</p>
-        <div id="cursos-slider">
-            <div class="container-fluid">
-                <div id="carouselExample5" class="carousel slide" data-ride="carousel" data-interval="9000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                        <div class="carousel-item col-md-3  active">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/robotica-brazo.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso"
-                                                value="robotica proyecto brazo robotico">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                    <br><br>
+                    <p class="cursos-p">Cursos de robótica</p>
+                    <div id="cursos-slider">
+                        <div class="container-fluid">
+                            <div id="carouselExample5" class="carousel slide" data-ride="carousel" data-interval="9000">
+                                <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                                    <div class="carousel-item col-md-3  active">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/robotica-brazo.png"
+                                                        alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso"
+                                                            value="robotica proyecto brazo robotico">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/robotica.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="robotica">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                    <div class="carousel-item col-md-3 ">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/robotica.png" alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso" value="robotica">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/ap-teach.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="ap teach">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                    <div class="carousel-item col-md-3 ">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/ap-teach.png" alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso" value="ap teach">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
 
 
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExample5" role="button"
+                                    data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next text-faded" href="#carouselExample5" role="button"
+                                    data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExample5" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample5" role="button"
-                        data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <br><br>
-        <p class="cursos-p">Cursos de programación</p>
-        <div id="cursos-slider">
-            <div class="container-fluid">
-                <div id="carouselExample6" class="carousel slide" data-ride="carousel" data-interval="9000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                        <div class="carousel-item col-md-3  active">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/ia.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="ia">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                    <br><br>
+                    <p class="cursos-p">Cursos de programación</p>
+                    <div id="cursos-slider">
+                        <div class="container-fluid">
+                            <div id="carouselExample6" class="carousel slide" data-ride="carousel" data-interval="9000">
+                                <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                                    <div class="carousel-item col-md-3  active">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/ia.png" alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso" value="ia">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/thunkable.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="thunkable">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                    <div class="carousel-item col-md-3 ">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/thunkable.png"
+                                                        alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso" value="thunkable">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
 
 
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExample6" role="button"
+                                    data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next text-faded" href="#carouselExample6" role="button"
+                                    data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExample6" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample6" role="button"
-                        data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <br><br>
-        <p class="cursos-p">Cursos de dibujo e Ilustración digital</p>
-        <div id="cursos-slider">
-            <div class="container-fluid">
-                <div id="carouselExample7" class="carousel slide" data-ride="carousel" data-interval="9000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                        <div class="carousel-item col-md-3  active">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/illustrator.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="illustrator">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                    <br><br>
+                    <p class="cursos-p">Cursos de dibujo e Ilustración digital</p>
+                    <div id="cursos-slider">
+                        <div class="container-fluid">
+                            <div id="carouselExample7" class="carousel slide" data-ride="carousel" data-interval="9000">
+                                <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                                    <div class="carousel-item col-md-3  active">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/illustrator.png"
+                                                        alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso" value="illustrator">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/photoshop.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="photoshop">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                    <div class="carousel-item col-md-3 ">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/photoshop.png"
+                                                        alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso" value="photoshop">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/dibujo.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="dibujo tradicional">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                    <div class="carousel-item col-md-3 ">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/dibujo.png" alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso"
+                                                            value="dibujo tradicional">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
 
 
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExample7" role="button"
+                                    data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next text-faded" href="#carouselExample7" role="button"
+                                    data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExample7" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample7" role="button"
-                        data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <br><br>
-        <p class="cursos-p">Cursos de Data Mining</p>
-        <div id="cursos-slider">
-            <div class="container-fluid">
-                <div id="carouselExample8" class="carousel slide" data-ride="carousel" data-interval="9000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                        <div class="carousel-item col-md-3  active">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/databricks.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="databricks">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                    <br><br>
+                    <p class="cursos-p">Cursos de Data Mining</p>
+                    <div id="cursos-slider">
+                        <div class="container-fluid">
+                            <div id="carouselExample8" class="carousel slide" data-ride="carousel" data-interval="9000">
+                                <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                                    <div class="carousel-item col-md-3  active">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/databricks.png"
+                                                        alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso" value="databricks">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+
+
                                 </div>
+                                <a class="carousel-control-prev" href="#carouselExample8" role="button"
+                                    data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next text-faded" href="#carouselExample8" role="button"
+                                    data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
                             </div>
                         </div>
-
-
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExample8" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample8" role="button"
-                        data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <br><br>
-        <p class="cursos-p">Cursos de Administración y finanzas</p>
-        <div id="cursos-slider">
-            <div class="container-fluid">
-                <div id="carouselExample9" class="carousel slide" data-ride="carousel" data-interval="9000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                        <div class="carousel-item col-md-3  active">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/excel.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="excel">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                    <br><br>
+                    <p class="cursos-p">Cursos de Administración y finanzas</p>
+                    <div id="cursos-slider">
+                        <div class="container-fluid">
+                            <div id="carouselExample9" class="carousel slide" data-ride="carousel" data-interval="9000">
+                                <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                                    <div class="carousel-item col-md-3  active">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/excel.png" alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso" value="excel">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/inversion.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="inversion">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                    <div class="carousel-item col-md-3 ">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/inversion.png"
+                                                        alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso" value="inversion">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/emprendimiento-e-innovacion.png"
-                                            alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="emprendimiento e innovacion">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                    <div class="carousel-item col-md-3 ">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/emprendimiento-e-innovacion.png"
+                                                        alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso"
+                                                            value="emprendimiento e innovacion">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item col-md-3 ">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/finanzas-personales.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="finanzas personales">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                                    <div class="carousel-item col-md-3 ">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/finanzas-personales.png"
+                                                        alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso"
+                                                            value="finanzas personales">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
 
 
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExample9" role="button"
+                                    data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next text-faded" href="#carouselExample9" role="button"
+                                    data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExample9" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample9" role="button"
-                        data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <br><br>
-        <p class="cursos-p">Curso de modelado 2D y 3D</p>
-        <div id="cursos-slider">
-            <div class="container-fluid">
-                <div id="carouselExample10" class="carousel slide" data-ride="carousel" data-interval="9000">
-                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
-                        <div class="carousel-item col-md-3  active">
-                            <div class="panel panel-default">
-                                <div class="prices-1">
-                                    <!-- Cuadrado con sombra -->
-                                    <div id="image-box">
-                                        <!-- Mitad superior para la imagen -->
-                                        <img src="images/curso/blender.png" alt="Descripción de la imagen">
-                                        <!-- Mitad inferior para el título de la imagen -->
-                                        <form class="botones-carrucel-cursos"
-                                            action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
-                                            <!-- Campo oculto para enviar información -->
-                                            <input type="hidden" name="nombreCurso" value="blender">
-                                            <button class="clase-muestra">
-                                                <span>Clase muestra</span>
-                                            </button>
-                                        </form>
-                                        <button class="suscripcion">
-                                            <span>proximamente</span>
-                                        </button>
+                    <br><br>
+                    <p class="cursos-p">Curso de modelado 2D y 3D</p>
+                    <div id="cursos-slider">
+                        <div class="container-fluid">
+                            <div id="carouselExample10" class="carousel slide" data-ride="carousel"
+                                data-interval="9000">
+                                <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                                    <div class="carousel-item col-md-3  active">
+                                        <div class="panel panel-default">
+                                            <div class="prices-1">
+                                                <!-- Cuadrado con sombra -->
+                                                <div id="image-box">
+                                                    <!-- Mitad superior para la imagen -->
+                                                    <img src="images/curso/blender.png" alt="Descripción de la imagen">
+                                                    <!-- Mitad inferior para el título de la imagen -->
+                                                    <form class="botones-carrucel-cursos"
+                                                        action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                        method="post">
+                                                        <!-- Campo oculto para enviar información -->
+                                                        <input type="hidden" name="nombreCurso" value="blender">
+                                                        <button class="clase-muestra">
+                                                            <span>Clase muestra</span>
+                                                        </button>
+                                                    </form>
+                                                    <button class="suscripcion">
+                                                        <span>proximamente</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+
+
                                 </div>
+                                <a class="carousel-control-prev" href="#carouselExample10" role="button"
+                                    data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next text-faded" href="#carouselExample10" role="button"
+                                    data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
                             </div>
                         </div>
-
-
                     </div>
-                    <a class="carousel-control-prev" href="#carouselExample10" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next text-faded" href="#carouselExample10" role="button"
-                        data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
                 </div>
-            </div>
-        </div>
-    </div>
+
+                <div id="video-popup" class="video-popup">
+                    <div class="video-container">
+                        <video id="video-popup-player" controls>
+                            <source src="" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <button id="close-video-popup" class="close-btn">X</button>
+                    </div>
+                </div>
+
+
+                <div class="informacion">
+                </div>
+        </section>
+    </main>
+
+
 </body>
 <script>
     function mostrarContenidoAreas() {
@@ -2313,27 +2382,38 @@
 
 
 
-    //FUNCIONES PARA LA PREVISUALIZACION DE VIDEO EN SLIDER***********************************************************++
-    // Obtener el video y la imagen de previsualización por sus ID
-    const video = document.getElementById('video');
-    const preview = document.getElementById('preview');
 
-    // Escuchar el evento 'loadedmetadata' para asegurarse de que el video esté cargado
-    video.addEventListener('loadedmetadata', function () {
-        // Obtener el cuadro del video en el segundo 0 (puedes ajustar esto si lo deseas)
-        video.currentTime = 1;
+
+    ///FUNCIONES PARA LA PREVISUALIZACION DE VIDEO EN SLIDER***********************************************************
+    // Obtener todos los elementos de video y previsualización
+    const videos = document.querySelectorAll('.carousel-item video');
+    const playIcons = document.querySelectorAll('.carousel-item .play-icon');
+    const videoPopup = document.getElementById('video-popup');
+    const videoPopupPlayer = document.getElementById('video-popup-player');
+    const closeVideoPopup = document.getElementById('close-video-popup');
+
+    // Iterar sobre cada elemento de video y previsualización
+    videos.forEach((video, index) => {
+        // Escuchar el evento 'loadedmetadata' para asegurarse de que el video esté cargado
+        video.addEventListener('loadedmetadata', function () {
+            // Obtener el cuadro del video en el segundo 0 (puedes ajustar esto si lo deseas)
+            video.currentTime = 1;
+        });
+
     });
 
-    // Escuchar el evento 'canplay' para asegurarse de que el video pueda reproducirse
-    video.addEventListener('canplay', function () {
-        // Capturar un cuadro del video y mostrarlo como una previsualización
-        const canvas = document.createElement('canvas');
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        preview.src = canvas.toDataURL();
-        preview.style.display = 'block';
+
+    playIcons.forEach((playIcon) => {
+        playIcon.addEventListener('click', function () {
+            const videoSrc = playIcon.dataset.videoSrc; // Obtener la URL del video del atributo personalizado
+            videoPopupPlayer.src = videoSrc;
+            videoPopup.style.display = 'block';
+        });
+    });
+
+    closeVideoPopup.addEventListener('click', function () {
+        videoPopup.style.display = 'none';
+        videoPopupPlayer.pause(); // Pausar el video al cerrar la ventana emergente
     });
 </script>
 

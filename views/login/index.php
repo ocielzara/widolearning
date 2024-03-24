@@ -269,7 +269,7 @@
         </form>
     </div>
     <div class="container-form-sesion sign-in">
-        <form class="formulario" action="index.php?c=usuarios&a=iniciarSesion" method="post">
+        <form class="formulario" action="index.php?c=Usuarios&a=iniciarSesion" method="post">
             <h2 class="create-account">Iniciar Sesion</h2>
             <p class="cuenta-gratis">¿Aun no tienes una cuenta?</p>
             <input type="email" placeholder="Email" name="correo" required>
