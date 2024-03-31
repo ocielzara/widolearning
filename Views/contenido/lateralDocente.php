@@ -400,7 +400,7 @@ if (isset ($_SESSION['idDocente'])) {
                                             $palabras = explode(' ', $mensaje);
 
                                             // Obtener la penúltima palabra
-                                            $penultimaPalabra = $palabras[count($palabras) - 3];
+                                            $penultimaPalabra = $palabras[count($palabras) - 5];
 
                                             // Generar el HTML para la notificación
                                             echo "<a href='#' class='nav__dropdown-item'>";

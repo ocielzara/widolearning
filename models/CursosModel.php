@@ -14,7 +14,7 @@ class CursoModel
     public function getCursosByBusqueda($id)
     {
         $id2 = "%$id%";
-        $sql = "SELECT * FROM motorbusqueda WHERE titulo LIKE ?";
+        $sql = "SELECT * FROM motorBusqueda WHERE titulo LIKE ?";
         $stmt = $this->db->prepare($sql);
         $stmt->bind_param('s', $id2);
         $stmt->execute();

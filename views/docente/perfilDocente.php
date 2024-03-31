@@ -8,6 +8,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="Views/style/carrucel.css">
 
     <style>
         * {
@@ -65,7 +66,7 @@
             color: #FEC400;
             padding: 5px;
             left: 30%;
-            top: 59%;
+            top: 32%;
             transform: translate(-50%, -50%);
             z-index: 2;
             /* Un valor mayor de z-index para que se superponga sobre el header */
@@ -87,7 +88,7 @@
         .image-container {
             width: 700px;
             /* Ancho del contenedor */
-            height: 400px;
+            height: 600px;
             /* Altura del contenedor */
             border-radius: 20px;
             /* Bordes redondeados */
@@ -98,7 +99,7 @@
             z-index: 2;
             position: absolute;
             left: 50%;
-            top: 100%;
+            top: 90%;
             transform: translate(-50%, -50%);
         }
 
@@ -131,7 +132,7 @@
             /* Bordes redondeados */
             overflow: hidden;
             /* Oculta el contenido que se desborda */
-            margin: 3% auto;
+            margin: 0% auto;
             /* Centra en medio de la página */
             background-image: linear-gradient(to top, #4F7CAC 100%, transparent 100%),
                 linear-gradient(to left, #4F7CAC 100%, transparent 100%),
@@ -168,417 +169,9 @@
             padding: 5px;
             /* Espacio interno */
         }
-
-        /* Estilo del cuadrado con sombra */
-        #image-box {
-            width: 200px;
-            /* Ajusta el ancho según tus necesidades */
-            height: 230px;
-            /* Ajusta la altura según tus necesidades */
-            background-color: #50B2FF;
-            /* Color de fondo del cuadrado */
-            border-radius: 20px;
-            /* Redondea los bordes más */
-            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-            /* Sombra */
-            /* margin-left: 10px;*/
-            margin-top: 20px;
-            /* */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #image-box img {
-            width: 100%;
-            /* La imagen ocupa el 100% del ancho del contenedor */
-            height: 65%;
-            flex: 0.2;
-            /* La imagen ocupa la mitad superior */
-            border-radius: 20px 20px 0 0;
-            /* Bordes redondeados solo arriba */
-            margin-top: -40px;
-        }
-
-        #image-box p {
-            flex: 0.9;
-            /* El título ocupa la mitad inferior */
-            margin: 0px 0;
-            /*text-align: center;*/
-            font-size: 11px;
-        }
-
-        .clase-muestra {
-            border-radius: 20px;
-            /* Bordes redondeados */
-            background-color: #FEC400;
-            /* Color de fondo azul */
-            color: #2E3532;
-            /* Color del texto blanco */
-            padding: 1px 5px;
-            /* Espacio interno */
-            border: none;
-            /* Sin borde */
-            cursor: pointer;
-            /* Cursor de puntero */
-            transition: background-color 0.3s;
-            /* Transición suave del color de fondo */
-            width: 75%;
-            margin-top: 10px;
-            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Cambiar el color de fondo cuando el cursor pasa sobre el botón */
-        .clase-muestra:hover {
-            background-color: white;
-            /* Color de fondo azul más oscuro */
-        }
-
-        .suscripcion {
-            border-radius: 20px;
-            /* Bordes redondeados */
-            background-color: #D2D2D2;
-            /* Color de fondo azul */
-            color: white;
-            /* Color del texto blanco */
-            padding: 1px 5px;
-            /* Espacio interno */
-            border: none;
-            /* Sin borde */
-            cursor: pointer;
-            /* Cursor de puntero */
-            transition: background-color 0.3s;
-            /* Transición suave del color de fondo */
-            width: 75%;
-            margin-top: 10px;
-            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Cambiar el color de fondo cuando el cursor pasa sobre el botón */
-        .suscripcion:hover {
-            background-color: #D2D2D2;
-            /* Color de fondo azul más oscuro */
-        }
-
-        .suscripcion span {}
-
-
-        .cardCarrusel {
-            width: 15%;
-            /* Ancho ajustable según preferencias */
-            margin: 5px;
-            /* Espacio entre las cards */
-        }
-
-        .bg-primary {
-            --bs-bg-opacity: 1;
-            background-color: white !important;
-        }
-
         /*********************************************************************************************/
 
-        .contenedor-1 {
-            width: 800px;
-            /* Ancho del contenedor */
-            height: 200px;
-            /* Altura del contenedor */
-            border-radius: 20px;
-            /* Bordes redondeados */
-            overflow: hidden;
-            /* Oculta el contenido que se desborda */
-            margin: 0% auto;
-            /* Centra en medio de la página */
-            padding: 0px;
-        }
-
-        /* Estilos para el formulario de búsqueda */
-
-        #search-form {
-            margin: 10px;
-        }
-
-        #search-input {
-            padding: 10px;
-            width: 600px;
-            border: 1px;
-            border-radius: 25px;
-            font-size: 16px;
-            background-color: #D4EBFF;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #D4EBFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* Estilos para los resultados de la búsqueda */
-        #search-results {
-            margin: 20px;
-            padding: 10px;
-            /* border: 1px solid #ccc;
-            border-radius: 5px;*/
-        }
-
-        /* Estilos para los elementos de resultado */
-        .result-item {
-            margin-bottom: 10px;
-        }
-
-
-
-
-        .cursos-p {
-            font-family: 'Arial', sans-serif;
-            font-size: 19px;
-            font-weight: bold;
-            color: orange;
-            padding: 5px;
-            margin-top: 0px;
-            margin-left: 5%;
-            /* Centra en medio de la página */
-        }
-
-
-
-
-        .prices-1 {
-            padding: 5px;
-            /* Espacio interno */
-        }
-
-        /* Estilo del cuadrado con sombra */
-        #image-box {
-            width: 200px;
-            /* Ajusta el ancho según tus necesidades */
-            height: 230px;
-            /* Ajusta la altura según tus necesidades */
-            background-color: #2E3532;
-            /* Color de fondo del cuadrado */
-            border-radius: 20px;
-            /* Redondea los bordes más */
-            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-            /* Sombra */
-            /* margin-left: 10px;*/
-            margin-top: 20px;
-            /* */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #image-box img {
-            width: 100%;
-            /* La imagen ocupa el 100% del ancho del contenedor */
-            height: 65%;
-            flex: 0.2;
-            /* La imagen ocupa la mitad superior */
-            border-radius: 20px 20px 0 0;
-            /* Bordes redondeados solo arriba */
-            margin-top: -40px;
-        }
-
-        #image-box p {
-            flex: 0.9;
-            /* El título ocupa la mitad inferior */
-            margin: 0px 0;
-            /*text-align: center;*/
-            font-size: 11px;
-        }
-
-        .suscripcion {
-            border-radius: 20px;
-            /* Bordes redondeados */
-            background-color: #D2D2D2;
-            /* Color de fondo azul */
-            color: white;
-            /* Color del texto blanco */
-            padding: 1px 5px;
-            /* Espacio interno */
-            border: none;
-            /* Sin borde */
-            cursor: pointer;
-            /* Cursor de puntero */
-            transition: background-color 0.3s;
-            /* Transición suave del color de fondo */
-            width: 75%;
-            margin-top: 10px;
-            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Cambiar el color de fondo cuando el cursor pasa sobre el botón */
-        .suscripcion:hover {
-            background-color: #D2D2D2;
-            /* Color de fondo azul más oscuro */
-        }
-
-        .suscripcion span {}
-
-
-        .cardCarrusel {
-            width: 15%;
-            /* Ancho ajustable según preferencias */
-            margin: 5px;
-            /* Espacio entre las cards */
-        }
-
-        .bg-primary {
-            --bs-bg-opacity: 1;
-            background-color: white !important;
-        }
-
-        .carousel {
-            /*background-image: url(images/home-opaco.png);*/
-            background-position: center top;
-            background-repeat: no-repeat;
-            background-size: 100%, cover;
-            /* Ajusta el tamaño de las imágenes de fondo */
-            min-height: 50vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            border-radius: 30px;
-            /* Redondea los bordes más */
-        }
-
-        @media (min-width: 768px) {
-
-            /* show 3 items */
-            .carousel-inner .active,
-            .carousel-inner .active+.carousel-item,
-            .carousel-inner .active+.carousel-item+.carousel-item,
-            .carousel-inner .active+.carousel-item+.carousel-item+.carousel-item {
-                display: block;
-            }
-
-            .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
-            .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item,
-            .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item+.carousel-item,
-            .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item+.carousel-item+.carousel-item {
-                transition: none;
-            }
-
-            .carousel-inner .carousel-item-next,
-            .carousel-inner .carousel-item-prev {
-                position: relative;
-                transform: translate3d(0, 0, 0);
-            }
-
-            .carousel-inner .active.carousel-item+.carousel-item+.carousel-item+.carousel-item+.carousel-item {
-                position: absolute;
-                top: 0;
-                right: -25%;
-                z-index: -1;
-                display: block;
-                visibility: visible;
-            }
-
-            /* left or forward direction */
-            .active.carousel-item-left+.carousel-item-next.carousel-item-left,
-            .carousel-item-next.carousel-item-left+.carousel-item,
-            .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item,
-            .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item+.carousel-item,
-            .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item+.carousel-item+.carousel-item {
-                position: relative;
-                transform: translate3d(-100%, 0, 0);
-                visibility: visible;
-            }
-
-            /* farthest right hidden item must be abso position for animations */
-            .carousel-inner .carousel-item-prev.carousel-item-right {
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: -1;
-                display: block;
-                visibility: visible;
-            }
-
-            /* right or prev direction */
-            .active.carousel-item-right+.carousel-item-prev.carousel-item-right,
-            .carousel-item-prev.carousel-item-right+.carousel-item,
-            .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item,
-            .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item+.carousel-item,
-            .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item+.carousel-item+.carousel-item {
-                position: relative;
-                transform: translate3d(100%, 0, 0);
-                visibility: visible;
-                display: block;
-                visibility: visible;
-            }
-
-        }
-
-        /* Bootstrap Lightbox using Modal */
-
-        #profile-grid {
-            overflow: auto;
-            white-space: normal;
-        }
-
-        #profile-grid .profile {
-            padding-bottom: 40px;
-        }
-
-        #profile-grid .panel {
-            padding: 0
-        }
-
-        #profile-grid .panel-body {
-            padding: 15px
-        }
-
-        #profile-grid .profile-name {
-            font-weight: bold;
-        }
-
-        #profile-grid .thumbnail {
-            margin-bottom: 6px;
-        }
-
-        #profile-grid .panel-thumbnail {
-            overflow: hidden;
-        }
-
-        #profile-grid .img-rounded {
-            border-radius: 4px 4px 0 0;
-        }
-
-        .carousel-control-prev-icon {
-            background-image: url(images/wido/boton-slider-prev.png);
-            padding: 25px;
-        }
-
-        .carousel-control-next-icon {
-            background-image: url(images/wido/boton-slider.png);
-            padding: 25px;
-        }
-
-        .carousel-control-next,
-        .carousel-control-prev {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            justify-content: center;
-            width: 2%;
-            color: black;
-            text-align: center;
-            opacity: .;
-        }
-
+       
         /**************************************************************************************************** */
 
         .disponibilidad {

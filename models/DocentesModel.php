@@ -42,7 +42,7 @@ class DocenteModel
 
     public function cursosAsignados($nombre)
     {
-        $query = "SELECT c.foto FROM Cursos c JOIN Asignaciones a ON c.id_curso = a.id_curso JOIN Maestros m ON m.id_maestro = a.id_maestro WHERE m.nombre = '$nombre'";
+        $query = "SELECT c.foto FROM cursos c JOIN asignaciones a ON c.id_curso = a.id_curso JOIN maestros m ON m.id_maestro = a.id_maestro WHERE m.nombre = '$nombre'";
         $resultado = mysqli_query($this->db, $query);
 
         if ($resultado && mysqli_num_rows($resultado) > 0) {

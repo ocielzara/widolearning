@@ -98,13 +98,30 @@ public function informacionBusqueda($nombre)
     }
 }
 
+public function informacionBusquedaAsesoria($nombre)
+{
+    $query = "SELECT * FROM asesoria WHERE nombre = '$nombre'";
+    $resultado = mysqli_query($this->db, $query);
 
-public function match($fecha)
+    // Verificar si la consulta fue exitosa
+    if ($resultado) {
+        // Devolver el resultado como un arreglo asociativo
+        return mysqli_fetch_assoc($resultado);
+    } else {
+        // Manejar el error si la consulta falla
+        return false;
+    }
+}
+
+
+public function match($fecha, $nombreCurso)
 {
     $query = "SELECT m.nombre, m.descripcion, m.foto
     FROM maestros m
-    JOIN disponibilidadmaestro d ON m.id_maestro = d.id_maestro
-    WHERE d.fecha = '$fecha'";
+    JOIN disponibilidadMaestro d ON m.id_maestro = d.id_maestro
+    JOIN asignaciones a ON m.id_maestro = a.id_maestro
+    JOIN cursos c ON a.id_curso = c.id_curso
+    WHERE d.fecha = '$fecha' AND c.nombre = '$nombreCurso'";
     $resultado = mysqli_query($this->db, $query);
 
         if ($resultado && mysqli_num_rows($resultado) > 0) {
@@ -151,7 +168,13 @@ public function consultaNotificaciones($idUsuario)
 
     public function agendaCitaDocente($idDocente, $fecha, $hora, $inicioUsuario, $nombreUsuario, $edadUsuario, $interesUsuario)
     {
-        $query = mysqli_query($this->db, "INSERT INTO notificaciones (id_usuario, id_maestro, mensaje, estado, fecha_creacion) VALUES (null, '$idDocente', '$inicioUsuario Hola soy $nombreUsuario con edad de $edadUsuario y mantengo intereses en $interesUsuario y me gustaria agendar una cita para $fecha $hora gracias.', 'noLeida', null)");
+        $query = mysqli_query($this->db, "INSERT INTO notificaciones (id_usuario, id_maestro, mensaje, estado, fecha_creacion) VALUES (null, '$idDocente', '$inicioUsuario Hola soy $nombreUsuario con edad de $edadUsuario y mantengo intereses en $interesUsuario y me gustaria agendar una cita para $fecha a las $hora gracias.', 'noLeida', null)");
+        return true; // La inserción fue exitosa
+    }
+
+    public function agendaCitaDocenteBuscado($idDocente, $fecha, $hora, $inicioUsuario, $nombreUsuario, $edadUsuario, $nombreCurso, $objetivo)
+    {
+        $query = mysqli_query($this->db, "INSERT INTO notificaciones (id_usuario, id_maestro, mensaje, estado, fecha_creacion) VALUES (null, '$idDocente', '$inicioUsuario Hola soy $nombreUsuario con edad de $edadUsuario y mantengo intereses en el curso $nombreCurso, mi objetivo es $objetivo y me gustaria agendar una cita para $fecha a las $hora gracias.', 'noLeida', null)");
         return true; // La inserción fue exitosa
     }
 
@@ -172,6 +195,29 @@ public function consultaNotificaciones($idUsuario)
 
             // Devolver el array de disponibilidad
             return $consultaNotificacionDatos;
+        } else {
+            // Si no se encontraron resultados, devolver false
+            return false;
+        }
+    }
+
+    public function consultaAsesoriasInformacion()
+    {
+        $query = "SELECT * FROM asesoria";
+        $resultado = mysqli_query($this->db, $query);
+
+        // Verificar si se encontraron resultados
+        if ($resultado->num_rows > 0) {
+            // Inicializar un array para almacenar la disponibilidad
+            $consultaAsesoriaDatos = array();
+
+            // Iterar sobre los resultados y almacenarlos en el array de disponibilidad
+            while ($row = $resultado->fetch_assoc()) {
+                $consultaAsesoriaDatos[] = $row;
+            }
+
+            // Devolver el array de disponibilidad
+            return $consultaAsesoriaDatos;
         } else {
             // Si no se encontraron resultados, devolver false
             return false;

@@ -28,12 +28,12 @@
         }
 
         .header {
-            background-image: url(images/header-docentes.png);
+            background-image: url(images/wido/header.png);
             background-position: center top;
             background-repeat: no-repeat;
             background-size: 100%, cover;
             /* Ajusta el tamaño de las imágenes de fondo */
-            min-height: 73vh;
+            min-height: 160vh;
             display: flex;
             align-items: center;
             position: relative;
@@ -74,9 +74,9 @@
 
         /* Estilos del contenedor */
         .image-container {
-            width: 600px;
+            width: 240px;
             /* Ancho del contenedor */
-            height: 630px;
+            height: 214px;
             /* Altura del contenedor */
             border-radius: 20px;
             /* Bordes redondeados */
@@ -127,7 +127,9 @@
 
         /* Estilo para los campos input */
         input[type="date"],
-        input[type="time"] {
+        input[type="time"],
+        input[type="text"],
+        select {
             padding: 8px;
             /* Añade un poco de espacio interno */
             border: 1px solid #ccc;
@@ -215,9 +217,6 @@
 <body>
 
     <header class="header">
-        <div class="menu container">
-            <img src="images/logo-aerobotlearning.png" alt="Descripción de la imagen" />
-        </div>
     </header>
     <div class="image-container">
         <img src="<?php echo $fotoCurso; ?>" alt="Descripción de la imagen">
@@ -232,7 +231,8 @@
             <a class="download-link" href="<?php echo $pdfCurso; ?>" target="_blank">Abrir PDF</a>
         </div>
 
-        <form class="formulario" action="index.php?c=usuarios&a=matchMaestro" method="post">
+        <form class="formulario" action="index.php?c=Usuarios&a=matchMaestro" method="post">
+        <input type="hidden" name="nombreCurso" value="<?php echo $nombreCurso ?>">
             <p class="custom-text">Elige el horario y el dia que deseas tomar tu clase muestra:</p>
             <div class="campo">
                 <label for="fecha">Fecha:</label>
@@ -243,6 +243,17 @@
                 <label for="hora">Hora:</label>
                 <input type="time" id="hora" name="hora">
             </div>
+            <!--
+            <p class="custom-text">¿Este curso es para ti?</p>
+            <div class="campo">
+                <select id="confirmacion" name="confirmacion">
+                    <option value="si">Sí</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            -->
+            <p class="custom-text">¿Cual es tu objetivo de aprendizaje?</p>
+            <input type="text" placeholder="Mi objetivo es.." name="objetivo" required>
             <button class="clase-muestra">
                 <span>Confirmar</span>
             </button>

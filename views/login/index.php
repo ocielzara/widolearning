@@ -30,15 +30,16 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        color: white;
+        color: #DFFAFF;
     }
 
     .container-form {
-        width: 90%;
-        height: 150vh;
+        width: 100%;
+        height: 100vh;
         display: flex;
         justify-content: space-around;
         transition: all .5s ease-out;
+        margin-top: -15%;
     }
 
     .container-form-sesion {
@@ -75,7 +76,7 @@
         font-size: .9rem;
         margin-top: 2rem;
         transition: all .3s ease-in;
-        color: #2E3532;
+        color: #DFFAFF;
     }
 
     .message button:hover {
@@ -94,7 +95,7 @@
     .create-account {
         padding: 2.7rem 0;
         font-size: 1.7rem;
-        color: white;
+        color: #DFFAFF;
     }
 
     .iconos {
@@ -111,7 +112,7 @@
         align-items: center;
         justify-content: center;
         padding: 1.5rem;
-        border: solid thin white;
+        border: solid thin #DFFAFF;
         border-radius: 50%;
         font-size: 1.5rem;
         transition: all .3s ease-in;
@@ -133,12 +134,12 @@
         margin-bottom: 2rem;
         background-color: transparent;
         border: none;
-        border-bottom: white thin solid;
+        border-bottom: #DFFAFF thin solid;
         text-align: center;
         outline: none;
         padding: .2rem 0;
         font-size: .8rem;
-        color: #ffffff;
+        color: #DFFAFF;
     }
 
     .boton {
@@ -154,9 +155,24 @@
         color: #222;
     }
 
+    .boton-master {
+        width: 60%;
+        margin: auto;
+        padding: .7rem;
+        border-radius: 2rem;
+        background-color: white;
+        font-weight: 600;
+        margin-top: 3rem;
+        font-size: .8rem;
+        cursor: pointer;
+        color: #222;
+        background-color: rgba(255, 255, 255, 0.4); /* Color blanco con 50% de opacidad */
+    }
+
     .boton:hover {
-        background-color: #2E3532;
-        color: white;
+        background-color: #4F7CAC;
+        color: #FEC400;
+        /* Color de fondo azul más oscuro */
     }
 
     .sign-in {
@@ -217,88 +233,48 @@
     .columna input {
         margin-right: 10px;
     }
+
+  
+.cuenta-gratis, .sign-in-btn {
+    display: inline-block;
+    margin-right: 10px; /* Espacio entre los elementos si es necesario */
+}
+
+.sign-in-btn {
+    color: #FFD800;
+}
+
 </style>
 
 <body>
 
     <div class="welcome-1">
+    <!--
         <div class="menu container">
             <img src="images/wido/wido-logo-09.png" alt="Descripción de la imagen" />
         </div>
+    -->
     </div>
+
     <div class="container-form sign-up">
         <div class="welcome-back">
             <div class="message">
+                <!--
                 <h2>Bienvenido</h2>
                 <p>Si ya tienes una cuenta por favor inicia sesion aqui</p>
                 <button class="sign-up-btn">Iniciar Sesion</button>
+                -->
             </div>
         </div>
-        <form class="formulario" action="index.php?c=Usuarios&a=registro" method="post">
-            <h2 class="create-account">Crear una cuenta</h2>
-            <p class="cuenta-gratis">Crear una cuenta gratis</p>
-            <input type="text" name="nombre" placeholder="nombre" required>
-            <input type="text" name="edad" placeholder="edad" required>
-            <input type="text" name="telefono" placeholder="telefono" maxlength="10"
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                required>
-            <input type="email" name="email" placeholder="email" required>
-            <input type="password" name="contraseña" placeholder="contraseña" required>
-            <h3>Selecciona tus intereses:</h3>
-            <div class="intereses-container">
-                <div class="columna">
-                    <label for="tecnologia">Tecnología</label><br>
-                    <input type="checkbox" id="tecnologia" name="intereses[]" value="tecnología">
-                    <label for="artes">Artes</label><br>
-                    <input type="checkbox" id="artes" name="intereses[]" value="artes">
-                    <label for="diseño">Diseño</label><br>
-                    <input type="checkbox" id="diseño" name="intereses[]" value="diseño">
-                    <label for="finanzas">Finanzas</label><br>
-                    <input type="checkbox" id="finanzas" name="intereses[]" value="finanzas">
-                </div>
-                <div class="columna">
-                    <label for="administracion">Administración</label><br>
-                    <input type="checkbox" id="administracion" name="intereses[]" value="administración">
-                    <label for="programacion">Programación</label><br>
-                    <input type="checkbox" id="programacion" name="intereses[]" value="programación">
-                    <label for="videojuegos">Videojuegos</label><br>
-                    <input type="checkbox" id="videojuegos" name="intereses[]" value="videojuegos">
-                </div>
-            </div>
-            <button class="boton" type="submit">Registrarse</button>
-        </form>
-    </div>
-    <div class="container-form-sesion sign-in">
         <form class="formulario" action="index.php?c=Usuarios&a=iniciarSesion" method="post">
-            <h2 class="create-account">Iniciar Sesion</h2>
-            <p class="cuenta-gratis">¿Aun no tienes una cuenta?</p>
-            <input type="email" placeholder="Email" name="correo" required>
+            <h2 class="create-account">¡HOLA DE NUEVO!</h2>
+            <input type="email" placeholder="Correo electronico" name="correo" required>
             <input type="password" placeholder="Contraseña" name="contraseña" required>
-            <button class="boton" type="submit">Iniciar sesion</button><br><br>
-            <a href="index.php?c=Docentes&a=login" class="boton">Soy master teach</a>
-        </form>
-        <div class="welcome-back">
-            <div class="message">
-                <h2>Bienvenido de nuevo</h2>
-                <p>Si aun no tienes una cuenta por favor registrese aqui</p>
-                <button class="sign-in-btn">Registrarse</button>
-            </div>
-        </div>
+            <button class="boton" type="submit">Iniciar sesion</button>
+            <p class="cuenta-gratis">¿Aun no tienes una cuenta?</p><a href="index.php?c=Usuarios&a=vistaRegistro" class="sign-in-btn">Registrate aqui</a><br><br>
+            <a href="index.php?c=Docentes&a=login" class="boton-master">Soy master teach</a>
+        </form> 
     </div>
-    <script src="script.js"></script>
+   
 </body>
-<script>
-    const $btnSignIn = document.querySelector('.sign-in-btn'),
-        $btnSignUp = document.querySelector('.sign-up-btn'),
-        $signUp = document.querySelector('.sign-up'),
-        $signIn = document.querySelector('.sign-in');
-
-    document.addEventListener('click', e => {
-        if (e.target === $btnSignIn || e.target === $btnSignUp) {
-            $signIn.classList.toggle('active');
-            $signUp.classList.toggle('active')
-        }
-    });
-</script>
-
 </html>

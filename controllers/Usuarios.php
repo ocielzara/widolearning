@@ -12,9 +12,16 @@ class UsuariosController
     {
         session_start();
         $model = new UsuarioModel();
-        if (isset ($_SESSION['idUsuario'])) {
+        //Estilo del boton "clase muestra"
+        $mostrar = false;
+        if (isset($_SESSION['idUsuario'])) {
+            //Estilo del boton "clase muestra"
+            $mostrar = true;
             $idUsuario = $_SESSION['idUsuario'];
-
+            //Nuevo inicio
+            $informacion = $model->informacionUsario($idUsuario);
+            $nombreUsuario = $informacion['nombre'];
+            //Nuevo end
             $notificaciones = $model->consultaNotificaciones($idUsuario);
             if ($notificaciones) {
                 // Inicializar un array para almacenar las fotos de los cursos
@@ -39,6 +46,7 @@ class UsuariosController
 
             }
         }
+
         $docentes = $model->consultaDocentesInformacion();
         // Inicializar un array para almacenar las fotos de los cursos
         $consultaDocentes = array();
@@ -56,6 +64,24 @@ class UsuariosController
             // Si no hay disponibilidad, inicializar los arrays como vacíos
             $consultaDocentes = [];
         }
+
+        $asesorias = $model->consultaAsesoriasInformacion();
+        // Inicializar un array para almacenar las fotos de los cursos
+        $consultaAsesorias = array();
+        // Verificar si hay disponibilidad antes de intentar iterar sobre ella
+        if (is_array($asesorias) && count($asesorias) > 0) {
+
+            foreach ($asesorias as $totalAsesorias) {
+                // Agregar los datos como un array asociativo a $consulta
+                $consultaAsesorias[] = array(
+                    'nombre' => $totalAsesorias['nombre'],
+                    'foto' => $totalAsesorias['foto']
+                );
+            }
+        } else {
+            // Si no hay disponibilidad, inicializar los arrays como vacíos
+            $consultaAsesorias = [];
+        }
         require_once "Views/main/index.php";
     }
 
@@ -64,10 +90,15 @@ class UsuariosController
         require_once "Views/login/index.php";
     }
 
+    public function vistaRegistro()
+    {
+        require_once "Views/alumno/registro.php";
+    }
+
     public function miEspacio()
     {
         // Verificar si se ha pasado el parámetro 'n' en la URL
-        if (isset ($_GET['n'])) {
+        if (isset($_GET['n'])) {
             // Obtener el valor de 'n' de la URL y asignarlo a una variable
             $nombre = $_GET['n'];
         } else {
@@ -137,7 +168,7 @@ class UsuariosController
         session_start();
 
         // Comprobar si se ha enviado una solicitud POST para cerrar sesión
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset ($_POST['cerrar_sesion'])) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cerrar_sesion'])) {
             // Destruir la sesión actual
             session_destroy();
 
@@ -166,8 +197,20 @@ class UsuariosController
             // Procesar los datos, por ejemplo, guardarlos en la base de datos
             $model = new UsuarioModel();
             if ($model->insertarUsuario($nombre, $correo, $edad, $telefono, $interesesComoTexto, $celular)) {
-                // Redirigir a alguna página después de registrar al usuario
-                header('Location: index.php');
+                // Iniciar sesion automaticamente
+                $usuario = $model->validarUsuario($correo, $celular);
+                if ($usuario) {
+                    // Inicio de sesión exitoso
+                    $idUsuario = $usuario['id_usuario'];
+                    session_start();
+                    $_SESSION['idUsuario'] = $idUsuario;
+
+                    // Redirigir a la página de miEspacio
+                    header("location:  index.php?c=Usuarios&a=index&n=$idUsuario");
+                } else {
+                    echo '<script>alert("Inicio de sesión automatico fallido");';
+                    echo 'window.location.href = "index.php";</script>';
+                }
             } else {
                 // Manejar el caso en que la inserción falla
                 // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
@@ -215,16 +258,41 @@ class UsuariosController
         }
     }
 
+    public function claseMuestraNavegacionAsesoria()
+    {
+        $nombre = $_POST['nombre'];
+
+        $model = new UsuarioModel();
+        $informacion = $model->informacionBusquedaAsesoria($nombre);
+        if ($informacion) {
+            $nombreCurso = $informacion['nombre'];
+            $fotoCurso = $informacion['foto'];
+            $descripcionCurso = $informacion['descripcion'];
+            $precioCurso = $informacion['precio'];
+            $pdfCurso = $informacion['pdf'];
+
+            require_once "Views/alumno/busqueda.php";
+        } else {
+            //IMPLEMENTAR PANTALLA DE ERROR
+            require_once "Views/docente/index.php";
+        }
+    }
+
     public function matchMaestro()
     {
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Validar y sanar los datos de entrada
+            $nombreCurso = $_POST['nombreCurso'];
             $fecha = $_POST['fecha'];
             $hora = $_POST['hora'];
+            $objetivo = $_POST['objetivo'];
+            session_start();
+            $_SESSION['objetivoUsario'] = $objetivo;
+            $_SESSION['nombreCurso'] = $nombreCurso;
             //echo $fecha, " ", $hora;
             $model = new UsuarioModel();
-            $informacion2 = $model->match($fecha);
+            $informacion2 = $model->match($fecha, $nombreCurso);
             // Verificar si se encontraron cursos asignados
             if ($informacion2) {
                 // Inicializar un array para almacenar las fotos de los cursos
@@ -260,23 +328,46 @@ class UsuariosController
             //echo $fecha, " ", $idUsuario;
             session_start();
             // Verificar si la variable de sesión existe antes de usarla para evitar errores
-            if (isset ($_SESSION['idUsuario'])) {
-                $inicioUsuario = $_SESSION['idUsuario'];
-                $model = new UsuarioModel();
-                $informacion = $model->informacionUsario($inicioUsuario);
-                $idUsuarioInicio = $informacion['id_usuario'];
-                $nombreUsuario = $informacion['nombre'];
-                $edadUsuario = $informacion['edad'];
-                $interesUsuario = $informacion['interes'];
-                if ($model->agendaCitaDocente($idDocente, $fecha, $hora, $inicioUsuario, $nombreUsuario, $edadUsuario, $interesUsuario)) {
-                    // Redirigir a alguna página después de registrar al usuario
-                    echo '<script>alert("Se ha agendado la cita, espera a que el docente confirme la cita.");';
-                    echo 'window.location.href = "index.php?c=Usuarios&a=index";</script>';
+            if (isset($_SESSION['idUsuario'])) {
+                $objetivo = $_SESSION['objetivoUsario'];
+                $nombreCurso = $_SESSION['nombreCurso'];
+                if (isset($objetivo) && isset($nombreCurso) && !empty($objetivo) && !empty($nombreCurso)) {
+                    $inicializador = "";
+                    $inicioUsuario = $_SESSION['idUsuario'];
+                    $model = new UsuarioModel();
+                    $informacion = $model->informacionUsario($inicioUsuario);
+                    $idUsuarioInicio = $informacion['id_usuario'];
+                    $nombreUsuario = $informacion['nombre'];
+                    $edadUsuario = $informacion['edad'];
+                    if ($model->agendaCitaDocenteBuscado($idDocente, $fecha, $hora, $inicioUsuario, $nombreUsuario, $edadUsuario, $nombreCurso, $objetivo)) {
+                        // Redirigir a alguna página después de registrar al usuario
+                        $_SESSION['objetivoUsario'] = $inicializador;
+                        $_SESSION['nombreCurso'] = $inicializador;
+                        echo '<script>alert("Se ha agendado la cita, espera a que el docente confirme la cita.");';
+                        echo 'window.location.href = "index.php?c=Usuarios&a=index";</script>';
+                    } else {
+                        // Manejar el caso en que la inserción falla
+                        // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
+                        // Por ejemplo:
+                        echo "Error al registrar el usuario.";
+                    }
                 } else {
-                    // Manejar el caso en que la inserción falla
-                    // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
-                    // Por ejemplo:
-                    echo "Error al registrar el usuario.";
+                    $inicioUsuario = $_SESSION['idUsuario'];
+                    $model = new UsuarioModel();
+                    $informacion = $model->informacionUsario($inicioUsuario);
+                    $idUsuarioInicio = $informacion['id_usuario'];
+                    $nombreUsuario = $informacion['nombre'];
+                    $edadUsuario = $informacion['edad'];
+                    $interesUsuario = $informacion['interes'];
+                    if ($model->agendaCitaDocente($idDocente, $fecha, $hora, $inicioUsuario, $nombreUsuario, $edadUsuario, $interesUsuario)) {
+                        echo '<script>alert("Se ha agendado la cita, espera a que el docente confirme la cita.");';
+                        echo 'window.location.href = "index.php?c=Usuarios&a=index";</script>';
+                    } else {
+                        // Manejar el caso en que la inserción falla
+                        // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
+                        // Por ejemplo:
+                        echo "Error al registrar el usuario.";
+                    }
                 }
             } else {
                 //echo "Para agendar cita, debes iniciar sesion";

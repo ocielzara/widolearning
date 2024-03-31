@@ -3,7 +3,7 @@
 // Verificar si la variable de sesión existe antes de usarla para evitar errores
 //if (isset ($_SESSION['idUsuario'])) {
 //    $inicioUsuario = $_SESSION['idUsuario'];
-    //echo $inicioUsuario;
+//echo $inicioUsuario;
 //} else {
 //    echo "No se ha iniciado sesión"; // En caso de que la sesión no esté iniciada o la variable de sesión no esté definida
 //}
@@ -243,7 +243,6 @@
         }
 
         .header__search {
-            width: 300px;
             padding: .55rem .75rem;
         }
 
@@ -389,66 +388,73 @@
                         </div>
 
                         <?php
-// session_start();
+                        // session_start();
 // Verificar si la variable de sesión existe antes de usarla para evitar errores
-if (isset ($_SESSION['idUsuario'])) {
-    
-?>
-                        <div class="nav__dropdown">
-                            <a href="#" class="nav__link">
-                                <i class='bx bx-bell nav__icon'></i>
-                                <span class="nav__name">Notificaciones</span>
-                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
-                            </a>
+                        if (isset($_SESSION['idUsuario'])) {
+
+                            ?>
+                            <div class="nav__dropdown">
+                                <a href="#" class="nav__link">
+                                    <i class='bx bx-bell nav__icon'></i>
+                                    <span class="nav__name">Notificaciones</span>
+                                    <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                </a>
 
 
 
-                            <div class="nav__dropdown-collapse">
-                                <div class="nav__dropdown-content">
-                                    <?php
-                                    // Verificar si hay notificaciones
-                                    if (!empty ($consultaNotificacion)) {
-                                        // Iterar sobre las notificaciones y mostrarlas
-                                        foreach ($consultaNotificacion as $notificacion) {
-                                            // Obtener los campos de la notificación
-                                            $mensaje = $notificacion['mensaje'];
-                                            $estado = $notificacion['estado'];
-                                            $fecha_creacion = $notificacion['fecha_creacion'];
+                                <div class="nav__dropdown-collapse">
+                                    <div class="nav__dropdown-content">
+                                        <?php
+                                        // Verificar si hay notificaciones
+                                        if (!empty($consultaNotificacion)) {
+                                            // Iterar sobre las notificaciones y mostrarlas
+                                            foreach ($consultaNotificacion as $notificacion) {
+                                                // Obtener los campos de la notificación
+                                                $mensaje = $notificacion['mensaje'];
+                                                $estado = $notificacion['estado'];
+                                                $fecha_creacion = $notificacion['fecha_creacion'];
 
-                                            // Generar el HTML para la notificación
-                                            echo "<a href='#' class='nav__dropdown-item'>";
-                                            echo "<span class='mensaje'>$mensaje </span>";
-                                            echo "<span class='fecha'>$fecha_creacion</span>";
-                                            echo "</a>";
+                                                // Generar el HTML para la notificación
+                                                echo "<a href='#' class='nav__dropdown-item'>";
+                                                echo "<span class='mensaje'>$mensaje </span>";
+                                                echo "<span class='fecha'>$fecha_creacion</span>";
+                                                echo "</a>";
+                                            }
+                                        } else {
+                                            // Si no hay notificaciones, mostrar un mensaje indicando que no hay notificaciones disponibles
+                                            echo "<p>No hay notificaciones disponibles</p>";
                                         }
-                                    } else {
-                                        // Si no hay notificaciones, mostrar un mensaje indicando que no hay notificaciones disponibles
-                                        echo "<p>No hay notificaciones disponibles</p>";
-                                    }
-                                    ?>
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
+
+                            <a href="#" class="nav__link">
+                                <i class='bx bx-star nav__icon'></i>
+                                <span class="nav__name">Learning Rewards</span>
+                            </a>
+
                         </div>
 
-                        <a href="#" class="nav__link">
-                            <i class='bx bx-star nav__icon'></i>
-                            <span class="nav__name">Learning Rewards</span>
-                        </a>
-
                     </div>
-
                 </div>
-            </div>
 
-            <a class="nav__link nav__logout">
-                <i class='bx bx-log-out nav__icon'></i>
-                <form action="index.php?c=Usuarios&a=cerrarSesion" method="post">
-                    <button class="cerrar" type="submit" name="cerrar_sesion">Cerrar sesión</button>
-                </form>
-            </a>
-            <?php
-} // Fin del bloque condicional
-?>
+                <h3 class="nav__subtitle">Usuario</h3>
+
+                <a href="#" class="nav__link">
+                    <i class='bx bx-user nav__icon'></i>
+                    <span class="nav__name"><?php echo $nombreUsuario; ?></span>
+                </a>
+
+                <a class="nav__link nav__logout">
+                    <i class='bx bx-log-out nav__icon'></i>
+                    <form action="index.php?c=Usuarios&a=cerrarSesion" method="post">
+                        <button class="cerrar" type="submit" name="cerrar_sesion">Cerrar sesión</button>
+                    </form>
+                </a>
+                <?php
+                        } // Fin del bloque condicional
+                        ?>
         </nav>
     </div>
 
