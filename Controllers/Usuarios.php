@@ -43,7 +43,6 @@ class UsuariosController
                     $consultaNotificacion = [];
                 }
             } else {
-
             }
         }
 
@@ -191,7 +190,6 @@ class UsuariosController
             // Convertir el array de intereses en una cadena separada por comas
             $interesesComoTexto = implode(" ", $interesesSeleccionados);
 
-
             // Aquí se pueden realizar más validaciones si es necesario
 
             // Procesar los datos, por ejemplo, guardarlos en la base de datos
@@ -309,12 +307,10 @@ class UsuariosController
             }
 
             require_once "Views/alumno/matchMaestro.php";
-
         } else {
             // Redirigir si se intenta acceder directamente a través de GET
             header('Location: index.php');
         }
-
     }
 
     public function apartarCita()
@@ -374,12 +370,10 @@ class UsuariosController
                 echo '<script>alert("Para agendar cita, debes iniciar sesion");';
                 echo 'window.location.href = "index.php?c=Usuarios&a=login";</script>';
             }
-
         } else {
             // Redirigir si se intenta acceder directamente a través de GET
             header('Location: index.php');
         }
-
     }
 
 
