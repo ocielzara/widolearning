@@ -80,8 +80,8 @@ document.addEventListener("DOMContentLoaded", function () {
 /*=============== SWIPER JS ===============*/
 let swiperCards = new Swiper(".card__content", {
   loop: true,
-  spaceBetween: 80,
-  grabCursor: true,
+  spaceBetween: 40,
+  grabCursor: false,
 
   pagination: {
     el: ".swiper-pagination",
@@ -98,8 +98,13 @@ let swiperCards = new Swiper(".card__content", {
     600: {
       slidesPerView: 2,
     },
-    968: {
-      slidesPerView: 3,
+
+    1024: {
+      slidesPerView: 2,
+    },
+
+    1448: {
+      slidesPerView: 4,
     },
   },
 });
