@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
 /*=============== SWIPER JS ===============*/
 let swiperCards = new Swiper(".card__content", {
   loop: true,
-  spaceBetween: 40,
+  spaceBetween: 20,
   grabCursor: false,
 
   pagination: {
@@ -104,7 +104,43 @@ let swiperCards = new Swiper(".card__content", {
     },
 
     1448: {
-      slidesPerView: 4,
+      slidesPerView: 3,
     },
   },
+});
+
+/*=============== BUSQUEDA DE CURSOS ===============*/
+
+$(document).ready(function () {
+  $("#buscar").click(function () {
+    var busqueda = $("#busqueda").val();
+    $.ajax({
+      type: "POST",
+      url: "index.php?c=cursos&a=cursos",
+      data: {
+        busqueda: busqueda,
+      },
+      dataType: "json",
+      success: function (response) {
+        console.log(response);
+        $("#resultados").empty(); // Limpiamos el contenedor de resultados antes de agregar nuevos resultados
+        // Verificamos si se encontraron cursos
+        if (response.length > 0) {
+          // Iteramos sobre cada curso y creamos un elemento h3 para mostrarlo
+          response.forEach(function (curso) {
+            //Aca modifica para que tenga link
+            $("#resultados").append(
+              '<a href="www.google.com">' + curso.titulo + "</a><br>"
+            );
+          });
+        } else {
+          // Si no se encontraron cursos, mostramos un mensaje
+          $("#resultados").append("<p>No se encontraron cursos.</p>");
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr.responseText);
+      },
+    });
+  });
 });
