@@ -90,10 +90,10 @@
                 <div class="h-1/3">Wido</div>
                 <div class="h-1/3">
                     <div class="w-[29rem] mx-48">
-                        <h1 style="font-size: 3rem;" class="font-bold text-[#4F7CAC]">Accede a diferentes cursos por
+                        <h1 class="text-[2.5rem] font-bold text-[#4F7CAC]">Accede a diferentes cursos por
                             videollamada
                         </h1>
-                        <h1 class="mt-12 text-5xl font-medium text-[#000000]">Educacion de calidad personalizada
+                        <h1 class="mt-12 text-[2.5rem] font-medium text-[#000000]">Educacion de calidad personalizada
                         </h1>
                     </div>
                 </div>
@@ -283,12 +283,6 @@
                 </div>
             </div>
 
-        </section>
-
-        <section>
-            <br>
-
-            <!--Areas aprendizaje style="display: none;"-->
             <div id="contenido-areas" class="prices-1">
 
                 <br>
@@ -1615,12 +1609,122 @@
                             <button id="close-video-popup" class="close-btn">X</button>
                         </div>
                     </div>
-
-
-                    <div class="informacion">
-
-                    </div>
         </section>
+        </div>
+
+
+        </section>
+
+        <section>
+
+            <section class="porque-estudiar">
+                <div class="w-full h-full bg-[#2E3532] p-10 rounded-br-[40rem] my-10">
+
+                    <div class="mx-52 my-10">
+                        <h1 class="text-white mb-3 text-4xl font-bold">¿Porque estudiar en?</h1>
+                        <h2 class="mx-16 text-[#FEC400] text-2xl font-semibold">La educacion online para que alcances
+                            tus metas</h2>
+                    </div>
+                    <div class="h-full mx-72 p-16">
+                        <div class="flex flex-row w-full">
+                            <div class="w-1/2">
+                                <div class="w-[27rem]">
+                                    <img src="images/home/porqueestudiar.png" class="w-full h-full" alt="personalizacion">
+                                </div>
+                            </div>
+                            <div class="text-white text-3xl w-1/2 my-auto">
+                                <div class="">
+                                    <h1 class="w-72 text-[#D7F9FF] font-bold border-b-2 pb-1 border-[#FAC400] text-center">
+                                        Personalizacion
+                                    </h1>
+                                    <p class="my-4">En Wido aprendes en vivo de forma personalizado con un <span class="font-bold">Master Teach</span> </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-row-reverse my-16 w-full">
+                            <div class="w-1/2">
+                                <div class="w-[28rem] ml-auto">
+                                    <img src="images/home/porqueestudia2.png" class="w-full h-full" alt="personalizacion">
+                                </div>
+                            </div>
+                            <div class="text-white text-3xl w-1/2 my-auto">
+                                <div class="">
+                                    <h1 class="w-[27rem] text-[#D7F9FF] font-bold border-b-2 pb-1 border-[#FAC400]">
+                                        Cursos / Asesorias escolares y laborales
+                                    </h1>
+                                    <p class="my-4">Accede a cursos y asesorias de acuerdo a tus objetivos y tiempos</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-row w-full mt-16">
+                            <div class="w-1/2">
+                                <div class="w-[28rem]">
+                                    <img src="images/home/porqueestudia3.png" class="w-full h-full" alt="meeting">
+                                </div>
+                            </div>
+                            <div class="text-white text-3xl w-1/2 my-auto">
+                                <div class="">
+                                    <h1 class="w-96 text-[#D7F9FF] font-bold border-b-2 pb-1 border-[#FAC400] text-center">
+                                        Nos adaptamos a ti
+                                    </h1>
+                                    <p class="my-4">En Wido <span class="font-bold">nos adaptamos a tus objetivos de
+                                            aprendizaje</span> y al nivel que tengas en cada curso creando un temario
+                                        ideal para ti</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <section class="cursos-gratis">
+                <div class="w-[85%] max-h-screen mx-auto my-16 flex justify-evenly">
+                    <div class="mx-20 w-[20rem]">
+                        <div>
+                            <img src="images/home/cursosgratis.png" class="w-full h-full" alt="cursogratis">
+                        </div>
+                        <div>
+                            <h1 class="border-b-2 border-[#FAC400] text-[#4F7CAC] text-center text-3xl font-bold my-3">
+                                Cursos
+                                GRATIS
+                            </h1>
+                            <p class="text-xl mx-10 font-medium">Cursos OnDemand totalmente gratis. En Wido a
+                                diferencia de
+                                otras plataformas nuestros
+                                cursos
+                                grabados no tienen costo.</p>
+                        </div>
+                    </div>
+                    <div class="mx-20 my-36 w-[20rem]">
+                        <div>
+                            <img src="images/home/conectamasterteach.png" class="w-full h-full" alt="">
+                        </div>
+                        <div>
+                            <h1 class="border-b-2 border-[#FAC400] text-[#4F7CAC] text-center text-3xl font-bold my-3">
+                                Conecta con tu Master Teach</h1>
+                            <p class="text-xl mx-10 font-medium">No pierdas de vista a tus mentores favoritos. Podrás
+                                estar en contacto con ellos de por
+                                vida
+                                por medio de nuestro sistema de suscripción a los canales 100% gratis</p>
+                        </div>
+                    </div>
+                    <div class="mx-20 w-[20rem]">
+                        <div>
+                            <img src="images/home/obtenrrecompensas.png" class="w-full h-full" alt="">
+                        </div>
+                        <div>
+                            <h1 class="border-b-2 border-[#FAC400] text-[#4F7CAC] text-center text-3xl font-bold my-3">
+                                Obten
+                                recompensas</h1>
+                            <p class="text-xl mx-10 font-medium">En Wido premiamos a nuestros estudiantes por medio de
+                                un sistema de gamificación.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
     </main>
     <footer>
         <div class="bg-[#2E3532] h-[35rem] flex flex-row">
@@ -1734,5 +1838,6 @@
         videoPopupPlayer.pause(); // Pausar el video al cerrar la ventana emergente
     });
 </script>
+
 
 </html>
