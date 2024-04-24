@@ -36,6 +36,14 @@
             /* Elimina los márgenes por defecto */
         }
 
+
+        .imageBackground {
+            background-image: url('images/home/homeweb.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
         /*========== HEADER ==========*/
         .header__container {
             display: flex;
@@ -55,6 +63,7 @@
             /* Centra en medio de la página */
             width: 80%;
         }
+
 
         .header__input {
             font-size: 1.8rem;
@@ -78,28 +87,63 @@
             margin: auto 0;
             font-size: 1.8rem;
         }
+
+        @media only screen and (max-width: 640px) {
+            .header__search {
+                display: flex;
+                padding: 1rem .90rem;
+                background-color: #D9F9FF;
+                border-radius: .25rem;
+                border-radius: 20px;
+                margin: 0% auto;
+                /* Centra en medio de la página */
+                width: 95%;
+            }
+
+            .header__input {
+                font-size: 1.4rem;
+                padding-left: 1rem;
+                width: 100%;
+                border: none;
+                outline: none;
+                background-color: #D9F9FF;
+                border-left: 2px solid #009BB8;
+            }
+
+            .header__icon,
+            .header__toggle {
+                padding: 0 1rem;
+                margin: auto 0;
+                font-size: 1.8rem;
+            }
+        }
     </style>
 
 
 </head>
 
 <body>
-    <div class="p-16 w-full h-screen">
-        <div class="imageBackground bg-no-repeat bg-center bg-cover w-full h-full" style="background-image: url('<?php echo 'images/home/homeweb.png'; ?>');">
-            <div class="flex flex-col h-full">
-                <div class="h-1/3">Wido</div>
-                <div class="h-1/3">
-                    <div class="w-[29rem] mx-48">
-                        <h1 class="text-[2.5rem] font-bold text-[#4F7CAC]">Accede a diferentes cursos por
+    <div class="sm:p-16 w-full sm:h-screen">
+        <div class="imageBackground w-full sm:h-full h-48 sm:mb-0 mb-96">
+            <div class="flex flex-col h-full relative sm:top-0 top-48">
+                <div class="sm:w-96 w-44 sm:h-1/3 sm:mx-16 ">
+                    <img src="images/home/logo.png" class="w-full h-full" alt="">
+                </div>
+                <div class="sm:h-1/3 sm:text-left sm:text-[2.5rem] text-2xl">
+                    <div class="sm:w-[29rem] sm:mx-48">
+                        <h1 class="s font-bold text-[#4F7CAC]">Accede a
+                            diferentes cursos por
                             videollamada
                         </h1>
-                        <h1 class="mt-12 text-[2.5rem] font-medium text-[#000000]">Educacion de calidad personalizada
+                        <h1 class="sm:mt-12 mt-3 sm:font-medium font-bold text-[#000000]">
+                            Educacion de
+                            calidad personalizada
                         </h1>
                     </div>
                 </div>
-                <div class="h-1/3">
-                    <div class="flex my-32 mx-44 p-10">
-                        <div class="bg-[#FEC400] w-80 flex justify-center h-16 text-center items-center rounded-3xl">
+                <div class="sm:h-1/3">
+                    <div class="flex sm:my-32 sm:mx-44 p-10">
+                        <div class="bg-[#FEC400] w-80 flex justify-center sm:h-16 h-10 text-center items-center rounded-3xl">
                             <a href='index.php?c=Usuarios&a=login' class="text-base text-black font-semibold">Clase
                                 muestra
                                 gratuita</a>
@@ -114,14 +158,14 @@
 
 
     <main>
-        <section class="sectiona1 my-16 como-funciona max-w-7xl mx-auto">
+        <section class="sectiona1 my-16 como-funciona sm:max-w-7xl mx-auto">
             <div>
-                <div class="border-b-2 w-[30rem] text-center border-[#4F7CAC]">
-                    <h1 class="text-5xl font-bold py-3 text-[#4F7CAC]">
+                <div class="border-b-2 sm:w-[30rem] text-center border-[#4F7CAC]">
+                    <h1 class="sm:text-5xl text-3xl font-bold py-3  text-[#4F7CAC]">
                         ¿Como funciona?
                     </h1>
                 </div>
-                <div class="flex justify-between text-center my-12 px-12">
+                <div class="flex sm:flex-row flex-col sm:justify-between text-center my-12 px-12">
                     <div>
                         <div class="w-[19.5rem] h-72">
                             <img src="images/home/comofunciona1.png" class="w-full h-full" alt="busca el curso o mentor">
@@ -156,18 +200,18 @@
                 </div>
             </div>
 
-            <div class="p-4 bg-[#d3deea] flex justify-around">
-                <button class="bg-[#4F7CAC] w-80 h-16 font-bold rounded-full text-base text-[#FEC400]" type="button" onclick="mostrarContenidoAreas()">Areas
+            <div class="p-4 bg-[#d3deea] flex sm:flex-row flex-col justify-around">
+                <button class="bg-[#4F7CAC] sm:w-80 h-16 sm:mb-0 mb-3 font-bold rounded-full text-base text-[#FEC400]" type="button" onclick="mostrarContenidoAreas()">Areas
                     de
                     aprendizaje</button>
-                <button class="bg-[#2E3532] w-64 h-16 font-bold rounded-full text-base" type="button" onclick="mostrarContenidoMasterTeach()">Master Teach</button>
+                <button class="bg-[#2E3532] sm:w-64 h-16 font-bold rounded-full text-base" type="button" onclick="mostrarContenidoMasterTeach()">Master Teach</button>
             </div>
         </section>
 
 
         <section class="section2 cursos-demanda max-w-7xl mx-auto">
             <div class="border-b-2 my-10 inline-block border-[#4F7CAC]">
-                <h1 class="text-5xl font-bold py-3 text-[#4F7CAC]">
+                <h1 class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
                     CURSOS TOP (con mayor demanda)
                 </h1>
             </div>
@@ -189,7 +233,7 @@
                                             </button>
                                         </form>
                                         <button class="w-[80%] mx-auto mt-3 mb-4 bg-slate-500 rounded-3xl text-slate-400">
-                                            <span>proximamente</span>
+                                            <span>Temario</span>
                                         </button>
                                     </div>
                                 </div>
@@ -208,7 +252,7 @@
                                             </button>
                                         </form>
                                         <button class="w-[80%] mx-auto mt-3 mb-4 bg-slate-500 rounded-3xl text-slate-400">
-                                            <span>proximamente</span>
+                                            <span>Temario</span>
                                         </button>
                                     </div>
                                 </div>
@@ -227,7 +271,7 @@
                                             </button>
                                         </form>
                                         <button class="w-[80%] mx-auto mt-3 mb-4 bg-slate-500 rounded-3xl text-slate-400">
-                                            <span>proximamente</span>
+                                            <span>Temario</span>
                                         </button>
                                     </div>
                                 </div>
@@ -246,7 +290,7 @@
                                             </button>
                                         </form>
                                         <button class="w-[80%] mx-auto mt-3 mb-4 bg-slate-500 rounded-3xl text-slate-400">
-                                            <span>proximamente</span>
+                                            <span>Temario</span>
                                         </button>
                                     </div>
                                 </div>
@@ -1610,125 +1654,118 @@
                         </div>
                     </div>
         </section>
-        </div>
 
+        <section class="porque-estudiar">
+            <div class="w-full h-full bg-[#2E3532] sm:p-10 p-5 sm:rounded-br-[40rem] my-10">
 
+                <div class="sm:mx-52 my-10">
+                    <h1 class="text-white mb-3 text-4xl font-bold">¿Porque estudiar en?</h1>
+                    <h2 class="sm:mx-16 text-[#FEC400] text-2xl font-semibold">La educacion online para que alcances
+                        tus metas</h2>
+                </div>
+                <div class="h-full sm:mx-72 sm:p-16">
+                    <div class="flex sm:flex-row flex-col w-full">
+                        <div class="sm:w-1/2">
+                            <div class="sm:w-[27rem] w-80">
+                                <img src="images/home/porqueestudiar.png" class="w-full h-full" alt="personalizacion">
+                            </div>
+                        </div>
+                        <div class="text-white text-3xl sm:w-1/2 sm:my-auto my-8">
+                            <div>
+                                <h1 class="w-72 text-[#D7F9FF] font-bold border-b-2 pb-1 border-[#FAC400] text-center">
+                                    Personalizacion
+                                </h1>
+                                <p class="my-4">En Wido aprendes en vivo de forma personalizado con un <span class="font-bold">Master Teach</span> </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex sm:flex-row-reverse flex-col my-16 w-full">
+                        <div class="sm:w-1/2">
+                            <div class="sm:w-[28rem] w-80 ml-auto">
+                                <img src="images/home/porqueestudia2.png" class="w-full h-full" alt="personalizacion">
+                            </div>
+                        </div>
+                        <div class="text-white text-3xl sm:w-1/2 sm:my-auto my-8">
+                            <div class="">
+                                <h1 class="sm:w-[27rem] text-[#D7F9FF] font-bold border-b-2 pb-1 border-[#FAC400]">
+                                    Cursos / Asesorias escolares y laborales
+                                </h1>
+                                <p class="my-4">Accede a cursos y asesorias de acuerdo a tus objetivos y tiempos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex sm:flex-row flex-col w-full mt-16">
+                        <div class="sm:w-1/2">
+                            <div class="sm:w-[28rem] w-80">
+                                <img src="images/home/porqueestudia3.png" class="w-full h-full" alt="meeting">
+                            </div>
+                        </div>
+                        <div class="text-white text-3xl sm:w-1/2 sm:my-auto my-8">
+                            <div class="">
+                                <h1 class="sm:w-96 text-[#D7F9FF] font-bold border-b-2 pb-1 border-[#FAC400] text-center">
+                                    Nos adaptamos a ti
+                                </h1>
+                                <p class="my-4">En Wido <span class="font-bold">nos adaptamos a tus objetivos de
+                                        aprendizaje</span> y al nivel que tengas en cada curso creando un temario
+                                    ideal para ti</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </section>
 
-        <section>
-
-            <section class="porque-estudiar">
-                <div class="w-full h-full bg-[#2E3532] p-10 rounded-br-[40rem] my-10">
-
-                    <div class="mx-52 my-10">
-                        <h1 class="text-white mb-3 text-4xl font-bold">¿Porque estudiar en?</h1>
-                        <h2 class="mx-16 text-[#FEC400] text-2xl font-semibold">La educacion online para que alcances
-                            tus metas</h2>
+        <section class="cursos-gratis">
+            <div class="sm:w-[85%] sm:max-h-screen mx-auto my-16 flex sm:flex-row flex-col justify-evenly">
+                <div class="mx-20 sm:w-[20rem]">
+                    <div>
+                        <img src="images/home/cursosgratis.png" class="w-full h-full" alt="cursogratis">
                     </div>
-                    <div class="h-full mx-72 p-16">
-                        <div class="flex flex-row w-full">
-                            <div class="w-1/2">
-                                <div class="w-[27rem]">
-                                    <img src="images/home/porqueestudiar.png" class="w-full h-full" alt="personalizacion">
-                                </div>
-                            </div>
-                            <div class="text-white text-3xl w-1/2 my-auto">
-                                <div class="">
-                                    <h1 class="w-72 text-[#D7F9FF] font-bold border-b-2 pb-1 border-[#FAC400] text-center">
-                                        Personalizacion
-                                    </h1>
-                                    <p class="my-4">En Wido aprendes en vivo de forma personalizado con un <span class="font-bold">Master Teach</span> </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex flex-row-reverse my-16 w-full">
-                            <div class="w-1/2">
-                                <div class="w-[28rem] ml-auto">
-                                    <img src="images/home/porqueestudia2.png" class="w-full h-full" alt="personalizacion">
-                                </div>
-                            </div>
-                            <div class="text-white text-3xl w-1/2 my-auto">
-                                <div class="">
-                                    <h1 class="w-[27rem] text-[#D7F9FF] font-bold border-b-2 pb-1 border-[#FAC400]">
-                                        Cursos / Asesorias escolares y laborales
-                                    </h1>
-                                    <p class="my-4">Accede a cursos y asesorias de acuerdo a tus objetivos y tiempos</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex flex-row w-full mt-16">
-                            <div class="w-1/2">
-                                <div class="w-[28rem]">
-                                    <img src="images/home/porqueestudia3.png" class="w-full h-full" alt="meeting">
-                                </div>
-                            </div>
-                            <div class="text-white text-3xl w-1/2 my-auto">
-                                <div class="">
-                                    <h1 class="w-96 text-[#D7F9FF] font-bold border-b-2 pb-1 border-[#FAC400] text-center">
-                                        Nos adaptamos a ti
-                                    </h1>
-                                    <p class="my-4">En Wido <span class="font-bold">nos adaptamos a tus objetivos de
-                                            aprendizaje</span> y al nivel que tengas en cada curso creando un temario
-                                        ideal para ti</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-
-            <section class="cursos-gratis">
-                <div class="w-[85%] max-h-screen mx-auto my-16 flex justify-evenly">
-                    <div class="mx-20 w-[20rem]">
-                        <div>
-                            <img src="images/home/cursosgratis.png" class="w-full h-full" alt="cursogratis">
-                        </div>
-                        <div>
-                            <h1 class="border-b-2 border-[#FAC400] text-[#4F7CAC] text-center text-3xl font-bold my-3">
-                                Cursos
-                                GRATIS
-                            </h1>
-                            <p class="text-xl mx-10 font-medium">Cursos OnDemand totalmente gratis. En Wido a
-                                diferencia de
-                                otras plataformas nuestros
-                                cursos
-                                grabados no tienen costo.</p>
-                        </div>
-                    </div>
-                    <div class="mx-20 my-36 w-[20rem]">
-                        <div>
-                            <img src="images/home/conectamasterteach.png" class="w-full h-full" alt="">
-                        </div>
-                        <div>
-                            <h1 class="border-b-2 border-[#FAC400] text-[#4F7CAC] text-center text-3xl font-bold my-3">
-                                Conecta con tu Master Teach</h1>
-                            <p class="text-xl mx-10 font-medium">No pierdas de vista a tus mentores favoritos. Podrás
-                                estar en contacto con ellos de por
-                                vida
-                                por medio de nuestro sistema de suscripción a los canales 100% gratis</p>
-                        </div>
-                    </div>
-                    <div class="mx-20 w-[20rem]">
-                        <div>
-                            <img src="images/home/obtenrrecompensas.png" class="w-full h-full" alt="">
-                        </div>
-                        <div>
-                            <h1 class="border-b-2 border-[#FAC400] text-[#4F7CAC] text-center text-3xl font-bold my-3">
-                                Obten
-                                recompensas</h1>
-                            <p class="text-xl mx-10 font-medium">En Wido premiamos a nuestros estudiantes por medio de
-                                un sistema de gamificación.</p>
-                        </div>
+                    <div>
+                        <h1 class="border-b-2 border-[#FAC400] text-[#4F7CAC] text-center text-3xl font-bold my-3">
+                            Cursos
+                            GRATIS
+                        </h1>
+                        <p class="text-xl sm:mx-10 font-medium">Cursos OnDemand totalmente gratis. En Wido a
+                            diferencia de
+                            otras plataformas nuestros
+                            cursos
+                            grabados no tienen costo.</p>
                     </div>
                 </div>
-            </section>
+                <div class="mx-20 my-36 sm:w-[20rem]">
+                    <div>
+                        <img src="images/home/conectamasterteach.png" class="w-full h-full" alt="">
+                    </div>
+                    <div>
+                        <h1 class="border-b-2 border-[#FAC400] text-[#4F7CAC] text-center text-3xl font-bold my-3">
+                            Conecta con tu Master Teach</h1>
+                        <p class="text-xl sm:mx-10 font-medium">No pierdas de vista a tus mentores favoritos. Podrás
+                            estar en contacto con ellos de por
+                            vida
+                            por medio de nuestro sistema de suscripción a los canales 100% gratis</p>
+                    </div>
+                </div>
+                <div class="mx-20 sm:w-[20rem]">
+                    <div>
+                        <img src="images/home/obtenrrecompensas.png" class="w-full h-full" alt="">
+                    </div>
+                    <div>
+                        <h1 class="border-b-2 border-[#FAC400] text-[#4F7CAC] text-center text-3xl font-bold my-3">
+                            Obten
+                            recompensas</h1>
+                        <p class="text-xl sm:mx-10 font-medium">En Wido premiamos a nuestros estudiantes por medio de
+                            un sistema de gamificación.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </main>
     <footer>
-        <div class="bg-[#2E3532] h-[35rem] flex flex-row">
-            <div class="text-[#D7F9FF] flex flex-col p-10 ml-16 mt-5">
+        <div class="bg-[#2E3532] sm:h-[35rem] flex sm:flex-row flex-col">
+            <div class="text-[#D7F9FF] flex flex-col p-10 sm:ml-16 mt-5">
                 <h1 class="font-bold text-3xl border-b-2 w-40">Legal</h1>
                 <span class="text-3xl mt-5 w-80">Terminos y condiciones</span>
                 <span class="text-3xl mt-5">Aviso de privacidad</span>
@@ -1737,9 +1774,10 @@
             <div class="text-[#D7F9FF] flex flex-col p-10 mt-5">
                 <h1 class="font-bold text-3xl border-b-2 w-40">Empresa</h1>
                 <span class="text-3xl mt-5">Ubicacion:</span>
-                <span class="text-3xl w-[33.8rem]">Av. General Ramon Corona 2514 Col. Nuevo Mexico, Zapopan,
+                <span class="text-3xl sm:w-[33.8rem]">Av. General Ramon Corona 2514 Col. Nuevo Mexico, Zapopan,
                     Mexico</span>
-                <span class="text-3xl mt-5 w-[34.5rem]">Hábitat de Negocios Tecnológico de Monterrey Campus Guadalajara
+                <span class="text-3xl mt-5 sm:w-[34.5rem]">Hábitat de Negocios Tecnológico de Monterrey Campus
+                    Guadalajara
                     Piso
                     4.</span>
             </div>
@@ -1755,7 +1793,7 @@
             </div>
         </div>
         <div class="bg-[#4F7CAC]">
-            <div class="p-10 text-center text-3xl font-semibold">
+            <div class="sm:p-10 text-center sm:text-3xl p-5 text-xl font-semibold">
                 <span class="text-black"><i class="fa fa-copyright" aria-hidden="true"></i> copyright</span>
                 <span class="text-white">Grupo Aerobot SAPI de CV.</span>
                 <span class="text-black">All Rights Reserved</span>
