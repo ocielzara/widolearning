@@ -115,7 +115,8 @@ License: For each use you must have a valid license purchased only from above li
                                 ?>
 
                                 <form action="index.php?c=rcontraseña&a=cambio_contraseña" method="post">
-                                    <label style="font-size: 140%;" for="codigo">Ingrese el código recibido en su correo:</label>
+                                    <label style="font-size: 140%;" for="codigo">Ingrese el código recibido en su
+                                        correo:</label>
                                     <br><br>
                                     <div class="col-lg-8">
                                         <!--begin::Row-->
@@ -135,8 +136,9 @@ License: For each use you must have a valid license purchased only from above li
                                     }
                                     ?>
                                     <br>
-                                    <div class="d-flex justify-content-between align-items-start flex-wrap mb-2"  style="margin-left:45%;">
-                                        <button class="btn btn-sm btn-primary me-3" type="submit">Verificar Código</button>
+                                    <div class="d-flex justify-content-between align-items-start flex-wrap mb-2" style="margin-left:45%;">
+                                        <button class="btn btn-sm btn-primary me-3" type="submit">Verificar
+                                            Código</button>
                                     </div>
                                 </form>
                             </div>

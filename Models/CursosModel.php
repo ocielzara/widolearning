@@ -34,4 +34,23 @@ class CursoModel
             return 0; // No se encontraron resultados
         }
     }
+
+    public function getAllCursos()
+    {
+        $query = "SELECT * FROM cursos";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        $result = $stmt->get_result(); // Obtener el resultado de la consulta
+
+        $cursos = array();
+        if ($result) {
+            while ($curso = $result->fetch_assoc()) {
+                $cursos[] = $curso;
+            }
+        }
+
+        // Devolver los cursos obtenidos de la base de datos
+        return $cursos;
+    }
 }

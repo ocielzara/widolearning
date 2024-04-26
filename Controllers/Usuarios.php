@@ -94,6 +94,12 @@ class UsuariosController
         require_once "Views/alumno/registro.php";
     }
 
+
+    public function recuperarContraseña()
+    {
+        require_once "Views/login/recuperacionContra.php";
+    }
+
     public function miEspacio()
     {
         // Verificar si se ha pasado el parámetro 'n' en la URL
