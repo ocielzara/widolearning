@@ -4,261 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="public/styles/tailwind.css">
+    <link rel="stylesheet" href="styles/output.css">
     <title>Busqueda</title>
-
-    <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        text-decoration: none;
-        list-style: none;
-    }
-
-    body {
-        font-family: "Poppins", sans-serif;
-        background-color: white;
-        margin: 0;
-        /* Elimina los márgenes por defecto */
-    }
-
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .header {
-        background-image: url(images/wido/header.png);
-        background-position: center top;
-        background-repeat: no-repeat;
-        background-size: 100%, cover;
-        /* Ajusta el tamaño de las imágenes de fondo */
-        min-height: 160vh;
-        display: flex;
-        align-items: center;
-        position: relative;
-    }
-
-    .menu.container img {
-        width: 400px;
-        /* Establece el ancho deseado para la imagen */
-        height: auto;
-        /* Hace que la altura se ajuste automáticamente para mantener la proporción original */
-        position: absolute;
-        /* Establece el posicionamiento absoluto para la imagen dentro del contenedor */
-        top: 10%;
-        /* Posiciona la parte superior de la imagen en el 50% del contenedor */
-        left: 2%;
-        /* Posiciona la parte izquierda de la imagen en el 50% del contenedor */
-    }
-
-    .custom-text {
-        font-family: 'Arial', sans-serif;
-        font-size: 24px;
-        font-weight: bold;
-        color: black;
-        padding: 5px;
-        margin-top: 0px;
-    }
-
-    #section1 {
-        display: flex;
-        height: 2px;
-        color: black;
-        border: 1px solid orange;
-        box-sizing: border-box;
-        margin-right: 65%;
-        margin-top: 0px;
-        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
-    }
-
-    /* Estilos del contenedor */
-    .image-container {
-        width: 240px;
-        /* Ancho del contenedor */
-        height: 214px;
-        /* Altura del contenedor */
-        border-radius: 20px;
-        /* Bordes redondeados */
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
-        /* Sombra */
-        overflow: hidden;
-        /* Oculta el contenido que se desborda */
-        margin: 3% auto;
-        /* Centra enmedio de la pagina */
-    }
-
-    /* Estilos de la imagen */
-    .image-container img {
-        width: 100%;
-        /* La imagen ocupa todo el ancho del contenedor */
-        height: auto;
-        /* La imagen ocupa todo el alto del contenedor */
-        object-fit: cover;
-        /* La imagen se ajusta para cubrir el contenedor */
-    }
-
-    .section-1 {
-        margin: 0% 30% auto;
-        /* Centra enmedio de la pagina */
-    }
-
-    .contenedor-1 {
-        background-color: #D7E3FF;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-    }
-
-    p {
-        font-family: 'Arial', sans-serif;
-        font-size: 20px;
-        font-weight: bold;
-        color: black;
-        padding: 5px;
-        margin-top: 0px;
-    }
-
-    .formulario {
-        margin: 0% 30% auto;
-        /* Centra enmedio de la pagina */
-    }
-
-    /* Estilo para los campos input */
-    input[type="date"],
-    input[type="time"],
-    input[type="text"],
-    select {
-        padding: 8px;
-        /* Añade un poco de espacio interno */
-        border: 1px solid #ccc;
-        /* Añade un borde gris */
-        border-radius: 4px;
-        /* Añade esquinas redondeadas */
-        font-size: 16px;
-        /* Tamaño de fuente */
-        width: 200px;
-        /* Ancho del campo */
-        margin-bottom: 10px;
-        /* Espacio inferior entre campos */
-        box-sizing: border-box;
-        /* Incluye el padding y borde en el ancho */
-    }
-
-    /* Estilo para el contenedor de los campos */
-    .campo {
-        margin-bottom: 20px;
-        /* Espacio inferior para separar los campos */
-    }
-
-    /* Estilo para la etiqueta */
-    label {
-        display: block;
-        /* Muestra la etiqueta en una nueva línea */
-        margin-bottom: 5px;
-        /* Espacio inferior entre etiqueta y campo */
-        font-weight: bold;
-        /* Texto en negrita */
-    }
-
-    /* Estilo para el botón */
-    .clase-muestra {
-        border-radius: 20px;
-        /* Bordes redondos */
-        background-color: #007bff;
-        /* Color de fondo azul */
-        padding: 10px 20px;
-        /* Espaciado interno */
-        border: none;
-        /* Sin borde */
-        color: #ffffff;
-        /* Color de letra blanco */
-        font-size: 16px;
-        /* Tamaño de fuente */
-        cursor: pointer;
-        /* Cursor al pasar por encima */
-        transition: background-color 0.3s;
-        /* Transición suave del color de fondo */
-        margin: 0% 20% auto;
-        /* Centra enmedio de la pagina */
-        width: 60%;
-    }
-
-    /* Estilo cuando se pasa el cursor sobre el botón */
-    .clase-muestra:hover {
-        background-color: #0056b3;
-        /* Cambia el color de fondo al pasar el cursor */
-    }
-
-    /* Estilo para el contenido dentro del botón */
-    .clase-muestra span {
-        pointer-events: none;
-        /* Evita que el texto dentro del botón sea clickeable */
-    }
-
-    .download-link {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-    }
-
-    .download-link:hover {
-        background-color: #0056b3;
-    }
-    </style>
-
 </head>
 
 <body>
-
-    <header class="header">
-    </header>
-    <div class="image-container">
-        <img src="<?php echo $fotoCurso; ?>" alt="Descripción de la imagen">
+    <div>
+        <div class="w-[90%] h-[20rem] mx-auto">
+            <img src="public/images/muestra-cursos/Diseño área-02.png" class="w-full h-full" alt="">
+        </div>
     </div>
-    <br>
-    <div class="contenedor-1">
-        <div class="section-1">
-            <p class="custom-text">Hola, haz elegido el curso:
+    <section class="w-[70%] mx-auto">
+        <div class="mt-20">
+            <h1 class="text-4xl text-[#4F7CAC] font-bold">
                 <?php echo $nombreCurso; ?>
-            </p>
-            <p class="custom-text">Visualizar PDF para mayor información:</p>
-            <a class="download-link" href="<?php echo $pdfCurso; ?>" target="_blank">Abrir PDF</a>
+            </h1>
         </div>
 
-        <form class="formulario" action="index.php?c=Usuarios&a=matchMaestro" method="post">
-            <input type="hidden" name="nombreCurso" value="<?php echo $nombreCurso ?>">
-            <p class="custom-text">Elige el horario y el dia que deseas tomar tu clase muestra:</p>
-            <div class="campo">
-                <label for="fecha">Fecha:</label>
-                <input type="date" id="fecha" name="fecha">
+        <div class="bg-[#D7F9FF] mb-10 p-10 h-full mt-16 rounded-3xl">
+            <div class="flex rounded-3xl p-10 bg-white">
+                <div class="w-[23%]">
+                    <div class="flex">
+                        <div class="w-1/2 h-36">
+                            <img src="public/images/docente/alexia.jpg" class="w-full h-full rounded-full" alt="">
+                        </div>
+                        <div class="w-1/2">
+                            <h1 class="w-16 ml-5 my-8 text-center font-semibold">Andrea Hernandez Miramar</h1>
+                        </div>
+                    </div>
+                    <div class="m-5">
+                        <p class="font-bold">Especialista en:</p>
+                        <div class="flex flex-col py-2">
+                            <button class="w-[90%] my-1 bg-slate-200 h-8 rounded-full">Dibujo Manga</button>
+                            <button class="w-[90%] mt-2 bg-[#FAC400] h-8 rounded-full">Ver portal</button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <h1>Calendario</h1>
+                    </div>
+                </div>
             </div>
-
-            <div class="campo">
-                <label for="hora">Hora:</label>
-                <input type="time" id="hora" name="hora">
-            </div>
-            <!--
-            <p class="custom-text">¿Este curso es para ti?</p>
-            <div class="campo">
-                <select id="confirmacion" name="confirmacion">
-                    <option value="si">Sí</option>
-                    <option value="no">No</option>
-                </select>
-            </div>
-            -->
-            <p class="custom-text">¿Cual es tu objetivo de aprendizaje?</p>
-            <input type="text" placeholder="Mi objetivo es.." name="objetivo" required>
-            <button class="clase-muestra">
-                <span>Confirmar</span>
-            </button>
-        </form>
-    </div>
+        </div>
+    </section>
 
 </body>
 

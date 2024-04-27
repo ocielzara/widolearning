@@ -9,7 +9,7 @@
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
     <!--========== Tailwind ==========-->
-    <link rel="stylesheet" href="public/styles/output.css">
+    <link rel="stylesheet" href="styles/output.css">
     <link rel="stylesheet" href="public/styles/tailwind.css">
 
     <link rel="stylesheet" href="public/styles/carrucel.css">
@@ -29,7 +29,7 @@
         <div class="imageBackground w-full sm:h-full h-48 sm:mb-0 mb-96">
             <div class="flex flex-col h-full relative sm:top-0 top-48">
                 <div class="sm:w-96 w-44 sm:h-1/3 sm:mx-16 ">
-                    <img src="images/home/logo.png" class="w-full h-full" alt="">
+                    <img src="public/images/home/logo.png" class="w-full h-full" alt="">
                 </div>
                 <div class="sm:h-1/3 sm:text-left sm:text-[2.5rem] text-2xl">
                     <div class="sm:w-[29rem] sm:mx-48">
@@ -76,20 +76,20 @@
                 <div class="flex sm:flex-row flex-col sm:justify-between text-center my-12 px-12">
                     <div>
                         <div class="w-[19.5rem] h-72">
-                            <img src="images/home/comofunciona1.png" class="w-full h-full"
+                            <img src="public/images/home/comofunciona1.png" class="w-full h-full"
                                 alt="busca el curso o mentor">
                         </div>
                         <h2 class="mx-auto my-3 text-3xl w-[16rem] font-bold">Busca el curso o mentor ideal</h2>
                     </div>
                     <div>
                         <div class="w-[18rem] h-72">
-                            <img src="images/home/comofunciona2.png" alt="adapta a tus tiempos">
+                            <img src="public/images/home/comofunciona2.png" alt="adapta a tus tiempos">
                         </div>
                         <h2 class="mx-auto my-3 text-3xl w-[18rem] font-bold">Agenda, adaptado a tus tiempos</h2>
                     </div>
                     <div>
                         <div class="w-[17rem] h-72">
-                            <img src="images/home/comofunciona3.png" alt="aprende personalizado">
+                            <img src="public/images/home/comofunciona3.png" alt="aprende personalizado">
                         </div>
                         <h2 class="mx-auto my-3 text-3xl w-[16rem] font-bold">Aprende personalizado</h2>
                     </div>
@@ -1504,7 +1504,8 @@
                     <div class="flex sm:flex-row flex-col w-full">
                         <div class="sm:w-1/2">
                             <div class="sm:w-[27rem] w-80">
-                                <img src="images/home/porqueestudiar.png" class="w-full h-full" alt="personalizacion">
+                                <img src="public/images/home/porqueestudiar.png" class="w-full h-full"
+                                    alt="personalizacion">
                             </div>
                         </div>
                         <div class="text-white text-3xl sm:w-1/2 sm:my-auto my-8">
@@ -1520,7 +1521,8 @@
                     <div class="flex sm:flex-row-reverse flex-col my-16 w-full">
                         <div class="sm:w-1/2">
                             <div class="sm:w-[28rem] w-80 ml-auto">
-                                <img src="images/home/porqueestudia2.png" class="w-full h-full" alt="personalizacion">
+                                <img src="public/images/home/porqueestudia2.png" class="w-full h-full"
+                                    alt="personalizacion">
                             </div>
                         </div>
                         <div class="text-white text-3xl sm:w-1/2 sm:my-auto my-8">
@@ -1535,7 +1537,7 @@
                     <div class="flex sm:flex-row flex-col w-full mt-16">
                         <div class="sm:w-1/2">
                             <div class="sm:w-[28rem] w-80">
-                                <img src="images/home/porqueestudia3.png" class="w-full h-full" alt="meeting">
+                                <img src="public/images/home/porqueestudia3.png" class="w-full h-full" alt="meeting">
                             </div>
                         </div>
                         <div class="text-white text-3xl sm:w-1/2 sm:my-auto my-8">
@@ -1559,7 +1561,7 @@
             <div class="sm:w-[85%] sm:max-h-screen mx-auto my-16 flex sm:flex-row flex-col justify-evenly">
                 <div class="mx-20 sm:w-[20rem]">
                     <div>
-                        <img src="images/home/cursosgratis.png" class="w-full h-full" alt="cursogratis">
+                        <img src="public/images/home/cursosgratis.png" class="w-full h-full" alt="cursogratis">
                     </div>
                     <div>
                         <h1 class="border-b-2 border-[#FAC400] text-[#4F7CAC] text-center text-3xl font-bold my-3">
@@ -1575,7 +1577,7 @@
                 </div>
                 <div class="mx-20 my-36 sm:w-[20rem]">
                     <div>
-                        <img src="images/home/conectamasterteach.png" class="w-full h-full" alt="">
+                        <img src="public/images/home/conectamasterteach.png" class="w-full h-full" alt="">
                     </div>
                     <div>
                         <h1 class="border-b-2 border-[#FAC400] text-[#4F7CAC] text-center text-3xl font-bold my-3">
@@ -1588,7 +1590,7 @@
                 </div>
                 <div class="mx-20 sm:w-[20rem]">
                     <div>
-                        <img src="images/home/obtenrrecompensas.png" class="w-full h-full" alt="">
+                        <img src="public/images/home/obtenrrecompensas.png" class="w-full h-full" alt="">
                     </div>
                     <div>
                         <h1 class="border-b-2 border-[#FAC400] text-[#4F7CAC] text-center text-3xl font-bold my-3">

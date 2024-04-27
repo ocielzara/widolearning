@@ -14,12 +14,11 @@ body {
     font-family: "Poppins", sans-serif;
     background-color: white;
     margin: 0;
-    /* Elimina los márgenes por defecto */
 }
 
 
 .imageBackground {
-    background-image: url('../../images/home/homeweb.png');
+    background-image: url('../../public/images/home/homeweb.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

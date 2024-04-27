@@ -27,7 +27,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-image: url(images/wido/login.png);
+        background-image: url(public/images/wido/login.png);
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;

@@ -228,6 +228,7 @@ function obtenerCursos() {
 }
 
 const mostrarCursos = (cursos) => {
+  console.log("Mostrar Cursos", cursos);
   var carruselcurso = document.getElementById("content-cursos");
   cursos.forEach((curso) => {
     var newContent = document.createElement("div");
@@ -235,7 +236,7 @@ const mostrarCursos = (cursos) => {
     newContent.innerHTML = `
     <div class="sm:w-[23rem] w-full h-[27.5rem] rounded-[2rem] bg-[#2E3532]">
         <div class="w-full h-1/2">
-            <img src="${curso.foto}" class="w-full h-full" alt="Descripción de la imagen">
+            <img src="public/${curso.foto}" class="w-full h-full" alt="Descripción de la imagen">
         </div>
         <div class="w-full h-1/2 flex justify-center flex-col">
             <form class="w-full flex my-2 justify-center" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
