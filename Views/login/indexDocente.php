@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/output.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -22,11 +23,11 @@
     }
 
     body {
-        height: 130vh;
+        height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-image: url(images/wido/loginDocente.png);
+        background-image: url(public/images/wido/loginDocente.png);
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -60,6 +61,7 @@
         padding: 1rem;
     }
 
+
     .message h2 {
         font-size: 1.7rem;
         padding: 1rem 0;
@@ -85,8 +87,9 @@
 
     .formulario {
         width: 400px;
+        height: 40rem;
         padding: 1rem;
-        margin: 2rem;
+        margin: auto 1rem;
         background-color: rgba(6, 6, 6, 0.6);
         text-align: center;
         border-radius: 20px;
@@ -166,7 +169,8 @@
         font-size: .8rem;
         cursor: pointer;
         color: #222;
-        background-color: rgba(255, 255, 255, 0.4); /* Color blanco con 50% de opacidad */
+        background-color: rgba(255, 255, 255, 0.4);
+        /* Color blanco con 50% de opacidad */
     }
 
     .boton:hover {
@@ -203,13 +207,9 @@
 
     .menu.container img {
         width: 600px;
-        /* Establece el ancho deseado para la imagen */
         height: auto;
-        /* Hace que la altura se ajuste automáticamente para mantener la proporción original */
         top: 0%;
-        /* Posiciona la parte superior de la imagen en el 50% del contenedor */
         left: 2%;
-        /* Posiciona la parte izquierda de la imagen en el 50% del contenedor */
     }
 
     .formulario input::placeholder {
@@ -234,32 +234,35 @@
         margin-right: 10px;
     }
 
-  
-.cuenta-gratis, .sign-in-btn {
-    display: inline-block;
-    margin-right: 10px; /* Espacio entre los elementos si es necesario */
-    color: #DFFAFF;
-}
 
-.sign-in-btn {
-    color: #FFD800;
-}
+    .cuenta-gratis,
+    .sign-in-btn {
+        display: inline-block;
+        margin-right: 10px;
+        /* Espacio entre los elementos si es necesario */
+        color: #DFFAFF;
+    }
 
+    .sign-in-btn {
+        color: #FFD800;
+    }
+
+    /* For small devices */
+    @media screen and (max-width: 425) {
+        .welcome-back {
+            display: none;
+        }
+    }
 </style>
 
 <body>
 
     <div class="welcome-1">
-    <!--
-        <div class="menu container">
-            <img src="images/wido/wido-logo-09.png" alt="Descripción de la imagen" />
-        </div>
-    -->
     </div>
 
     <div class="container-form sign-up">
-        <div class="welcome-back">
-            <div class="message">
+        <div class="hidden welcome-back">
+            <div class="hidden message">
                 <!--
                 <h2>Bienvenido</h2>
                 <p>Si ya tienes una cuenta por favor inicia sesion aqui</p>
@@ -268,13 +271,16 @@
             </div>
         </div>
         <form class="formulario" action="index.php?c=Docentes&a=iniciarSesion" method="post">
-            <h2 class="create-account">¡HOLA MASTER TEACH!</h2>
-            <p class="cuenta-gratis">Bienvenido a tu espacio</p>
-            <input type="email" placeholder="Correo electronico" name="correo" required>
-            <input type="password" placeholder="Contraseña" name="contraseña" required>
+            <div>
+                <h2 class="create-account font-semibold">¡HOLA MASTER TEACH!</h2>
+                <p class="cuenta-gratis">Bienvenido a tu espacio</p>
+                <input type="email" placeholder="Correo electronico" name="correo" required>
+                <input type="password" placeholder="Contraseña" name="contraseña" required>
+            </div>
             <button class="boton" type="submit">Iniciar sesion</button>
-        </form> 
+        </form>
     </div>
-   
+
 </body>
+
 </html>

@@ -206,56 +206,19 @@ closeVideoPopup.addEventListener("click", function () {
   videoPopupPlayer.pause(); // Pausar el video al cerrar la ventana emergente
 });
 
-//FUNCION PARA TRAER LOS CURSOS***********************************************************
-
 // Definir una función para hacer la solicitud AJAX
-function obtenerCursos() {
-  fetch("http://localhost/widolearning/index.php?c=Cursos&a=verCursos")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(
-          "Error al obtener los cursos. Código de estado: " + response.status
-        );
-      }
-      return response.json(); // Parsear la respuesta JSON
-    })
-    .then((data) => {
-      mostrarCursos(data.slice(0, 6)); // Llama a la función mostrarCursos con los primeros 6 valores del array data
-    })
-    .catch((error) => {
-      console.error("Error en la solicitud:", error);
-    });
-}
-
-const mostrarCursos = (cursos) => {
-  console.log("Mostrar Cursos", cursos);
-  var carruselcurso = document.getElementById("content-cursos");
-  cursos.forEach((curso) => {
-    var newContent = document.createElement("div");
-    newContent.className = "w-auto swiper-slide overflow-hidden";
-    newContent.innerHTML = `
-    <div class="sm:w-[23rem] w-full h-[27.5rem] rounded-[2rem] bg-[#2E3532]">
-        <div class="w-full h-1/2">
-            <img src="public/${curso.foto}" class="w-full h-full" alt="Descripción de la imagen">
-        </div>
-        <div class="w-full h-1/2 flex justify-center flex-col">
-            <form class="w-full flex my-2 justify-center" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
-
-                <input type="hidden" name="nombreCurso" value="${curso.nombre}">
-                <button class="w-[80%] bg-[#FEC400] rounded-3xl text-[#2E3532] font-bold">
-                    <span>Clase muestra</span>
-                </button>
-            </form>
-            <button class="w-[80%] mx-auto mt-3 mb-4 bg-slate-500 rounded-3xl text-slate-400">
-                <span>Temario</span>
-            </button>
-        </div>
-    </div>
-    `;
-    carruselcurso.appendChild(newContent);
-  });
-};
 
 window.onload = function () {
   obtenerCursos();
 };
+
+var currentIndex = 0;
+
+function avanzarOpcion(offset) {
+  var selector = document.getElementById("miSelector");
+  currentIndex += offset;
+  if (currentIndex < 0) currentIndex = 0;
+  if (currentIndex >= selector.options.length)
+    currentIndex = selector.options.length - 1;
+  selector.selectedIndex = currentIndex;
+}

@@ -1,4 +1,8 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class UsuariosController
 {
     //Incuimos los modelos que vamos a utilizar
@@ -196,6 +200,7 @@ class UsuariosController
             // Convertir el array de intereses en una cadena separada por comas
             $interesesComoTexto = implode(" ", $interesesSeleccionados);
 
+
             // Aquí se pueden realizar más validaciones si es necesario
 
             // Procesar los datos, por ejemplo, guardarlos en la base de datos
@@ -208,6 +213,50 @@ class UsuariosController
                     $idUsuario = $usuario['id_usuario'];
                     session_start();
                     $_SESSION['idUsuario'] = $idUsuario;
+
+                    //********************************************************* */
+
+
+                    //Rutas
+                    require 'PHPMailer/Exception.php';
+                    require 'PHPMailer/PHPMailer.php';
+                    require 'PHPMailer/SMTP.php';
+
+
+
+                    //Create an instance; passing `true` enables exceptions
+                    $mail = new PHPMailer(true);
+
+                    try {
+                        //Server settings
+                        $mail->SMTPDebug = 0;                      //Enable verbose debug output
+                        $mail->isSMTP();                                            //Send using SMTP
+                        $mail->Host = 'smtp.hostinger.com';                     //Set the SMTP server to send through
+                        $mail->SMTPAuth = true;                                   //Enable SMTP authentication
+                        $mail->Username = 'hola@widolearn.com';                     //SMTP username
+                        $mail->Password = 'Wido2024!';                               //SMTP password
+                        $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
+                        $mail->Port = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+                        //Recipients
+                        $mail->setFrom('hola@widolearn.com', 'Wido');    //Add a recipient
+                        //$mail->addAddress($email, $name);               //Name is optional
+                        $mail->addAddress($correo);
+
+                        // Lee el contenido del archivo HTML
+                        $htmlContent = file_get_contents('Views/contenido/correo.html');
+
+                        //Content
+                        $mail->isHTML(true);                                  //Set email format to HTML
+                        $mail->Subject = 'Wido bienvenida ' . $nombre;
+                        $mail->Body = $htmlContent;
+                        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                        $mail->send();
+                        echo 'Message has been sent';
+                    } catch (Exception $e) {
+                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    }
 
                     // Redirigir a la página de miEspacio
                     header("location:  index.php?c=Usuarios&a=index&n=$idUsuario");
@@ -226,7 +275,6 @@ class UsuariosController
             header('Location: index.php');
         }
     }
-
 
     // Método para obtener información de la base de datos
     public function obtenerInformacionDesdeBD()

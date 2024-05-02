@@ -25,6 +25,7 @@
 </head>
 
 <body>
+    <?php include 'Views/contenido/lateralUsuario.php'; ?>
     <div class="sm:p-16 w-full sm:h-screen">
         <div class="imageBackground w-full sm:h-full h-48 sm:mb-0 mb-96">
             <div class="flex flex-col h-full relative sm:top-0 top-48">
@@ -44,15 +45,18 @@
                     </div>
                 </div>
                 <div class="sm:h-1/3">
-                    <div class="flex sm:my-32 sm:mx-44 p-10">
+                    <?php if ($mostrar) : ?>
+
+                    <?php else : ?>
+                    <div class="flex sm:my-[7.5rem] sm:mx-44 p-10">
                         <div
                             class="bg-[#FEC400] w-80 flex justify-center sm:h-16 h-10 text-center items-center rounded-3xl">
-                            <a href='index.php?c=Usuarios&a=login' class="text-base text-black font-semibold">Clase
+                            <a href='index.php?c=Usuarios&a=login' class="text-lg text-black font-semibold">Clase
                                 muestra
                                 gratuita</a>
                         </div>
-
                     </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -135,7 +139,6 @@
                     <div class="swiper-button-next">
                         <i class="ri-arrow-right-s-line "></i>
                     </div>
-
                     <div class="swiper-button-prev">
                         <i class="ri-arrow-left-s-line"></i>
                     </div>
@@ -143,27 +146,26 @@
             </div>
 
             <div id="contenido-areas" class="prices-1">
-
-                <br>
-                <p class="cursos-p">ASESORÍAS ACADEMICAS/LABORALES</p>
-                <div id="cursos-slider">
-                    <div class="container-fluid">
-                        <div id="carouselExample3" class="carousel slide" data-ride="carousel" data-interval="9000">
-                            <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                <div class="border-b-2 my-10 inline-block border-[#4F7CAC]">
+                    <h1 class="sm:text-5xl text-2xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
+                        ASESORÍAS ACADEMICAS/LABORALES
+                    </h1>
+                </div>
+                <div class="flex my-10">
+                    <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
+                        <div class="card__content overflow-hidden">
+                            <div class="swiper-wrapper" id="content-asesorias">
                             </div>
-
-                            <a class="carousel-control-prev" href="#carouselExample3" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample3" role="button"
-                                data-slide="next">
-                                <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
+                        </div>
+                        <div class="swiper-button-next">
+                            <i class="ri-arrow-right-s-line "></i>
+                        </div>
+                        <div class="swiper-button-prev">
+                            <i class="ri-arrow-left-s-line"></i>
                         </div>
                     </div>
                 </div>
+
 
             </div>
 
@@ -210,7 +212,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/ajedrez.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/ajedrez.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -254,7 +257,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/oratoria.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/oratoria.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -278,7 +282,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/locucion.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/locucion.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -323,7 +328,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/minecraft.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/minecraft.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -347,7 +353,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/unity3d.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/unity3d.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -371,7 +378,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/unity2d.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/unity2d.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -395,7 +403,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/gdevelop.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/gdevelop.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -419,7 +428,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/roblox.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/roblox.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -443,7 +453,7 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/lego.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/lego.png" alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -488,7 +498,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/emociones.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/emociones.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -533,7 +544,7 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/roboticamovil.png"
+                                                <img src="public/images/curso/roboticamovil.png"
                                                     alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
@@ -558,7 +569,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/robotica.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/robotica.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -603,7 +615,7 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/ia.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/ia.png" alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -627,7 +639,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/chatgpt.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/chatgpt.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -651,7 +664,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/moviles-1.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/moviles-1.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -675,7 +689,7 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/ciberseguridad.png"
+                                                <img src="public/images/curso/ciberseguridad.png"
                                                     alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
@@ -700,7 +714,7 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/web.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/web.png" alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -724,7 +738,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/movil-2.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/movil-2.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -748,7 +763,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/python.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/python.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -793,7 +809,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/guitarra.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/guitarra.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -838,7 +855,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/tiktok.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/tiktok.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -862,7 +880,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/branding.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/branding.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -907,7 +926,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/aleman.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/aleman.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -931,7 +951,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/ingles.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/ingles.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -976,7 +997,7 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/adobe-premiere.png"
+                                                <img src="public/images/curso/adobe-premiere.png"
                                                     alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
@@ -1001,7 +1022,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/adobe-after.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/adobe-after.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -1025,7 +1047,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/fotografia.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/fotografia.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -1070,7 +1093,7 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/manga.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/manga.png" alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -1094,7 +1117,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/ilustracion.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/ilustracion.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -1118,7 +1142,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/photoshop.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/photoshop.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -1142,7 +1167,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/illustrator.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/illustrator.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=Usuarios&a=claseMuestraNavegacion"
@@ -1187,7 +1213,7 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/mysql.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/mysql.png" alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=usuarios&a=claseMuestraNavegacion"
@@ -1211,7 +1237,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/databricks.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/databricks.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=usuarios&a=claseMuestraNavegacion"
@@ -1255,7 +1282,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/autocad.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/autocad.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=usuarios&a=claseMuestraNavegacion"
@@ -1279,7 +1307,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/solidworks.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/solidworks.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=usuarios&a=claseMuestraNavegacion"
@@ -1323,7 +1352,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/pastel.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/pastel.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=usuarios&a=claseMuestraNavegacion"
@@ -1368,7 +1398,7 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/finanzas-personales.png"
+                                                <img src="public/images/curso/finanzas-personales.png"
                                                     alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
@@ -1393,7 +1423,7 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/emprendimiento-e-innovacion.png"
+                                                <img src="public/images/curso/emprendimiento-e-innovacion.png"
                                                     alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
@@ -1419,7 +1449,8 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/inversion.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/inversion.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=usuarios&a=claseMuestraNavegacion"
@@ -1443,7 +1474,7 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="images/curso/excel.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/excel.png" alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
                                                 <form class="botones-carrucel-cursos"
                                                     action="index.php?c=usuarios&a=claseMuestraNavegacion"
@@ -1500,8 +1531,8 @@
                     <h2 class="sm:mx-16 text-[#FEC400] text-2xl font-semibold">La educacion online para que alcances
                         tus metas</h2>
                 </div>
-                <div class="h-full sm:mx-72 sm:p-16">
-                    <div class="flex sm:flex-row flex-col w-full">
+                <div class="h-full sm:mx-[15%] sm:p-16">
+                    <div class="flex lg:flex-row flex-col w-full">
                         <div class="sm:w-1/2">
                             <div class="sm:w-[27rem] w-80">
                                 <img src="public/images/home/porqueestudiar.png" class="w-full h-full"
@@ -1518,7 +1549,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex sm:flex-row-reverse flex-col my-16 w-full">
+                    <div class="flex lg:flex-row-reverse flex-col my-16 w-full">
                         <div class="sm:w-1/2">
                             <div class="sm:w-[28rem] w-80 ml-auto">
                                 <img src="public/images/home/porqueestudia2.png" class="w-full h-full"
@@ -1534,7 +1565,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex sm:flex-row flex-col w-full mt-16">
+                    <div class="flex lg:flex-row flex-col w-full mt-16">
                         <div class="sm:w-1/2">
                             <div class="sm:w-[28rem] w-80">
                                 <img src="public/images/home/porqueestudia3.png" class="w-full h-full" alt="meeting">
@@ -1558,7 +1589,7 @@
         </section>
 
         <section class="cursos-gratis">
-            <div class="sm:w-[85%] sm:max-h-screen mx-auto my-16 flex sm:flex-row flex-col justify-evenly">
+            <div class="sm:w-[85%] sm:max-h-full mx-auto my-16 flex sm:flex-row flex-col flex-wrap justify-evenly">
                 <div class="mx-20 sm:w-[20rem]">
                     <div>
                         <img src="public/images/home/cursosgratis.png" class="w-full h-full" alt="cursogratis">
@@ -1605,31 +1636,33 @@
 
     </main>
     <footer>
-        <div class="bg-[#2E3532] sm:h-[35rem] flex sm:flex-row flex-col">
-            <div class="text-[#D7F9FF] flex flex-col p-10 sm:ml-16 mt-5">
-                <h1 class="font-bold text-3xl border-b-2 w-40">Legal</h1>
-                <span class="text-3xl mt-5 w-80">Terminos y condiciones</span>
-                <span class="text-3xl mt-5">Aviso de privacidad</span>
-                <span class="text-3xl mt-5 w-72">Reglamento y politicas de clase</span>
+        <div class="bg-[#2E3532] xl:h-[35rem] p-10 flex sm:flex-row flex-col flex-wrap">
+            <div class="text-[#D7F9FF] flex flex-col sm:ml-16 mt-5">
+                <h1 class="font-bold sm:text-3xl text-2xl border-b-2 w-40">Legal</h1>
+                <span class="sm:text-3xl text-xl sm:mt-5 mt-3 w-80">Terminos y condiciones</span>
+                <span class="sm:text-3xl text-xl sm:mt-5 mt-3">Aviso de privacidad</span>
+                <span class="sm:text-3xl text-xl sm:mt-5 mt-3 w-72">Reglamento y politicas de clase</span>
             </div>
-            <div class="text-[#D7F9FF] flex flex-col p-10 mt-5">
-                <h1 class="font-bold text-3xl border-b-2 w-40">Empresa</h1>
-                <span class="text-3xl mt-5">Ubicacion:</span>
-                <span class="text-3xl sm:w-[33.8rem]">Av. General Ramon Corona 2514 Col. Nuevo Mexico, Zapopan,
+            <div class="text-[#D7F9FF] flex flex-col mx-auto mt-5">
+                <h1 class="font-bold sm:text-3xl text-2xl border-b-2 w-40">Empresa</h1>
+                <span class="sm:text-3xl text-xl sm:mt-5 mt-3">Ubicacion:</span>
+                <span class="sm:text-3xl text-xl sm:w-[33.8rem]">Av. General Ramon Corona 2514 Col. Nuevo Mexico,
+                    Zapopan,
                     Mexico</span>
-                <span class="text-3xl mt-5 sm:w-[34.5rem]">Hábitat de Negocios Tecnológico de Monterrey Campus
+                <span class="sm:text-3xl text-xl mt-5 sm:w-[34.5rem]">Hábitat de Negocios Tecnológico de Monterrey
+                    Campus
                     Guadalajara
                     Piso
                     4.</span>
             </div>
-            <div class="text-[#D7F9FF] flex flex-col p-10 mt-5">
-                <h1 class="font-bold text-3xl border-b-2 w-40">Contacto</h1>
-                <span class="text-3xl mt-5">hola@widolearn.com</span>
-                <span class="text-3xl mt-3">22 28 27 90 92</span>
-                <div class="my-auto ml-auto">
-                    <span class="text-4xl mx-3"><i class="fa-brands fa-facebook "></i></span>
-                    <span class="text-4xl mx-3"><i class="fa-brands fa-instagram"></i></span>
-                    <span class="text-4xl mx-3"><i class="fa-brands fa-whatsapp"></i></span>
+            <div class="text-[#D7F9FF] flex flex-col mx-auto mt-5">
+                <h1 class="font-bold sm:text-3xl text-2xl border-b-2 w-40">Contacto</h1>
+                <span class="sm:text-3xl text-xl mt-5">hola@widolearn.com</span>
+                <span class="sm:text-3xl text-xl mt-3">22 28 27 90 92</span>
+                <div class="sm:my-auto my-5 ml-auto">
+                    <span class="sm:text-4xl text-2xl mx-3"><i class="fa-brands fa-facebook "></i></span>
+                    <span class="sm:text-4xl text-2xl mx-3"><i class="fa-brands fa-instagram"></i></span>
+                    <span class="sm:text-4xl text-2xl mx-3"><i class="fa-brands fa-whatsapp"></i></span>
                 </div>
             </div>
         </div>
@@ -1645,6 +1678,7 @@
     <script src="public/JS/swiper-bundle.min.js"></script>
     <!--=============== MAIN JS ===============-->
     <script src="public/JS/script.js"></script>
+    <script src="public/JS/API.js"></script>
 
 </body>
 

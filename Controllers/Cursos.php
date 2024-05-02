@@ -39,4 +39,14 @@ class CursosController
 
         echo json_encode($cursos);
     }
+
+    public function verAsesorias()
+    {
+        $cursoModel = new CursoModel();
+        $cursos = $cursoModel->getAsesorias();
+
+        header('Content-Type: application/json');
+
+        echo json_encode($cursos);
+    }
 }
