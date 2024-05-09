@@ -208,10 +208,6 @@ closeVideoPopup.addEventListener("click", function () {
 
 // Definir una función para hacer la solicitud AJAX
 
-window.onload = function () {
-  obtenerCursos();
-};
-
 var currentIndex = 0;
 
 function avanzarOpcion(offset) {
@@ -222,3 +218,12 @@ function avanzarOpcion(offset) {
     currentIndex = selector.options.length - 1;
   selector.selectedIndex = currentIndex;
 }
+
+function mostrarToastify() {
+  Toastify({
+    text: "This is a toast",
+    duration: 3000,
+  }).showToast();
+}
+
+mostrarToastify();

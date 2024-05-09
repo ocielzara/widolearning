@@ -5,22 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/output.css">
+    <link rel="stylesheet" href="public/styles/tailwind.css">
     <title>Recuperar Contraseña</title>
 </head>
 
 <body>
-    <div class="bg-[url('public/images/wido/login.png')] w-full h-screen">
-        <form class="formulario" action="index.php?c=Usuarios&a=iniciarSesion" method="post">
-            <h2 class="create-account">¡HOLA DE NUEVO</h2>
-            <div class="mb-8">
-                <input class="inputForm" type="email" id="email" placeholder="Correo electronico" name="correo">
-                <span id="email-error" class="error text-red-600 mt-2"></span>
-            </div>
-            <div class="text-sm flex justify-around">
-            </div>
-            <button class="boton" type="submit">Recuperar</button>
-            <p class="cuenta-gratis">¿Aun no tienes una cuenta?</p><a href="index.php?c=Usuarios&a=vistaRegistro" class="sign-in-btn">Registrate aqui</a><br><br>
-        </form>
+    <div class="bg-recuperar p-10 flex justify-center items-center my-auto">
+        <div class="w-96 h-96 bg-opacity-50 bg-black text-white ml-auto mr-52 p-10 rounded-3xl">
+            <form class="formulario" action="index.php?c=Usuarios&a=recuperarContrasena" method="post">
+                <h2 class="create-account text-center font-bold my-8 text-[#D7F9FF]">¡HOLA DE NUEVO</h2>
+                <div class="mb-8 m-5 text-[#D7F9FF] flex flex-col justify-center">
+                    <label class="" for=" email">Recuperar Contraseña</label>
+                    <input class="inputForm" type="email" id="email" placeholder="Correo electronico" name="email">
+                    <span id="email-error" class="error text-red-600 mt-2"></span>
+                </div>
+                <div class="text-sm flex justify-around">
+                </div>
+                <button class="boton w-full h-12 rounded-full mt-8 bg-[#4F7CAC]" type="submit">Recuperar</button>
+            </form>
+        </div>
     </div>
 </body>
 

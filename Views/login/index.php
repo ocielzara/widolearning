@@ -5,252 +5,252 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="styles/output.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>Bienvenido a mi Formulario</title>
 </head>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
-
-body {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url(public/images/wido/login.png);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    color: #DFFAFF;
-}
-
-.container-form {
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: space-around;
-    transition: all .5s ease-out;
-}
-
-.container-form-sesion {
-    width: 90%;
-    height: 100vh;
-    display: flex;
-    justify-content: space-around;
-    transition: all .5s ease-out;
-}
-
-.welcome-back {
-    display: flex;
-    align-items: center;
-    text-align: center;
-}
-
-@media only screen and (max-width: 640px) {
-    .welcome-back {
-        display: none;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
     }
-}
 
-.message {
-    padding: 1rem;
-}
+    body {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: url(public/images/wido/login.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: #DFFAFF;
+    }
 
-.message h2 {
-    font-size: 1.7rem;
-    padding: 1rem 0;
-}
+    .container-form {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: space-around;
+        transition: all .5s ease-out;
+    }
 
-.message button {
-    padding: 1rem;
-    font-weight: 400;
-    background-color: #FEC400;
-    border-radius: 2rem;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-size: .9rem;
-    margin-top: 2rem;
-    transition: all .3s ease-in;
-    color: #DFFAFF;
-}
+    .container-form-sesion {
+        width: 90%;
+        height: 100vh;
+        display: flex;
+        justify-content: space-around;
+        transition: all .5s ease-out;
+    }
 
-.message button:hover {
-    background-color: white;
-}
+    .welcome-back {
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
 
-.formulario {
-    width: 400px;
-    padding: 1rem;
-    margin: 2rem;
-    background-color: rgba(6, 6, 6, 0.6);
-    text-align: center;
-    border-radius: 50px;
-}
+    @media only screen and (max-width: 640px) {
+        .welcome-back {
+            display: none;
+        }
+    }
 
-.create-account {
-    padding: 2.7rem 0;
-    font-size: 1.7rem;
-    color: #DFFAFF;
-}
+    .message {
+        padding: 1rem;
+    }
 
-.iconos {
-    width: 200px;
-    display: flex;
-    justify-content: space-around;
-    margin: auto;
-}
+    .message h2 {
+        font-size: 1.7rem;
+        padding: 1rem 0;
+    }
 
-.border-icon {
-    height: 20px;
-    width: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1.5rem;
-    border: solid thin #DFFAFF;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    transition: all .3s ease-in;
-}
+    .message button {
+        padding: 1rem;
+        font-weight: 400;
+        background-color: #FEC400;
+        border-radius: 2rem;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-size: .9rem;
+        margin-top: 2rem;
+        transition: all .3s ease-in;
+        color: #DFFAFF;
+    }
 
-.border-icon:hover {
-    background-color: #4a4aee;
-    cursor: pointer;
-}
+    .message button:hover {
+        background-color: white;
+    }
 
-.cuenta-gratis {
-    padding: 2rem 0;
-}
+    .formulario {
+        width: 400px;
+        padding: 1rem;
+        margin: 2rem;
+        background-color: rgba(6, 6, 6, 0.6);
+        text-align: center;
+        border-radius: 50px;
+    }
 
-.inputForm {
-    width: 70%;
-    display: block;
-    margin: auto;
-    background-color: transparent;
-    border: none;
-    border-bottom: #DFFAFF thin solid;
-    text-align: center;
-    outline: none;
-    padding: .2rem 0;
-    font-size: .9rem;
-    color: #DFFAFF;
-}
+    .create-account {
+        padding: 2.7rem 0;
+        font-size: 1.7rem;
+        color: #DFFAFF;
+    }
 
-.boton {
-    width: 60%;
-    margin: auto;
-    padding: .7rem;
-    border-radius: 2rem;
-    background-color: #4F7CAC;
-    font-weight: 600;
-    margin-top: 3rem;
-    font-size: .8rem;
-    cursor: pointer;
-    color: #FEC400;
-}
+    .iconos {
+        width: 200px;
+        display: flex;
+        justify-content: space-around;
+        margin: auto;
+    }
 
-.boton-master {
-    width: 60%;
-    margin: auto;
-    padding: .7rem;
-    border-radius: 2rem;
-    background-color: white;
-    font-weight: 600;
-    margin-top: 3rem;
-    font-size: .8rem;
-    cursor: pointer;
-    color: #222;
-    background-color: rgba(255, 255, 255, 0.4);
-    /* Color blanco con 50% de opacidad */
-}
+    .border-icon {
+        height: 20px;
+        width: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+        border: solid thin #DFFAFF;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        transition: all .3s ease-in;
+    }
 
-.boton:hover {
-    background-color: #4F7CAD;
-    color: #FEC400;
-    /* Color de fondo azul más oscuro */
-}
+    .border-icon:hover {
+        background-color: #4a4aee;
+        cursor: pointer;
+    }
 
-.sign-in {
-    position: absolute;
-    opacity: 0;
-    visibility: hidden;
-}
+    .cuenta-gratis {
+        padding: 2rem 0;
+    }
 
-.sign-in.active {
-    opacity: 1;
-    visibility: visible;
-}
+    .inputForm {
+        width: 70%;
+        display: block;
+        margin: auto;
+        background-color: transparent;
+        border: none;
+        border-bottom: #DFFAFF thin solid;
+        text-align: center;
+        outline: none;
+        padding: .2rem 0;
+        font-size: .9rem;
+        color: #DFFAFF;
+    }
 
-.sign-up.active {
-    opacity: 0;
-    visibility: hidden;
-}
+    .boton {
+        width: 60%;
+        margin: auto;
+        padding: .7rem;
+        border-radius: 2rem;
+        background-color: #4F7CAC;
+        font-weight: 600;
+        margin-top: 3rem;
+        font-size: .8rem;
+        cursor: pointer;
+        color: #FEC400;
+    }
 
-/************************************ */
+    .boton-master {
+        width: 60%;
+        margin: auto;
+        padding: .7rem;
+        border-radius: 2rem;
+        background-color: white;
+        font-weight: 600;
+        margin-top: 3rem;
+        font-size: .8rem;
+        cursor: pointer;
+        color: #222;
+        background-color: rgba(255, 255, 255, 0.4);
+        /* Color blanco con 50% de opacidad */
+    }
 
-.welcome-1 {
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 50%;
-    /*border: 1px solid #ccc;*/
-}
+    .boton:hover {
+        background-color: #4F7CAD;
+        color: #FEC400;
+        /* Color de fondo azul más oscuro */
+    }
 
-.menu.container img {
-    width: 600px;
-    /* Establece el ancho deseado para la imagen */
-    height: auto;
-    /* Hace que la altura se ajuste automáticamente para mantener la proporción original */
-    top: 0%;
-    /* Posiciona la parte superior de la imagen en el 50% del contenedor */
-    left: 2%;
-    /* Posiciona la parte izquierda de la imagen en el 50% del contenedor */
-}
+    .sign-in {
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+    }
 
-.formulario input::placeholder {
-    color: white;
-    /* Color del texto del placeholder */
-}
+    .sign-in.active {
+        opacity: 1;
+        visibility: visible;
+    }
 
-.cuenta-gratis {
-    color: white;
-}
+    .sign-up.active {
+        opacity: 0;
+        visibility: hidden;
+    }
 
-.intereses-container {
-    display: flex;
-    margin-bottom: -40px;
-}
+    /************************************ */
 
-.columna {
-    flex: 1;
-}
+    .welcome-1 {
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 50%;
+        /*border: 1px solid #ccc;*/
+    }
 
-.columna input {
-    margin-right: 10px;
-}
+    .menu.container img {
+        width: 600px;
+        /* Establece el ancho deseado para la imagen */
+        height: auto;
+        /* Hace que la altura se ajuste automáticamente para mantener la proporción original */
+        top: 0%;
+        /* Posiciona la parte superior de la imagen en el 50% del contenedor */
+        left: 2%;
+        /* Posiciona la parte izquierda de la imagen en el 50% del contenedor */
+    }
+
+    .formulario input::placeholder {
+        color: white;
+        /* Color del texto del placeholder */
+    }
+
+    .cuenta-gratis {
+        color: white;
+    }
+
+    .intereses-container {
+        display: flex;
+        margin-bottom: -40px;
+    }
+
+    .columna {
+        flex: 1;
+    }
+
+    .columna input {
+        margin-right: 10px;
+    }
 
 
-.cuenta-gratis,
-.sign-in-btn {
-    display: inline-block;
-    margin-right: 10px;
-    /* Espacio entre los elementos si es necesario */
-}
+    .cuenta-gratis,
+    .sign-in-btn {
+        display: inline-block;
+        margin-right: 10px;
+        /* Espacio entre los elementos si es necesario */
+    }
 
-.sign-in-btn {
-    color: #FFD800;
-}
+    .sign-in-btn {
+        color: #FFD800;
+    }
 </style>
 
 <body>
@@ -282,12 +282,12 @@ body {
                 </div>
             </div>
             <button class="boton" type="submit">Iniciar sesion</button>
-            <p class="cuenta-gratis">¿Aun no tienes una cuenta?</p><a href="index.php?c=Usuarios&a=vistaRegistro"
-                class="sign-in-btn">Registrate aqui</a><br><br>
+            <p class="cuenta-gratis">¿Aun no tienes una cuenta?</p><a href="index.php?c=Usuarios&a=vistaRegistro" class="sign-in-btn">Registrate aqui</a><br><br>
             <a href="index.php?c=Docentes&a=login" class="boton-master">Soy master teach</a>
         </form>
     </div>
-    <script src="JS/script.js"></script>
+    <script src="public/JS/script.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
 
 </html>

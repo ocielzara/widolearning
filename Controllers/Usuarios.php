@@ -3,6 +3,10 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+require 'PHPMailer/Exception.php';
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
+
 class UsuariosController
 {
     //Incuimos los modelos que vamos a utilizar
@@ -187,6 +191,8 @@ class UsuariosController
         }
     }
 
+
+
     public function registro()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -195,84 +201,65 @@ class UsuariosController
             $edad = $_POST['edad'];
             $telefono = $_POST['telefono'];
             $correo = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-            $celular = $_POST['contraseña']; // No necesitas filtrar la contraseña aquí
+            $contraseña = $_POST['contraseña'];
             $interesesSeleccionados = $_POST['intereses'];
-            // Convertir el array de intereses en una cadena separada por comas
             $interesesComoTexto = implode(" ", $interesesSeleccionados);
 
-
-            // Aquí se pueden realizar más validaciones si es necesario
-
-            // Procesar los datos, por ejemplo, guardarlos en la base de datos
             $model = new UsuarioModel();
-            if ($model->insertarUsuario($nombre, $correo, $edad, $telefono, $interesesComoTexto, $celular)) {
-                // Iniciar sesion automaticamente
-                $usuario = $model->validarUsuario($correo, $celular);
+            $mensaje = $model->insertarUsuario($nombre, $correo, $edad, $telefono, $interesesComoTexto, $contraseña);
+            if ($mensaje === "¡Tu cuenta ha sido creada exitosamente!") {
+                // El usuario se registró correctamente
+                $usuario = $model->validarUsuario($correo, $contraseña);
                 if ($usuario) {
-                    // Inicio de sesión exitoso
                     $idUsuario = $usuario['id_usuario'];
                     session_start();
                     $_SESSION['idUsuario'] = $idUsuario;
 
-                    //********************************************************* */
+                    $this->enviarCorreoBienvenida($correo, $nombre);
 
-
-                    //Rutas
-                    require 'PHPMailer/Exception.php';
-                    require 'PHPMailer/PHPMailer.php';
-                    require 'PHPMailer/SMTP.php';
-
-
-
-                    //Create an instance; passing `true` enables exceptions
-                    $mail = new PHPMailer(true);
-
-                    try {
-                        //Server settings
-                        $mail->SMTPDebug = 0;                      //Enable verbose debug output
-                        $mail->isSMTP();                                            //Send using SMTP
-                        $mail->Host = 'smtp.hostinger.com';                     //Set the SMTP server to send through
-                        $mail->SMTPAuth = true;                                   //Enable SMTP authentication
-                        $mail->Username = 'hola@widolearn.com';                     //SMTP username
-                        $mail->Password = 'Wido2024!';                               //SMTP password
-                        $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
-                        $mail->Port = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-                        //Recipients
-                        $mail->setFrom('hola@widolearn.com', 'Wido');    //Add a recipient
-                        //$mail->addAddress($email, $name);               //Name is optional
-                        $mail->addAddress($correo);
-
-                        // Lee el contenido del archivo HTML
-                        $htmlContent = file_get_contents('Views/contenido/correo.html');
-
-                        //Content
-                        $mail->isHTML(true);                                  //Set email format to HTML
-                        $mail->Subject = 'Wido bienvenida ' . $nombre;
-                        $mail->Body = $htmlContent;
-                        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-                        $mail->send();
-                        echo 'Message has been sent';
-                    } catch (Exception $e) {
-                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                    }
-
-                    // Redirigir a la página de miEspacio
-                    header("location:  index.php?c=Usuarios&a=index&n=$idUsuario");
-                } else {
-                    echo '<script>alert("Inicio de sesión automatico fallido");';
-                    echo 'window.location.href = "index.php";</script>';
+                    // Mostrar el mensaje y redirigir después de unos segundos
+                    echo '<script>alert("¡Registro exitoso!");</script>';
+                    echo '<script>window.setTimeout(function(){ window.location.href = "index.php?c=Usuarios&a=index&n=' . $idUsuario . '"; }, 2000);</script>';
+                    exit;
                 }
             } else {
-                // Manejar el caso en que la inserción falla
-                // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
-                // Por ejemplo:
-                echo "Error al registrar el usuario.";
+                // Hubo un problema durante el registro
+                $_SESSION['mensaje_registro'] = $mensaje;
+                echo '<script>alert("' . $mensaje . '");</script>';
             }
         } else {
-            // Redirigir si se intenta acceder directamente a través de GET
             header('Location: index.php');
+            exit;
+        }
+    }
+
+    public function enviarCorreoBienvenida($correo, $nombre)
+    {
+        $mail = new PHPMailer(true);
+        try {
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.hostinger.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'hola@widolearn.com';
+            $mail->Password = 'Wido2024!';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
+
+            $mail->setFrom('hola@widolearn.com', 'Wido');
+            $mail->addAddress($correo);
+
+            $htmlContent = file_get_contents('Views/contenido/correo.html');
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Wido bienvenida ' . $nombre;
+            $mail->Body = $htmlContent;
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
     }
 
@@ -430,6 +417,73 @@ class UsuariosController
         }
     }
 
+
+
+    public function enviarCorreoRecuperacion($correo, $contrasena)
+    {
+        // Generar una nueva contraseña aleatoria
+        try {
+            $nuevaContrasena = $contrasena;
+
+            $mail = new PHPMailer(true);
+
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.hostinger.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'hola@widolearn.com';
+            $mail->Password = 'Wido2024!';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
+            $mail->setFrom('hola@widolearn.com', 'Wido');
+            $mail->addAddress($correo);
+
+            $htmlContent = file_get_contents('Views/contenido/correo.html');
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Recuperación de contraseña';
+            $mail->Body = "Tu nueva contraseña es: $nuevaContrasena";
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+            $mail->send();
+
+            if ($mail->ErrorInfo) {
+                echo "Error al enviar el correo de recuperación: {$mail->ErrorInfo}";
+            } else {
+                echo "Correo de recuperación enviado correctamente";
+            }
+        } catch (Exception $e) {
+            echo "Error al enviar el correo de recuperación: {$e->getMessage()}";
+        }
+    }
+
+    public function recuperarContrasena()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $correo = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+            // Validar que el correo existe en la base de datos
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->obtenerUsuarioPorCorreo($correo);
+            if ($usuario) {
+                // Generar una nueva contraseña aleatoria
+                $nuevaContrasena = $usuarioModel->generarContraseñaAleatoria();
+
+                // Actualizar la contraseña en la base de datos
+                if ($usuarioModel->actualizarContrasena($usuario['id_usuario'], $nuevaContrasena)) {
+                    // Enviar correo electrónico con la nueva contraseña
+                    $this->enviarCorreoRecuperacion($correo, $nuevaContrasena);
+                    echo "Se ha enviado un correo electrónico con instrucciones para recuperar tu contraseña.";
+                } else {
+                    echo "Error al actualizar la contraseña.";
+                }
+            } else {
+                echo "El correo electrónico proporcionado no está asociado a ninguna cuenta.";
+            }
+        } else {
+            // Redirigir si se intenta acceder directamente a través de GET
+            header('Location: index.php');
+        }
+    }
 
     public function prueba()
     {
