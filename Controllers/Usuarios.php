@@ -151,27 +151,51 @@ class UsuariosController
 
     public function iniciarSesion()
     {
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $correo = $_POST['correo'];
-            $contrasena = $_POST['contraseña'];
+            $input = file_get_contents("php://input");
+            $data = json_decode($input, true);
+
+            $correo = isset($data['correo']) ? $data['correo'] : null;
+            $contrasena = isset($data['contraseña']) ? $data['contraseña'] : null;
+
+            if (empty($correo) || empty($contrasena)) {
+                $response = array(
+                    'success' => false,
+                    'message' => 'Email and password are required.',
+                );
+                echo json_encode($response);
+                exit;
+            }
+
             $model = new UsuarioModel();
             $usuario = $model->validarUsuario($correo, $contrasena);
 
-            if ($usuario) {
-                // Inicio de sesión exitoso
+            if ($usuario && is_array($usuario)) {
                 $idUsuario = $usuario['id_usuario'];
                 session_start();
                 $_SESSION['idUsuario'] = $idUsuario;
-
-                // Redirigir a la página de miEspacio
-                header("location:  index.php?c=Usuarios&a=index&n=$idUsuario");
+                $response = array(
+                    'success' => true,
+                    'message' => 'Login successful',
+                    'idUsuario' => $idUsuario,
+                );
+                echo json_encode($response);
+                exit;
             } else {
-                echo '<script>alert("Inicio de sesión fallido. Por favor, verifica tu correo electrónico o contraseña.");';
-                echo 'window.location.href = "index.php";</script>';
+                $response = array(
+                    'success' => false,
+                    'message' => 'Inicio de sesión fallido. Por favor, verifica tu correo electrónico o contraseña.',
+                );
+                echo json_encode($response);
+                exit;
             }
         } else {
-            // Redirigir si se intenta acceder directamente a través de GET
             header('Location: index.php');
+            exit;
         }
     }
 
@@ -196,36 +220,39 @@ class UsuariosController
     public function registro()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Validar y sanar los datos de entrada
-            $nombre = strtolower($_POST['nombre']);
-            $edad = $_POST['edad'];
-            $telefono = $_POST['telefono'];
-            $correo = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-            $contraseña = $_POST['contraseña'];
-            $interesesSeleccionados = $_POST['intereses'];
+            $json_data = file_get_contents('php://input');
+            $data = json_decode($json_data, true);
+
+            $nombre = strtolower($data['nombre']);
+            $edad = $data['edad'];
+            $telefono = $data['telefono'];
+            $correo = filter_var($data['correo'], FILTER_SANITIZE_EMAIL);
+            $contraseña = $data['contraseña'];
+            $interesesSeleccionados = $data['intereses'];
             $interesesComoTexto = implode(" ", $interesesSeleccionados);
 
             $model = new UsuarioModel();
             $mensaje = $model->insertarUsuario($nombre, $correo, $edad, $telefono, $interesesComoTexto, $contraseña);
+            header('Content-Type: application/json');
             if ($mensaje === "¡Tu cuenta ha sido creada exitosamente!") {
                 // El usuario se registró correctamente
-                $usuario = $model->validarUsuario($correo, $contraseña);
-                if ($usuario) {
-                    $idUsuario = $usuario['id_usuario'];
-                    session_start();
-                    $_SESSION['idUsuario'] = $idUsuario;
+                $id_usuario = $model->validarUsuario($correo, $contraseña);
+                session_start();
 
-                    $this->enviarCorreoBienvenida($correo, $nombre);
+                $this->enviarCorreoBienvenida($correo, $nombre);
+                $response = array(
+                    'success' => true,
+                    'message' => 'Registro exitoso',
+                    'id_usuario' => $id_usuario
+                );
 
-                    // Mostrar el mensaje y redirigir después de unos segundos
-                    echo '<script>alert("¡Registro exitoso!");</script>';
-                    echo '<script>window.setTimeout(function(){ window.location.href = "index.php?c=Usuarios&a=index&n=' . $idUsuario . '"; }, 2000);</script>';
-                    exit;
-                }
+                echo json_encode($response);
+                exit;
             } else {
                 // Hubo un problema durante el registro
                 $_SESSION['mensaje_registro'] = $mensaje;
-                echo '<script>alert("' . $mensaje . '");</script>';
+                echo json_encode(array('success' => false, 'error' => $mensaje));
+                exit;
             }
         } else {
             header('Location: index.php');
@@ -257,7 +284,6 @@ class UsuariosController
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $mail->send();
-            echo 'Message has been sent';
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
@@ -283,13 +309,10 @@ class UsuariosController
 
         $model = new UsuarioModel();
         $informacion = $model->informacionBusqueda($nombre);
+
         if ($informacion) {
             $nombreCurso = $informacion['nombre'];
-            $fotoCurso = $informacion['foto'];
-            $descripcionCurso = $informacion['descripcion'];
-            $precioCurso = $informacion['precio'];
-            $pdfCurso = $informacion['pdf'];
-
+            $tipo = $informacion['tipo'];
             require_once "Views/alumno/busqueda.php";
         } else {
             //IMPLEMENTAR PANTALLA DE ERROR
@@ -303,12 +326,9 @@ class UsuariosController
 
         $model = new UsuarioModel();
         $informacion = $model->informacionBusquedaAsesoria($nombre);
+        echo ("segunda funcion donde se ven los datos");
         if ($informacion) {
             $nombreCurso = $informacion['nombre'];
-            $fotoCurso = $informacion['foto'];
-            $descripcionCurso = $informacion['descripcion'];
-            $precioCurso = $informacion['precio'];
-            $pdfCurso = $informacion['pdf'];
 
             require_once "Views/alumno/busqueda.php";
         } else {

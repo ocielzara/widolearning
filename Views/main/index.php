@@ -19,7 +19,9 @@
 
     <!--========== BOX ICONS ==========-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -46,13 +48,14 @@
                     <?php if ($mostrar) : ?>
 
                     <?php else : ?>
-                        <div class="flex sm:my-[7.5rem] sm:mx-44 p-10">
-                            <div class="bg-[#FEC400] w-80 flex justify-center sm:h-16 h-10 text-center items-center rounded-3xl">
-                                <a href='index.php?c=Usuarios&a=login' class="text-lg text-black font-semibold">Clase
-                                    muestra
-                                    gratuita</a>
-                            </div>
+                    <div class="flex sm:my-[7.5rem] sm:mx-44 p-10">
+                        <div
+                            class="bg-[#FEC400] w-80 flex justify-center sm:h-16 h-10 text-center items-center rounded-3xl">
+                            <a href='index.php?c=Usuarios&a=login' class="text-lg text-black font-semibold">Clase
+                                muestra
+                                gratuita</a>
                         </div>
+                    </div>
                     <?php endif; ?>
                 </div>
             </div>
@@ -77,7 +80,8 @@
                 <div class="flex sm:flex-row flex-col sm:justify-between text-center my-12 px-12">
                     <div>
                         <div class="w-[19.5rem] h-72">
-                            <img src="public/images/home/comofunciona1.png" class="w-full h-full" alt="busca el curso o mentor">
+                            <img src="public/images/home/comofunciona1.png" class="w-full h-full"
+                                alt="busca el curso o mentor">
                         </div>
                         <h2 class="mx-auto my-3 text-3xl w-[16rem] font-bold">Busca el curso o mentor ideal</h2>
                     </div>
@@ -100,21 +104,25 @@
                     <div class="header__search">
                         <i id="buscar" class='bx bx-search header__icon'></i>
 
-                        <input type="text" id="busqueda" class="header__input" placeholder="¿Qué deseas aprender?">
+                        <input type="text" id="inputSearch" class="header__input" placeholder="¿Qué deseas aprender?">
 
                     </div>
                 </div>
-                <div class="bg-white hidden border-2 py-2 px-4 shadow rounded-xl mt-4 mx-28 w-[50rem] min-h-auto max-h-[32rem] overflow-y-auto buscador" id="buscador">
+                <div class="bg-white hidden border-2 py-2 px-4 shadow rounded-xl mt-4 mx-28 w-[50rem] min-h-auto max-h-[32rem] overflow-y-auto buscador"
+                    id="buscador">
                 </div>
 
             </div>
 
             <div class="p-4 bg-[#d3deea] flex sm:flex-row flex-col justify-around">
-                <button class="bg-[#4F7CAC] sm:w-80 h-16 sm:mb-0 mb-3 font-bold rounded-full text-base text-[#FEC400]" type="button" onclick="mostrarContenidoAreas()">Areas
+                <button class="bg-[#4F7CAC] sm:w-80 h-16 sm:mb-0 mb-3 font-bold rounded-full text-base text-[#FEC400]"
+                    type="button" onclick="mostrarContenidoAreas()">Areas
                     de
                     aprendizaje</button>
-                <button class="bg-[#2E3532] sm:w-64 h-16 font-bold rounded-full text-base" type="button" onclick="mostrarContenidoMasterTeach()">Master Teach</button>
+                <button class="bg-[#2E3532] sm:w-64 h-16 font-bold rounded-full text-base" type="button"
+                    onclick="mostrarContenidoMasterTeach()">Master Teach</button>
             </div>
+
         </section>
 
 
@@ -138,7 +146,12 @@
                     </div>
                 </div>
             </div>
-
+            <div id="pdfModal">
+                <div id="pdfContent">
+                    <span class="close" onclick="closePDF()">&times;</span>
+                    <embed id="pdfEmbed" src="" type="application/pdf" width="100%" height="600px" />
+                </div>
+            </div>
             <div id="contenido-areas" class="prices-1">
                 <div class="border-b-2 my-10 inline-block border-[#4F7CAC]">
                     <h1 class="sm:text-5xl text-2xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
@@ -147,16 +160,11 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="swiper-container-2 overflow-hidden">
                             <div class="swiper-wrapper" id="content-asesorias">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
-                            <i class="ri-arrow-right-s-line "></i>
-                        </div>
-                        <div class="swiper-button-prev">
-                            <i class="ri-arrow-left-s-line"></i>
-                        </div>
+
                     </div>
                 </div>
 
@@ -178,7 +186,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample15" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample15" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -205,9 +214,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/ajedrez.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/ajedrez.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="ajedrez">
                                                     <button class="clase-muestra">
@@ -227,7 +239,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample2" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample2" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -246,9 +259,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/oratoria.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/oratoria.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="oratoria">
                                                     <button class="clase-muestra">
@@ -268,9 +284,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/locucion.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/locucion.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="locucion y doblaje">
                                                     <button class="clase-muestra">
@@ -291,7 +310,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample25" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample25" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -310,9 +330,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/minecraft.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/minecraft.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="minecraft">
                                                     <button class="clase-muestra">
@@ -332,9 +355,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/unity3d.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/unity3d.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="unity 3d">
                                                     <button class="clase-muestra">
@@ -354,9 +380,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/unity2d.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/unity2d.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="unity 2d">
                                                     <button class="clase-muestra">
@@ -376,9 +405,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/gdevelop.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/gdevelop.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="gdevelop">
                                                     <button class="clase-muestra">
@@ -398,9 +430,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/roblox.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/roblox.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="roblox studio">
                                                     <button class="clase-muestra">
@@ -422,7 +457,9 @@
                                                 <!-- Mitad superior para la imagen -->
                                                 <img src="public/images/curso/lego.png" alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="lego fornite">
                                                     <button class="clase-muestra">
@@ -443,7 +480,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample4" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample4" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -462,9 +500,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/emociones.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/emociones.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="emociones">
                                                     <button class="clase-muestra">
@@ -485,7 +526,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample4" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample4" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -504,9 +546,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/roboticamovil.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/roboticamovil.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="robotica movil">
                                                     <button class="clase-muestra">
@@ -526,9 +571,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/robotica.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/robotica.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="robotica">
                                                     <button class="clase-muestra">
@@ -549,7 +597,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample5" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample5" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -570,7 +619,9 @@
                                                 <!-- Mitad superior para la imagen -->
                                                 <img src="public/images/curso/ia.png" alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="ia">
                                                     <button class="clase-muestra">
@@ -590,9 +641,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/chatgpt.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/chatgpt.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="chatgpt">
                                                     <button class="clase-muestra">
@@ -612,9 +666,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/moviles-1.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/moviles-1.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="moviles-1">
                                                     <button class="clase-muestra">
@@ -634,9 +691,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/ciberseguridad.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/ciberseguridad.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="ciberseguridad">
                                                     <button class="clase-muestra">
@@ -658,7 +718,9 @@
                                                 <!-- Mitad superior para la imagen -->
                                                 <img src="public/images/curso/web.png" alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="web">
                                                     <button class="clase-muestra">
@@ -678,9 +740,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/movil-2.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/movil-2.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="movil-2">
                                                     <button class="clase-muestra">
@@ -700,9 +765,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/python.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/python.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="python">
                                                     <button class="clase-muestra">
@@ -723,7 +791,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample6" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample6" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -742,9 +811,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/guitarra.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/guitarra.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="guitarra">
                                                     <button class="clase-muestra">
@@ -765,7 +837,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample6" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample6" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -784,9 +857,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/tiktok.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/tiktok.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="tiktok">
                                                     <button class="clase-muestra">
@@ -806,9 +882,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/branding.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/branding.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="branding">
                                                     <button class="clase-muestra">
@@ -829,7 +908,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample19" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample19" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -848,9 +928,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/aleman.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/aleman.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="aleman">
                                                     <button class="clase-muestra">
@@ -870,9 +953,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/ingles.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/ingles.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="ingles">
                                                     <button class="clase-muestra">
@@ -893,7 +979,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample21" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample21" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -912,9 +999,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/adobe-premiere.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/adobe-premiere.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="adobe premiere">
                                                     <button class="clase-muestra">
@@ -934,9 +1024,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/adobe-after.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/adobe-after.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="adobe after">
                                                     <button class="clase-muestra">
@@ -956,9 +1049,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/fotografia.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/fotografia.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="fotografia">
                                                     <button class="clase-muestra">
@@ -979,7 +1075,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample22" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample22" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -1000,7 +1097,9 @@
                                                 <!-- Mitad superior para la imagen -->
                                                 <img src="public/images/curso/manga.png" alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="manga">
                                                     <button class="clase-muestra">
@@ -1020,9 +1119,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/ilustracion.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/ilustracion.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="ilustracion">
                                                     <button class="clase-muestra">
@@ -1042,9 +1144,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/photoshop.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/photoshop.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="photoshop">
                                                     <button class="clase-muestra">
@@ -1064,9 +1169,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/illustrator.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/illustrator.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=Usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="illustrator">
                                                     <button class="clase-muestra">
@@ -1087,7 +1195,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample23" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample23" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -1108,7 +1217,9 @@
                                                 <!-- Mitad superior para la imagen -->
                                                 <img src="public/images/curso/mysql.png" alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="mysql">
                                                     <button class="clase-muestra">
@@ -1128,9 +1239,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/databricks.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/databricks.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="databricks">
                                                     <button class="clase-muestra">
@@ -1150,7 +1264,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample26" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample26" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -1169,9 +1284,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/autocad.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/autocad.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="autocad">
                                                     <button class="clase-muestra">
@@ -1191,9 +1309,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/solidworks.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/solidworks.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="solidworks">
                                                     <button class="clase-muestra">
@@ -1213,7 +1334,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample27" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample27" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -1232,9 +1354,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/pastel.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/pastel.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="pastel">
                                                     <button class="clase-muestra">
@@ -1255,7 +1380,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample28" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample28" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -1274,9 +1400,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/finanzas-personales.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/finanzas-personales.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="finanzas personales">
                                                     <button class="clase-muestra">
@@ -1296,11 +1425,15 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/emprendimiento-e-innovacion.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/emprendimiento-e-innovacion.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
-                                                    <input type="hidden" name="nombreCurso" value="emprendimiento e innovacion">
+                                                    <input type="hidden" name="nombreCurso"
+                                                        value="emprendimiento e innovacion">
                                                     <button class="clase-muestra">
                                                         <span>Clase muestra</span>
                                                     </button>
@@ -1318,9 +1451,12 @@
                                             <!-- Cuadrado con sombra -->
                                             <div id="image-box">
                                                 <!-- Mitad superior para la imagen -->
-                                                <img src="public/images/curso/inversion.png" alt="Descripción de la imagen">
+                                                <img src="public/images/curso/inversion.png"
+                                                    alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="inversion">
                                                     <button class="clase-muestra">
@@ -1342,7 +1478,9 @@
                                                 <!-- Mitad superior para la imagen -->
                                                 <img src="public/images/curso/excel.png" alt="Descripción de la imagen">
                                                 <!-- Mitad inferior para el título de la imagen -->
-                                                <form class="botones-carrucel-cursos" action="index.php?c=usuarios&a=claseMuestraNavegacion" method="post">
+                                                <form class="botones-carrucel-cursos"
+                                                    action="index.php?c=usuarios&a=claseMuestraNavegacion"
+                                                    method="post">
                                                     <!-- Campo oculto para enviar información -->
                                                     <input type="hidden" name="nombreCurso" value="excel">
                                                     <button class="clase-muestra">
@@ -1364,7 +1502,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample29" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample29" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -1398,7 +1537,8 @@
                     <div class="flex lg:flex-row flex-col w-full">
                         <div class="md:w-1/2">
                             <div class="sm:w-[27rem] w-80">
-                                <img src="public/images/home/porqueestudiar.png" class="w-full h-full" alt="personalizacion">
+                                <img src="public/images/home/porqueestudiar.png" class="w-full h-full"
+                                    alt="personalizacion">
                             </div>
                         </div>
                         <div class="text-white text-3xl md:w-1/2 md:my-auto my-8">
@@ -1406,14 +1546,16 @@
                                 <h1 class="w-72 text-[#D7F9FF] font-bold border-b-2 pb-1 border-[#FAC400] text-center">
                                     Personalizacion
                                 </h1>
-                                <p class="my-4">En Wido aprendes en vivo de forma personalizado con un <span class="font-bold">Master Teach</span> </p>
+                                <p class="my-4">En Wido aprendes en vivo de forma personalizado con un <span
+                                        class="font-bold">Master Teach</span> </p>
                             </div>
                         </div>
                     </div>
                     <div class="flex lg:flex-row-reverse flex-col my-16 w-full">
                         <div class="md:w-1/2">
                             <div class="sm:w-[28rem] w-80 ml-auto">
-                                <img src="public/images/home/porqueestudia2.png" class="w-full h-full" alt="personalizacion">
+                                <img src="public/images/home/porqueestudia2.png" class="w-full h-full"
+                                    alt="personalizacion">
                             </div>
                         </div>
                         <div class="text-white text-3xl md:w-1/2 md:my-auto my-8">
@@ -1433,7 +1575,8 @@
                         </div>
                         <div class="text-white text-3xl md:w-1/2 md:my-auto my-8">
                             <div class="">
-                                <h1 class="sm:w-96 text-[#D7F9FF] font-bold border-b-2 pb-1 border-[#FAC400] text-center">
+                                <h1
+                                    class="sm:w-96 text-[#D7F9FF] font-bold border-b-2 pb-1 border-[#FAC400] text-center">
                                     Nos adaptamos a ti
                                 </h1>
                                 <p class="my-4">En Wido <span class="font-bold">nos adaptamos a tus objetivos de

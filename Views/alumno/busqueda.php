@@ -12,13 +12,13 @@
 <body>
     <div>
         <div class="w-[90%] h-[20rem] mx-auto">
-            <img src="public/images/muestra-cursos/Diseño área-02.png" class="w-full h-full" alt="">
+            <img src="public/images/muestra-cursos/<?php echo $tipo; ?>.png" class="w-full h-full" alt="">
         </div>
     </div>
     <section class="w-[70%] mx-auto">
         <div class="mt-20">
             <h1 class="text-4xl text-[#4F7CAC] font-bold">
-                <?php echo $nombreCurso; ?>
+                <?php echo ucfirst($nombreCurso); ?>
             </h1>
         </div>
 
@@ -37,7 +37,8 @@
                         <p class="font-bold">Especialista en:</p>
                         <div class="flex flex-col py-2">
                             <button class="w-[90%] my-1 bg-slate-200 h-8 rounded-full">Dibujo Manga</button>
-                            <button class="w-[90%] mt-2 bg-[#FAC400] h-8 rounded-full">Ver portal</button>
+                            <button class="w-[90%] mt-2 bg-[#FAC400] h-8 rounded-full" id="navigateDocente">Ver
+                                portal</button>
                         </div>
                     </div>
                 </div>
@@ -47,7 +48,8 @@
                         </h1>
                         <label for="countries" class="block mb-2 text-sm font-medium mt-2 text-gray-900">
                             Selecciona un dia</label>
-                        <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                        <select id="countries"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                             <option value="lunes">Lunes</option>
                             <option value="miercoles">Miercoles</option>
                             <option value="jueves">Jueves</option>

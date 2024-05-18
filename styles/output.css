@@ -831,12 +831,12 @@ video {
   height: 2rem;
 }
 
-.h-96 {
-  height: 24rem;
-}
-
 .h-\[20rem\] {
   height: 20rem;
+}
+
+.h-\[25rem\] {
+  height: 25rem;
 }
 
 .h-full {
@@ -1424,7 +1424,7 @@ a:hover {
   background-color: rgb(100 116 139 / var(--tw-bg-opacity));
   border-radius: 1.5rem;
   --tw-text-opacity: 1;
-  color: rgb(148 163 184 / var(--tw-text-opacity));
+  color: #ffffff;
 }
 
 .bg-recuperar {
@@ -1457,6 +1457,163 @@ a:hover {
 .imageBuscador {
   width: 8rem;
   margin-inline: 0.75rem;
+}
+
+.container-form {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  transition: all 0.5s ease-out;
+}
+
+.formulario {
+  width: 1000px;
+  padding: 1rem;
+  margin: 2rem;
+  background-color: rgba(6, 6, 6, 0.7);
+  border-radius: 20px;
+  display: flex;
+}
+
+.create-account {
+  padding: 2.7rem 0;
+  font-size: 1.7rem;
+  color: #dffaff;
+}
+
+.datos {
+  width: 70%;
+  margin: auto;
+  background-color: transparent;
+  border: none;
+  border-bottom: #dffaff thin solid;
+  text-align: center;
+  outline: none;
+  padding: 0.2rem 0;
+  font-size: 0.8rem;
+  color: #dffaff;
+}
+
+.boton {
+  width: 40%;
+  margin: auto;
+  padding: 0.7rem;
+  border-radius: 2rem;
+  background-color: white;
+  font-weight: 600;
+  margin-top: 3rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: #222;
+  margin-left: 50%;
+}
+
+.boton:hover {
+  background-color: #4f7cac;
+  color: #fec400;
+  /* Color de fondo azul más oscuro */
+}
+
+/************************************ */
+
+.formulario input::-moz-placeholder {
+  color: white;
+  /* Color del texto del placeholder */
+}
+
+.formulario input::placeholder {
+  color: white;
+  /* Color del texto del placeholder */
+}
+
+.cuenta-gratis {
+  color: white;
+}
+
+.sign-in-btn {
+  color: #ffd800;
+}
+
+.left-content {
+  width: 50%;
+  border-right: 2px solid #dffaff;
+  text-align: center;
+  /* Aquí estableces el borde derecho de color rojo */
+}
+
+.right-content {
+  width: 50%;
+  padding: 2.7rem 0;
+  margin-left: 40px;
+}
+
+h3 {
+  margin-bottom: 40px;
+}
+
+.intereses-container label {
+  display: block;
+  /* Establece los labels como elementos de bloque */
+  margin-bottom: 0.5rem;
+  /* Espacio entre cada checkbox y su título */
+  margin-left: 120px;
+  margin-top: 15px;
+}
+
+.bottom-content {
+  position: absolute;
+  /* Posiciona el contenedor de forma absoluta */
+  bottom: 3rem;
+  /* Coloca el contenedor 20px desde el borde inferior */
+  right: 5rem;
+  /* Coloca el contenedor 20px desde el borde derecho */
+  text-align: right;
+  /* Alinea el texto a la derecha dentro del contenedor */
+}
+
+.cuenta-gratis,
+.sign-in-btn {
+  display: inline-block;
+  margin-right: 10px;
+  /* Espacio entre los elementos si es necesario */
+}
+
+.intereses-container input {
+  background-color: #dffaff;
+}
+
+#pdfModal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#pdfContent {
+  margin: 5% auto;
+  padding: 20px;
+  width: 80%;
+  background-color: white;
+}
+
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 640px) {
@@ -1498,6 +1655,37 @@ a:hover {
 
   .logo-wido {
     margin-inline: auto;
+  }
+
+  .container-form {
+    height: auto;
+    flex-direction: row;
+  }
+
+  .formulario {
+    flex-direction: column;
+  }
+
+  .left-content {
+    width: 100%;
+    border-right: none;
+  }
+
+  .right-content {
+    width: 100%;
+    padding: 0;
+  }
+
+  .intereses-container label {
+    margin-left: 4rem;
+  }
+
+  .bottom-content {
+    bottom: 0.5rem;
+  }
+
+  .boton {
+    margin-left: 20%;
   }
 }
 

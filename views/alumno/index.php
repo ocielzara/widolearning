@@ -856,16 +856,19 @@ if (isset($_SESSION['nombreAlumno'])) {
                             dataType: 'json',
                             success: function(response) {
                                 console.log(response);
-                                $('#resultados').empty(); // Limpiamos el contenedor de resultados antes de agregar nuevos resultados
+                                $('#resultados')
+                                    .empty(); // Limpiamos el contenedor de resultados antes de agregar nuevos resultados
 
-                               
+
 
                                 // Verificamos si se encontraron cursos
                                 if (response.length > 0) {
                                     // Iteramos sobre cada curso y creamos un elemento h3 para mostrarlo
                                     response.forEach(function(curso) {
                                         //Aca modifica para que tenga link
-                                        $('#resultados').append('<a href="www.google.com">' + curso.titulo + '</a><br>');
+                                        $('#resultados').append(
+                                            '<a href="www.google.com">' + curso
+                                            .titulo + '</a><br>');
                                     });
                                 } else {
                                     // Si no se encontraron cursos, mostramos un mensaje
@@ -1114,7 +1117,8 @@ if (isset($_SESSION['nombreAlumno'])) {
                                 const resultItem = document.createElement("div");
                                 resultItem.classList.add("result-item");
                                 // Se envuelve el título en un enlace <a> con el atributo href que apunta a la URL correspondiente
-                                resultItem.innerHTML = `<h3><a href="${result.contenido}">${result.titulo}</a></h3>`;
+                                resultItem.innerHTML =
+                                    `<h3><a href="${result.contenido}">${result.titulo}</a></h3>`;
                                 searchResults.appendChild(resultItem);
                             });
                         } else {

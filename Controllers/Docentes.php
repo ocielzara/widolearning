@@ -139,7 +139,7 @@ class DocentesController
 
                 // Iterar sobre los resultados de los cursos asignados
                 foreach ($informacionCursos as $curso) {
-                    // Agregar la foto del curso al array de fotos de cursos
+                    // Agregar la foto del curso al array de fotos de cursos 
                     $fotosCursos[] = $curso['foto'];
                 }
             } else {

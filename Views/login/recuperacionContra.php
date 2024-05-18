@@ -11,9 +11,9 @@
 
 <body>
     <div class="bg-recuperar p-10 flex justify-center items-center my-auto">
-        <div class="w-96 h-96 bg-opacity-50 bg-black text-white ml-auto mr-52 p-10 rounded-3xl">
-            <form class="formulario" action="index.php?c=Usuarios&a=recuperarContrasena" method="post">
-                <h2 class="create-account text-center font-bold my-8 text-[#D7F9FF]">¡HOLA DE NUEVO</h2>
+        <div class="w-96 h-[25rem] bg-opacity-50 bg-black text-white ml-auto mr-52 p-10 rounded-3xl">
+            <form class="w-full h-full flex flex-col" action="index.php?c=Usuarios&a=recuperarContrasena" method="post">
+                <h2 class="create-account text-center font-bold my-5 text-[#D7F9FF]">¡HOLA DE NUEVO</h2>
                 <div class="mb-8 m-5 text-[#D7F9FF] flex flex-col justify-center">
                     <label class="" for=" email">Recuperar Contraseña</label>
                     <input class="inputForm" type="email" id="email" placeholder="Correo electronico" name="email">

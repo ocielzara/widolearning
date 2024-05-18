@@ -52,15 +52,17 @@ class UsuarioModel
         if ($stmt->num_rows > 0) {
             $stmt->bind_result($id_usuario, $contraseña_hash);
             $stmt->fetch();
-
-            // Verificar la contraseña
             if (password_verify($contrasena, $contraseña_hash)) {
-                return $id_usuario; // Devolver el ID del usuario
+                // Devolver un array asociativo en lugar de solo el id_usuario
+                return array(
+                    'id_usuario' => $id_usuario,
+                );
             }
         }
 
         return false; // Usuario no encontrado o contraseña incorrecta
     }
+
     public function motorBusqueda($keyword)
     {
 
@@ -128,6 +130,7 @@ class UsuarioModel
 
     public function informacionBusquedaAsesoria($nombre)
     {
+        echo ($nombre);
         $query = "SELECT * FROM asesoria WHERE nombre = '$nombre'";
         $resultado = mysqli_query($this->db, $query);
 
