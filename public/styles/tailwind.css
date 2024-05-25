@@ -20,7 +20,7 @@ body {
   background-image: url("../../public/images/home/homeweb.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
 }
 
 /*========== HEADER ==========*/
@@ -192,6 +192,7 @@ a:hover {
 }
 
 .imageBuscador {
+  cursor: pointer;
   width: 8rem;
   margin-inline: 0.75rem;
 }
@@ -348,6 +349,38 @@ h3 {
   cursor: pointer;
 }
 
+.contentMentor {
+  margin-bottom: 3rem;
+  padding: 2.5rem;
+}
+
+.contentMentores {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  background: #ffffff;
+}
+
+.bottonBG {
+  width: 90%;
+  background: #fac400;
+}
+
+.textMentor {
+  margin-inline: 1rem;
+}
+
+@media screen and (min-width: 1440px) {
+  .containderCard {
+    width: 23.8rem !important;
+  }
+
+  .containderCard2 {
+    width: 23.8rem !important;
+  }
+}
+
 @media only screen and (max-width: 640px) {
   .header__search {
     display: flex;
@@ -420,9 +453,34 @@ h3 {
 }
 
 /* For small devices */
-@media screen and (max-width: 320px) {
+@media only screen and (min-width: 450px) and (max-width: 320px) {
+  .imageBackground {
+    background-image: url("../../public/images/home/portadamobil.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  .containderCard {
+    width: 2rem !important;
+  }
+
+  .contentMentores {
+    flex-direction: row;
+  }
+
   .card__data {
     padding: 1rem;
+  }
+
+  .imageBuscador {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .imagenContenedor {
+    width: 2rem;
+    height: 2rem;
   }
 }
 

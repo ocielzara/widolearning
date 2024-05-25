@@ -305,7 +305,17 @@ class UsuariosController
     //**********************Nuevos*/
     public function claseMuestraNavegacion()
     {
-        $nombre = $_POST['nombreCurso'];
+        if (!isset($_GET['nombreCurso']) || !isset($_GET['idCurso'])) {
+            echo "Parámetros no recibidos correctamente.";
+            exit;
+        }
+
+        $nombre = $_GET['nombreCurso'];
+        $idCurso = $_GET['idCurso'];
+
+        // Agregar mensajes de depuración
+        error_log("nombreCurso: $nombre");
+        error_log("idCurso: $idCurso");
 
         $model = new UsuarioModel();
         $informacion = $model->informacionBusqueda($nombre);
@@ -313,17 +323,18 @@ class UsuariosController
         if ($informacion) {
             $nombreCurso = $informacion['nombre'];
             $tipo = $informacion['tipo'];
-            require_once "Views/alumno/busqueda.php";
+            require_once "Views/alumno/detallesCurso.php";
         } else {
-            //IMPLEMENTAR PANTALLA DE ERROR
+            // IMPLEMENTAR PANTALLA DE ERROR
             require_once "Views/docente/index.php";
         }
     }
 
+
+
     public function claseMuestraNavegacionAsesoria()
     {
         $nombre = $_POST['nombre'];
-
         $model = new UsuarioModel();
         $informacion = $model->informacionBusquedaAsesoria($nombre);
         echo ("segunda funcion donde se ven los datos");

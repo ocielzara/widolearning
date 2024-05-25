@@ -26,10 +26,10 @@ class DocenteModel
         return false;
     }
 
-    public function informacionDocente($nombre)
+    public function informacionDocente($id)
     {
 
-        $query = "SELECT * FROM maestros WHERE nombre = '$nombre'";
+        $query = "SELECT * FROM Mentor WHERE Mentor_ID = '$id'";
         $resultado = mysqli_query($this->db, $query);
         //CONVERTIR EL RESULTADO A MINISCULAS O MAYUSCULAS !!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -39,6 +39,49 @@ class DocenteModel
 
         return false;
     }
+
+    public function informacionMentorPorId($mentorId)
+    {
+        $sql = "
+    SELECT 
+        m.Mentor_ID, 
+        m.Nombre AS Mentor, 
+        m.Foto AS MentorFoto, 
+        m.Area, 
+        m.Correo, 
+        m.Tipo, 
+        m.Horario_Disponibilidad, 
+        m.Notificacion_Cel, 
+        c.id_curso, 
+        c.nombre AS Curso, 
+        c.foto AS CursoFoto, 
+        c.tipo AS TipoCurso, 
+        c.temario, 
+        c.requerimientos, 
+        c.pdf, 
+        c.precio
+    FROM 
+        Mentor m
+    JOIN 
+        asignaciones a ON m.Mentor_ID = a.id_maestro
+    JOIN 
+        cursos c ON a.id_curso = c.id_curso
+    WHERE 
+        m.Mentor_ID = ?";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param('i', $mentorId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $mentorInfo = [];
+        while ($row = $result->fetch_assoc()) {
+            $mentorInfo[] = $row;
+        }
+
+        return $mentorInfo;
+    }
+
 
     public function cursosAsignados($nombre)
     {
@@ -134,24 +177,24 @@ class DocenteModel
         return false;
     }
 
-    
+
     public function actualizarDisponibilidad($id, $date, $time)
-{
-    // Preparar la consulta SQL de actualización
-    $query = "UPDATE disponibilidadMaestro SET fecha = '$date', hora = '$time' WHERE id_disponibilidad = '$id'";
+    {
+        // Preparar la consulta SQL de actualización
+        $query = "UPDATE disponibilidadMaestro SET fecha = '$date', hora = '$time' WHERE id_disponibilidad = '$id'";
 
-    // Ejecutar la consulta
-    $resultado = mysqli_query($this->db, $query);
+        // Ejecutar la consulta
+        $resultado = mysqli_query($this->db, $query);
 
-    // Verificar si la actualización fue exitosa
-    if ($resultado) {
-        return true; // La actualización fue exitosa
-    } else {
-        return false; // Hubo un error al actualizar
+        // Verificar si la actualización fue exitosa
+        if ($resultado) {
+            return true; // La actualización fue exitosa
+        } else {
+            return false; // Hubo un error al actualizar
+        }
     }
-}
 
-public function consultaNotificaciones($idMaestro)
+    public function consultaNotificaciones($idMaestro)
     {
         $query = "SELECT * FROM notificaciones WHERE id_maestro = '$idMaestro' ORDER BY fecha_creacion DESC";
         $resultado = mysqli_query($this->db, $query);
@@ -191,11 +234,32 @@ public function consultaNotificaciones($idMaestro)
         $query = mysqli_query($this->db, "INSERT INTO notificaciones (id_usuario, id_maestro, mensaje, estado, fecha_creacion) VALUES ('$idUsuario', null, 'Ha sido aceptada tu cita del $fecha por el mentor $nombreDocente.', 'noLeida', null)");
         return true; // La inserción fue exitosa
     }
-    
+
     public function insertarRechazar($idUsuario, $nombreDocente, $fecha)
     {
         $query = mysqli_query($this->db, "INSERT INTO notificaciones (id_usuario, id_maestro, mensaje, estado, fecha_creacion) VALUES ('$idUsuario', null, 'Hups! a sido rechazada tu cita del $fecha por el mentor $nombreDocente.', 'noLeida', null)");
         return true; // La inserción fue exitosa
     }
 
+    public function getMentoresByCursoId($cursoId)
+    {
+        $sql = "
+        SELECT m.Mentor_ID, m.Nombre AS Mentor, m.Foto AS MentorFoto, c.nombre AS Curso, c.foto AS CursoFoto, c.tipo AS TipoCurso, c.pdf AS PDF
+        FROM Mentor m
+        JOIN asignaciones a ON m.Mentor_ID = a.id_maestro
+        JOIN cursos c ON a.id_curso = c.id_curso
+        WHERE c.id_curso = ?";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param('i', $cursoId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $mentores = [];
+        while ($row = $result->fetch_assoc()) {
+            $mentores[] = $row;
+        }
+
+        return $mentores;
+    }
 }

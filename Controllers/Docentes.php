@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\map;
+
 class DocentesController
 {
     //Incuimos los modelos que vamos a utilizar
@@ -11,7 +14,7 @@ class DocentesController
     public function index()
     {
         session_start();
-        if (isset ($_SESSION['idDocente'])) {
+        if (isset($_SESSION['idDocente'])) {
             $docente = new DocenteModel();
             $idDocente = $_SESSION['idDocente'];
             $disponibilidadInformacion = $docente->disponibilidadConsulta($idDocente);
@@ -35,7 +38,6 @@ class DocentesController
                     $consulta = [];
                 }
             } else {
-
             }
 
             $notificaciones = $docente->consultaNotificaciones($idDocente);
@@ -59,7 +61,6 @@ class DocentesController
                     $consultaNotificacion = [];
                 }
             } else {
-
             }
         }
 
@@ -100,7 +101,7 @@ class DocentesController
         session_start();
 
         // Comprobar si se ha enviado una solicitud POST para cerrar sesión
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset ($_POST['cerrar_sesion'])) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['cerrar_sesion'])) {
             // Destruir la sesión actual
             session_destroy();
 
@@ -176,7 +177,8 @@ class DocentesController
 
             require_once "Views/docente/perfilDocente.php";
         } else {
-            require_once "Views/docente/index.php";
+            //require_once "Views/docente/index.php";
+            require_once "Views/docente/perfilDocente.php";
         }
     }
 
@@ -242,7 +244,6 @@ class DocentesController
             $fecha = $informacion['fecha'];
             $hora = $informacion['hora'];
             require_once "Views/docente/agenda/editar.php";
-
         } else {
             // Manejar el caso en que la inserción falla
             // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
@@ -336,5 +337,74 @@ class DocentesController
             // Redirigir si se intenta acceder directamente a través de GET
             header('Location: index.php');
         }
+    }
+    public function verMentoresporIdCursos()
+    {
+        if (isset($_GET['cursoId'])) {
+            $cursoId = $_GET['cursoId'];
+            $model = new DocenteModel();
+            $mentores = $model->getMentoresByCursoId($cursoId);
+            if ($mentores) {
+                header('Content-Type: application/json');
+                echo json_encode($mentores);
+            } else {
+                http_response_code(404);
+                echo json_encode(['error' => 'No se encontraron mentores para este curso.']);
+            }
+        } else {
+            http_response_code(400);
+            echo json_encode(['error' => 'No se ha proporcionado un ID de curso.']);
+        }
+    }
+    public function informacionMentorId()
+    {
+        error_log("informacionMentorId called");  // Logging
+
+        if (isset($_GET['idCurso'])) {
+            $cursoId = $_GET['idCurso'];
+            $model = new DocenteModel();
+            $mentores = $model->informacionMentorPorId($cursoId);
+
+            if ($mentores) {
+                if ($this->isAjaxRequest()) {
+                    header('Content-Type: application/json');
+                    echo json_encode($mentores);
+                    exit;
+                } else {
+                    // Almacenar los datos en una variable accesible desde la vista
+                    $this->$mentores = $mentores;
+                    // Evitar que la página se almacene en caché
+                    header('Cache-Control: no-cache, must-revalidate');
+                    header('Pragma: no-cache');
+                    header('Expires: Sat, 26 Jul 1997 05:00:00 GMT');
+                    // Cargar la vista HTML
+                    require_once "Views/docente/perfilDocente.php";
+                }
+            } else {
+                if ($this->isAjaxRequest()) {
+                    http_response_code(404);
+                    echo json_encode(['error' => 'No se encontraron cursos para este mentor.']);
+                    exit;
+                } else {
+                    // Manejar la vista de error de HTML
+                    require_once "Views/error/404.php";
+                }
+            }
+        } else {
+            if ($this->isAjaxRequest()) {
+                http_response_code(400);
+                echo json_encode(['error' => 'No se ha proporcionado un ID del Curso.']);
+                exit;
+            } else {
+                // Manejar la vista de error de HTML
+                require_once "Views/error/400.php";
+            }
+        }
+    }
+
+
+    private function isAjaxRequest()
+    {
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
     }
 }

@@ -39,6 +39,20 @@ class CursosController
 
         echo json_encode($cursos);
     }
+    public function verCursosCategorias()
+    {
+        if (isset($_GET['tipo'])) {
+            $cursoModel = new CursoModel();
+            $tipo = $_GET['tipo'];
+            $cursos = $cursoModel->getCursosForType($tipo);
+
+            header('Content-Type: application/json');
+
+            echo json_encode($cursos);
+        } else {
+            echo json_encode(array('error' => 'No se proporcionó una cadena de búsqueda.'));
+        }
+    }
 
     public function verAsesorias()
     {

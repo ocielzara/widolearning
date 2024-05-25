@@ -1,16 +1,10 @@
-console.log("Hello world!");
-
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("domContentLoaded");
   const navigateButton = document.getElementById("navigateDocente");
 
   navigateButton.addEventListener("click", function () {
-    console.log("Le diste click");
     window.location.href = "index.php?c=Docentes&a=perfilDocente";
   });
 });
-
-// validar formulario
 
 document.addEventListener("DOMContentLoaded", function () {
   const emailInput = document.querySelector('input[name="correo"]');
@@ -107,6 +101,10 @@ let swiperCards = new Swiper(".card__content", {
       slidesPerView: 2,
     },
 
+    1440: {
+      slidesPerView: 4,
+    },
+
     1448: {
       slidesPerView: 3,
     },
@@ -128,4 +126,78 @@ let swiperCards2 = new Swiper(".swiper-container-2", {
       slidesPerView: 3,
     },
   },
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  var button = document.getElementById("toggleButton");
+  var content = document.getElementById("extraContent");
+
+  button.addEventListener("click", function () {
+    if (content.classList.contains("hidden")) {
+      content.classList.remove("hidden");
+      button.textContent = "Ocultar";
+    } else {
+      content.classList.add("hidden");
+      button.textContent = "Mostrar más";
+    }
+  });
+});
+
+function mostrarContenidoAreas() {
+  var contenidoAdicional = document.getElementById("contenido-areas");
+  contenidoAdicional.style.display = "block";
+  var contenidoFooter = document.getElementById("footer");
+  contenidoFooter.style.display = "flex";
+
+  // Oculta el contenido adicional de Master Teach si está visible
+  var contenidoMasterTeach = document.getElementById("contenido-master-teach");
+  contenidoMasterTeach.style.display = "none";
+}
+
+function mostrarContenidoMasterTeach() {
+  var contenidoMasterTeach = document.getElementById("contenido-master-teach");
+  contenidoMasterTeach.style.display = "block";
+
+  // Oculta el contenido adicional de "Areas de aprendizaje" si está visible
+  var contenidoAdicional = document.getElementById("contenido-areas");
+  contenidoAdicional.style.display = "none";
+  // Oculta el contenido footer si está visible
+  var contenidoFooter = document.getElementById("footer");
+  contenidoFooter.style.display = "none";
+  // Oculta el contenido adicional de "contenido-mas" si está visible
+  var contenidoMas = document.getElementById("contenido-mas");
+  contenidoMas.style.display = "none";
+}
+
+function mostrarMas() {
+  var contenidoMas = document.getElementById("contenido-mas");
+  contenidoMas.style.display = "block";
+}
+
+const videos = document.querySelectorAll(".carousel-item video");
+const playIcons = document.querySelectorAll(".carousel-item .play-icon");
+const videoPopup = document.getElementById("video-popup");
+const videoPopupPlayer = document.getElementById("video-popup-player");
+const closeVideoPopup = document.getElementById("close-video-popup");
+
+// Iterar sobre cada elemento de video y previsualización
+videos.forEach((video, index) => {
+  // Escuchar el evento 'loadedmetadata' para asegurarse de que el video esté cargado
+  video.addEventListener("loadedmetadata", function () {
+    // Obtener el cuadro del video en el segundo 0 (puedes ajustar esto si lo deseas)
+    video.currentTime = 1;
+  });
+});
+
+playIcons.forEach((playIcon) => {
+  playIcon.addEventListener("click", function () {
+    const videoSrc = playIcon.dataset.videoSrc; // Obtener la URL del video del atributo personalizado
+    videoPopupPlayer.src = videoSrc;
+    videoPopup.style.display = "block";
+  });
+});
+
+closeVideoPopup.addEventListener("click", function () {
+  videoPopup.style.display = "none";
+  videoPopupPlayer.pause(); // Pausar el video al cerrar la ventana emergente
 });
