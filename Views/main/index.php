@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Wido</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="public/images/home/iconWido.jpeg">
+    <link rel="icon" type="image/png" sizes="16x16" href="public/images/home/iconWido.jpeg">
 
     <!--========== Tailwind ==========-->
     <link rel="stylesheet" href="styles/output.css">
@@ -19,7 +22,9 @@
 
     <!--========== BOX ICONS ==========-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -46,13 +51,15 @@
                     <?php if ($mostrar) : ?>
 
                     <?php else : ?>
-                        <div class="flex lg:my-[7.5rem] 2xl:my-[5rem] xl:my-[4rem] sm:mx-44 xl:mx-32 p-10">
-                            <button class="bg-[#FEC400] cursor-pointer w-80 flex font-bold justify-center sm:h-16 h-10 text-center items-center rounded-3xl text-black" onclick="iniciarSesion()">
-                                Clase
-                                muestra
-                                gratuita
-                            </button>
-                        </div>
+                    <div class="flex lg:my-[7.5rem] 2xl:my-[5rem] xl:my-[4rem] sm:mx-44 xl:mx-32 p-10">
+                        <button
+                            class="bg-[#FEC400] cursor-pointer w-80 flex font-bold justify-center sm:h-16 h-10 text-center items-center rounded-3xl text-black"
+                            onclick="iniciarSesion ()">
+                            Clase
+                            muestra
+                            gratuita
+                        </button>
+                    </div>
                     <?php endif; ?>
                 </div>
             </div>
@@ -62,7 +69,8 @@
 
     <main>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <a href="https://api.whatsapp.com/message/4IGVTKTG6JFAM1?autoload=1&app_absent=0" onclick="obtenerCursos()" class="float" target="_blank">
+        <a href="https://api.whatsapp.com/message/4IGVTKTG6JFAM1?autoload=1&app_absent=0" onclick="obtenerCursos()"
+            class="float" target="_blank">
             <i class="fa fa-whatsapp my-float"></i>
         </a>
 
@@ -77,20 +85,23 @@
                 <div class="flex sm:flex-row flex-col sm:justify-between text-center text-black my-12 xl:p-0 px-12">
                     <div>
                         <div class="xl:w-[16rem] xl:h-60 sm:w-[19.5rem] sm:h-72">
-                            <img src="public/images/home/comofunciona1.png" class="w-full h-full" alt="busca el curso o mentor">
+                            <img src="public/images/home/comofunciona1.png" class="w-full h-full"
+                                alt="busca el curso o mentor">
                         </div>
                         <h2 class="mx-auto my-3 text-3xl w-[16rem] font-bold">Busca el curso o mentor ideal</h2>
                     </div>
                     <div>
                         <div class="xl:w-[15rem] xl:h-60 sm:w-[18rem] sm:h-72">
-                            <img src="public/images/home/comofunciona2.png" class="w-full h-full" alt="adapta a tus tiempos">
+                            <img src="public/images/home/comofunciona2.png" class="w-full h-full"
+                                alt="adapta a tus tiempos">
                         </div>
                         <h2 class="mx-auto my-3 xl:mt-12 text-[1.75rem] w-[18rem] font-bold">Agenda, adaptado a tus
                             tiempos</h2>
                     </div>
                     <div>
                         <div class="xl:w-[14rem] xl:h-60 sm:w-[19.5rem] sm:h-72">
-                            <img src="public/images/home/comofunciona3.png" class="w-full h-full" alt="aprende personalizado">
+                            <img src="public/images/home/comofunciona3.png" class="w-full h-full"
+                                alt="aprende personalizado">
                         </div>
                         <div>
                             <h2 class="mx-auto mt-3 text-3xl w-[16rem] font-bold">Aprende personalizado</h2>
@@ -107,16 +118,19 @@
 
                     </div>
                 </div>
-                <div class="bg-white hidden border-2 py-2 sm:px-4 shadow rounded-xl mt-4 sm:mx-28 sm:w-[50rem] min-h-auto max-h-[32rem] overflow-y-auto w-full buscador" id="buscador">
+                <div class="bg-white hidden border-2 py-2 sm:px-4 shadow rounded-xl mt-4 sm:mx-28 sm:w-[50rem] min-h-auto max-h-[32rem] overflow-y-auto w-full buscador"
+                    id="buscador">
                 </div>
 
             </div>
 
             <div class="p-4 bg-[#d3deea] flex sm:flex-row flex-col justify-around">
-                <button class="bg-[#4F7CAC] sm:w-80 h-16 sm:mb-0 mb-3 font-bold rounded-full text-base text-[#FEC400]" type="button" onclick="mostrarContenidoAreas()">Areas
+                <button class="bg-[#4F7CAC] sm:w-80 h-16 sm:mb-0 mb-3 font-bold rounded-full text-base text-[#FEC400]"
+                    type="button" onclick="mostrarContenidoAreas()">Areas
                     de
                     aprendizaje</button>
-                <button class="bg-[#2E3532] sm:w-64 h-16 font-bold rounded-full text-base" type="button" onclick="mostrarContenidoMasterTeach()">Master Teach</button>
+                <button class="bg-[#2E3532] sm:w-64 h-16 font-bold rounded-full text-base" type="button"
+                    onclick="mostrarContenidoMasterTeach()">Master Teach</button>
             </div>
 
         </section>
@@ -167,9 +181,52 @@
 
                     </div>
                 </div>
-
-
             </div>
+
+            <div class="border-b-2 my-10 inline-block border-[#4F7CAC]">
+                <h1 class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
+                    CURSOS DE PROGRAMACION
+                </h1>
+            </div>
+
+            <div class="flex my-10">
+                <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
+                    <div class="card__content overflow-hidden">
+                        <div class="swiper-wrapper" id="programacion">
+                        </div>
+                    </div>
+                    <div class="swiper-button-next">
+                        <i class="ri-arrow-right-s-line "></i>
+                    </div>
+                    <div class="swiper-button-prev">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-b-2 my-10 inline-block border-[#4F7CAC]">
+                <h1 class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
+                    CURSOS DE ADMINISTRACION Y FINAZAS
+                </h1>
+            </div>
+
+            <div class="flex my-10">
+                <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
+                    <div class="card__content overflow-hidden">
+                        <div class="swiper-wrapper" id="administracion">
+                        </div>
+                    </div>
+                    <div class="swiper-button-next">
+                        <i class="ri-arrow-right-s-line "></i>
+                    </div>
+                    <div class="swiper-button-prev">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </div>
+                </div>
+            </div>
+
+
+
 
             <!--Master teach-->
             <div id="contenido-master-teach" class="prices-1" style="display: none;">
@@ -186,7 +243,8 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next text-faded" href="#carouselExample15" role="button" data-slide="next">
+                            <a class="carousel-control-next text-faded" href="#carouselExample15" role="button"
+                                data-slide="next">
                                 <span class="carousel-control-next-icon p-2" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -198,7 +256,8 @@
             </div>
 
             <div id="footer" class="flex justify-center my-10 w-full">
-                <button class="text-[#FAC400] bg-[#4F7CAC] rounded-full font-bold w-96  text-xl" type="button" id="toggleButton">Mostrar
+                <button class="text-[#FAC400] bg-[#4F7CAC] rounded-full font-bold w-96  text-xl" type="button"
+                    id="toggleButton">Mostrar
                     más
                     categorías</button>
             </div>
@@ -269,7 +328,8 @@
 
                             <div id="contenido-mas" class="prices-1">
                                 <div class="border-b-2 my-10 inline-block border-[#4F7CAC]">
-                                    <h1 class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
+                                    <h1
+                                        class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
                                         CURSOS DE SALUD Y BIENESTAR
                                     </h1>
                                 </div>
@@ -288,30 +348,10 @@
                                     </div>
                                 </div>
 
-                                <div class="border-b-2 my-10 inline-block border-[#4F7CAC]">
-                                    <h1 class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
-                                        CURSOS DE PROGRAMACION
-                                    </h1>
-                                </div>
-
-                                <div class="flex my-10">
-                                    <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                        <div class="card__content overflow-hidden">
-                                            <div class="swiper-wrapper" id="programacion">
-                                            </div>
-                                        </div>
-                                        <div class="swiper-button-next">
-                                            <i class="ri-arrow-right-s-line "></i>
-                                        </div>
-                                        <div class="swiper-button-prev">
-                                            <i class="ri-arrow-left-s-line"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div id="contenido-mas" class="prices-1">
                                     <div class="border-b-2 my-10 inline-block border-[#4F7CAC]">
-                                        <h1 class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
+                                        <h1
+                                            class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
                                             CURSOS DE MUSICA
                                         </h1>
                                     </div>
@@ -332,7 +372,8 @@
 
                                     <div id="contenido-mas" class="prices-1">
                                         <div class="border-b-2 my-10 inline-block border-[#4F7CAC]">
-                                            <h1 class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
+                                            <h1
+                                                class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
                                                 CURSOS DE MKT
                                             </h1>
                                         </div>
@@ -353,7 +394,8 @@
 
                                         <div id="contenido-mas" class="prices-1">
                                             <div class="border-b-2 my-10 inline-block border-[#4F7CAC]">
-                                                <h1 class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
+                                                <h1
+                                                    class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
                                                     CURSOS DE IDIOMAS
                                                 </h1>
                                             </div>
@@ -374,7 +416,8 @@
 
                                             <div id="contenido-mas" class="prices-1">
                                                 <div class="border-b-2 my-10 inline-block border-[#4F7CAC]">
-                                                    <h1 class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
+                                                    <h1
+                                                        class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
                                                         CURSOS DE DIBUJO E ILUSTRACION DIGITAL
                                                     </h1>
                                                 </div>
@@ -395,7 +438,8 @@
 
                                                 <div id="contenido-mas" class="prices-1">
                                                     <div class="border-b-2 my-10 inline-block border-[#4F7CAC]">
-                                                        <h1 class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
+                                                        <h1
+                                                            class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
                                                             CURSOS DE DATA MINING
                                                         </h1>
                                                     </div>
@@ -416,7 +460,8 @@
 
                                                     <div id="contenido-mas" class="prices-1">
                                                         <div class="border-b-2 my-10 inline-block border-[#4F7CAC]">
-                                                            <h1 class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
+                                                            <h1
+                                                                class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
                                                                 CURSOS DE CAD
                                                             </h1>
                                                         </div>
@@ -437,12 +482,14 @@
 
                                                         <div id="contenido-mas" class="prices-1">
                                                             <div class="border-b-2 my-10 inline-block border-[#4F7CAC]">
-                                                                <h1 class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
+                                                                <h1
+                                                                    class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
                                                                     CURSOS DE ARTE
                                                                 </h1>
                                                             </div>
                                                             <div class="flex my-10">
-                                                                <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
+                                                                <div
+                                                                    class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
                                                                     <div class="card__content overflow-hidden">
                                                                         <div class="swiper-wrapper" id="arte">
                                                                         </div>
@@ -456,39 +503,8 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div id="contenido-mas" class="prices-1">
-                                                                <div class="border-b-2 my-10 inline-block border-[#4F7CAC]">
-                                                                    <h1 class="sm:text-5xl text-3xl sm:text-left text-center font-bold py-3 text-[#4F7CAC]">
-                                                                        CURSOS DE ADMINISTRACION Y FINANZAS
-                                                                    </h1>
-                                                                </div>
-                                                                <div class="flex my-10">
-                                                                    <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                                                        <div class="card__content overflow-hidden">
-                                                                            <div class="swiper-wrapper" id="administracion">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="swiper-button-next">
-                                                                            <i class="ri-arrow-right-s-line "></i>
-                                                                        </div>
-                                                                        <div class="swiper-button-prev">
-                                                                            <i class="ri-arrow-left-s-line"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
 
-
-                                                            <div id="video-popup" class="video-popup">
-                                                                <div class="video-container">
-                                                                    <video id="video-popup-player" controls>
-                                                                        <source src="" type="video/mp4">
-                                                                        Your browser does not support the
-                                                                        video tag.
-                                                                    </video>
-                                                                    <button id="close-video-popup" class="close-btn">X</button>
-                                                                </div>
-                                                            </div>
+                                                        </div>
 
         </section>
 
@@ -504,7 +520,8 @@
                     <div class="flex lg:flex-row flex-col w-full">
                         <div class="md:w-1/2">
                             <div class="xl:w-[20rem] sm:w-[27rem] xl:ml-auto xl:mr-10">
-                                <img src="public/images/home/porqueestudiar.png" class="w-full h-full" alt="personalizacion">
+                                <img src="public/images/home/porqueestudiar.png" class="w-full h-full"
+                                    alt="personalizacion">
                             </div>
                         </div>
                         <div class="text-white md:w-1/2 md:my-auto my-8">
@@ -521,12 +538,14 @@
                     <div class="flex lg:flex-row-reverse flex-col my-16 w-full">
                         <div class="md:w-1/2 w-full">
                             <div class="xl:w-[23rem] sm:w-[28rem] xl:ml-10">
-                                <img src="public/images/home/porqueestudia2.png" class="w-full h-full" alt="personalizacion">
+                                <img src="public/images/home/porqueestudia2.png" class="w-full h-full"
+                                    alt="personalizacion">
                             </div>
                         </div>
                         <div class="text-white md:w-1/2 md:my-auto my-8">
                             <div class="ml-auto text-2xl xl:text-right">
-                                <h1 class="sm:w-[27rem] text-[#D7F9FF] font-bold ml-auto border-b-2 pb-1 border-[#FAC400]">
+                                <h1
+                                    class="sm:w-[27rem] text-[#D7F9FF] font-bold ml-auto border-b-2 pb-1 border-[#FAC400]">
                                     Cursos / Asesorias escolares y laborales
                                 </h1>
                                 <p class="my-4 xl:w-[27rem] xl:ml-auto">Accede a cursos y asesorias de acuerdo a tus
@@ -544,7 +563,8 @@
                         </div>
                         <div class="text-white md:w-1/2 md:my-auto my-8">
                             <div class="text-2xl">
-                                <h1 class="sm:w-96 text-[#D7F9FF] font-bold border-b-2 pb-1 border-[#FAC400] text-center">
+                                <h1
+                                    class="sm:w-96 text-[#D7F9FF] font-bold border-b-2 pb-1 border-[#FAC400] text-center">
                                     Nos adaptamos a ti
                                 </h1>
                                 <p class="my-4 xl:w-[26rem]">En Wido <span class="font-bold">nos adaptamos a tus

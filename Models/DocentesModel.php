@@ -13,18 +13,30 @@ class DocenteModel
 
     public function validarDocente($correo, $contrasena)
     {
+        // Preparar la consulta para prevenir inyección SQL
+        $query = "SELECT * FROM mentor_login WHERE Username = ?";
 
-        //$contrasena = md5($contrasena);
+        if ($stmt = mysqli_prepare($this->db, $query)) {
+            // Bind the parameters
+            mysqli_stmt_bind_param($stmt, "s", $correo);
+            // Execute the statement
+            mysqli_stmt_execute($stmt);
+            // Get the result
+            $resultado = mysqli_stmt_get_result($stmt);
 
-        $query = "SELECT * FROM maestros WHERE correo_electronico = '$correo' AND contraseña = '$contrasena'";
-        $resultado = mysqli_query($this->db, $query);
-
-        if (mysqli_num_rows($resultado) > 0) {
-            return mysqli_fetch_array($resultado);
+            // Check if the user exists
+            if ($resultado && mysqli_num_rows($resultado) > 0) {
+                $usuario = mysqli_fetch_array($resultado, MYSQLI_ASSOC);
+                // Verify the password
+                if (password_verify($contrasena, $usuario['Password'])) {
+                    return $usuario;
+                }
+            }
         }
 
         return false;
     }
+
 
     public function informacionDocente($id)
     {

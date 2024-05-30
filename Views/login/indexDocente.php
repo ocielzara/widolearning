@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="styles/output.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <title>Bienvenido a mi Formulario</title>
+    <title>Bienvenido Mentor</title>
 </head>
 
 <style>
@@ -89,7 +88,8 @@
         width: 400px;
         height: 40rem;
         padding: 1rem;
-        margin: auto 1rem;
+        margin-block: 18rem;
+        margin-inline: 2rem;
         background-color: rgba(6, 6, 6, 0.6);
         text-align: center;
         border-radius: 20px;
@@ -248,9 +248,13 @@
     }
 
     /* For small devices */
-    @media screen and (max-width: 425) {
+    @media screen and (max-width: 425px) {
         .welcome-back {
             display: none;
+        }
+
+        .formulario {
+            margin-block: auto;
         }
     }
 </style>
@@ -263,21 +267,16 @@
     <div class="container-form sign-up">
         <div class="hidden welcome-back">
             <div class="hidden message">
-                <!--
-                <h2>Bienvenido</h2>
-                <p>Si ya tienes una cuenta por favor inicia sesion aqui</p>
-                <button class="sign-up-btn">Iniciar Sesion</button>
-                -->
             </div>
         </div>
         <form class="formulario" action="index.php?c=Docentes&a=iniciarSesion" method="post">
-            <div>
+            <div class="w-full">
                 <h2 class="create-account font-semibold">¡HOLA MASTER TEACH!</h2>
                 <p class="cuenta-gratis">Bienvenido a tu espacio</p>
                 <input type="email" placeholder="Correo electronico" name="correo" required>
                 <input type="password" placeholder="Contraseña" name="contraseña" required>
+                <button class="boton" type="submit">Iniciar sesion</button>
             </div>
-            <button class="boton" type="submit">Iniciar sesion</button>
         </form>
     </div>
 

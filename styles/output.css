@@ -987,9 +987,9 @@ video {
   --tw-bg-opacity: 0.5;
 }
 
-.object-contain {
-  -o-object-fit: contain;
-     object-fit: contain;
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .p-10 {
@@ -1360,7 +1360,6 @@ a:hover {
 }
 
 .imageBuscador {
-  cursor: pointer;
   width: 8rem;
   margin-inline: 0.75rem;
 }
@@ -1629,12 +1628,9 @@ h3 {
 
 /* For small devices */
 
-@media only screen and (min-width: 450px) and (max-width: 320px) {
+@media only screen and (max-width: 450px) {
   .imageBackground {
     background-image: url("../../public/images/home/portadamobil.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
   }
 
   .containderCard {

@@ -1,3 +1,7 @@
+//const baseUrl = "https://www.widolearn.com";
+const baseUrl = "http://localhost/widolearning";
+// http://localhost/widolearning/
+
 function mostrarToastify(texto, tipo) {
   const background = tipo === "success" ? "green" : "red";
   Toastify({
@@ -39,7 +43,7 @@ function closePDF() {
 }
 
 function redirigirClaseMuestra(idCurso, nombreCurso) {
-  const url = `index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=${idCurso}&nombreCurso=${encodeURIComponent(
+  const url = `${baseUrl}/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=${idCurso}&nombreCurso=${encodeURIComponent(
     nombreCurso
   )}`;
   window.location.href = url;
@@ -49,14 +53,13 @@ function mostrarResultados(resultados) {
   contentBuscador.innerHTML = "";
 
   resultados.forEach(function (resultado) {
-    console.log(resultado.foto);
     var newContent = document.createElement("div");
     newContent.className = "flex p-3 my-3 shadow-md";
     newContent.innerHTML = `
       <div class="imageBuscador" >
         <img src="public/${resultado.foto}" class="w-full h-full" alt="">
       </div>
-      <div class="m-auto" onclick="redirigirClaseMuestra(${resultado.id_curso}, '${resultado.nombre}')>
+      <div class="m-auto cursor-pointer" onclick="redirigirClaseMuestra(${resultado.id_curso}, '${resultado.nombre}')">
         <h1 class="font-bold sm:text-2xl text-center my-4 mx-5 items-center">${resultado.nombre}</h1>
       </div>
     `;
@@ -131,9 +134,7 @@ const mostrarAsesorias = (data) => {
 };
 
 function mostrarMasCategorias(typoCurso) {
-  fetch(
-    `http://localhost/widolearning/index.php?c=Cursos&a=verCursosCategorias&tipo=${typoCurso}`
-  )
+  fetch(`${baseUrl}/index.php?c=Cursos&a=verCursosCategorias&tipo=${typoCurso}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(
@@ -156,7 +157,7 @@ function mostrarMasCategorias(typoCurso) {
               <button class="button1" onclick="redirigirClaseMuestra(${curso.id_curso}, '${curso.nombre}')">
                 <span>Clase muestra</span>
               </button>
-              <button class="button2" onclick="openPDF('public/images/curso-pdf/adobe-after-pdf.pdf')">
+              <button class="button2" onclick="openPDF('public/${curso.pdf}')">
                 <span>Temario</span>
               </button>
             </div>
@@ -170,7 +171,7 @@ function mostrarMasCategorias(typoCurso) {
     });
 }
 function obtenerCursos() {
-  fetch("http://localhost/widolearning/index.php?c=Cursos&a=verCursos")
+  fetch(`${baseUrl}/index.php?c=Cursos&a=verCursos`)
     .then((response) => {
       if (!response.ok) {
         throw new Error(
@@ -194,7 +195,7 @@ function obtenerCursos() {
               <button class="button1" onclick="redirigirClaseMuestra(${curso.id_curso}, '${curso.nombre}')">
                 <span>Clase muestra</span>
               </button>
-              <button class="button2" onclick="openPDF('public/images/curso-pdf/adobe-after-pdf.pdf')">
+              <button class="button2" onclick="openPDF('public/${curso.pdf}')">
                 <span>Temario</span>
               </button>
             </div>
@@ -209,7 +210,7 @@ function obtenerCursos() {
 }
 
 function obtenerAsesorias() {
-  fetch("http://localhost/widolearning/index.php?c=Cursos&a=verAsesorias")
+  fetch(`${baseUrl}/index.php?c=Cursos&a=verAsesorias`)
     .then((res) => {
       if (!res.ok) {
         throw new Error(
@@ -231,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const urlParams = new URLSearchParams(window.location.search);
   const idCurso = urlParams.get("idCurso");
   fetch(
-    `http://localhost/widolearning/index.php?c=Docentes&a=verMentoresporIdCursos&cursoId=${idCurso}`
+    `${baseUrl}/index.php?c=Docentes&a=verMentoresporIdCursos&cursoId=${idCurso}`
   )
     .then((response) => response.json())
     .then((data) => {
@@ -313,11 +314,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function verPerfilMentor(idMentor) {
-  const url = `index.php?c=Docentes&a=informacionMentorId&idCurso=${idMentor}`;
+  const url = `${baseUrl}/index.php?c=Docentes&a=informacionMentorId&idCurso=${idMentor}`;
   window.location.href = url;
 }
 function iniciarSesion() {
-  const url = "http://www.widolearn.com/index.php?c=Usuarios&a=login";
+  const url = `${baseUrl}/index.php?c=Usuarios&a=login`;
   window.location.href = url;
 }
 
@@ -326,7 +327,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const idCurso = urlParams.get("idCurso");
 
   fetch(
-    `http://localhost/widolearning/index.php?c=Docentes&a=informacionMentorId&idCurso=${idCurso}`,
+    `${baseUrl}/index.php?c=Docentes&a=informacionMentorId&idCurso=${idCurso}`,
     {
       headers: {
         "X-Requested-With": "XMLHttpRequest",
@@ -362,7 +363,7 @@ document.addEventListener("DOMContentLoaded", function () {
               <button class="button1" onclick="redirigirClaseMuestra(${curso.id_curso}, '${curso.Curso}')">
                 <span>Clase muestra</span>
               </button>
-              <button class="button2" onclick="openPDF('public/images/curso-pdf/adobe-after-pdf.pdf')">
+              <button class="button2" onclick="openPDF('public/${curso.pdf}')">
                 <span>Temario</span>
               </button>
             </div>
@@ -440,7 +441,7 @@ function enviarForm(
   contraseña,
   selectedIntereses
 ) {
-  fetch("http://localhost/widolearning/index.php?c=Usuarios&a=registro", {
+  fetch(`${baseUrl}/index.php?c=Usuarios&a=registro`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -484,7 +485,7 @@ function login() {
   const correo = document.getElementById("email").value;
   const contraseña = document.getElementById("password").value;
 
-  fetch("http://localhost/widolearning/index.php?c=Usuarios&a=iniciarSesion", {
+  fetch(`${baseUrl}/index.php?c=Usuarios&a=iniciarSesion`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
