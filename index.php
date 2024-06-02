@@ -13,6 +13,11 @@ require_once "Controllers/Docentes.php";
 require_once "Controllers/Cursos.php";
 //Mediante la url vamos a saber que controlador se usa
 //ejemplo index.php?c=sedes
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 if (isset($_GET['c'])) {
 	$controlador = cargarControlador($_GET['c']);
 

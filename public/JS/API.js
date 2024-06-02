@@ -238,6 +238,9 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((data) => {
       var carruselcurso = document.getElementById("mentorContainer");
       data.forEach((curso) => {
+        const mentorFoto = curso.MentorFoto
+          ? `public/images/docente/${curso.MentorFoto}/${curso.MentorFoto}-profile.png`
+          : "public/images/docente/blank-profile.png";
         const especialidad = curso.Curso;
         const nombre =
           especialidad.charAt(0).toUpperCase() + especialidad.slice(1);
@@ -248,7 +251,8 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="xl:w-[40%] sm:w-[23%] sm:border-r-2 sm:border-black">
             <div class="flex sm:flex-row flex-col">
                 <div class="sm:w-1/2 2xl:w-[40%] w-40 sm:h-36 h-40 mx-auto">
-                    <img src="public/images/docente/${curso.MentorFoto}/${curso.MentorFoto}-profile.png" class="w-full h-full rounded-full" alt="">
+                  <img src="${mentorFoto}" class="w-full h-full rounded-full" alt="">
+                
                 </div>
                 <div class="sm:w-1/2 my-auto textMentor">
                     <h1 class="sm:w-16 text-center font-semibold">${curso.Mentor}
@@ -259,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <p class="font-bold sm:text-left text-center">Especialista en:</p>
                 <div class="flex flex-col sm:items-start items-center py-2">
                     <button class="w-[90%] my-1 h-8 font-semibold">${nombre}</button>
-                    <button class="mt-2 bottonBG font-bold h-8 rounded-full" onclick="verPerfilMentor(${curso.Mentor_ID})" id="navigateDocente">Ver portal</button>
+                    <button class="mt-2 bottonBG font-bold h-8 rounded-full cursor-pointer" onclick="verPerfilMentor(${curso.Mentor_ID})" id="navigateDocente">Ver portal</button>
                 </div>
             </div>
         </div>
@@ -279,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </select>
 
             </div>
-            <div class="grid sm:grid-cols-4 grid-cols-2 p-10">
+            <div class="fechaContent">
                 <div>
                     <p class="m-2 p-1">6:30 PM</p>
                 </div>
@@ -510,5 +514,3 @@ function login() {
       mostrarToastify("Network error: " + error.message, "error");
     });
 }
-
-/**  Buscar resultados de la base de datos */

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil Mentor</title>
-    <!-- Bootstrap -->
+    <link rel="icon" type="image/png" sizes="32x32" href="public/images/home/iconWido.jpeg">
+    <link rel="icon" type="image/png" sizes="16x16" href="public/images/home/iconWido.jpeg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
     <!-- Font Awesome -->
@@ -21,10 +22,8 @@
     <!--========== CONTENTS ==========-->
     <main>
         <section>
-            <?php include 'Views/contenido/header.php'; ?>
             <div class="container">
-                <!-- Otras partes de tu código aquí -->
-                <a href="index.php?c=Docentes&a=agendaIndex&id=<?php echo $idDocente; ?>" class="btn btn-dark mb-3">Crear</a>
+                <a href="index.php?c=Docentes&a=agendaIndex&id=<?php echo $_SESSION['mentor_id']; ?>" class="btn btn-dark mb-3">Crear</a>
                 <table class="table table-hover text-center">
                     <thead class="table-dark">
                         <tr>
@@ -35,14 +34,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (isset($consulta) && is_array($consulta)) : ?>
-                            <?php foreach ($consulta as $fila) : ?>
+                        <?php if (isset($mentorInfo) && is_array($mentorInfo)) : ?>
+                            <?php foreach ($mentorInfo as $fila) : ?>
                                 <tr>
                                     <td>
                                         <?php echo $fila['id_disponibilidad']; ?>
                                     </td>
                                     <td>
-                                        <?php echo $fila['fecha']; ?>
+                                        <?php echo $fila['dia_semana']; ?>
                                     </td>
                                     <td>
                                         <?php echo $fila['hora']; ?>
@@ -56,11 +55,6 @@
                         <?php else : ?>
                             <tr>
                                 <td colspan="4">No hay datos disponibles</td>
-                                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                                    Launch demo modal
-                                </button>
-
-                                <!-- Modal -->
                                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">

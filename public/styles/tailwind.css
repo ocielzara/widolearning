@@ -370,6 +370,21 @@ h3 {
   margin-inline: 1rem;
 }
 
+.fechaContent {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.fechaContent :is(p) {
+  cursor: pointer;
+  border-radius: 0.4rem;
+  padding-inline: 0.5rem;
+  margin: 0.5rem;
+  color: #ffffff;
+  background: #2e3532;
+}
+
 @media screen and (min-width: 1440px) {
   .containderCard {
     width: 23.8rem !important;

@@ -1,7 +1,7 @@
 <?php
 // Verificar si la variable de sesión existe antes de usarla para evitar errores
-if (isset ($_SESSION['idDocente'])) {
-    $inicioDocente = $_SESSION['idDocente'];
+if (isset($_SESSION['mentor_id'])) {
+    $inicioDocente = $_SESSION['mentor_id'];
 } else {
     echo "No se ha iniciado sesión"; // En caso de que la sesión no esté iniciada o la variable de sesión no esté definida
 }
@@ -383,7 +383,7 @@ if (isset ($_SESSION['idDocente'])) {
                                 <div class="nav__dropdown-content">
                                     <?php
                                     // Verificar si hay notificaciones
-                                    if (!empty ($consultaNotificacion)) {
+                                    if (!empty($consultaNotificacion)) {
                                         // Iterar sobre las notificaciones y mostrarlas
                                         foreach ($consultaNotificacion as $notificacion) {
                                             // Obtener los campos de la notificación
@@ -408,7 +408,7 @@ if (isset ($_SESSION['idDocente'])) {
                                             echo "<span class='mensaje'>$restoMensaje</span>";
                                             echo "<span class='fecha'>$fecha_creacion</span>";
                                             echo "</a>";
-                                            ?>
+                                    ?>
                                             <form action="index.php?c=Docentes&a=confirmarCita" method="post">
                                                 <input type="hidden" name="idUsuario" value="<?php echo $primerCaracter; ?>">
                                                 <input type="hidden" name="fecha" value="<?php echo $penultimaPalabra; ?>">
@@ -420,7 +420,7 @@ if (isset ($_SESSION['idDocente'])) {
                                                 <button class="button-cr">Rechazar</button>
                                             </form>
                                             <br>
-                                            <?php
+                                    <?php
                                         }
                                     } else {
                                         // Si no hay notificaciones, mostrar un mensaje indicando que no hay notificaciones disponibles

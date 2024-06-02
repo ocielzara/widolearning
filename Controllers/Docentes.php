@@ -4,69 +4,14 @@ use function PHPSTORM_META\map;
 
 class DocentesController
 {
-    //Incuimos los modelos que vamos a utilizar
+    private $docenteModel;
+
     public function __construct()
     {
         require_once "Models/DocentesModel.php";
     }
 
-
-    public function index()
-    {
-        session_start();
-        if (isset($_SESSION['idDocente'])) {
-            $docente = new DocenteModel();
-            $idDocente = $_SESSION['idDocente'];
-            $disponibilidadInformacion = $docente->disponibilidadConsulta($idDocente);
-            // Verificar si se encontraron cursos asignados
-            if ($disponibilidadInformacion) {
-                // Inicializar un array para almacenar las fotos de los cursos
-                $consulta = array();
-                // Verificar si hay disponibilidad antes de intentar iterar sobre ella
-                if (is_array($disponibilidadInformacion) && count($disponibilidadInformacion) > 0) {
-
-                    foreach ($disponibilidadInformacion as $disponibilidad) {
-                        // Agregar los datos como un array asociativo a $consulta
-                        $consulta[] = array(
-                            'id_disponibilidad' => $disponibilidad['id_disponibilidad'],
-                            'fecha' => $disponibilidad['fecha'],
-                            'hora' => $disponibilidad['hora']
-                        );
-                    }
-                } else {
-                    // Si no hay disponibilidad, inicializar los arrays como vacíos
-                    $consulta = [];
-                }
-            } else {
-            }
-
-            $notificaciones = $docente->consultaNotificaciones($idDocente);
-            if ($notificaciones) {
-                // Inicializar un array para almacenar las fotos de los cursos
-                $consultaNotificacion = array();
-                // Verificar si hay disponibilidad antes de intentar iterar sobre ella
-                if (is_array($notificaciones) && count($notificaciones) > 0) {
-
-                    foreach ($notificaciones as $totalNotificaciones) {
-                        // Agregar los datos como un array asociativo a $consulta
-                        $consultaNotificacion[] = array(
-                            'id_usuario' => $totalNotificaciones['id_usuario'],
-                            'mensaje' => $totalNotificaciones['mensaje'],
-                            'estado' => $totalNotificaciones['estado'],
-                            'fecha_creacion' => $totalNotificaciones['fecha_creacion']
-                        );
-                    }
-                } else {
-                    // Si no hay disponibilidad, inicializar los arrays como vacíos
-                    $consultaNotificacion = [];
-                }
-            } else {
-            }
-        }
-
-        require_once "Views/docente/index.php";
-    }
-
+    // Muestra el formulario de inicio de sesión
     public function login()
     {
         require_once "Views/login/indexDocente.php";
@@ -74,27 +19,62 @@ class DocentesController
 
     public function iniciarSesion()
     {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $correo = $_POST['correo'];
-            $contraseña = $_POST['contraseña'];
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Capturar datos JSON del cuerpo de la solicitud
+            $data = json_decode(file_get_contents('php://input'), true);
 
-            $docente = new DocenteModel();
-            $maestro = $docente->validarDocente($correo, $contraseña);
-            if ($maestro) {
-                $idDocente = $maestro['id_maestro'];
-                session_start();
-                $_SESSION['idDocente'] = $idDocente;
-                // Redirigir a la página de miEspacio
-                header("location:  index.php?c=Docentes&a=index&n=$idDocente");
+            // Verificar si los datos vienen en formato JSON
+            if ($data) {
+                $correo = $data['correo'];
+                $contrasena = $data['contrasena'];
             } else {
-                require_once "Views/error/index.php";
+                // Si no hay datos JSON, obtener los datos del formulario
+                $correo = $_POST['correo'] ?? null;
+                $contrasena = $_POST['contrasena'] ?? null;
+            }
+
+            if ($correo && $contrasena) {
+                $model = new DocenteModel();
+                $usuario = $model->validarDocente($correo, $contrasena);
+                if ($usuario) {
+                    session_start();
+                    $_SESSION['mentor_id'] = $usuario['Mentor_ID'];
+                    $_SESSION['nombre'] = $usuario['Nombre'];
+
+                    header("Location: index.php?c=Docentes&a=index");
+                    exit();
+                } else {
+                    echo "Correo o contraseña incorrectos";
+                }
+            } else {
+                echo "Faltan datos en la solicitud.";
             }
         } else {
-            // Redirigir si se intenta acceder directamente a través de GET
-            header('Location: index.php');
+            // Si no es un método POST, redirigir al formulario de inicio de sesión
+            header('Location: index.php?c=Docentes&a=login');
+            exit();
         }
     }
 
+    public function index()
+    {
+        session_start();
+        if (!isset($_SESSION['mentor_id'])) {
+            header('Location: index.php?c=Docentes&a=login');
+            exit();
+        }
+        $model = new DocenteModel();
+        $mentorId = $_SESSION['mentor_id'];
+        $mentorInfo = $model->disponibilidadMaestro($mentorId);
+        require_once "Views/docente/index.php";
+    }
+
+
+    public function informacionDocente($id)
+    {
+        $docente = new DocenteModel();
+        return $docente->informacionDocente($id);
+    }
     public function cerrarSesion()
     {
         // Verificar si se ha iniciado una sesión
@@ -190,29 +170,21 @@ class DocentesController
     public function agendaCrear()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Validar y sanar los datos de entrada
-            $date = $_POST['date'];
-            $time = $_POST['time'];
+            $dia_semana = $_POST['dia_semana'];
+            $time = $_POST['hora'];
             $id = $_POST['id_maestro'];
-
-            // Aquí se pueden realizar más validaciones si es necesario
-
-            // Procesar los datos, por ejemplo, guardarlos en la base de datos
             $model = new DocenteModel();
-            if ($model->insertarDisponibilidad($id, $date, $time)) {
-                // Redirigir a alguna página después de registrar al usuario
-                header("location:  index.php?c=Docentes&a=index");
+            if ($model->insertarDisponibilidad($id, $dia_semana, $time)) {
+                header("location: index.php?c=Docentes&a=index");
             } else {
-                // Manejar el caso en que la inserción falla
-                // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
-                // Por ejemplo:
-                echo "Error al registrar el usuario.";
+                echo "Error al registrar la disponibilidad.";
             }
         } else {
             // Redirigir si se intenta acceder directamente a través de GET
             header('Location: index.php');
         }
     }
+
 
     public function agendaEliminar()
     {
@@ -235,19 +207,14 @@ class DocentesController
     public function agendaEditar()
     {
         $id_disponibilidad = $_GET['id'];
-
-        // Procesar los datos, por ejemplo, guardarlos en la base de datos
         $model = new DocenteModel();
-        $informacion = $model->consultaDisponibilidadAgenda($id_disponibilidad);
+        $informacion = $model->obtenerFechaPorId($id_disponibilidad);
         if ($informacion) {
             // Redirigir a alguna página después de registrar al usuario
-            $fecha = $informacion['fecha'];
+            $fecha = $informacion['dia_semana'];
             $hora = $informacion['hora'];
             require_once "Views/docente/agenda/editar.php";
         } else {
-            // Manejar el caso en que la inserción falla
-            // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
-            // Por ejemplo:
             echo "Error al registrar el usuario.";
         }
     }
@@ -255,26 +222,17 @@ class DocentesController
     public function actualizarDisponibilidad()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Validar y sanar los datos de entrada
             $date = $_POST['nuevaFecha'];
             $time = $_POST['nuevaHora'];
+
             $id = $_POST['id'];
-
-            // Aquí se pueden realizar más validaciones si es necesario
-
-            // Procesar los datos, por ejemplo, guardarlos en la base de datos
             $model = new DocenteModel();
             if ($model->actualizarDisponibilidad($id, $date, $time)) {
-                // Redirigir a alguna página después de registrar al usuario
-                header("location:  index.php?c=Docentes&a=index");
+                header("Location: index.php?c=Docentes&a=index");
             } else {
-                // Manejar el caso en que la inserción falla
-                // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
-                // Por ejemplo:
-                echo "Error al registrar el usuario.";
+                echo "Error al actualizar la disponibilidad.";
             }
         } else {
-            // Redirigir si se intenta acceder directamente a través de GET
             header('Location: index.php');
         }
     }
@@ -372,7 +330,7 @@ class DocentesController
                     exit;
                 } else {
                     // Almacenar los datos en una variable accesible desde la vista
-                    $this->$mentores = $mentores;
+                    $this->mentores = $mentores;
                     // Evitar que la página se almacene en caché
                     header('Cache-Control: no-cache, must-revalidate');
                     header('Pragma: no-cache');
@@ -401,6 +359,7 @@ class DocentesController
             }
         }
     }
+
 
 
     private function isAjaxRequest()

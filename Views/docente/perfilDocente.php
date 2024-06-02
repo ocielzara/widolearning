@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="public/images/home/iconWido.jpeg">
+    <link rel="icon" type="image/png" sizes="16x16" href="public/images/home/iconWido.jpeg">
     <link rel="stylesheet" href="styles/output.css">
     <link rel="stylesheet" href="public/styles/styleDocente.css">
 </head>
@@ -18,7 +20,7 @@
                         <h1 class="text-[#FAC400] font-bold text-4xl" id="mentor-name"></h1>
                     </div>
                     <div class="w-[75%] bg-[#114a8f] sm:h-[30rem] rounded-[3rem]">
-                        <img src="" id="mentor-photo" class="w-full h-full rounded-[3rem] 2xl:object-contain object-cover" alt="">
+                        <img src="" id="mentor-photo" class="w-full h-full rounded-[3rem]" alt="">
                     </div>
                 </div>
             </div>
@@ -46,7 +48,7 @@
 
                 <div id="pdfModal">
                     <div id="pdfContent">
-                        <span class="close text-black" onclick="closePDF()">&times;</span>
+                        <span class="close" style="color: black; cursor: pointer;" onclick="closePDF()">&times;</span>
                         <embed id="pdfEmbed" src="" type="application/pdf" width="100%" height="600px" />
                     </div>
                 </div>

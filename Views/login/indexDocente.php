@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/output.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" type="image/png" sizes="32x32" href="public/images/home/iconWido.jpeg">
+    <link rel="icon" type="image/png" sizes="16x16" href="public/images/home/iconWido.jpeg">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
@@ -274,12 +276,13 @@
                 <h2 class="create-account font-semibold">¡HOLA MASTER TEACH!</h2>
                 <p class="cuenta-gratis">Bienvenido a tu espacio</p>
                 <input type="email" placeholder="Correo electronico" name="correo" required>
-                <input type="password" placeholder="Contraseña" name="contraseña" required>
+                <input type="password" placeholder="Contraseña" name="contrasena" required>
                 <button class="boton" type="submit">Iniciar sesion</button>
             </div>
         </form>
     </div>
 
 </body>
+
 
 </html>

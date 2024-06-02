@@ -27,11 +27,35 @@ class DocenteModel
             // Check if the user exists
             if ($resultado && mysqli_num_rows($resultado) > 0) {
                 $usuario = mysqli_fetch_array($resultado, MYSQLI_ASSOC);
-                // Verify the password
-                if (password_verify($contrasena, $usuario['Password'])) {
+
+                // Verificar que el usuario fue encontrado
+                var_dump($usuario);
+
+                // Verify the password (assumes plain text for now)
+                if ($contrasena === $usuario['Password']) {
+                    // Obtener información adicional del mentor desde otra tabla
+                    $mentorQuery = "SELECT * FROM Mentor WHERE Mentor_ID = ?";
+                    if ($mentorStmt = mysqli_prepare($this->db, $mentorQuery)) {
+                        mysqli_stmt_bind_param($mentorStmt, "i", $usuario['Mentor_ID']);
+                        mysqli_stmt_execute($mentorStmt);
+                        $mentorResult = mysqli_stmt_get_result($mentorStmt);
+                        if ($mentorResult && mysqli_num_rows($mentorResult) > 0) {
+                            $mentorInfo = mysqli_fetch_array($mentorResult, MYSQLI_ASSOC);
+                            $usuario['Nombre'] = $mentorInfo['Nombre'];
+                        }
+                    }
                     return $usuario;
+                } else {
+                    // Mostrar mensaje de error si la contraseña no coincide
+                    echo "La contraseña no coincide.";
                 }
+            } else {
+                // Mostrar mensaje de error si el usuario no fue encontrado
+                echo "No se encontró un usuario con ese correo.";
             }
+        } else {
+            // Mostrar mensaje de error si la consulta no pudo ser preparada
+            echo "Error al preparar la consulta.";
         }
 
         return false;
@@ -40,18 +64,18 @@ class DocenteModel
 
     public function informacionDocente($id)
     {
+        $query = "SELECT * FROM Mentor WHERE Mentor_ID = ?";
+        if ($stmt = mysqli_prepare($this->db, $query)) {
+            mysqli_stmt_bind_param($stmt, "i", $id);
+            mysqli_stmt_execute($stmt);
+            $resultado = mysqli_stmt_get_result($stmt);
 
-        $query = "SELECT * FROM Mentor WHERE Mentor_ID = '$id'";
-        $resultado = mysqli_query($this->db, $query);
-        //CONVERTIR EL RESULTADO A MINISCULAS O MAYUSCULAS !!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        if (mysqli_num_rows($resultado) > 0) {
-            return mysqli_fetch_array($resultado);
+            if ($resultado && mysqli_num_rows($resultado) > 0) {
+                return mysqli_fetch_array($resultado, MYSQLI_ASSOC);
+            }
         }
-
         return false;
     }
-
     public function informacionMentorPorId($mentorId)
     {
         $sql = "
@@ -68,8 +92,6 @@ class DocenteModel
         c.nombre AS Curso, 
         c.foto AS CursoFoto, 
         c.tipo AS TipoCurso, 
-        c.temario, 
-        c.requerimientos, 
         c.pdf, 
         c.precio
     FROM 
@@ -109,7 +131,7 @@ class DocenteModel
 
     public function disponibilidadMaestro($idMaestro)
     {
-        $query = "SELECT fecha, hora FROM disponibilidadMaestro WHERE id_maestro = '$idMaestro'";
+        $query = "SELECT * FROM disponibilidadMaestro WHERE id_maestro = '$idMaestro'";
         $resultado = mysqli_query($this->db, $query);
 
         // Verificar si se encontraron resultados
@@ -154,11 +176,14 @@ class DocenteModel
         }
     }
 
-    public function insertarDisponibilidad($id, $date, $time)
+    public function insertarDisponibilidad($id_maestro, $dia_semana, $hora)
     {
-        // Preparar la consulta SQL
-        $query = mysqli_query($this->db, "INSERT INTO disponibilidadMaestro (id_maestro, fecha, hora) VALUES ('$id', '$date', '$time')");
-        return true; // La inserción fue exitosa
+        $query = "INSERT INTO disponibilidadMaestro (id_maestro, dia_semana, hora) VALUES (?, ?, ?)";
+        if ($stmt = $this->db->prepare($query)) {
+            $stmt->bind_param('iss', $id_maestro, $dia_semana, $hora);
+            return $stmt->execute();
+        }
+        return false;
     }
 
     public function eliminarDisponibilidad($id)
@@ -177,54 +202,61 @@ class DocenteModel
         }
     }
 
-    public function consultaDisponibilidadAgenda($id)
+    public function obtenerDisponibilidadPorMaestroId($id_maestro)
     {
-        $query = "SELECT * FROM disponibilidadMaestro WHERE id_disponibilidad = '$id'";
-        $resultado = mysqli_query($this->db, $query);
-
-        if (mysqli_num_rows($resultado) > 0) {
-            return mysqli_fetch_array($resultado);
+        $query = "SELECT dia_semana, hora FROM disponibilidadMaestro WHERE id_maestro = ?";
+        if ($stmt = $this->db->prepare($query)) {
+            $stmt->bind_param('i', $id_maestro);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $disponibilidad = [];
+            while ($row = $result->fetch_assoc()) {
+                $disponibilidad[] = $row;
+            }
+            return $disponibilidad;
         }
-
+        return false;
+    }
+    public function obtenerFechaPorId($id_disponibilidad)
+    {
+        $query = "SELECT * FROM disponibilidadMaestro WHERE id_disponibilidad = ?";
+        if ($stmt = $this->db->prepare($query)) {
+            $stmt->bind_param('i', $id_disponibilidad);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                return $result->fetch_assoc();
+            }
+        }
         return false;
     }
 
-
     public function actualizarDisponibilidad($id, $date, $time)
     {
-        // Preparar la consulta SQL de actualización
-        $query = "UPDATE disponibilidadMaestro SET fecha = '$date', hora = '$time' WHERE id_disponibilidad = '$id'";
+        $query = "UPDATE disponibilidadMaestro SET dia_semana = ?, hora = ? WHERE id_disponibilidad = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("ssi", $date, $time, $id);
 
-        // Ejecutar la consulta
-        $resultado = mysqli_query($this->db, $query);
-
-        // Verificar si la actualización fue exitosa
+        $resultado = $stmt->execute();
         if ($resultado) {
-            return true; // La actualización fue exitosa
+            return true;
         } else {
-            return false; // Hubo un error al actualizar
+            return false;
         }
     }
-
     public function consultaNotificaciones($idMaestro)
     {
         $query = "SELECT * FROM notificaciones WHERE id_maestro = '$idMaestro' ORDER BY fecha_creacion DESC";
         $resultado = mysqli_query($this->db, $query);
-
-        // Verificar si se encontraron resultados
         if ($resultado->num_rows > 0) {
-            // Inicializar un array para almacenar la disponibilidad
+
             $consultaNotificacionDatos = array();
 
-            // Iterar sobre los resultados y almacenarlos en el array de disponibilidad
             while ($row = $resultado->fetch_assoc()) {
                 $consultaNotificacionDatos[] = $row;
             }
-
-            // Devolver el array de disponibilidad
             return $consultaNotificacionDatos;
         } else {
-            // Si no se encontraron resultados, devolver false
             return false;
         }
     }
