@@ -314,6 +314,7 @@ class DocentesController
             echo json_encode(['error' => 'No se ha proporcionado un ID de curso.']);
         }
     }
+
     public function informacionMentorId()
     {
         error_log("informacionMentorId called");  // Logging

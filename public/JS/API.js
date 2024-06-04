@@ -1,5 +1,5 @@
-//const baseUrl = "https://www.widolearn.com";
-const baseUrl = "http://localhost/widolearning";
+const baseUrl = "https://www.widolearn.com";
+//const baseUrl = "http://localhost/widolearning";
 // http://localhost/widolearning/
 
 function mostrarToastify(texto, tipo) {
@@ -231,84 +231,141 @@ function obtenerAsesorias() {
 document.addEventListener("DOMContentLoaded", function () {
   const urlParams = new URLSearchParams(window.location.search);
   const idCurso = urlParams.get("idCurso");
+  console.log(`Fetching data for course ID: ${idCurso}`);
+
   fetch(
     `${baseUrl}/index.php?c=Docentes&a=verMentoresporIdCursos&cursoId=${idCurso}`
   )
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      return response.json();
+    })
     .then((data) => {
+      console.log("Data received:", data);
       var carruselcurso = document.getElementById("mentorContainer");
-      data.forEach((curso) => {
-        const mentorFoto = curso.MentorFoto
-          ? `public/images/docente/${curso.MentorFoto}/${curso.MentorFoto}-profile.png`
+
+      if (!Array.isArray(data) || data.length === 0) {
+        throw new Error("No data found");
+      }
+
+      const mentoresDisponibilidad = {};
+
+      // Agrupar disponibilidades por mentor
+      data.forEach((item) => {
+        if (!mentoresDisponibilidad[item.Mentor_ID]) {
+          mentoresDisponibilidad[item.Mentor_ID] = {
+            Mentor: item.Mentor,
+            MentorFoto: item.MentorFoto,
+            Curso: item.Curso,
+            CursoFoto: item.CursoFoto,
+            TipoCurso: item.TipoCurso,
+            PDF: item.PDF,
+            Disponibilidad: [],
+          };
+        }
+        if (item.dia_semana && item.hora) {
+          mentoresDisponibilidad[item.Mentor_ID].Disponibilidad.push({
+            dia_semana: item.dia_semana,
+            hora: item.hora,
+          });
+        }
+      });
+
+      Object.keys(mentoresDisponibilidad).forEach((mentorId) => {
+        const mentor = mentoresDisponibilidad[mentorId];
+        const mentorFoto = mentor.MentorFoto
+          ? `public/images/docente/${mentor.MentorFoto}/${mentor.MentorFoto}-profile.png`
           : "public/images/docente/blank-profile.png";
-        const especialidad = curso.Curso;
+        const especialidad = mentor.Curso;
         const nombre =
           especialidad.charAt(0).toUpperCase() + especialidad.slice(1);
+
+        // Crear objeto de disponibilidades agrupadas por día de la semana
+        const disponibilidades = {};
+        mentor.Disponibilidad.forEach((dispo) => {
+          console.log(
+            `Processing availability: ${dispo.dia_semana} at ${dispo.hora}`
+          );
+          const dia = dispo.dia_semana.toLowerCase();
+          if (!disponibilidades[dia]) {
+            disponibilidades[dia] = [];
+          }
+          disponibilidades[dia].push(dispo.hora);
+        });
+
         var newContent = document.createElement("div");
         newContent.className =
           "flex sm:flex-row flex-col rounded-3xl p-10 bg-white contentMentor";
         newContent.innerHTML = `
-        <div class="xl:w-[40%] sm:w-[23%] sm:border-r-2 sm:border-black">
-            <div class="flex sm:flex-row flex-col">
-                <div class="sm:w-1/2 2xl:w-[40%] w-40 sm:h-36 h-40 mx-auto">
-                  <img src="${mentorFoto}" class="w-full h-full rounded-full" alt="">
-                
-                </div>
-                <div class="sm:w-1/2 my-auto textMentor">
-                    <h1 class="sm:w-16 text-center font-semibold">${curso.Mentor}
-                    </h1>
-                </div>
-            </div>
-            <div class="m-5">
-                <p class="font-bold sm:text-left text-center">Especialista en:</p>
-                <div class="flex flex-col sm:items-start items-center py-2">
-                    <button class="w-[90%] my-1 h-8 font-semibold">${nombre}</button>
-                    <button class="mt-2 bottonBG font-bold h-8 rounded-full cursor-pointer" onclick="verPerfilMentor(${curso.Mentor_ID})" id="navigateDocente">Ver portal</button>
-                </div>
-            </div>
-        </div>
-        <div class="flex flex-col justify-center mx-auto">
-            <div>
-                <h1 class="text-center sm:my-0 my-5 font-bold">Puedes seleccionar un dia para ver los horaros
-                    disponibles
-                </h1>
-                <label for="countries" class="block mb-2 text-sm font-medium mt-2 text-gray-900">
-                    Selecciona un dia</label>
-                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                    <option value="lunes">Lunes</option>
-                    <option value="miercoles">Miercoles</option>
-                    <option value="jueves">Jueves</option>
-                    <option value="viernes">Viernes</option>
-                    <option value="sabado">Sabado</option>
-                </select>
-
-            </div>
-            <div class="fechaContent">
-                <div>
-                    <p class="m-2 p-1">6:30 PM</p>
-                </div>
-                <div>
-                    <p class="m-2 p-1">6:30 PM</p>
-                </div>
-                <div>
-                    <p class="m-2 p-1">6:30 PM</p>
-                </div>
-                <div>
-                    <p class="m-2 p-1">6:30 PM</p>
-                </div>
-                <div>
-                    <p class="m-2 p-1">6:30 PM</p>
-                </div>
-                <div>
-                    <p class="m-2 p-1">6:30 PM</p>
-                </div>
-            </div>
-        </div>
-        `;
+              <div class="xl:w-[40%] sm:w-[23%] sm:border-r-2 sm:border-black">
+                  <div class="flex sm:flex-row flex-col">
+                      <div class="sm:w-1/2 2xl:w-[40%] w-40 sm:h-36 h-40 mx-auto">
+                        <img src="${mentorFoto}" class="w-full h-full rounded-full" alt="">
+                      </div>
+                      <div class="sm:w-1/2 my-auto textMentor">
+                          <h1 class="sm:w-16 text-center font-semibold">${mentor.Mentor}</h1>
+                      </div>
+                  </div>
+                  <div class="m-5">
+                      <p class="font-bold sm:text-left text-center">Especialista en:</p>
+                      <div class="flex flex-col sm:items-start items-center py-2">
+                          <button class="w-[90%] my-1 h-8 font-semibold">${nombre}</button>
+                          <button class="mt-2 bottonBG font-bold h-8 rounded-full cursor-pointer" onclick="verPerfilMentor(${mentorId})" id="navigateDocente">Ver portal</button>
+                      </div>
+                  </div>
+              </div>
+              <div class="flex flex-col justify-center mx-auto">
+                  <div class="mx-auto">
+                      <h1 class="text-center sm:my-0 my-5 font-bold">Puedes seleccionar un día para ver los horarios disponibles</h1>
+                      <label for="days_${mentorId}" class="block mb-2 text-sm font-medium mt-2 text-gray-900">
+                          Selecciona un día</label>
+                      <select id="days_${mentorId}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block sm:w-96 w-full p-2.5 ">
+                          <option value="lunes">Lunes</option>
+                          <option value="martes">Martes</option>
+                          <option value="miercoles">Miércoles</option>
+                          <option value="jueves">Jueves</option>
+                          <option value="viernes">Viernes</option>
+                          <option value="sabado">Sábado</option>
+                          <option value="domingo">Domingo</option>
+                      </select>
+                  </div>
+                  <div class="fechaContent grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-5" id="horarios_${mentorId}">
+                  </div>
+              </div>
+              `;
         carruselcurso.appendChild(newContent);
+
+        // Agregar evento para cambiar los horarios cuando se seleccione un día
+        const select = document.getElementById(`days_${mentorId}`);
+        select.addEventListener("change", function () {
+          const selectedDay = this.value;
+          const horariosContainer = document.getElementById(
+            `horarios_${mentorId}`
+          );
+          horariosContainer.innerHTML = ""; // Limpiar horarios previos
+
+          if (disponibilidades[selectedDay]) {
+            disponibilidades[selectedDay].forEach((hora) => {
+              const horaElement = document.createElement("div");
+              horaElement.innerHTML = `<p class="m-2 p-1">${hora}</p>`;
+              horariosContainer.appendChild(horaElement);
+            });
+          } else {
+            const noDisponibilidadElement = document.createElement("div");
+            noDisponibilidadElement.className = "sm:mx-20";
+            noDisponibilidadElement.innerHTML = `<p class="m-2 mx-auto w-full sm:w-72 p-1">No hay horarios disponibles</p>`;
+            horariosContainer.appendChild(noDisponibilidadElement);
+          }
+        });
+
+        // Disparar el evento change para mostrar los horarios del primer día por defecto
+        select.dispatchEvent(new Event("change"));
       });
     })
     .catch((error) => {
+      console.error("Error fetching mentor data:", error);
       var carruselcurso = document.getElementById("mentorContainer");
       var newContent = document.createElement("h1");
       newContent.className = "w-full h-full font-bold text-4xl text-center";

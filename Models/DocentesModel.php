@@ -288,11 +288,22 @@ class DocenteModel
     public function getMentoresByCursoId($cursoId)
     {
         $sql = "
-        SELECT m.Mentor_ID, m.Nombre AS Mentor, m.Foto AS MentorFoto, c.nombre AS Curso, c.foto AS CursoFoto, c.tipo AS TipoCurso, c.pdf AS PDF
-        FROM Mentor m
-        JOIN asignaciones a ON m.Mentor_ID = a.id_maestro
-        JOIN cursos c ON a.id_curso = c.id_curso
-        WHERE c.id_curso = ?";
+        SELECT 
+        m.Mentor_ID, 
+        m.Nombre AS Mentor, 
+        m.Foto AS MentorFoto, 
+        c.nombre AS Curso, 
+        c.foto AS CursoFoto, 
+        c.tipo AS TipoCurso, 
+        c.pdf AS PDF,
+        d.dia_semana, 
+        d.hora
+    FROM Mentor m
+    JOIN asignaciones a ON m.Mentor_ID = a.id_maestro
+    JOIN cursos c ON a.id_curso = c.id_curso
+    LEFT JOIN disponibilidadMaestro d ON m.Mentor_ID = d.id_maestro
+    WHERE c.id_curso = ?;
+    ";
 
         $stmt = $this->db->prepare($sql);
         $stmt->bind_param('i', $cursoId);
