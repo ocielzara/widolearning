@@ -34,4 +34,61 @@ class CursoModel
             return 0; // No se encontraron resultados
         }
     }
+
+    public function getAllCursos()
+    {
+        $query = "SELECT * FROM cursos";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        $result = $stmt->get_result(); // Obtener el resultado de la consulta
+
+        $cursos = array();
+        if ($result) {
+            while ($curso = $result->fetch_assoc()) {
+                $cursos[] = $curso;
+            }
+        }
+
+        // Devolver los cursos obtenidos de la base de datos
+        return $cursos;
+    }
+
+    public function getCursosForType($typoCurso)
+    {
+        $query = "SELECT * FROM cursos WHERE tipo = '$typoCurso'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        $result = $stmt->get_result(); // Obtener el resultado de la consulta
+
+        $cursos = array();
+        if ($result) {
+            while ($curso = $result->fetch_assoc()) {
+                $cursos[] = $curso;
+            }
+        }
+
+        // Devolver los cursos obtenidos de la base de datos
+        return $cursos;
+    }
+
+    public function getAsesorias()
+    {
+        $query = "SELECT * FROM asesoria";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        $result = $stmt->get_result(); // Obtener el resultado de la consulta
+
+        $asesorias = array();
+        if ($result) {
+            while ($curso = $result->fetch_assoc()) {
+                $asesorias[] = $curso;
+            }
+        }
+
+        // Devolver los asesorias obtenidos de la base de datos
+        return $asesorias;
+    }
 }

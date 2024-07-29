@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="public/images/home/iconWido.jpeg">
+    <link rel="icon" type="image/png" sizes="16x16" href="public/images/home/iconWido.jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <title>Bienvenido a mi Formulario</title>
+    <link rel="stylesheet" href="styles/output.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <title>Bienvenido a mi</title>
 </head>
 
 <style>
@@ -22,11 +25,11 @@
     }
 
     body {
-        height: 150vh;
+        height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-image: url(images/wido/login.png);
+        background-image: url(public/images/wido/login.png);
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -35,11 +38,10 @@
 
     .container-form {
         width: 100%;
-        height: 100vh;
+        height: auto;
         display: flex;
         justify-content: space-around;
         transition: all .5s ease-out;
-        margin-top: -15%;
     }
 
     .container-form-sesion {
@@ -54,6 +56,12 @@
         display: flex;
         align-items: center;
         text-align: center;
+    }
+
+    @media only screen and (max-width: 640px) {
+        .welcome-back {
+            display: none;
+        }
     }
 
     .message {
@@ -84,12 +92,14 @@
     }
 
     .formulario {
+        display: flex;
+        flex-direction: column;
         width: 400px;
         padding: 1rem;
         margin: 2rem;
         background-color: rgba(6, 6, 6, 0.6);
         text-align: center;
-        border-radius: 20px;
+        border-radius: 50px;
     }
 
     .create-account {
@@ -127,18 +137,17 @@
         padding: 2rem 0;
     }
 
-    .formulario input {
+    .inputForm {
         width: 70%;
         display: block;
         margin: auto;
-        margin-bottom: 2rem;
         background-color: transparent;
         border: none;
         border-bottom: #DFFAFF thin solid;
         text-align: center;
         outline: none;
         padding: .2rem 0;
-        font-size: .8rem;
+        font-size: .9rem;
         color: #DFFAFF;
     }
 
@@ -147,12 +156,12 @@
         margin: auto;
         padding: .7rem;
         border-radius: 2rem;
-        background-color: white;
+        background-color: #4F7CAC;
         font-weight: 600;
         margin-top: 3rem;
         font-size: .8rem;
         cursor: pointer;
-        color: #222;
+        color: #FEC400;
     }
 
     .boton-master {
@@ -166,11 +175,12 @@
         font-size: .8rem;
         cursor: pointer;
         color: #222;
-        background-color: rgba(255, 255, 255, 0.4); /* Color blanco con 50% de opacidad */
+        background-color: rgba(255, 255, 255, 0.4);
+        /* Color blanco con 50% de opacidad */
     }
 
     .boton:hover {
-        background-color: #4F7CAC;
+        background-color: #4F7CAD;
         color: #FEC400;
         /* Color de fondo azul más oscuro */
     }
@@ -234,47 +244,54 @@
         margin-right: 10px;
     }
 
-  
-.cuenta-gratis, .sign-in-btn {
-    display: inline-block;
-    margin-right: 10px; /* Espacio entre los elementos si es necesario */
-}
 
-.sign-in-btn {
-    color: #FFD800;
-}
+    .cuenta-gratis,
+    .sign-in-btn {
+        display: inline-block;
+        margin-right: 10px;
+        /* Espacio entre los elementos si es necesario */
+    }
 
+    .sign-in-btn {
+        color: #FFD800;
+    }
 </style>
 
 <body>
 
     <div class="welcome-1">
-    <!--
-        <div class="menu container">
-            <img src="images/wido/wido-logo-09.png" alt="Descripción de la imagen" />
-        </div>
-    -->
     </div>
 
     <div class="container-form sign-up">
         <div class="welcome-back">
             <div class="message">
-                <!--
-                <h2>Bienvenido</h2>
-                <p>Si ya tienes una cuenta por favor inicia sesion aqui</p>
-                <button class="sign-up-btn">Iniciar Sesion</button>
-                -->
             </div>
         </div>
-        <form class="formulario" action="index.php?c=Usuarios&a=iniciarSesion" method="post">
-            <h2 class="create-account">¡HOLA DE NUEVO!</h2>
-            <input type="email" placeholder="Correo electronico" name="correo" required>
-            <input type="password" placeholder="Contraseña" name="contraseña" required>
-            <button class="boton" type="submit">Iniciar sesion</button>
+        <form class="formulario" method="post" id="loginForm">
+            <h2 class="create-account">¡HOLA DE NUEVO</h2>
+            <div class="mb-8">
+                <input class="inputForm" type="email" id="email" placeholder="Correo electronico" name="correo">
+                <span id="email-error" class="error text-red-600 mt-2"></span>
+            </div>
+            <div class="mb-8">
+                <input class="inputForm" type="password" id="password" placeholder="Contraseña" name="contraseña">
+                <span id="password-error" class="error text-red-600 mt-2"></span>
+            </div>
+            <div class="text-sm flex justify-around">
+                <div>
+                    <input type="checkbox" onclick="mostrarContraseña()"> Show Password
+                </div>
+                <div>
+                    <a href="index.php?c=Usuarios&a=recuperarContraseña" class="">Olvidaste tu <br> constraseña?</a>
+                </div>
+            </div>
+            <button class="boton" type="button" onclick="login()">Iniciar sesion</button>
             <p class="cuenta-gratis">¿Aun no tienes una cuenta?</p><a href="index.php?c=Usuarios&a=vistaRegistro" class="sign-in-btn">Registrate aqui</a><br><br>
             <a href="index.php?c=Docentes&a=login" class="boton-master">Soy master teach</a>
-        </form> 
+        </form>
     </div>
-   
+    <script src="public/JS/API.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
+
 </html>
