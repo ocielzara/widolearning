@@ -1,7 +1,5 @@
-const baseUrl = "https://www.widolearn.com";
-//const baseUrl = "http://localhost/widolearning";
-// http://localhost/widolearning/
-
+//const baseUrl = "https://www.widolearn.com";
+const baseUrl = "http://localhost/widolearning";
 function mostrarToastify(texto, tipo) {
   const background = tipo === "success" ? "green" : "red";
   Toastify({
@@ -231,7 +229,6 @@ function obtenerAsesorias() {
 document.addEventListener("DOMContentLoaded", function () {
   const urlParams = new URLSearchParams(window.location.search);
   const idCurso = urlParams.get("idCurso");
-  console.log(`Fetching data for course ID: ${idCurso}`);
 
   fetch(
     `${baseUrl}/index.php?c=Docentes&a=verMentoresporIdCursos&cursoId=${idCurso}`
@@ -243,7 +240,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return response.json();
     })
     .then((data) => {
-      console.log("Data received:", data);
       var carruselcurso = document.getElementById("mentorContainer");
 
       if (!Array.isArray(data) || data.length === 0) {
@@ -252,7 +248,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const mentoresDisponibilidad = {};
 
-      // Agrupar disponibilidades por mentor
       data.forEach((item) => {
         if (!mentoresDisponibilidad[item.Mentor_ID]) {
           mentoresDisponibilidad[item.Mentor_ID] = {
@@ -282,7 +277,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const nombre =
           especialidad.charAt(0).toUpperCase() + especialidad.slice(1);
 
-        // Crear objeto de disponibilidades agrupadas por día de la semana
         const disponibilidades = {};
         mentor.Disponibilidad.forEach((dispo) => {
           console.log(
@@ -337,20 +331,69 @@ document.addEventListener("DOMContentLoaded", function () {
               `;
         carruselcurso.appendChild(newContent);
 
-        // Agregar evento para cambiar los horarios cuando se seleccione un día
         const select = document.getElementById(`days_${mentorId}`);
         select.addEventListener("change", function () {
           const selectedDay = this.value;
           const horariosContainer = document.getElementById(
             `horarios_${mentorId}`
           );
-          horariosContainer.innerHTML = ""; // Limpiar horarios previos
+          horariosContainer.innerHTML = "";
 
           if (disponibilidades[selectedDay]) {
             disponibilidades[selectedDay].forEach((hora) => {
               const horaElement = document.createElement("div");
-              horaElement.innerHTML = `<p class="m-2 p-1">${hora}</p>`;
+              horaElement.innerHTML = `<p class="m-2 p-1 myBtn" 
+              data-mentor="${mentor.Mentor}" 
+              data-mentor-foto="${mentor.MentorFoto}" 
+              data-mentor-id="${mentorId}" 
+              data-curso="${mentor.Curso}" 
+              data-dia="${selectedDay}" 
+              data-hora="${hora}">${hora}</p>`;
+
               horariosContainer.appendChild(horaElement);
+
+              horaElement
+                .querySelector(".myBtn")
+                .addEventListener("click", function () {
+                  if (!isLoggedIn) {
+                    Toastify({
+                      text: "Necesitas iniciar sesión primero",
+                      duration: 3000,
+                      close: true,
+                      gravity: "top", // `top` or `bottom`
+                      position: "center", // `left`, `center` or `right`
+                      backgroundColor:
+                        "linear-gradient(to right, #ff5f6d, #ffc371)",
+                    }).showToast();
+                    return;
+                  }
+                  const mentorName = this.getAttribute("data-mentor");
+                  const cursoName = this.getAttribute("data-curso");
+                  const hora = this.getAttribute("data-hora");
+                  const dia = this.getAttribute("data-dia");
+                  const mentorId = this.getAttribute("data-mentor-id");
+
+                  if (mentorName && cursoName && hora && dia) {
+                    document.getElementById(
+                      "mentor-data"
+                    ).textContent = `Master Teach: ${mentorName}`;
+                    document.getElementById(
+                      "curso-data"
+                    ).textContent = `Deseas agendar el curso ${cursoName} con el mentor: ${mentorName} en la siguiente hora : ${hora}`;
+
+                    var modal = document.getElementById("myModal");
+                    modal.style.display = "block";
+
+                    const agendarBtn = document.getElementById("agendarBtn");
+                    agendarBtn.setAttribute("data-mentor-id", mentorId);
+                    agendarBtn.setAttribute("data-hora", hora);
+                    agendarBtn.setAttribute("data-dia", dia);
+                    agendarBtn.setAttribute("data-mentor-name", mentorName);
+                    agendarBtn.setAttribute("data-curso-name", cursoName);
+                  } else {
+                    console.error("Faltan datos para mostrar en el modal.");
+                  }
+                });
             });
           } else {
             const noDisponibilidadElement = document.createElement("div");
@@ -359,8 +402,6 @@ document.addEventListener("DOMContentLoaded", function () {
             horariosContainer.appendChild(noDisponibilidadElement);
           }
         });
-
-        // Disparar el evento change para mostrar los horarios del primer día por defecto
         select.dispatchEvent(new Event("change"));
       });
     })
@@ -372,6 +413,83 @@ document.addEventListener("DOMContentLoaded", function () {
       newContent.innerHTML = `PROXIMAMENTE`;
       carruselcurso.appendChild(newContent);
     });
+
+  var modal = document.getElementById("myModal");
+  var span = document.getElementsByClassName("close")[0];
+  span.onclick = function () {
+    modal.style.display = "none";
+  };
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  document.getElementById("agendarBtn").addEventListener("click", function () {
+    const mentorID = this.getAttribute("data-mentor-id");
+    const hora = this.getAttribute("data-hora");
+    const dia = this.getAttribute("data-dia");
+    const mentorName = this.getAttribute("data-mentor-name");
+    const cursoName = this.getAttribute("data-curso-name");
+    const alumnoName = nombreUsuario;
+    const correoUsuario = correo;
+
+    const payload = {
+      mentorID,
+      hora,
+      dia,
+      mentorName,
+      cursoName,
+      alumnoName,
+      correoUsuario,
+    };
+
+    fetch(`${baseUrl}/index.php?c=Usuarios&a=agendarCita`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          Toastify({
+            text: "Curso agendado exitosamente.",
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "#4CAF50",
+            stopOnFocus: true,
+          }).showToast();
+
+          var modal = document.getElementById("myModal");
+          modal.style.display = "none";
+        } else {
+          Toastify({
+            text: data.message,
+            duration: 3000,
+            gravity: "top",
+            position: "right",
+            backgroundColor: "#FF0000",
+            stopOnFocus: true,
+          }).showToast();
+        }
+      })
+      .catch((error) => {
+        // Manejar error
+        console.error("Error al agendar:", error);
+
+        Toastify({
+          text: "Error al agendar el curso. Por favor, intenta nuevamente.",
+          duration: 3000,
+          gravity: "top",
+          position: "right",
+          backgroundColor: "#FF0000",
+          stopOnFocus: true,
+        }).showToast();
+      });
+  });
 });
 
 function verPerfilMentor(idMentor) {
@@ -570,4 +688,8 @@ function login() {
       console.error("Network error:", error);
       mostrarToastify("Network error: " + error.message, "error");
     });
+}
+
+function agendar() {
+  console.log("Oprimiste la tecla");
 }

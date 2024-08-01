@@ -308,8 +308,6 @@
         }
     }
 
-    /****************************************************************************** */
-
     .cerrar {
         background-color: var(--first-color);
         /* Color de fondo del botón */
@@ -389,10 +387,10 @@
 
                         <?php
                         // session_start();
-// Verificar si la variable de sesión existe antes de usarla para evitar errores
-                        if (isset($_SESSION['idUsuario'])) {
+                        // Verificar si la variable de sesión existe antes de usarla para evitar errores
+                        if (isset($_SESSION['id_usuario'])) {
 
-                            ?>
+                        ?>
                             <div class="nav__dropdown">
                                 <a href="#" class="nav__link">
                                     <i class='bx bx-bell nav__icon'></i>
@@ -434,27 +432,27 @@
                                 <span class="nav__name">Learning Rewards</span>
                             </a>
 
-                        </div>
-
                     </div>
+
                 </div>
+            </div>
 
-                <h3 class="nav__subtitle">Usuario</h3>
+            <h3 class="nav__subtitle">Usuario</h3>
 
-                <a href="#" class="nav__link">
-                    <i class='bx bx-user nav__icon'></i>
-                    <span class="nav__name"><?php echo $nombreUsuario; ?></span>
-                </a>
+            <a href="#" class="nav__link">
+                <i class='bx bx-user nav__icon'></i>
+                <span class="nav__name"><?php echo $_SESSION['nombre']; ?></span>
+            </a>
 
-                <a class="nav__link nav__logout">
-                    <i class='bx bx-log-out nav__icon'></i>
-                    <form action="index.php?c=Usuarios&a=cerrarSesion" method="post">
-                        <button class="cerrar" type="submit" name="cerrar_sesion">Cerrar sesión</button>
-                    </form>
-                </a>
-                <?php
+            <a class="nav__link nav__logout">
+                <i class='bx bx-log-out nav__icon'></i>
+                <form action="index.php?c=Usuarios&a=cerrarSesion" method="post">
+                    <button class="cerrar" type="submit" name="cerrar_sesion">Cerrar sesión</button>
+                </form>
+            </a>
+        <?php
                         } // Fin del bloque condicional
-                        ?>
+        ?>
         </nav>
     </div>
 

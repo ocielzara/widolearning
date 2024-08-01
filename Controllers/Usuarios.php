@@ -173,15 +173,20 @@ class UsuariosController
 
             $model = new UsuarioModel();
             $usuario = $model->validarUsuario($correo, $contrasena);
-
             if ($usuario && is_array($usuario)) {
-                $idUsuario = $usuario['id_usuario'];
                 session_start();
-                $_SESSION['idUsuario'] = $idUsuario;
+                $idUsuario = $usuario['id_usuario'];
+                $nombre = $usuario['nombre'];
+                $correo_electronico = $usuario['correo_electronico'];
+                $_SESSION['id_usuario'] = $idUsuario;
+                $_SESSION['nombre'] = $nombre;
+                $_SESSION['correo_electronico'] = $correo_electronico; // Almacenar correo en la sesión
                 $response = array(
                     'success' => true,
                     'message' => 'Login successful',
                     'idUsuario' => $idUsuario,
+                    'nombre' => $nombre,
+                    'correo' => $correo_electronico,
                 );
                 echo json_encode($response);
                 exit;
@@ -330,8 +335,6 @@ class UsuariosController
         }
     }
 
-
-
     public function claseMuestraNavegacionAsesoria()
     {
         $nombre = $_POST['nombre'];
@@ -385,71 +388,6 @@ class UsuariosController
         }
     }
 
-    public function apartarCita()
-    {
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Validar y sanar los datos de entrada
-            $fecha = $_POST['fecha_seleccionada'];
-            $hora = $_POST['hora_seleccionada'];
-            $idDocente = $_POST['idDocente'];
-            //echo $fecha, " ", $idUsuario;
-            session_start();
-            // Verificar si la variable de sesión existe antes de usarla para evitar errores
-            if (isset($_SESSION['idUsuario'])) {
-                $objetivo = $_SESSION['objetivoUsario'];
-                $nombreCurso = $_SESSION['nombreCurso'];
-                if (isset($objetivo) && isset($nombreCurso) && !empty($objetivo) && !empty($nombreCurso)) {
-                    $inicializador = "";
-                    $inicioUsuario = $_SESSION['idUsuario'];
-                    $model = new UsuarioModel();
-                    $informacion = $model->informacionUsario($inicioUsuario);
-                    $idUsuarioInicio = $informacion['id_usuario'];
-                    $nombreUsuario = $informacion['nombre'];
-                    $edadUsuario = $informacion['edad'];
-                    if ($model->agendaCitaDocenteBuscado($idDocente, $fecha, $hora, $inicioUsuario, $nombreUsuario, $edadUsuario, $nombreCurso, $objetivo)) {
-                        // Redirigir a alguna página después de registrar al usuario
-                        $_SESSION['objetivoUsario'] = $inicializador;
-                        $_SESSION['nombreCurso'] = $inicializador;
-                        echo '<script>alert("Se ha agendado la cita, espera a que el docente confirme la cita.");';
-                        echo 'window.location.href = "index.php?c=Usuarios&a=index";</script>';
-                    } else {
-                        // Manejar el caso en que la inserción falla
-                        // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
-                        // Por ejemplo:
-                        echo "Error al registrar el usuario.";
-                    }
-                } else {
-                    $inicioUsuario = $_SESSION['idUsuario'];
-                    $model = new UsuarioModel();
-                    $informacion = $model->informacionUsario($inicioUsuario);
-                    $idUsuarioInicio = $informacion['id_usuario'];
-                    $nombreUsuario = $informacion['nombre'];
-                    $edadUsuario = $informacion['edad'];
-                    $interesUsuario = $informacion['interes'];
-                    if ($model->agendaCitaDocente($idDocente, $fecha, $hora, $inicioUsuario, $nombreUsuario, $edadUsuario, $interesUsuario)) {
-                        echo '<script>alert("Se ha agendado la cita, espera a que el docente confirme la cita.");';
-                        echo 'window.location.href = "index.php?c=Usuarios&a=index";</script>';
-                    } else {
-                        // Manejar el caso en que la inserción falla
-                        // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
-                        // Por ejemplo:
-                        echo "Error al registrar el usuario.";
-                    }
-                }
-            } else {
-                //echo "Para agendar cita, debes iniciar sesion";
-                echo '<script>alert("Para agendar cita, debes iniciar sesion");';
-                echo 'window.location.href = "index.php?c=Usuarios&a=login";</script>';
-            }
-        } else {
-            // Redirigir si se intenta acceder directamente a través de GET
-            header('Location: index.php');
-        }
-    }
-
-
-
     public function enviarCorreoRecuperacion($correo, $contrasena)
     {
         // Generar una nueva contraseña aleatoria
@@ -488,6 +426,97 @@ class UsuariosController
         }
     }
 
+    public function agendarCita()
+    {
+        error_log('Método agendarCita llamado'); // Registro para depuración
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            error_log('Método de solicitud: POST'); // Registro para depuración
+
+            $input = file_get_contents("php://input");
+            $data = json_decode($input, true);
+
+            error_log('Datos recibidos: ' . print_r($data, true)); // Registro para depuración
+
+            $mentorID = isset($data['mentorID']) ? $data['mentorID'] : null;
+            $hora = isset($data['hora']) ? $data['hora'] : null;
+            $dia = isset($data['dia']) ? $data['dia'] : null;
+            $mentorName = isset($data['mentorName']) ? $data['mentorName'] : null;
+            $cursoName = isset($data['cursoName']) ? $data['cursoName'] : null;
+            $alumnoName = isset($data['alumnoName']) ? $data['alumnoName'] : null;
+            $correoUsuario = isset($data['correoUsuario']) ? $data['correoUsuario'] : null;
+
+            if (empty($mentorID) || empty($hora) || empty($dia) || empty($mentorName) || empty($cursoName) || empty($alumnoName) || empty($correoUsuario)) {
+                $response = array(
+                    'success' => false,
+                    'message' => 'Faltan datos necesarios para agendar la cita.',
+                );
+                echo json_encode($response);
+                exit;
+            }
+
+            $this->enviarAgendaMentor($correoUsuario, $mentorName, $hora, $dia, $cursoName, $alumnoName);
+            exit;
+        } else {
+            error_log('Método de solicitud no permitido: ' . $_SERVER["REQUEST_METHOD"]); // Registro para depuración
+
+            $response = array(
+                'success' => false,
+                'message' => 'Método de solicitud no permitido.',
+            );
+            echo json_encode($response);
+            exit;
+        }
+    }
+
+    public function enviarAgendaMentor($correo, $mentorName, $hora, $dia, $cursoName, $alumnoName)
+    {
+        try {
+            $mail = new PHPMailer(true);
+
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.hostinger.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'hola@widolearn.com';
+            $mail->Password = 'Wido2024!';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
+            $mail->setFrom('hola@widolearn.com', 'Wido');
+            $correoDefecto = "hola@widolearn.com";
+            $mail->addAddress($correo);
+            $mail->addAddress($correoDefecto);
+            $htmlContent = file_get_contents('Views/contenido/compra-curso.php');
+
+            $htmlContent = str_replace('{{MENTOR_NAME}}', htmlspecialchars($mentorName), $htmlContent);
+            $htmlContent = str_replace('{{HORA}}', htmlspecialchars($hora), $htmlContent);
+            $htmlContent = str_replace('{{DIA}}', htmlspecialchars($dia), $htmlContent);
+            $htmlContent = str_replace('{{CURSO_NAME}}', htmlspecialchars($cursoName), $htmlContent);
+            $htmlContent = str_replace('{{ALUMNO_NAME}}', htmlspecialchars($alumnoName), $htmlContent);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Curso Agendado';
+            $mail->Body = $htmlContent;
+
+            $mail->send();
+
+            if ($mail->ErrorInfo) {
+                $response = array(
+                    'success' => false,
+                    'message' => "Error al enviar el correo de recuperación: {$mail->ErrorInfo}"
+                );
+            } else {
+                $response = array(
+                    'success' => true,
+                    'message' => "Curso agendado y enviado correctamente"
+                );
+            }
+            echo json_encode($response);
+        } catch (Exception $e) {
+            echo "Error al enviar el correo de recuperación: {$e->getMessage()}";
+        }
+    }
+
     public function recuperarContrasena()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -521,5 +550,9 @@ class UsuariosController
         session_start();
         session_destroy();
         header('location: index.php');
+    }
+
+    public function agendar()
+    {
     }
 }

@@ -46,17 +46,15 @@
                     </div>
                 </div>
                 <div class="sm:h-1/3">
-                    <?php if ($mostrar) : ?>
-
+                    <?php if (isset($_SESSION['nombre'])) : ?>
                     <?php else : ?>
                         <div class="flex lg:my-[7.5rem] 2xl:my-[5rem] xl:my-[4rem] sm:mx-44 xl:mx-32 p-10">
-                            <button class="bg-[#FEC400] cursor-pointer w-80 flex font-bold justify-center sm:h-16 h-10 text-center items-center rounded-3xl text-black" onclick="iniciarSesion ()">
-                                Clase
-                                muestra
-                                gratuita
+                            <button class="bg-[#FEC400] cursor-pointer w-80 flex font-bold justify-center sm:h-16 h-10 text-center items-center rounded-3xl text-black" onclick="iniciarSesion()">
+                                Clase muestra gratuita
                             </button>
                         </div>
                     <?php endif; ?>
+
                 </div>
             </div>
         </div>

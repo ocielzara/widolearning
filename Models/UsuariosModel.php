@@ -41,8 +41,8 @@ class UsuarioModel
 
     public function validarUsuario($correo, $contrasena)
     {
-        // Obtener el hash de contraseña de la base de datos
-        $query = "SELECT id_usuario, contraseña FROM usuarios WHERE correo_electronico = ?";
+        // Obtener el hash de contraseña, nombre y correo electrónico del usuario de la base de datos
+        $query = "SELECT id_usuario, nombre, correo_electronico, contraseña FROM usuarios WHERE correo_electronico = ?";
         $stmt = $this->db->prepare($query);
         $stmt->bind_param("s", $correo);
         $stmt->execute();
@@ -50,17 +50,19 @@ class UsuarioModel
 
         // Verificar si se encontró el usuario
         if ($stmt->num_rows > 0) {
-            $stmt->bind_result($id_usuario, $contraseña_hash);
+            $stmt->bind_result($id_usuario, $nombre, $correo_electronico, $contraseña_hash);
             $stmt->fetch();
+
             if (password_verify($contrasena, $contraseña_hash)) {
-                // Devolver un array asociativo en lugar de solo el id_usuario
                 return array(
                     'id_usuario' => $id_usuario,
+                    'nombre' => $nombre,
+                    'correo_electronico' => $correo_electronico,
                 );
             }
         }
 
-        return false; // Usuario no encontrado o contraseña incorrecta
+        return false;
     }
 
     public function motorBusqueda($keyword)
