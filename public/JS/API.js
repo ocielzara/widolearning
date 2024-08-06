@@ -1,5 +1,5 @@
-const baseUrl = "https://www.widolearn.com";
-//const baseUrl = "http://localhost/widolearning";
+//const baseUrl = "https://www.widolearn.com";
+const baseUrl = "http://localhost/widolearning";
 function mostrarToastify(texto, tipo) {
   const background = tipo === "success" ? "green" : "red";
   Toastify({
@@ -12,11 +12,10 @@ function mostrarToastify(texto, tipo) {
 }
 
 window.onload = function () {
-    
   // Obtén el parámetro 'idUusario' de la URL actual
   const urlParams = new URLSearchParams(window.location.search);
-  const idUsu = urlParams.get('n');
-  
+  const idUsu = urlParams.get("n");
+
   obtenerCursos(idUsu);
   obtenerAsesorias();
   obtenerMentores();
@@ -48,19 +47,17 @@ window.onload = function () {
   obtenerMentoresPorTipo("musica");
   obtenerMentoresPorTipo("salud");
   obtenerMentoresPorTipo("otros");
-  
-  const idUsuario = urlParams.get('idUsuario');
+
+  const idUsuario = urlParams.get("idUsuario");
   obtenerCursosPorUsuario(idUsuario);
-  const idCurso = urlParams.get('idCurso');
-  obtenerCreditosCursos(idUsuario, idCurso)
-  const id = urlParams.get('id');
-  obtenerDatosMisAlumnos(id)
-  obtenerIscripciones(id)
-  const mentorId = urlParams.get('mentorId');
-  obtenerDatosDisponibilidadMentor(mentorId)
+  const idCurso = urlParams.get("idCurso");
+  obtenerCreditosCursos(idUsuario, idCurso);
+  const id = urlParams.get("id");
+  obtenerDatosMisAlumnos(id);
+  obtenerIscripciones(id);
+  const mentorId = urlParams.get("mentorId");
+  obtenerDatosDisponibilidadMentor(mentorId);
 };
-
-
 
 let filtrarDatos = [];
 function openPDF(pdfUrl) {
@@ -90,7 +87,7 @@ function redirigirVerPerfil(Mentor_ID) {
 function redirigirVistaAprendizaje() {
   // Obtén el parámetro 'n' de la URL actual
   const urlParams = new URLSearchParams(window.location.search);
-  const idUsuario = urlParams.get('n');
+  const idUsuario = urlParams.get("n");
 
   if (idUsuario) {
     // Construye la URL de redirección
@@ -98,20 +95,28 @@ function redirigirVistaAprendizaje() {
     // Redirige el navegador a la URL construida
     window.location.href = url;
   } else {
-    console.error('No se encontró el idUsuario en la URL actual.');
+    console.error("No se encontró el idUsuario en la URL actual.");
   }
 }
 
 function obtenerCursosPorUsuario(idUsuario) {
-  fetch(`${baseUrl}/index.php?c=Usuarios&a=vistaAprendizaje&idUsuario=${encodeURIComponent(idUsuario)}`)
+  fetch(
+    `${baseUrl}/index.php?c=Usuarios&a=vistaAprendizaje&idUsuario=${encodeURIComponent(
+      idUsuario
+    )}`
+  )
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Error al obtener los cursos. Código de estado: " + response.status);
+        throw new Error(
+          "Error al obtener los cursos. Código de estado: " + response.status
+        );
       }
       return response.json();
     })
     .then((data) => {
-      var contenedorIconos = document.getElementById('contenedor-iconos-cursos');
+      var contenedorIconos = document.getElementById(
+        "contenedor-iconos-cursos"
+      );
       data.forEach((curso) => {
         var newContent = document.createElement("a");
         newContent.className = "icon-circle";
@@ -126,60 +131,79 @@ function obtenerCursosPorUsuario(idUsuario) {
 }
 
 function obtenerCreditosCursos(idUsuario, idCurso) {
-  fetch(`${baseUrl}/index.php?c=Usuarios&a=creditosCursos&idUsuario=${encodeURIComponent(idUsuario)}&idCurso=${encodeURIComponent(idCurso)}`)
+  fetch(
+    `${baseUrl}/index.php?c=Usuarios&a=creditosCursos&idUsuario=${encodeURIComponent(
+      idUsuario
+    )}&idCurso=${encodeURIComponent(idCurso)}`
+  )
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Error al obtener los cursos. Código de estado: " + response.status);
+        throw new Error(
+          "Error al obtener los cursos. Código de estado: " + response.status
+        );
       }
       return response.json();
     })
     .then((data) => {
-         const curso = data[0]; // Asumiendo que la respuesta contiene un solo objeto
+      const curso = data[0]; // Asumiendo que la respuesta contiene un solo objeto
 
-        // Inserta los datos en el HTML
-        document.getElementById('curso-nombre').innerText = `Curso: ${curso.nombre_curso}`;
-        document.getElementById('mentor-nombre').innerText = `Mentor: ${curso.nombre_mentor}`;
-        document.getElementById('total-creditos').innerText = `Total créditos: ${curso.creditos}`;
-        document.getElementById('cursados').innerText = `Cursados: ${curso.cursados}`;
+      // Inserta los datos en el HTML
+      document.getElementById(
+        "curso-nombre"
+      ).innerText = `Curso: ${curso.nombre_curso}`;
+      document.getElementById(
+        "mentor-nombre"
+      ).innerText = `Mentor: ${curso.nombre_mentor}`;
+      document.getElementById(
+        "total-creditos"
+      ).innerText = `Total créditos: ${curso.creditos}`;
+      document.getElementById(
+        "cursados"
+      ).innerText = `Cursados: ${curso.cursados}`;
 
-        // Inserta los iconos en el contenedor
-        var contenedorIconos = document.getElementById('contenedor-creditos');
-        contenedorIconos.innerHTML = ''; // Limpia el contenedor antes de agregar nuevos elementos
+      // Inserta los iconos en el contenedor
+      var contenedorIconos = document.getElementById("contenedor-creditos");
+      contenedorIconos.innerHTML = ""; // Limpia el contenedor antes de agregar nuevos elementos
 
-        for (let i = 0; i < curso.creditos; i++) {
-          var newContent = document.createElement("a");
-          newContent.className = "icon-circle";
-          
-          // Aplicar estilo normal u opaco según el número de cursados
-          if (i < curso.cursados) {
-            newContent.innerHTML = `<a href='https://us02web.zoom.us/j/82296455704?pwd=SVR2d#success'><i class='bx ${curso.icono_curso} nav__iconSub'></i></a>`;
-          } else {
-            newContent.innerHTML = `<i class='bx ${curso.icono_curso} nav__iconSub' style='opacity: 0.3;'></i>`;
-          }
-          
-          contenedorIconos.appendChild(newContent);
+      for (let i = 0; i < curso.creditos; i++) {
+        var newContent = document.createElement("a");
+        newContent.className = "icon-circle";
+
+        // Aplicar estilo normal u opaco según el número de cursados
+        if (i < curso.cursados) {
+          newContent.innerHTML = `<a href='https://us02web.zoom.us/j/82296455704?pwd=SVR2d#success'><i class='bx ${curso.icono_curso} nav__iconSub'></i></a>`;
+        } else {
+          newContent.innerHTML = `<i class='bx ${curso.icono_curso} nav__iconSub' style='opacity: 0.3;'></i>`;
         }
+
+        contenedorIconos.appendChild(newContent);
+      }
     })
     .catch((error) => {
       console.error("Error en la solicitud:", error);
     });
 }
 
-
 function obtenerDatosMisAlumnos(idMentor) {
-  fetch(`${baseUrl}/index.php?c=Docentes&a=mentorias&id=${encodeURIComponent(idMentor)}`)
+  fetch(
+    `${baseUrl}/index.php?c=Docentes&a=mentorias&id=${encodeURIComponent(
+      idMentor
+    )}`
+  )
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Error al obtener los cursos. Código de estado: " + response.status);
+        throw new Error(
+          "Error al obtener los cursos. Código de estado: " + response.status
+        );
       }
       return response.json();
     })
     .then((data) => {
-       var contenedor = document.getElementById('contenedor-datos-mentor');
+      var contenedor = document.getElementById("contenedor-datos-mentor");
 
       if (data.length > 0) {
         data.forEach((item) => {
-          var row = document.createElement('tr');
+          var row = document.createElement("tr");
 
           row.innerHTML = `
             <td>${item.nombreCurso}</td>
@@ -193,7 +217,7 @@ function obtenerDatosMisAlumnos(idMentor) {
           contenedor.appendChild(row);
         });
       } else {
-        var row = document.createElement('tr');
+        var row = document.createElement("tr");
         row.innerHTML = '<td colspan="6">No hay datos disponibles</td>';
         contenedor.appendChild(row);
       }
@@ -205,16 +229,20 @@ function obtenerDatosMisAlumnos(idMentor) {
 
 //DUDAS???????????????????????????????????????????????????????
 function obtenerDatosDisponibilidadMentor(idMentor) {
-  fetch(`${baseUrl}/index.php?c=Docentes&a=indexJson&mentorId=${encodeURIComponent(idMentor)}`)
+  fetch(
+    `${baseUrl}/index.php?c=Docentes&a=indexJson&mentorId=${encodeURIComponent(
+      idMentor
+    )}`
+  )
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Error al obtener los cursos. Código de estado: " + response.status);
+        throw new Error(
+          "Error al obtener los cursos. Código de estado: " + response.status
+        );
       }
       return response.json();
     })
-    .then((data) => {
-       
-    })
+    .then((data) => {})
     .catch((error) => {
       console.error("Error en la solicitud:", error);
     });
@@ -222,95 +250,107 @@ function obtenerDatosDisponibilidadMentor(idMentor) {
 
 function incrementarCursados(idRuta, cursados) {
   const data = {
-        idRuta: idRuta,
-        cursados: cursados
-    };
+    idRuta: idRuta,
+    cursados: cursados,
+  };
 
-    console.log("Datos a enviar:", data); // Verificar datos antes de enviar
+  console.log("Datos a enviar:", data); // Verificar datos antes de enviar
   fetch(`${baseUrl}/index.php?c=Docentes&a=actualizarCursados`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       idRuta: idRuta,
-      cursados: cursados
+      cursados: cursados,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Respuesta del servidor:", data); // Log para verificar respuesta
+      if (data.success) {
+        alert("Cursados actualizado exitosamente.");
+        location.reload(); // Recarga la página para ver los cambios
+      } else {
+        alert("Error al actualizar los cursados.");
+      }
     })
-  })
-  .then((response) => response.json())
-  .then((data) => {
-    console.log('Respuesta del servidor:', data); // Log para verificar respuesta
-    if (data.success) {
-      alert("Cursados actualizado exitosamente.");
-      location.reload(); // Recarga la página para ver los cambios
-    } else {
-      alert("Error al actualizar los cursados.");
-    }
-  })
-  .catch((error) => {
-    console.error("Error en la solicitud:", error);
-  });
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
 }
 
 function decrementarCursados(idRuta, cursados) {
   const data = {
-        idRuta: idRuta,
-        cursados: cursados
-    };
+    idRuta: idRuta,
+    cursados: cursados,
+  };
 
-    console.log("Datos a enviar:", data); // Verificar datos antes de enviar
+  console.log("Datos a enviar:", data); // Verificar datos antes de enviar
   fetch(`${baseUrl}/index.php?c=Docentes&a=actualizarCursadosDecrementar`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       idRuta: idRuta,
-      cursados: cursados
+      cursados: cursados,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Respuesta del servidor:", data); // Log para verificar respuesta
+      if (data.success) {
+        alert("Cursados actualizado exitosamente.");
+        location.reload(); // Recarga la página para ver los cambios
+      } else {
+        alert("Error al actualizar los cursados.");
+      }
     })
-  })
-  .then((response) => response.json())
-  .then((data) => {
-    console.log('Respuesta del servidor:', data); // Log para verificar respuesta
-    if (data.success) {
-      alert("Cursados actualizado exitosamente.");
-      location.reload(); // Recarga la página para ver los cambios
-    } else {
-      alert("Error al actualizar los cursados.");
-    }
-  })
-  .catch((error) => {
-    console.error("Error en la solicitud:", error);
-  });
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
 }
 
 //MOSTRAR INSCRIPCIONES
 function obtenerIscripciones(idAdministrador) {
-  fetch(`${baseUrl}/index.php?c=Administradors&a=inscripcion&id=${encodeURIComponent(idAdministrador)}`)
+  fetch(
+    `${baseUrl}/index.php?c=Administradors&a=inscripcion&id=${encodeURIComponent(
+      idAdministrador
+    )}`
+  )
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Error al obtener los cursos. Código de estado: " + response.status);
+        throw new Error(
+          "Error al obtener los cursos. Código de estado: " + response.status
+        );
       }
       return response.json();
     })
     .then((data) => {
-       var contenedor = document.getElementById('contenedor-datos-administrador');
+      var contenedor = document.getElementById(
+        "contenedor-datos-administrador"
+      );
 
       if (data.length > 0) {
         data.forEach((item) => {
-          var row = document.createElement('tr');
+          var row = document.createElement("tr");
 
           row.innerHTML = `
             <td>${item.nombre_usuario}</td>
             <td>${item.nombre_mentor}</td>
             <td>${item.nombre_curso}</td>
-            ${item.estado === 'empezo' ? `<td><button class="btn btn-primary" onclick="confirmaCompra(${item.id_inscripcion})">Confirmar compra</button></td>` : ''}
+            ${
+              item.estado === "empezo"
+                ? `<td><button class="btn btn-primary" onclick="confirmaCompra(${item.id_inscripcion})">Confirmar compra</button></td>`
+                : ""
+            }
           `;
 
           contenedor.appendChild(row);
         });
       } else {
-        var row = document.createElement('tr');
+        var row = document.createElement("tr");
         row.innerHTML = '<td colspan="6">No hay datos disponibles</td>';
         contenedor.appendChild(row);
       }
@@ -322,45 +362,47 @@ function obtenerIscripciones(idAdministrador) {
 
 function confirmaCompra(idInscripcion) {
   const data = {
-        idInscripcion: idInscripcion
-    };
+    idInscripcion: idInscripcion,
+  };
 
-    console.log("Datos a enviar:", data); // Verificar datos antes de enviar
+  console.log("Datos a enviar:", data); // Verificar datos antes de enviar
   fetch(`${baseUrl}/index.php?c=Administradors&a=confirmar`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      idInscripcion: idInscripcion
+      idInscripcion: idInscripcion,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Respuesta del servidor:", data); // Log para verificar respuesta
+      if (data.success) {
+        alert("Confirmacion exitosa.");
+        location.reload(); // Recarga la página para ver los cambios
+      } else {
+        alert("Error al confirmar.");
+      }
     })
-  })
-  .then((response) => response.json())
-  .then((data) => {
-    console.log('Respuesta del servidor:', data); // Log para verificar respuesta
-    if (data.success) {
-      alert("Confirmacion exitosa.");
-      location.reload(); // Recarga la página para ver los cambios
-    } else {
-      alert("Error al confirmar.");
-    }
-  })
-  .catch((error) => {
-    console.error("Error en la solicitud:", error);
-  });
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
 }
 
 function cursosAdmi() {
   fetch(`${baseUrl}/index.php?c=Administradors&a=allCursos`)
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Error al obtener los cursos. Código de estado: " + response.status);
+        throw new Error(
+          "Error al obtener los cursos. Código de estado: " + response.status
+        );
       }
       return response.json();
     })
     .then((data) => {
-    // Llamar a una función para mostrar los cursos en un select
-    mostrarCursos(data);
+      // Llamar a una función para mostrar los cursos en un select
+      mostrarCursos(data);
     })
     .catch((error) => {
       console.error("Error en la solicitud:", error);
@@ -368,11 +410,11 @@ function cursosAdmi() {
 }
 
 function mostrarCursos(cursos) {
-  const selectCursos = document.getElementById('selectCursos');
-  selectCursos.innerHTML = ''; // Limpiar cualquier opción existente
+  const selectCursos = document.getElementById("selectCursos");
+  selectCursos.innerHTML = ""; // Limpiar cualquier opción existente
 
   cursos.forEach((curso) => {
-    const option = document.createElement('option');
+    const option = document.createElement("option");
     option.value = curso.id_curso;
     option.textContent = curso.nombre;
     selectCursos.appendChild(option);
@@ -380,8 +422,7 @@ function mostrarCursos(cursos) {
 }
 
 // Llamar a la función para cargar los cursos al cargar la página
-document.addEventListener('DOMContentLoaded', cursosAdmi);
-
+document.addEventListener("DOMContentLoaded", cursosAdmi);
 
 //FIN
 
@@ -391,7 +432,8 @@ function mostrarResultados(resultados) {
   if (resultados.length > 0) {
     resultados.forEach(function (resultado) {
       var newContent = document.createElement("div");
-      newContent.className = "flex p-3 my-3 hover-item cursor-pointer rounded-xl shadow-md";
+      newContent.className =
+        "flex p-3 my-3 hover-item cursor-pointer rounded-xl shadow-md";
       newContent.innerHTML = `
         <div class="flex items-center space-x-2">
           <span class="icon-circle">
@@ -481,17 +523,21 @@ const mostrarAsesorias = (data) => {
 
 async function mostrarMasCategorias(idUsuario, typoCurso) {
   try {
-    const response = await fetch(`${baseUrl}/index.php?c=Cursos&a=verCursosCategorias&tipo=${typoCurso}`);
+    const response = await fetch(
+      `${baseUrl}/index.php?c=Cursos&a=verCursosCategorias&tipo=${typoCurso}`
+    );
     if (!response.ok) {
-      throw new Error("Error al obtener los cursos. Código de estado: " + response.status);
+      throw new Error(
+        "Error al obtener los cursos. Código de estado: " + response.status
+      );
     }
     const cursos = await response.json();
     const carruselcurso = document.getElementById(typoCurso);
-    
+
     for (const curso of cursos) {
       // Obtén el estado de inscripción para el curso actual
       const estado = await obtenerEstadoInscripcion(idUsuario, curso.id_curso);
-      
+
       const newContent = document.createElement("div");
       newContent.className = "containderCard swiper-slide w-[320px]";
       newContent.innerHTML = `
@@ -500,7 +546,12 @@ async function mostrarMasCategorias(idUsuario, typoCurso) {
             <img src="public/${curso.foto}" alt="Descripción de la imagen">
           </div>
           <div class="cardContent">
-            ${generarBotonSegunEstado(curso.id_curso, curso.nombre, curso.pdf, estado)}
+            ${generarBotonSegunEstado(
+              curso.id_curso,
+              curso.nombre,
+              curso.pdf,
+              estado
+            )}
           </div>
         </div>
       `;
@@ -510,7 +561,6 @@ async function mostrarMasCategorias(idUsuario, typoCurso) {
     console.error("Error en la solicitud:", error);
   }
 }
-
 
 async function obtenerCursos(idUsuario) {
   try {
@@ -525,7 +575,7 @@ async function obtenerCursos(idUsuario) {
     var carruselcurso = document.getElementById("content-cursos");
     for (const curso of cursos) {
       const estado = await obtenerEstadoInscripcion(idUsuario, curso.id_curso);
-       // Mostrar alert con la información del estado
+      // Mostrar alert con la información del estado
       //alert(`Curso: ${curso.id_curso}\nEstado: ${estado}`);
       var newContent = document.createElement("div");
       newContent.className = "containderCard swiper-slide w-[320px]";
@@ -535,7 +585,12 @@ async function obtenerCursos(idUsuario) {
             <img src="public/${curso.foto}" alt="Descripción de la imagen">
           </div>
           <div class="cardContent">
-            ${generarBotonSegunEstado(curso.id_curso, curso.nombre, curso.pdf, estado)}
+            ${generarBotonSegunEstado(
+              curso.id_curso,
+              curso.nombre,
+              curso.pdf,
+              estado
+            )}
           </div>
         </div>
       `;
@@ -548,10 +603,13 @@ async function obtenerCursos(idUsuario) {
 
 async function obtenerEstadoInscripcion(idUsuario, idCurso) {
   try {
-    const response = await fetch(`${baseUrl}/index.php?c=Usuarios&a=getEstado&idUsuario=${idUsuario}&idCurso=${idCurso}`);
+    const response = await fetch(
+      `${baseUrl}/index.php?c=Usuarios&a=getEstado&idUsuario=${idUsuario}&idCurso=${idCurso}`
+    );
     if (!response.ok) {
       throw new Error(
-        "Error al obtener el estado de inscripción. Código de estado: " + response.status
+        "Error al obtener el estado de inscripción. Código de estado: " +
+          response.status
       );
     }
     const data = await response.json();
@@ -563,7 +621,7 @@ async function obtenerEstadoInscripcion(idUsuario, idCurso) {
 }
 
 function generarBotonSegunEstado(idCurso, nombreCurso, pdfCurso, estado) {
-  if (estado === 'empezo') {
+  if (estado === "empezo") {
     return `
       <button class="button1" onclick="mostrarModalCompra('${nombreCurso}')">
         <span>Comprar</span>
@@ -572,7 +630,7 @@ function generarBotonSegunEstado(idCurso, nombreCurso, pdfCurso, estado) {
         <span>Temario</span>
       </button>
     `;
-  } else if (estado === 'cursando') {
+  } else if (estado === "cursando") {
     return `
       <button class="button1" onclick="redirigirClaseMuestra(${idCurso}, '${nombreCurso}')">
         <span>Mi curso</span>
@@ -598,7 +656,7 @@ function mostrarModalCompra(cursoName) {
   const modal = document.getElementById("myModalCompra");
   const modalTitle = document.getElementById("mentor-dataCompra");
   modalTitle.textContent = "Elije tu forma de pago";
-  
+
   const cursoData = document.getElementById("curso-dataCompra");
   cursoData.textContent = cursoName;
 
@@ -609,11 +667,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("myModalCompra");
   const closeModal = document.getElementsByClassName("close")[0];
 
-  closeModal.addEventListener("click", function() {
+  closeModal.addEventListener("click", function () {
     modal.style.display = "none";
   });
 
-  window.addEventListener("click", function(event) {
+  window.addEventListener("click", function (event) {
     if (event.target === modal) {
       modal.style.display = "none";
     }
@@ -621,24 +679,23 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 //FIN
 
-
 //CAMBIOS JULIO 24
 function obtenerMentores() {
-        fetch(`${baseUrl}/index.php?c=Usuarios&a=verMentores`)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(
-                        "Error al obtener los mentores. Código de estado: " + response.status
-                    );
-                }
-                return response.json();
-            })
-            .then((data) => {
-                var carruselMentores = document.getElementById("content-mentores");
-                data.forEach((mentor) => {
-                    var newContent = document.createElement("div");
-                    newContent.className = "containderCard swiper-slide w-[320px]";
-                    newContent.innerHTML = `
+  fetch(`${baseUrl}/index.php?c=Usuarios&a=verMentores`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(
+          "Error al obtener los mentores. Código de estado: " + response.status
+        );
+      }
+      return response.json();
+    })
+    .then((data) => {
+      var carruselMentores = document.getElementById("content-mentores");
+      data.forEach((mentor) => {
+        var newContent = document.createElement("div");
+        newContent.className = "containderCard swiper-slide w-[320px]";
+        newContent.innerHTML = `
                         <div class="ssubContentCard">
                             <div class="cardImageMentor">
                                 <img src="public/images/docente/${mentor.Mentor_Foto}/${mentor.Mentor_Foto}.png" alt="${mentor.Mentor_Nombre}">
@@ -652,45 +709,51 @@ function obtenerMentores() {
                             </div>
                         </div>
                     `;
-                    carruselMentores.appendChild(newContent);
-                });
+        carruselMentores.appendChild(newContent);
+      });
 
-                // Inicializar el slider de Swiper después de cargar los mentores
-                var swiperMentores = new Swiper(".swiper", {
-                    loop: true,
-                    spaceBetween: 20,
-                    grabCursor: true,
-                    navigation: {
-                        nextEl: ".swiper-button-next",
-                        prevEl: ".swiper-button-prev",
-                    },
-                    breakpoints: {
-                        600: {
-                            slidesPerView: 1,
-                        },
-                        1024: {
-                            slidesPerView: 2,
-                        },
-                        1440: {
-                            slidesPerView: 3,
-                        },
-                    },
-                });
-            })
-            .catch((error) => {
-                console.error("Error en la solicitud:", error);
-            });
-    }
-    
+      // Inicializar el slider de Swiper después de cargar los mentores
+      var swiperMentores = new Swiper(".swiper", {
+        loop: true,
+        spaceBetween: 20,
+        grabCursor: true,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+          600: {
+            slidesPerView: 1,
+          },
+          1024: {
+            slidesPerView: 2,
+          },
+          1440: {
+            slidesPerView: 3,
+          },
+        },
+      });
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
+}
+
 function obtenerMentoresPorTipo(tipoCurso) {
-  fetch(`${baseUrl}/index.php?c=Usuarios&a=verMentoresPorTipo&tipoCurso=${encodeURIComponent(tipoCurso)}`)
+  fetch(
+    `${baseUrl}/index.php?c=Usuarios&a=verMentoresPorTipo&tipoCurso=${encodeURIComponent(
+      tipoCurso
+    )}`
+  )
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Error al obtener los mentores. Código de estado: " + response.status);
+        throw new Error(
+          "Error al obtener los mentores. Código de estado: " + response.status
+        );
       }
       return response.json();
     })
-   .then((data) => {
+    .then((data) => {
       var carruselMentores = document.getElementById(`${tipoCurso}-mentores`);
       data.forEach((mentor) => {
         var newContent = document.createElement("div");
@@ -712,26 +775,26 @@ function obtenerMentoresPorTipo(tipoCurso) {
         carruselMentores.appendChild(newContent);
       });
       // Inicializar el slider de Swiper después de cargar los mentores
-                var swiperMentores = new Swiper(".swiper", {
-                    loop: true,
-                    spaceBetween: 20,
-                    grabCursor: true,
-                    navigation: {
-                        nextEl: ".swiper-button-next",
-                        prevEl: ".swiper-button-prev",
-                    },
-                    breakpoints: {
-                        600: {
-                            slidesPerView: 1,
-                        },
-                        1024: {
-                            slidesPerView: 2,
-                        },
-                        1440: {
-                            slidesPerView: 3,
-                        },
-                    },
-                });
+      var swiperMentores = new Swiper(".swiper", {
+        loop: true,
+        spaceBetween: 20,
+        grabCursor: true,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+          600: {
+            slidesPerView: 1,
+          },
+          1024: {
+            slidesPerView: 2,
+          },
+          1440: {
+            slidesPerView: 3,
+          },
+        },
+      });
     })
     .catch((error) => {
       console.error("Error en la solicitud:", error);
@@ -876,14 +939,14 @@ document.addEventListener("DOMContentLoaded", function () {
           mentor.Curso
         );
       });
-      
+
       //NUEVO CAMBIO AGENDA
       function getDateAfterHours(hours) {
         const now = new Date();
         now.setHours(now.getHours() + hours, 0, 0, 0);
         return now;
-    }
-    //FIN AGENDA
+      }
+      //FIN AGENDA
 
       function populateCalendar(
         mentorId,
@@ -931,7 +994,7 @@ document.addEventListener("DOMContentLoaded", function () {
           "17:00",
           "18:00",
         ];
-        
+
         //NUEVO CAMBIO AGENDA
         // Calcular la fecha límite (48 horas a partir de ahora)
         const dateLimit = getDateAfterHours(48);
@@ -962,13 +1025,16 @@ document.addEventListener("DOMContentLoaded", function () {
               //CAMBIOS AJENDA
               const date = new Date(startDate);
               date.setDate(startDate.getDate() + j);
-              const cellDateTime = new Date(`${date.toDateString()} ${timeSlots[i]}`);
+              const cellDateTime = new Date(
+                `${date.toDateString()} ${timeSlots[i]}`
+              );
               // Mostrar en la consola
               console.log(`Fecha y hora combinadas: ${cellDateTime}`);
               //FIN AGENDA
               if (
                 disponibilidades[day] &&
-                disponibilidades[day].includes(timeSlots[i]) && cellDateTime >= dateLimit
+                disponibilidades[day].includes(timeSlots[i]) &&
+                cellDateTime >= dateLimit
               ) {
                 cell.textContent = timeSlots[i];
                 // Añadir identificador a la celda
@@ -1052,8 +1118,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const cursoName = this.dataset.cursoName;
 
             const edad = document.getElementById("edad").value;
-            const conocimientos =
-              document.getElementById("selectConocimientos").value;
+            const conocimientos = document.getElementById(
+              "selectConocimientos"
+            ).value;
 
             if (!edad || !conocimientos) {
               alert("Por favor, completa toda la información.");
@@ -1205,10 +1272,6 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 });
 
-
-
-
-
 function verPerfilMentor(idMentor) {
   const url = `${baseUrl}/index.php?c=Docentes&a=informacionMentorId&idCurso=${idMentor}`;
   window.location.href = url;
@@ -1274,68 +1337,67 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => console.error("Error al obtener los datos:", error));
 });
 
-
 document.addEventListener("DOMContentLoaded", function () {
-document.getElementById("registroForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  
-  //alert("¡Se ha presionado el botón de Registrarse!"); // Depuración para verificar el evento submit
-  
-  const nombre = document.getElementById("nombre").value;
-  const edad = document.getElementById("edad").value;
-  const correo = document.getElementById("correo").value;
-  const telefono = document.getElementById("telefono").value;
-  const contraseña = document.getElementById("contraseña").value;
-  const intereses = document.querySelectorAll(
-    'input[name="intereses[]"]:checked'
-  );
-  const selectedIntereses = [];
+  document.getElementById("registroForm").addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  intereses.forEach(function (checkbox) {
-    selectedIntereses.push(checkbox.value);
+    //alert("¡Se ha presionado el botón de Registrarse!"); // Depuración para verificar el evento submit
+
+    const nombre = document.getElementById("nombre").value;
+    const edad = document.getElementById("edad").value;
+    const correo = document.getElementById("correo").value;
+    const telefono = document.getElementById("telefono").value;
+    const contraseña = document.getElementById("contraseña").value;
+    const intereses = document.querySelectorAll(
+      'input[name="intereses[]"]:checked'
+    );
+    const selectedIntereses = [];
+
+    intereses.forEach(function (checkbox) {
+      selectedIntereses.push(checkbox.value);
+    });
+
+    const nombreError = document.getElementById("nombre-error");
+    const edadError = document.getElementById("edad-error");
+    const correoError = document.getElementById("correo-error");
+    const telefonoError = document.getElementById("telefono-error");
+    const contraseñaError = document.getElementById("contraseña-error");
+    const interesesError = document.getElementById("intereses-error");
+    let isValid = true;
+
+    if (nombre === "" || /\d/.test(nombre)) {
+      nombreError.textContent = "Favor de ingresar un nombre";
+      isValid = false;
+    }
+
+    if (edad === "") {
+      edadError.textContent = "Favor de ingresar su edad";
+      isValid = false;
+    }
+
+    if (correo === "" || !correo.includes("@")) {
+      correoError.textContent = "Favor de ingresar un correo valido";
+      isValid = false;
+    }
+
+    if (telefono === "" || telefono.length < 9) {
+      telefonoError.textContent = "Favord de ingresar un numero de telefono";
+      isValid = false;
+    }
+    if (contraseñaError === "" || contraseña.length < 6) {
+      contraseñaError.textContent =
+        "Favor de ingresar una contraseña con al menos 6 digitos";
+      isValid = false;
+    }
+    if (selectedIntereses.length < 2) {
+      interesesError.textContent = "Favor de seleccionar mas de dos interese";
+      isValid = false;
+    }
+
+    if (isValid) {
+      enviarForm(nombre, edad, telefono, correo, contraseña, selectedIntereses);
+    }
   });
-
-  const nombreError = document.getElementById("nombre-error");
-  const edadError = document.getElementById("edad-error");
-  const correoError = document.getElementById("correo-error");
-  const telefonoError = document.getElementById("telefono-error");
-  const contraseñaError = document.getElementById("contraseña-error");
-  const interesesError = document.getElementById("intereses-error");
-  let isValid = true;
-
-  if (nombre === "" || /\d/.test(nombre)) {
-    nombreError.textContent = "Favor de ingresar un nombre";
-    isValid = false;
-  }
-
-  if (edad === "") {
-    edadError.textContent = "Favor de ingresar su edad";
-    isValid = false;
-  }
-
-  if (correo === "" || !correo.includes("@")) {
-    correoError.textContent = "Favor de ingresar un correo valido";
-    isValid = false;
-  }
-
-  if (telefono === "" || telefono.length < 9) {
-    telefonoError.textContent = "Favord de ingresar un numero de telefono";
-    isValid = false;
-  }
-  if (contraseñaError === "" || contraseña.length < 6) {
-    contraseñaError.textContent =
-      "Favor de ingresar una contraseña con al menos 6 digitos";
-    isValid = false;
-  }
-  if (selectedIntereses.length < 2) {
-    interesesError.textContent = "Favor de seleccionar mas de dos interese";
-    isValid = false;
-  }
-
-  if (isValid) {
-    enviarForm(nombre, edad, telefono, correo, contraseña, selectedIntereses);
-  }
-});
 });
 
 function enviarForm(
@@ -1426,126 +1488,137 @@ function agendar() {
 
 //*******************************************************************
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("registroFormMentores").addEventListener("submit", (e) => {
-        e.preventDefault();
-    
-        // alert("¡Se ha presionado el botón de Registrarse!"); // Depuración para verificar el evento submit
+  document
+    .getElementById("registroFormMentores")
+    .addEventListener("submit", (e) => {
+      e.preventDefault();
 
-        const nombreMentor = document.getElementById("nombreMentor").value.trim();
-        //const areaMentor = document.getElementById("selectArea").value;
-        const correoMentor = document.getElementById("correoMentor").value.trim();
-        const tipoMentor = document.getElementById("tipoMentor").value.trim();
-        const telefonoMentor = document.getElementById("telefonoMentor").value.trim();
-        const acercaMentor = document.getElementById("acercaMentor").value.trim();
-        const fotoMentor = document.getElementById("fotoMentorPerfil").files[0];
-        const fotoMentorTarjeta = document.getElementById("fotoMentorTarejta").files[0];
-        const fotoMentorPortada = document.getElementById("fotoMentorPortada").files[0];
-        
-        const cursoId = document.getElementById("selectCursos").value; // Capturar el valor del select
+      // alert("¡Se ha presionado el botón de Registrarse!"); // Depuración para verificar el evento submit
 
-        const nombreMentorError = document.getElementById("nombreMentor-error");
-        //const areaMentorError = document.getElementById("areaMentor-error");
-        const correoMentorError = document.getElementById("correoMentor-error");
-        const tipoMentorError = document.getElementById("tipoMentor-error");
-        const telefonoMentorError = document.getElementById("telefonoMentor-error");
-        const acercaMentorError = document.getElementById("acercaMentor-error");
-    
-        // alert("¡Se ha presionado el botón de Registrarse!"+nombreMentor); // Depuración para verificar el evento submit
+      const nombreMentor = document.getElementById("nombreMentor").value.trim();
+      //const areaMentor = document.getElementById("selectArea").value;
+      const correoMentor = document.getElementById("correoMentor").value.trim();
+      const tipoMentor = document.getElementById("tipoMentor").value.trim();
+      const telefonoMentor = document
+        .getElementById("telefonoMentor")
+        .value.trim();
+      const acercaMentor = document.getElementById("acercaMentor").value.trim();
+      const fotoMentor = document.getElementById("fotoMentorPerfil").files[0];
+      const fotoMentorTarjeta =
+        document.getElementById("fotoMentorTarejta").files[0];
+      const fotoMentorPortada =
+        document.getElementById("fotoMentorPortada").files[0];
 
-        let isValid = true;
+      const cursoId = document.getElementById("selectCursos").value; // Capturar el valor del select
 
-        // Limpiar mensajes de error previos
-        nombreMentorError.textContent = "";
-        //areaMentorError.textContent = "";
-        correoMentorError.textContent = "";
-        tipoMentorError.textContent = "";
-        telefonoMentorError.textContent = "";
-        acercaMentorError.textContent = "";
+      const nombreMentorError = document.getElementById("nombreMentor-error");
+      //const areaMentorError = document.getElementById("areaMentor-error");
+      const correoMentorError = document.getElementById("correoMentor-error");
+      const tipoMentorError = document.getElementById("tipoMentor-error");
+      const telefonoMentorError = document.getElementById(
+        "telefonoMentor-error"
+      );
+      const acercaMentorError = document.getElementById("acercaMentor-error");
 
-        if (nombreMentor === "" || /\d/.test(nombreMentor)) {
-            nombreMentorError.textContent = "Favor de ingresar un nombre válido";
-            isValid = false;
-        }
+      // alert("¡Se ha presionado el botón de Registrarse!"+nombreMentor); // Depuración para verificar el evento submit
 
-        /*
+      let isValid = true;
+
+      // Limpiar mensajes de error previos
+      nombreMentorError.textContent = "";
+      //areaMentorError.textContent = "";
+      correoMentorError.textContent = "";
+      tipoMentorError.textContent = "";
+      telefonoMentorError.textContent = "";
+      acercaMentorError.textContent = "";
+
+      if (nombreMentor === "" || /\d/.test(nombreMentor)) {
+        nombreMentorError.textContent = "Favor de ingresar un nombre válido";
+        isValid = false;
+      }
+
+      /*
         if (areaMentor === "") {
             areaMentorError.textContent = "Favor de ingresar un área válida";
             isValid = false;
         }
         */
 
-        if (correoMentor === "" || !correoMentor.includes("@")) {
-            correoMentorError.textContent = "Favor de ingresar un correo válido";
-            isValid = false;
-        }
+      if (correoMentor === "" || !correoMentor.includes("@")) {
+        correoMentorError.textContent = "Favor de ingresar un correo válido";
+        isValid = false;
+      }
 
-        if (tipoMentor === "") {
-            tipoMentorError.textContent = "Favor de ingresar un curso o asesoría";
-            isValid = false;
-        }
+      if (tipoMentor === "") {
+        tipoMentorError.textContent = "Favor de ingresar un curso o asesoría";
+        isValid = false;
+      }
 
-        if (telefonoMentor === "" || telefonoMentor.length < 9) {
-            telefonoMentorError.textContent = "Favor de ingresar un número de teléfono válido";
-            isValid = false;
-        }
+      if (telefonoMentor === "" || telefonoMentor.length < 9) {
+        telefonoMentorError.textContent =
+          "Favor de ingresar un número de teléfono válido";
+        isValid = false;
+      }
 
-        if (acercaMentor === "") {
-            acercaMentorError.textContent = "Favor de ingresar información y hobbies del mentor";
-            isValid = false;
-        }
-        
-        if (cursoId === "") {
-            //Agregar validación para el select
-            alert("Por favor, seleccione un curso.");
-            isValid = false;
-        }
+      if (acercaMentor === "") {
+        acercaMentorError.textContent =
+          "Favor de ingresar información y hobbies del mentor";
+        isValid = false;
+      }
 
-        if (isValid) {
-            const formData = new FormData();
-            formData.append("nombreMentor", nombreMentor);
-            //formData.append("areaMentor", areaMentor);
-            formData.append("correoMentor", correoMentor);
-            formData.append("tipoMentor", tipoMentor);
-            formData.append("telefonoMentor", telefonoMentor);
-            formData.append("acercaMentor", acercaMentor);
-            formData.append("fotoMentorPerfil", fotoMentor);
-            formData.append("fotoMentorTarjeta", fotoMentorTarjeta);
-            formData.append("fotoMentorPortada", fotoMentorPortada);
-            formData.append("cursoId", cursoId); // Agregar el cursoId al FormData
+      if (cursoId === "") {
+        //Agregar validación para el select
+        alert("Por favor, seleccione un curso.");
+        isValid = false;
+      }
 
-            enviarFormularioMentor(formData);
-        }
+      if (isValid) {
+        const formData = new FormData();
+        formData.append("nombreMentor", nombreMentor);
+        //formData.append("areaMentor", areaMentor);
+        formData.append("correoMentor", correoMentor);
+        formData.append("tipoMentor", tipoMentor);
+        formData.append("telefonoMentor", telefonoMentor);
+        formData.append("acercaMentor", acercaMentor);
+        formData.append("fotoMentorPerfil", fotoMentor);
+        formData.append("fotoMentorTarjeta", fotoMentorTarjeta);
+        formData.append("fotoMentorPortada", fotoMentorPortada);
+        formData.append("cursoId", cursoId); // Agregar el cursoId al FormData
+
+        enviarFormularioMentor(formData);
+      }
     });
 });
 
 function enviarFormularioMentor(formData) {
-    fetch(`${baseUrl}/index.php?c=Administradors&a=registro`, {
-        method: "POST",
-        body: formData,
-    })
+  fetch(`${baseUrl}/index.php?c=Administradors&a=registro`, {
+    method: "POST",
+    body: formData,
+  })
     .then((response) => {
-        if (response.ok) {
-            //alert("Va bien"); // Depuración 
-            return response.json();
-        } else {
-            console.error("Error sending data to API:", response);
-            throw new Error("Error sending data to API: " + response.statusText);
-        }
+      if (response.ok) {
+        //alert("Va bien"); // Depuración
+        return response.json();
+      } else {
+        console.error("Error sending data to API:", response);
+        throw new Error("Error sending data to API: " + response.statusText);
+      }
     })
     .then((data) => {
-        if (data.success) {
-            //alert("Va bien"); // Depuración 
-            console.log("Data sent successfully: " + data.message);
-            document.getElementById("registroFormMentores").reset(); // Resetear el formulario
-            mostrarToastify(data.message, "success"); // Mostrar mensaje de éxito
-        } else {
-            mostrarToastify(data.error, "error if (data.success)"); // Mostrar mensaje de error
-        }
+      if (data.success) {
+        //alert("Va bien"); // Depuración
+        console.log("Data sent successfully: " + data.message);
+        document.getElementById("registroFormMentores").reset(); // Resetear el formulario
+        mostrarToastify(data.message, "success"); // Mostrar mensaje de éxito
+      } else {
+        mostrarToastify(data.error, "error if (data.success)"); // Mostrar mensaje de error
+      }
     })
     .catch((error) => {
-        console.error("Network error:", error);
-        mostrarToastify("Network error enviarFormularioMentor: " + error.message, "error"); // Mostrar error de red
+      console.error("Network error:", error);
+      mostrarToastify(
+        "Network error enviarFormularioMentor: " + error.message,
+        "error"
+      ); // Mostrar error de red
     });
 }
-
-

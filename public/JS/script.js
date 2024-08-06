@@ -101,11 +101,7 @@ let swiperCards = new Swiper(".card__content", {
       slidesPerView: 2,
     },
 
-    1440: {
-      slidesPerView: 2,
-    },
-
-    1448: {
+    1280: {
       slidesPerView: 4,
     },
   },
@@ -126,6 +122,11 @@ let swiperCards2 = new Swiper(".swiper-container-2", {
       slidesPerView: 3,
     },
   },
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  var splide = new Splide(".splide");
+  splide.mount();
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -153,7 +154,9 @@ function mostrarContenidoAreas() {
   contenidoTop.style.display = "block";
   var contenidoProgramacion = document.getElementById("contenido-programacion");
   contenidoProgramacion.style.display = "block";
-  var contenidoAdministracion = document.getElementById("contenido-administracion");
+  var contenidoAdministracion = document.getElementById(
+    "contenido-administracion"
+  );
   contenidoAdministracion.style.display = "block";
   //fin
   var contenidoFooter = document.getElementById("footer");
@@ -163,7 +166,7 @@ function mostrarContenidoAreas() {
   var contenidoMasterTeach = document.getElementById("contenido-master-teach");
   contenidoMasterTeach.style.display = "none";
   //CAMBIOS JULIO 24
-  toggleButtonStyles('btn-areas', 'btn-master');
+  toggleButtonStyles("btn-areas", "btn-master");
   reinitSwiper();
   //fin
 }
@@ -186,11 +189,13 @@ function mostrarContenidoMasterTeach() {
   contenidoTop.style.display = "none";
   var contenidoProgramacion = document.getElementById("contenido-programacion");
   contenidoProgramacion.style.display = "none";
-  var contenidoAdministracion = document.getElementById("contenido-administracion");
+  var contenidoAdministracion = document.getElementById(
+    "contenido-administracion"
+  );
   contenidoAdministracion.style.display = "none";
   //fin
   //CAMBIOS JULIO 24
-  toggleButtonStyles('btn-master', 'btn-areas');
+  toggleButtonStyles("btn-master", "btn-areas");
   //fin
 }
 
@@ -230,21 +235,21 @@ closeVideoPopup.addEventListener("click", function () {
 //NUEVOS ESTILOS JULIO 24 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 function toggleButtonStyles(activeButtonId, inactiveButtonId) {
-    const activeButton = document.getElementById(activeButtonId);
-    const inactiveButton = document.getElementById(inactiveButtonId);
+  const activeButton = document.getElementById(activeButtonId);
+  const inactiveButton = document.getElementById(inactiveButtonId);
 
-    // Clases para el botón activo
-    const activeButtonClasses = ['bg-[#4F7CAC]', 'text-[#FEC400]'];
-    // Clases para el botón inactivo
-    const inactiveButtonClasses = ['bg-[#2E3532]', 'text-white'];
+  // Clases para el botón activo
+  const activeButtonClasses = ["bg-[#4F7CAC]", "text-[#FEC400]"];
+  // Clases para el botón inactivo
+  const inactiveButtonClasses = ["bg-[#2E3532]", "text-white"];
 
-    // Remover clases activas del botón inactivo y agregar clases inactivas
-    inactiveButton.classList.remove(...activeButtonClasses);
-    inactiveButton.classList.add(...inactiveButtonClasses);
+  // Remover clases activas del botón inactivo y agregar clases inactivas
+  inactiveButton.classList.remove(...activeButtonClasses);
+  inactiveButton.classList.add(...inactiveButtonClasses);
 
-    // Remover clases inactivas del botón activo y agregar clases activas
-    activeButton.classList.remove(...inactiveButtonClasses);
-    activeButton.classList.add(...activeButtonClasses);
+  // Remover clases inactivas del botón activo y agregar clases activas
+  activeButton.classList.remove(...inactiveButtonClasses);
+  activeButton.classList.add(...activeButtonClasses);
 }
 
 function reinitSwiper() {
@@ -254,7 +259,7 @@ function reinitSwiper() {
   }
 
   // Inicializar Swiper después de un pequeño retraso
-  setTimeout(function() {
+  setTimeout(function () {
     swiperInstance = new Swiper(".card__content", {
       loop: true,
       spaceBetween: 20,
