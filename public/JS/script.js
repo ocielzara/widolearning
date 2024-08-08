@@ -80,6 +80,10 @@ let swiperCards = new Swiper(".card__content", {
   loop: true,
   spaceBetween: 20,
   grabCursor: false,
+  /* autoplay: {
+    delay: 2000,
+    disableOnInteraction: false,
+  },*/
 
   pagination: {
     el: ".swiper-pagination",
@@ -87,14 +91,15 @@ let swiperCards = new Swiper(".card__content", {
     dynamicBullets: true,
   },
 
-  navigation: {
+  /*navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
-  },
+  },*/
 
   breakpoints: {
     600: {
       slidesPerView: 1,
+      spaceBetween: 20,
     },
 
     1024: {
@@ -111,6 +116,10 @@ let swiperCards2 = new Swiper(".swiper-container-2", {
   loop: true,
   spaceBetween: 20,
   grabCursor: false,
+  autoplay: {
+    delay: 2000,
+    disableOnInteraction: false,
+  },
   breakpoints: {
     600: {
       slidesPerView: 1,

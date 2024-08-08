@@ -115,16 +115,16 @@
                 <div class="flex sm:flex-row flex-col sm:justify-between text-center text-black my-12 xl:p-0 px-12">
                     <div>
                         <div>
-                            <img src="public/images/home/comofunciona1.png" class="2xl:w-64 xl:w-48 2xl:h-64 xl:h-48"
-                                alt="busca el curso o mentor">
+                            <img src="public/images/home/comofunciona1.png" class="2xl:w-60 lg:w-48 2xl:h-64 lg:h-48
+                            w-56 h-56 sm:mx-0 mx-auto" alt="busca el curso o mentor">
                         </div>
                         <h2 class="mx-auto my-3 2xl:text-3xl xl:text-xl text-2xl w-[16rem] font-bold">Busca el curso o
                             mentor ideal</h2>
                     </div>
                     <div>
                         <div>
-                            <img src="public/images/home/comofunciona2.png" class="2xl:w-60 xl:w-48 2xl:h-64 xl:h-48"
-                                alt="adapta a tus tiempos">
+                            <img src="public/images/home/comofunciona2.png" class="2xl:w-60 lg:w-48 2xl:h-64 lg:h-48
+                            w-56 h-56 sm:mx-0 mx-auto" alt="adapta a tus tiempos">
                         </div>
                         <h2 class="mx-auto my-3 xl:mt-12 2xl:text-3xl xl:text-xl text-2xl w-[18rem] font-bold">Agenda,
                             adaptado a tus
@@ -132,8 +132,8 @@
                     </div>
                     <div>
                         <div>
-                            <img src="public/images/home/comofunciona3.png" class="2xl:w-60 xl:w-48 2xl:h-64 xl:h-48"
-                                alt="aprende personalizado">
+                            <img src="public/images/home/comofunciona3.png" class="2xl:w-60 lg:w-48 2xl:h-64 lg:h-48
+                            w-56 h-56 sm:mx-0 mx-auto" alt="aprende personalizado">
                         </div>
                         <div>
                             <h2 class="mx-auto mt-3 2xl:text-3xl xl:text-xl text-2xl w-[16rem] font-bold">Aprende
@@ -191,7 +191,7 @@
         </section>
                     -->
 
-        <section class="section2 cursos-demanda max-w-7xl mx-auto">
+        <section class="section2 cursos-demanda 2xl:max-w-[90rem] 2xl:mx-auto">
             <div id="contenido-top">
                 <div class="my-10 inline-block">
                     <h1
@@ -200,18 +200,18 @@
                     </h1>
                 </div>
 
-                <div class="flex my-10">
+                <div class="flex p-1 my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden  sm:mx-0 ">
                             <div class="swiper-wrapper" id="content-cursos">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
             </div>
@@ -251,16 +251,16 @@
 
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="programacion">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
             </div>
@@ -275,16 +275,16 @@
 
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="administracion">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
             </div>
@@ -303,17 +303,17 @@
 
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="content-mentores">
                                 <!-- Aquí se insertarán los mentores -->
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
 
@@ -326,16 +326,16 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="administracion-mentores">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
 
@@ -347,16 +347,16 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="programacion-mentores">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
 
@@ -368,16 +368,16 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="CAD-mentores">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
 
@@ -389,16 +389,16 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="CAD-mentores">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
 
@@ -410,16 +410,16 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="dibujo-ilustracion-mentores">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
 
@@ -431,16 +431,16 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="modelado-animacion-mentores">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
 
@@ -452,16 +452,16 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="robotica-electronica-mentores">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
 
@@ -473,16 +473,16 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="videojuegos-mentores">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
 
@@ -494,16 +494,16 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="mkt-mentores">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
 
@@ -515,16 +515,16 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="data-mining-mentores">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
                 <!--
@@ -535,7 +535,7 @@
                     </div>
                     <div class="flex my-10">
                         <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                            <div class="card__content overflow-hidden">
+                            <div class="card__content overflow-hidden ">
                                 <div class="swiper-wrapper" id="arte-mentores">
                                 </div>
                             </div>
@@ -557,16 +557,16 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="idiomas-mentores">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
 
@@ -578,16 +578,16 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="musica-mentores">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
 
@@ -599,16 +599,16 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="salud-mentores">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
 
@@ -620,16 +620,16 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="otros-mentores">
                             </div>
                         </div>
-                        <div class="swiper-button-next">
+                        <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
                         <div class="swiper-button-prev">
                             <i class="ri-arrow-left-s-line"></i>
-                        </div>
+                        </div> --->
                     </div>
                 </div>
 
@@ -653,7 +653,7 @@
                     </div>
                     <div class="flex my-10">
                         <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                            <div class="card__content overflow-hidden">
+                            <div class="card__content overflow-hidden ">
                                 <div class="swiper-wrapper" id="otros">
                                 </div>
                             </div>
@@ -675,7 +675,7 @@
                         </div>
                         <div class="flex my-10">
                             <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                <div class="card__content overflow-hidden">
+                                <div class="card__content overflow-hidden ">
                                     <div class="swiper-wrapper" id="voz">
                                     </div>
                                 </div>
@@ -697,7 +697,7 @@
                             </div>
                             <div class="flex my-10">
                                 <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                    <div class="card__content overflow-hidden">
+                                    <div class="card__content overflow-hidden ">
                                         <div class="swiper-wrapper" id="videojuegos">
                                         </div>
                                     </div>
@@ -719,7 +719,7 @@
                                 </div>
                                 <div class="flex my-10">
                                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                        <div class="card__content overflow-hidden">
+                                        <div class="card__content overflow-hidden ">
                                             <div class="swiper-wrapper" id="salud">
                                             </div>
                                         </div>
@@ -741,7 +741,7 @@
                                     </div>
                                     <div class="flex my-10">
                                         <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                            <div class="card__content overflow-hidden">
+                                            <div class="card__content overflow-hidden ">
                                                 <div class="swiper-wrapper" id="musica">
                                                 </div>
                                             </div>
@@ -763,7 +763,7 @@
                                         </div>
                                         <div class="flex my-10">
                                             <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                                <div class="card__content overflow-hidden">
+                                                <div class="card__content overflow-hidden ">
                                                     <div class="swiper-wrapper" id="mkt">
                                                     </div>
                                                 </div>
@@ -785,7 +785,7 @@
                                             </div>
                                             <div class="flex my-10">
                                                 <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                                    <div class="card__content overflow-hidden">
+                                                    <div class="card__content overflow-hidden ">
                                                         <div class="swiper-wrapper" id="idiomas">
                                                         </div>
                                                     </div>
@@ -807,7 +807,7 @@
                                                 </div>
                                                 <div class="flex my-10">
                                                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                                        <div class="card__content overflow-hidden">
+                                                        <div class="card__content overflow-hidden ">
                                                             <div class="swiper-wrapper" id="dibujo-ilustracion">
                                                             </div>
                                                         </div>
@@ -829,7 +829,7 @@
                                                     </div>
                                                     <div class="flex my-10">
                                                         <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                                            <div class="card__content overflow-hidden">
+                                                            <div class="card__content overflow-hidden ">
                                                                 <div class="swiper-wrapper" id="data-mining">
                                                                 </div>
                                                             </div>
@@ -851,7 +851,7 @@
                                                         </div>
                                                         <div class="flex my-10">
                                                             <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                                                <div class="card__content overflow-hidden">
+                                                                <div class="card__content overflow-hidden ">
                                                                     <div class="swiper-wrapper" id="CAD">
                                                                     </div>
                                                                 </div>
@@ -874,7 +874,7 @@
                                                             <div class="flex my-10">
                                                                 <div
                                                                     class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                                                    <div class="card__content overflow-hidden">
+                                                                    <div class="card__content overflow-hidden ">
                                                                         <div class="swiper-wrapper" id="arte">
                                                                         </div>
                                                                     </div>

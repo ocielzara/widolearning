@@ -162,16 +162,22 @@ a:hover {
 }
 
 .containderCard {
-  width: auto;
+  width: 320px !important;
+  margin-inline: 0.5rem !important;
   overflow: hidden;
   border-radius: 2rem;
 }
 
 .subContentCard {
-  width: 15rem;
+  width: 100%;
   height: 27rem;
   border-radius: 2rem;
   background-color: #2e3532;
+}
+
+.swiper {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 .cardImage {
@@ -605,14 +611,23 @@ h3 {
 /***FIN**/
 
 @media screen and (max-width: 1440px) {
-  .containderCard {
-    width: 23.8rem !important;
-  }
-
   .imageBackground {
     background-image: url("../../public/images/home/homeweb.png");
     background-repeat: no-repeat;
     background-size: 70%;
+  }
+  .containderCard {
+    width: 305px !important;
+    margin-inline: 0.5rem !important;
+    overflow: hidden;
+    border-radius: 2rem;
+  }
+
+  .subContentCard {
+    width: 100%;
+    height: 27rem;
+    border-radius: 2rem;
+    background-color: #2e3532;
   }
 }
 
@@ -707,6 +722,27 @@ h3 {
 
   .contentMentores {
     flex-direction: row;
+  }
+
+  .containderCard {
+    width: 350px !important;
+    overflow: hidden;
+    border-radius: 2rem;
+  }
+
+  .swiper-button-next {
+    display: none !important;
+  }
+
+  .swiper-button-prev {
+    display: none !important;
+  }
+
+  .subContentCard {
+    width: 100%;
+    height: 27rem;
+    border-radius: 2rem;
+    background-color: #2e3532;
   }
 
   .card__data {

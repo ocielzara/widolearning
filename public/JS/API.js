@@ -499,7 +499,7 @@ const mostrarAsesorias = (data) => {
     var newContent = document.createElement("div");
     newContent.className = "containderCard swiper-slide";
     newContent.innerHTML = `
-      <div class="ssubContentCard">
+      <div class="subContentCard">
           <div class="cardImage">
               <img src="public/${curso.foto}" alt="Descripción de la imagen">
           </div>
@@ -539,9 +539,9 @@ async function mostrarMasCategorias(idUsuario, typoCurso) {
       const estado = await obtenerEstadoInscripcion(idUsuario, curso.id_curso);
 
       const newContent = document.createElement("div");
-      newContent.className = "containderCard swiper-slide w-[320px]";
+      newContent.className = "containderCard swiper-slide";
       newContent.innerHTML = `
-        <div class="ssubContentCard">
+        <div class="subContentCard">
           <div class="cardImage">
             <img src="public/${curso.foto}" alt="Descripción de la imagen">
           </div>
@@ -572,15 +572,17 @@ async function obtenerCursos(idUsuario) {
     }
     const cursos = await response.json();
     filtrarDatos.push(...cursos);
+    //Mantener en pantalla solo 6 tarjetas maximo
+    const primerosDiez = cursos.slice(0, 6);
     var carruselcurso = document.getElementById("content-cursos");
-    for (const curso of cursos) {
+    for (const curso of primerosDiez) {
       const estado = await obtenerEstadoInscripcion(idUsuario, curso.id_curso);
       // Mostrar alert con la información del estado
       //alert(`Curso: ${curso.id_curso}\nEstado: ${estado}`);
       var newContent = document.createElement("div");
-      newContent.className = "containderCard swiper-slide w-[320px]";
+      newContent.className = "containderCard swiper-slide";
       newContent.innerHTML = `
-        <div class="ssubContentCard">
+        <div class="subContentCard">
           <div class="cardImage">
             <img src="public/${curso.foto}" alt="Descripción de la imagen">
           </div>
@@ -711,28 +713,6 @@ function obtenerMentores() {
                     `;
         carruselMentores.appendChild(newContent);
       });
-
-      // Inicializar el slider de Swiper después de cargar los mentores
-      var swiperMentores = new Swiper(".swiper", {
-        loop: true,
-        spaceBetween: 20,
-        grabCursor: true,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-        breakpoints: {
-          600: {
-            slidesPerView: 1,
-          },
-          1024: {
-            slidesPerView: 2,
-          },
-          1440: {
-            slidesPerView: 3,
-          },
-        },
-      });
     })
     .catch((error) => {
       console.error("Error en la solicitud:", error);
@@ -775,26 +755,6 @@ function obtenerMentoresPorTipo(tipoCurso) {
         carruselMentores.appendChild(newContent);
       });
       // Inicializar el slider de Swiper después de cargar los mentores
-      var swiperMentores = new Swiper(".swiper", {
-        loop: true,
-        spaceBetween: 20,
-        grabCursor: true,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-        breakpoints: {
-          600: {
-            slidesPerView: 1,
-          },
-          1024: {
-            slidesPerView: 2,
-          },
-          1440: {
-            slidesPerView: 3,
-          },
-        },
-      });
     })
     .catch((error) => {
       console.error("Error en la solicitud:", error);
