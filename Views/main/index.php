@@ -14,7 +14,6 @@
     <!--========== Tailwind ==========-->
     <link rel="stylesheet" href="styles/output.css">
     <link rel="stylesheet" href="public/styles/tailwind.css">
-    <link rel="stylesheet" href="public/JS/splide-4.1.3/dist/css/splide.min.css">
 
     <link rel="stylesheet" href="pub    0lic/styles/carrucel.css">
 
@@ -200,9 +199,9 @@
                     </h1>
                 </div>
 
-                <div class="flex p-1 my-10">
+                <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden  sm:mx-0 ">
+                        <div class="card__content overflow-hidden">
                             <div class="swiper-wrapper" id="content-cursos">
                             </div>
                         </div>
@@ -1076,22 +1075,6 @@
     <!--=============== MAIN JS ===============-->
     <script src="public/JS/script.js"></script>
     <script src="public/JS/API.js"></script>
-    <script src="public/JS/splide-4.1.3/dist/js/splide.min.js"></script>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var splide = new Splide(".splide", {
-            perPage: 4,
-            rewind: true,
-            rewindSpeed: 1000,
-            breakpoints: {
-                640: {
-                    perPage: 1,
-                },
-            }
-        });
-        splide.mount();
-    });
-    </script>
 </body>
 
 </html>

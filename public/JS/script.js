@@ -80,10 +80,10 @@ let swiperCards = new Swiper(".card__content", {
   loop: true,
   spaceBetween: 20,
   grabCursor: false,
-  /* autoplay: {
+  autoplay: {
     delay: 2000,
     disableOnInteraction: false,
-  },*/
+  },
 
   pagination: {
     el: ".swiper-pagination",
