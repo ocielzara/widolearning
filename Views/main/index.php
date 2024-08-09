@@ -198,20 +198,17 @@
                         CURSOS TOP (con mayor demanda)
                     </h1>
                 </div>
-
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="content-cursos">
                             </div>
                         </div>
-                        <!--    <div class="swiper-button-next">
-                            <i class="ri-arrow-right-s-line "></i>
-                        </div>
-                        <div class="swiper-button-prev">
-                            <i class="ri-arrow-left-s-line"></i>
-                        </div> --->
                     </div>
+                </div>
+                <div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                 </div>
             </div>
 
@@ -231,11 +228,10 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="swiper-container-2 overflow-hidden">
+                        <div class="card__content overflow-hidden ">
                             <div class="swiper-wrapper" id="content-asesorias">
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

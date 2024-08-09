@@ -1042,10 +1042,6 @@ video {
      object-fit: cover;
 }
 
-.p-1 {
-  padding: 0.25rem;
-}
-
 .p-10 {
   padding: 2.5rem;
 }
@@ -1400,6 +1396,10 @@ a:hover {
   height: 27rem;
   border-radius: 2rem;
   background-color: #2e3532;
+}
+
+.swiper-pagination {
+  position: relative !important;
 }
 
 .swiper {
@@ -1988,7 +1988,7 @@ h3 {
   }
 
   .containderCard {
-    width: 350px !important;
+    width: 100% !important;
     overflow: hidden;
     border-radius: 2rem;
   }

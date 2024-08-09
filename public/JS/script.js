@@ -91,10 +91,10 @@ let swiperCards = new Swiper(".card__content", {
     dynamicBullets: true,
   },
 
-  /*navigation: {
+  navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
-  },*/
+  },
 
   breakpoints: {
     600: {
