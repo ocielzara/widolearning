@@ -85,7 +85,7 @@ let swiperCards = new Swiper(".card__content", {
     disableOnInteraction: false,
   },
 
-  pagination: {
+  /*pagination: {
     el: ".swiper-pagination",
     clickable: true,
     dynamicBullets: true,
@@ -94,12 +94,17 @@ let swiperCards = new Swiper(".card__content", {
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
-  },
+  },*/
 
+  scrollbars: {
+    el: ".swiper-scrollbar",
+    draggable: true, // Permite arrastrar el scrollbar
+    hide: false, // Muestra el scrollbar de forma permanente
+  },
   breakpoints: {
     600: {
       slidesPerView: 1,
-      spaceBetween: 20,
+      spaceBetween: 10,
     },
 
     1024: {
@@ -132,6 +137,8 @@ let swiperCards2 = new Swiper(".swiper-container-2", {
     },
   },
 });
+
+/**   */
 
 document.addEventListener("DOMContentLoaded", function () {
   var splide = new Splide(".splide");

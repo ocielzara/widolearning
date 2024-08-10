@@ -497,7 +497,7 @@ const mostrarAsesorias = (data) => {
   var carruselAsesorias = document.getElementById("content-asesorias");
   data.forEach((curso) => {
     var newContent = document.createElement("div");
-    newContent.className = "containderCard swiper-slide";
+    newContent.className = "containderCard";
     newContent.innerHTML = `
       <div class="subContentCard">
           <div class="cardImage">
@@ -539,7 +539,7 @@ async function mostrarMasCategorias(idUsuario, typoCurso) {
       const estado = await obtenerEstadoInscripcion(idUsuario, curso.id_curso);
 
       const newContent = document.createElement("div");
-      newContent.className = "containderCard swiper-slide";
+      newContent.className = "containderCard";
       newContent.innerHTML = `
         <div class="subContentCard">
           <div class="cardImage">
@@ -580,7 +580,7 @@ async function obtenerCursos(idUsuario) {
       // Mostrar alert con la información del estado
       //alert(`Curso: ${curso.id_curso}\nEstado: ${estado}`);
       var newContent = document.createElement("div");
-      newContent.className = "containderCard swiper-slide";
+      newContent.className = "containderCard";
       newContent.innerHTML = `
         <div class="subContentCard">
           <div class="cardImage">

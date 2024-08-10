@@ -8,8 +8,8 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-    <link rel="icon" type="image/png" sizes="32x32" href="public/images/home/iconWido.jpeg">
-    <link rel="icon" type="image/png" sizes="16x16" href="public/images/home/iconWido.jpeg">
+    <link rel="icon" type="image/png" sizes="32x32" href="public/images/home/iconWido.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="public/images/home/iconWido.png">
 
     <!--========== Tailwind ==========-->
     <link rel="stylesheet" href="styles/output.css">
@@ -54,13 +54,13 @@
                 <div class="sm:h-1/3">
                     <?php if (isset($_SESSION['nombre'])) : ?>
                     <?php else : ?>
-                    <div class="flex lg:my-[7.5rem] 2xl:my-[5rem] xl:my-[4rem] sm:mx-44 xl:mx-32 p-10">
-                        <button
-                            class="bg-[#FEC400] cursor-pointer w-80 flex font-bold justify-center sm:h-16 h-10 text-center items-center rounded-3xl text-black"
-                            onclick="iniciarSesion()">
-                            Clase muestra gratuita
-                        </button>
-                    </div>
+                        <div class="flex lg:my-[7.5rem] 2xl:my-[5rem] xl:my-[4rem] sm:mx-44 xl:mx-32 p-10">
+                            <button
+                                class="bg-[#FEC400] cursor-pointer w-80 flex font-bold justify-center sm:h-16 h-10 text-center items-center rounded-3xl text-black"
+                                onclick="iniciarSesion()">
+                                Clase muestra gratuita
+                            </button>
+                        </div>
                     <?php endif; ?>
 
                 </div>
@@ -192,23 +192,17 @@
 
         <section class="section2 cursos-demanda 2xl:max-w-[90rem] 2xl:mx-auto">
             <div id="contenido-top">
-                <div class="my-10 inline-block">
+                <div class="my-10">
                     <h1
-                        class="border-b-2 border-[#4F7CAC] sm:text-start text-center 2xl:text-5xl lg:text-2xl text-xl sm:ml-20 font-bold py-3 text-[#4F7CAC]">
+                        class="md:w-fit border-b-2 border-[#4F7CAC] md:text-start text-center 2xl:text-5xl lg:text-2xl text-xl sm:ml-20 font-bold py-3 text-[#4F7CAC]">
                         CURSOS TOP (con mayor demanda)
                     </h1>
                 </div>
-                <div class="flex my-10">
+                <div class="flex my-10 w-[96%]">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden ">
-                            <div class="swiper-wrapper" id="content-cursos">
-                            </div>
+                        <div class="flex overflow-x-auto space-x-4 p-4" id="content-cursos">
                         </div>
                     </div>
-                </div>
-                <div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
                 </div>
             </div>
 
@@ -220,34 +214,32 @@
             </div>
 
             <div id="contenido-areas" class="prices-1">
-                <div class="my-10 inline-block">
+                <div class="my-10">
                     <h1
-                        class="border-b-2 border-[#4F7CAC] sm:text-start text-center 2xl:text-5xl lg:text-2xl text-xl sm:ml-20 font-bold py-3 text-[#4F7CAC]">
+                        class="md:w-fit border-b-2 border-[#4F7CAC] md:text-start text-center 2xl:text-5xl lg:text-2xl text-xl sm:ml-20 font-bold py-3 text-[#4F7CAC]">
                         ASESORÍAS ACADEMICAS/LABORALES
                     </h1>
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden ">
-                            <div class="swiper-wrapper" id="content-asesorias">
-                            </div>
+                        <div class="flex overflow-x-auto space-x-4 p-4" id="content-asesorias">
                         </div>
                     </div>
                 </div>
             </div>
 
             <div id="contenido-programacion">
-                <div class="my-10 inline-block">
+                <div class="my-10">
                     <h1
-                        class="border-b-2 border-[#4F7CAC] sm:text-start text-center 2xl:text-5xl lg:text-2xl text-3xl sm:ml-20 font-bold py-3 text-[#4F7CAC]">
+                        class="border-b-2 border-[#4F7CAC] sm:text-start 2xl:text-5xl lg:text-2xl text-2xl sm:ml-20 font-bold py-3 text-[#4F7CAC]">
                         CURSOS DE PROGRAMACION
                     </h1>
                 </div>
 
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden ">
-                            <div class="swiper-wrapper" id="programacion">
+                        <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
+                            <div class="flex overflow-x-auto space-x-4 p-4" id="programacion">
                             </div>
                         </div>
                         <!--    <div class="swiper-button-next">
@@ -270,10 +262,11 @@
 
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden ">
-                            <div class="swiper-wrapper" id="administracion">
+                        <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
+                            <div class="flex overflow-x-auto space-x-4 p-4" id="administracion">
                             </div>
                         </div>
+
                         <!--    <div class="swiper-button-next">
                             <i class="ri-arrow-right-s-line "></i>
                         </div>
@@ -298,17 +291,9 @@
 
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden ">
-                            <div class="swiper-wrapper" id="content-mentores">
-                                <!-- Aquí se insertarán los mentores -->
-                            </div>
+                        <div class="flex overflow-x-auto space-x-4 p-4" id="content-mentores">
                         </div>
-                        <!--    <div class="swiper-button-next">
-                            <i class="ri-arrow-right-s-line "></i>
-                        </div>
-                        <div class="swiper-button-prev">
-                            <i class="ri-arrow-left-s-line"></i>
-                        </div> --->
+
                     </div>
                 </div>
 
@@ -615,16 +600,8 @@
                 </div>
                 <div class="flex my-10">
                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                        <div class="card__content overflow-hidden ">
-                            <div class="swiper-wrapper" id="otros-mentores">
-                            </div>
+                        <div class="flex overflow-x-auto space-x-4 p-4" id="otros-mentores">
                         </div>
-                        <!--    <div class="swiper-button-next">
-                            <i class="ri-arrow-right-s-line "></i>
-                        </div>
-                        <div class="swiper-button-prev">
-                            <i class="ri-arrow-left-s-line"></i>
-                        </div> --->
                     </div>
                 </div>
 
@@ -648,15 +625,7 @@
                     </div>
                     <div class="flex my-10">
                         <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                            <div class="card__content overflow-hidden ">
-                                <div class="swiper-wrapper" id="otros">
-                                </div>
-                            </div>
-                            <div class="swiper-button-next">
-                                <i class="ri-arrow-right-s-line "></i>
-                            </div>
-                            <div class="swiper-button-prev">
-                                <i class="ri-arrow-left-s-line"></i>
+                            <div class="flex overflow-x-auto space-x-4 p-4" id="otros">
                             </div>
                         </div>
                     </div>
@@ -670,15 +639,7 @@
                         </div>
                         <div class="flex my-10">
                             <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                <div class="card__content overflow-hidden ">
-                                    <div class="swiper-wrapper" id="voz">
-                                    </div>
-                                </div>
-                                <div class="swiper-button-next">
-                                    <i class="ri-arrow-right-s-line "></i>
-                                </div>
-                                <div class="swiper-button-prev">
-                                    <i class="ri-arrow-left-s-line"></i>
+                                <div class="flex overflow-x-auto space-x-4 p-4" id="voz">
                                 </div>
                             </div>
                         </div>
@@ -692,15 +653,7 @@
                             </div>
                             <div class="flex my-10">
                                 <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                    <div class="card__content overflow-hidden ">
-                                        <div class="swiper-wrapper" id="videojuegos">
-                                        </div>
-                                    </div>
-                                    <div class="swiper-button-next">
-                                        <i class="ri-arrow-right-s-line "></i>
-                                    </div>
-                                    <div class="swiper-button-prev">
-                                        <i class="ri-arrow-left-s-line"></i>
+                                    <div class="flex overflow-x-auto space-x-4 p-4" id="videojuegos">
                                     </div>
                                 </div>
                             </div>
@@ -714,15 +667,7 @@
                                 </div>
                                 <div class="flex my-10">
                                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                        <div class="card__content overflow-hidden ">
-                                            <div class="swiper-wrapper" id="salud">
-                                            </div>
-                                        </div>
-                                        <div class="swiper-button-next">
-                                            <i class="ri-arrow-right-s-line "></i>
-                                        </div>
-                                        <div class="swiper-button-prev">
-                                            <i class="ri-arrow-left-s-line"></i>
+                                        <div class="flex overflow-x-auto space-x-4 p-4" id="salud">
                                         </div>
                                     </div>
                                 </div>
@@ -736,15 +681,7 @@
                                     </div>
                                     <div class="flex my-10">
                                         <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                            <div class="card__content overflow-hidden ">
-                                                <div class="swiper-wrapper" id="musica">
-                                                </div>
-                                            </div>
-                                            <div class="swiper-button-next">
-                                                <i class="ri-arrow-right-s-line "></i>
-                                            </div>
-                                            <div class="swiper-button-prev">
-                                                <i class="ri-arrow-left-s-line"></i>
+                                            <div class="flex overflow-x-auto space-x-4 p-4" id="musica">
                                             </div>
                                         </div>
                                     </div>
@@ -758,15 +695,7 @@
                                         </div>
                                         <div class="flex my-10">
                                             <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                                <div class="card__content overflow-hidden ">
-                                                    <div class="swiper-wrapper" id="mkt">
-                                                    </div>
-                                                </div>
-                                                <div class="swiper-button-next">
-                                                    <i class="ri-arrow-right-s-line "></i>
-                                                </div>
-                                                <div class="swiper-button-prev">
-                                                    <i class="ri-arrow-left-s-line"></i>
+                                                <div class="flex overflow-x-auto space-x-4 p-4" id="mkt">
                                                 </div>
                                             </div>
                                         </div>
@@ -780,15 +709,7 @@
                                             </div>
                                             <div class="flex my-10">
                                                 <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                                    <div class="card__content overflow-hidden ">
-                                                        <div class="swiper-wrapper" id="idiomas">
-                                                        </div>
-                                                    </div>
-                                                    <div class="swiper-button-next">
-                                                        <i class="ri-arrow-right-s-line "></i>
-                                                    </div>
-                                                    <div class="swiper-button-prev">
-                                                        <i class="ri-arrow-left-s-line"></i>
+                                                    <div class="flex overflow-x-auto space-x-4 p-4" id="idiomas">
                                                     </div>
                                                 </div>
                                             </div>
@@ -802,15 +723,8 @@
                                                 </div>
                                                 <div class="flex my-10">
                                                     <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                                        <div class="card__content overflow-hidden ">
-                                                            <div class="swiper-wrapper" id="dibujo-ilustracion">
-                                                            </div>
-                                                        </div>
-                                                        <div class="swiper-button-next">
-                                                            <i class="ri-arrow-right-s-line "></i>
-                                                        </div>
-                                                        <div class="swiper-button-prev">
-                                                            <i class="ri-arrow-left-s-line"></i>
+                                                        <div class="flex overflow-x-auto space-x-4 p-4"
+                                                            id="dibujo-ilustracion">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -824,15 +738,8 @@
                                                     </div>
                                                     <div class="flex my-10">
                                                         <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                                            <div class="card__content overflow-hidden ">
-                                                                <div class="swiper-wrapper" id="data-mining">
-                                                                </div>
-                                                            </div>
-                                                            <div class="swiper-button-next">
-                                                                <i class="ri-arrow-right-s-line "></i>
-                                                            </div>
-                                                            <div class="swiper-button-prev">
-                                                                <i class="ri-arrow-left-s-line"></i>
+                                                            <div class="flex overflow-x-auto space-x-4 p-4"
+                                                                id="data-mining">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -846,15 +753,8 @@
                                                         </div>
                                                         <div class="flex my-10">
                                                             <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                                                <div class="card__content overflow-hidden ">
-                                                                    <div class="swiper-wrapper" id="CAD">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="swiper-button-next">
-                                                                    <i class="ri-arrow-right-s-line "></i>
-                                                                </div>
-                                                                <div class="swiper-button-prev">
-                                                                    <i class="ri-arrow-left-s-line"></i>
+                                                                <div class="flex overflow-x-auto space-x-4 p-4"
+                                                                    id="CAD">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -869,15 +769,8 @@
                                                             <div class="flex my-10">
                                                                 <div
                                                                     class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                                                                    <div class="card__content overflow-hidden ">
-                                                                        <div class="swiper-wrapper" id="arte">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="swiper-button-next">
-                                                                        <i class="ri-arrow-right-s-line "></i>
-                                                                    </div>
-                                                                    <div class="swiper-button-prev">
-                                                                        <i class="ri-arrow-left-s-line"></i>
+                                                                    <div class="flex overflow-x-auto space-x-4 p-4"
+                                                                        id="arte">
                                                                     </div>
                                                                 </div>
                                                             </div>

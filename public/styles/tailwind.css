@@ -164,12 +164,14 @@ a:hover {
 /*========== SWIPER ==========*/
 
 .containderCard {
-  width: 320px !important;
-  margin-inline: 0.5rem !important;
+  width: 320px;
+  margin-right: 0.5rem; /* Cambiado a margin-right */
   overflow: hidden;
   border-radius: 2rem;
+  flex-shrink: 0; /* Asegura que las tarjetas no se reduzcan */
 }
 
+/* El sub contenido de la tarjeta */
 .subContentCard {
   width: 100%;
   height: 27rem;
@@ -177,31 +179,17 @@ a:hover {
   background-color: #2e3532;
 }
 
-.swiper-pagination {
-  position: relative !important;
-}
-
-.swiper {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-.swiper-pagination span {
-  width: 50px;
-  height: 50px;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 1;
-}
-
+/* Estilo para la imagen de la tarjeta */
 .cardImage {
   width: 100%;
   height: 15rem;
 }
 
+/* Imagen dentro de la tarjeta */
 .cardImage img {
   width: 100%;
   height: 100%;
-  object-fit: fill;
+  object-fit: cover; /* Cambia a cover para mantener la proporción */
 }
 
 .cardImageMentor {
@@ -738,7 +726,6 @@ h3 {
   }
 
   .containderCard {
-    width: 100% !important;
     overflow: hidden;
     border-radius: 2rem;
   }

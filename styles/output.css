@@ -889,8 +889,21 @@ video {
   width: 80%;
 }
 
+.w-\[96\%\] {
+  width: 96%;
+}
+
 .w-full {
   width: 100%;
+}
+
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.w-52 {
+  width: 13rem;
 }
 
 .max-w-5xl {
@@ -929,8 +942,18 @@ video {
   justify-content: space-evenly;
 }
 
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .overflow-hidden {
   overflow: hidden;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
 }
 
 .overflow-y-auto {
@@ -1384,12 +1407,19 @@ a:hover {
   text-decoration: none;
 }
 
+/*========== SWIPER ==========*/
+
 .containderCard {
-  width: 320px !important;
-  margin-inline: 0.5rem !important;
+  width: 320px;
+  margin-right: 0.5rem;
+  /* Cambiado a margin-right */
   overflow: hidden;
   border-radius: 2rem;
+  flex-shrink: 0;
+  /* Asegura que las tarjetas no se reduzcan */
 }
+
+/* El sub contenido de la tarjeta */
 
 .subContentCard {
   width: 100%;
@@ -1398,25 +1428,21 @@ a:hover {
   background-color: #2e3532;
 }
 
-.swiper-pagination {
-  position: relative !important;
-}
-
-.swiper {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
+/* Estilo para la imagen de la tarjeta */
 
 .cardImage {
   width: 100%;
   height: 15rem;
 }
 
+/* Imagen dentro de la tarjeta */
+
 .cardImage img {
   width: 100%;
   height: 100%;
-  -o-object-fit: fill;
-     object-fit: fill;
+  -o-object-fit: cover;
+     object-fit: cover;
+  /* Cambia a cover para mantener la proporción */
 }
 
 .cardImageMentor {
@@ -1988,7 +2014,6 @@ h3 {
   }
 
   .containderCard {
-    width: 100% !important;
     overflow: hidden;
     border-radius: 2rem;
   }
@@ -2256,6 +2281,10 @@ h3 {
     padding: 3rem;
   }
 
+  .sm\:p-4 {
+    padding: 1rem;
+  }
+
   .sm\:px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -2318,8 +2347,17 @@ h3 {
     width: 50%;
   }
 
+  .md\:w-fit {
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+
   .md\:rounded-br-\[30rem\] {
     border-bottom-right-radius: 30rem;
+  }
+
+  .md\:text-start {
+    text-align: start;
   }
 }
 
