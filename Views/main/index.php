@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="styles/output.css">
     <link rel="stylesheet" href="public/styles/tailwind.css">
 
-    <link rel="stylesheet" href="pub    0lic/styles/carrucel.css">
+    <link rel="stylesheet" href="public/styles/carrucel.css">
 
     <!--========== Swiper CSS ==========-->
     <link rel="stylesheet" href="public/styles/swiper-bundle.min.css">
