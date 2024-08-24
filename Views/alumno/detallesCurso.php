@@ -34,7 +34,7 @@ $correo = $isLoggedIn ? $_SESSION['correo_electronico'] : '';
         console.log("isLoggedIn:", isLoggedIn);
     </script>
     <div>
-        <div class="sm:w-[90%] sm:h-[20rem] mx-auto">
+        <div class="sm:w-[90%] 2xl:h-[20rem] lg:h-[15rem] h-40">
             <img src="public/images/muestra-cursos/<?php echo $tipo; ?>.png" class="w-full h-full" alt="">
         </div>
     </div>
@@ -47,7 +47,7 @@ $correo = $isLoggedIn ? $_SESSION['correo_electronico'] : '';
 
         <div class="bg-[#D7F9FF] sm:mb-10 p-10 h-auto mt-16 rounded-3xl" id="mentorContainer"></div>
 
-         <!-- Original Modal -->
+        <!-- Original Modal -->
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close" style="color: #000000;">&times;</span>
@@ -61,46 +61,49 @@ $correo = $isLoggedIn ? $_SESSION['correo_electronico'] : '';
                 </div>
             </div>
         </div>
-        
-        <!-- New Modal for Additional Information -->
-<div id="additionalInfoModal" class="modal">
-    <div class="modal-content">
-        <span class="close" style="color: #000000;">&times;</span>
-        <div class="p-5">
-            <h1 class="text-[#4F7CAC] font-bold text-2xl">Información Adicional</h1>
-            <p class="modal-parrafo my-8 font-medium">Por favor, ingresa tu edad y si tienes conocimientos previos del curso.</p>
-            <label for="edad" class="block font-medium">Edad:</label>
-            <input type="number" id="edad" name="edad" class="block w-full p-2 border rounded mb-4">
 
-            <label for="conocimientos" class="block font-medium">¿Cuentas con conocimientos previos?</label>
-            <select id="selectConocimientos" name="conocimientos" class="block w-full p-2 border rounded mb-4">
+        <!-- New Modal for Additional Information -->
+        <div id="additionalInfoModal" class="modal">
+            <div class="modal-content">
+                <span class="close" style="color: #000000;">&times;</span>
+                <div class="p-5">
+                    <h1 class="text-[#4F7CAC] font-bold text-2xl">Información Adicional</h1>
+                    <p class="modal-parrafo my-8 font-medium">Por favor, ingresa tu edad y si tienes conocimientos
+                        previos del curso.</p>
+                    <label for="edad" class="block font-medium">Edad:</label>
+                    <input type="number" id="edad" name="edad" class="block w-full p-2 border rounded mb-4">
+
+                    <label for="conocimientos" class="block font-medium">¿Cuentas con conocimientos previos?</label>
+                    <select id="selectConocimientos" name="conocimientos" class="block w-full p-2 border rounded mb-4">
                         <option value="si">Si</option>
                         <option value="No">No</option>
                         <option value="Un poco">Un poco</option>
-            </select>
-            <!--<textarea id="conocimientos" name="conocimientos" class="block w-full p-2 border rounded mb-4"></textarea>-->
+                    </select>
+                    <!--<textarea id="conocimientos" name="conocimientos" class="block w-full p-2 border rounded mb-4"></textarea>-->
 
-            <div class="p-5 m-5 flex justify-center">
-                <button id="nextBtn" class="button-modal">Siguiente</button>
+                    <div class="p-5 m-5 flex justify-center">
+                        <button id="nextBtn" class="button-modal">Siguiente</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-        
-         <!-- New Modal-->
+
+        <!-- New Modal-->
         <div id="agendadoModal" class="modal">
             <div class="modal-content">
                 <span class="close" style="color: #000000;">&times;</span>
-                <img id="modalImage" src="public/images/wido/pantallaEmergenteAgendado.png" alt="Agendado" class="w-full h-full object-cover">
+                <img id="modalImage" src="public/images/wido/pantallaEmergenteAgendado.png" alt="Agendado"
+                    class="w-full h-full object-cover">
             </div>
         </div>
-        
+
         <!-- New Modal No Inicio sesion-->
         <div id="loginModal" class="modal">
             <div class="modal-content">
                 <span class="close" style="color: #000000;">&times;</span>
-                <img id="modalImageNoInicio" src="public/images/wido/avisoInicioSesion.png" alt="Agendado" class="w-full h-full object-cover">
+                <img id="modalImageNoInicio" src="public/images/wido/avisoInicioSesion.png" alt="Agendado"
+                    class="w-full h-full object-cover">
             </div>
         </div>
     </section>
