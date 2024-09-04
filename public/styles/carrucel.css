@@ -1,439 +1,455 @@
-/*********************************************************************************************/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .contenedor-1 {
-    width: 800px;
-    /* Ancho del contenedor */
-    height: 200px;
-    /* Altura del contenedor */
-    border-radius: 20px;
-    /* Bordes redondeados */
-    overflow: hidden;
-    /* Oculta el contenido que se desborda */
-    margin: 0% auto;
-    /* Centra en medio de la página */
-    padding: 0px;
+  width: 800px;
+  /* Ancho del contenedor */
+  height: 200px;
+  /* Altura del contenedor */
+  border-radius: 20px;
+  /* Bordes redondeados */
+  overflow: hidden;
+  /* Oculta el contenido que se desborda */
+  margin: 0% auto;
+  /* Centra en medio de la página */
+  padding: 0px;
 }
 
 /* Estilos para el formulario de búsqueda */
 
 #search-form {
-    margin: 10px;
+  margin: 10px;
 }
 
 #search-input {
-    padding: 10px;
-    width: 600px;
-    border: 1px;
-    border-radius: 25px;
-    font-size: 16px;
-    background-color: #D4EBFF;
+  padding: 10px;
+  width: 600px;
+  border: 1px;
+  border-radius: 25px;
+  font-size: 16px;
+  background-color: #d4ebff;
 }
 
 button {
-    padding: 10px 20px;
-    background-color: #D4EBFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 10px 20px;
+  background-color: #d4ebff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 /* Estilos para los resultados de la búsqueda */
 #search-results {
-    margin: 20px;
-    padding: 10px;
-    /* border: 1px solid #ccc;
+  margin: 20px;
+  padding: 10px;
+  /* border: 1px solid #ccc;
     border-radius: 5px;*/
 }
 
 /* Estilos para los elementos de resultado */
 .result-item {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
-
 .prices-1 {
-    padding: 5px;
-    /* Espacio interno */
+  padding: 5px;
+  /* Espacio interno */
 }
 
 /* Estilo del cuadrado con sombra */
 #image-box {
-    width: 240px;
-    /* Ajusta el ancho según tus necesidades */
-    height: 330px;
-    /* Ajusta la altura según tus necesidades */
-    background-color: #2E3532;
-    /* Color de fondo del cuadrado */
-    border-radius: 20px;
-    /* Redondea los bordes más */
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-    /* Sombra */
-    /* margin-left: 10px;*/
-    margin-top: 20px;
-    /* */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 240px;
+  /* Ajusta el ancho según tus necesidades */
+  height: 330px;
+  /* Ajusta la altura según tus necesidades */
+  background-color: #2e3532;
+  /* Color de fondo del cuadrado */
+  border-radius: 20px;
+  /* Redondea los bordes más */
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  /* Sombra */
+  /* margin-left: 10px;*/
+  margin-top: 20px;
+  /* */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Estilo del cuadrado con sombra */
 #video-box {
-    width: 240px;
-    /* Ajusta el ancho según tus necesidades */
-    height: 330px;
-    /* Ajusta la altura según tus necesidades */
-    background-color: #2E3532;
-    /* Color de fondo del cuadrado */
-    border-radius: 20px;
-    /* Redondea los bordes más */
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-    /* Sombra */
-    /* margin-left: 10px;*/
-    margin-top: 20px;
-    /* */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
+  width: 240px;
+  /* Ajusta el ancho según tus necesidades */
+  height: 330px;
+  /* Ajusta la altura según tus necesidades */
+  background-color: #2e3532;
+  /* Color de fondo del cuadrado */
+  border-radius: 20px;
+  /* Redondea los bordes más */
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  /* Sombra */
+  /* margin-left: 10px;*/
+  margin-top: 20px;
+  /* */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #image-box img {
-    width: 100%;
-    /* La imagen ocupa el 100% del ancho del contenedor */
-    height: 65%;
-    flex: 0.2;
-    /* La imagen ocupa la mitad superior */
-    border-radius: 20px 20px 0 0;
-    /* Bordes redondeados solo arriba */
-    margin-top: -45px;
+  width: 100%;
+  /* La imagen ocupa el 100% del ancho del contenedor */
+  height: 65%;
+  flex: 0.2;
+  /* La imagen ocupa la mitad superior */
+  border-radius: 20px 20px 0 0;
+  /* Bordes redondeados solo arriba */
+  margin-top: -45px;
 }
 
 #video-box video {
-    width: 100%;
-    /* La imagen ocupa el 100% del ancho del contenedor */
-    height: 65%;
-    flex: 0.2;
-    /* La imagen ocupa la mitad superior */
-    border-radius: 20px 20px 0 0;
-    /* Bordes redondeados solo arriba */
-    margin-top: -60px;
+  width: 100%;
+  /* La imagen ocupa el 100% del ancho del contenedor */
+  height: 65%;
+  flex: 0.2;
+  /* La imagen ocupa la mitad superior */
+  border-radius: 20px 20px 0 0;
+  /* Bordes redondeados solo arriba */
+  margin-top: -60px;
 }
 
 #image-box p {
-    flex: 0.9;
-    /* El título ocupa la mitad inferior */
-    margin: 0px 0;
-    /*text-align: center;*/
-    font-size: 11px;
+  flex: 0.9;
+  /* El título ocupa la mitad inferior */
+  margin: 0px 0;
+  /*text-align: center;*/
+  font-size: 11px;
 }
 
 .clase-muestra {
-    border-radius: 20px;
-    /* Bordes redondeados */
-    background-color: #FEC400;
-    /* Color de fondo azul */
-    color: #2E3532;
-    /* Color del texto blanco */
-    padding: 1px 5px;
-    /* Espacio interno */
-    border: none;
-    /* Sin borde */
-    cursor: pointer;
-    /* Cursor de puntero */
-    transition: background-color 0.3s;
-    /* Transición suave del color de fondo */
-    width: 75%;
-    margin-top: 10px;
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  /* Bordes redondeados */
+  background-color: #fec400;
+  /* Color de fondo azul */
+  color: #2e3532;
+  /* Color del texto blanco */
+  padding: 1px 5px;
+  /* Espacio interno */
+  border: none;
+  /* Sin borde */
+  cursor: pointer;
+  /* Cursor de puntero */
+  transition: background-color 0.3s;
+  /* Transición suave del color de fondo */
+  width: 75%;
+  margin-top: 10px;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
 }
 
 /* Cambiar el color de fondo cuando el cursor pasa sobre el botón */
 .clase-muestra:hover {
-    background-color: white;
-    /* Color de fondo azul más oscuro */
+  background-color: white;
+  /* Color de fondo azul más oscuro */
 }
 
 .suscripcion {
-    border-radius: 20px;
-    /* Bordes redondeados */
-    background-color: #D2D2D2;
-    /* Color de fondo azul */
-    color: white;
-    /* Color del texto blanco */
-    padding: 1px 5px;
-    /* Espacio interno */
-    border: none;
-    /* Sin borde */
-    cursor: pointer;
-    /* Cursor de puntero */
-    transition: background-color 0.3s;
-    /* Transición suave del color de fondo */
-    width: 75%;
-    margin-top: 10px;
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  /* Bordes redondeados */
+  background-color: #d2d2d2;
+  /* Color de fondo azul */
+  color: white;
+  /* Color del texto blanco */
+  padding: 1px 5px;
+  /* Espacio interno */
+  border: none;
+  /* Sin borde */
+  cursor: pointer;
+  /* Cursor de puntero */
+  transition: background-color 0.3s;
+  /* Transición suave del color de fondo */
+  width: 75%;
+  margin-top: 10px;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
 }
 
 /* Cambiar el color de fondo cuando el cursor pasa sobre el botón */
 .suscripcion:hover {
-    background-color: #D2D2D2;
-    /* Color de fondo azul más oscuro */
+  background-color: #d2d2d2;
+  /* Color de fondo azul más oscuro */
 }
 
-.suscripcion span {}
-
+.suscripcion span {
+}
 
 .cardCarrusel {
-    width: 15%;
-    /* Ancho ajustable según preferencias */
-    margin: 5px;
-    /* Espacio entre las cards */
+  width: 15%;
+  /* Ancho ajustable según preferencias */
+  margin: 5px;
+  /* Espacio entre las cards */
 }
 
 .bg-primary {
-    --bs-bg-opacity: 1;
-    background-color: white !important;
+  --bs-bg-opacity: 1;
+  background-color: white !important;
 }
 
 .carousel {
-    /*background-image: url(images/home-opaco.png);*/
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: 100%, cover;
-    /* Ajusta el tamaño de las imágenes de fondo */
-    min-height: 50vh;
-    display: flex;
-    align-items: center;
-    position: relative;
-    border-radius: 30px;
-    /* Redondea los bordes más */
+  /*background-image: url(images/home-opaco.png);*/
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 100%, cover;
+  /* Ajusta el tamaño de las imágenes de fondo */
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-radius: 30px;
+  /* Redondea los bordes más */
 }
 
 @media (min-width: 768px) {
+  /* show 3 items */
+  .carousel-inner .active,
+  .carousel-inner .active + .carousel-item,
+  .carousel-inner .active + .carousel-item + .carousel-item,
+  .carousel-inner .active + .carousel-item + .carousel-item + .carousel-item {
+    display: block;
+  }
 
-    /* show 3 items */
-    .carousel-inner .active,
-    .carousel-inner .active+.carousel-item,
-    .carousel-inner .active+.carousel-item+.carousel-item,
-    .carousel-inner .active+.carousel-item+.carousel-item+.carousel-item {
-        display: block;
-    }
+  .carousel-inner
+    .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+  .carousel-inner
+    .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)
+    + .carousel-item,
+  .carousel-inner
+    .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)
+    + .carousel-item
+    + .carousel-item,
+  .carousel-inner
+    .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)
+    + .carousel-item
+    + .carousel-item
+    + .carousel-item {
+    transition: none;
+  }
 
-    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
-    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item,
-    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item+.carousel-item,
-    .carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left)+.carousel-item+.carousel-item+.carousel-item {
-        transition: none;
-    }
+  .carousel-inner .carousel-item-next,
+  .carousel-inner .carousel-item-prev {
+    position: relative;
+    transform: translate3d(0, 0, 0);
+  }
 
-    .carousel-inner .carousel-item-next,
-    .carousel-inner .carousel-item-prev {
-        position: relative;
-        transform: translate3d(0, 0, 0);
-    }
+  .carousel-inner
+    .active.carousel-item
+    + .carousel-item
+    + .carousel-item
+    + .carousel-item
+    + .carousel-item {
+    position: absolute;
+    top: 0;
+    right: -25%;
+    z-index: -1;
+    display: block;
+    visibility: visible;
+  }
 
-    .carousel-inner .active.carousel-item+.carousel-item+.carousel-item+.carousel-item+.carousel-item {
-        position: absolute;
-        top: 0;
-        right: -25%;
-        z-index: -1;
-        display: block;
-        visibility: visible;
-    }
+  /* left or forward direction */
+  .active.carousel-item-left + .carousel-item-next.carousel-item-left,
+  .carousel-item-next.carousel-item-left + .carousel-item,
+  .carousel-item-next.carousel-item-left + .carousel-item + .carousel-item,
+  .carousel-item-next.carousel-item-left
+    + .carousel-item
+    + .carousel-item
+    + .carousel-item,
+  .carousel-item-next.carousel-item-left
+    + .carousel-item
+    + .carousel-item
+    + .carousel-item
+    + .carousel-item {
+    position: relative;
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
 
-    /* left or forward direction */
-    .active.carousel-item-left+.carousel-item-next.carousel-item-left,
-    .carousel-item-next.carousel-item-left+.carousel-item,
-    .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item,
-    .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item+.carousel-item,
-    .carousel-item-next.carousel-item-left+.carousel-item+.carousel-item+.carousel-item+.carousel-item {
-        position: relative;
-        transform: translate3d(-100%, 0, 0);
-        visibility: visible;
-    }
+  /* farthest right hidden item must be abso position for animations */
+  .carousel-inner .carousel-item-prev.carousel-item-right {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    display: block;
+    visibility: visible;
+  }
 
-    /* farthest right hidden item must be abso position for animations */
-    .carousel-inner .carousel-item-prev.carousel-item-right {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        display: block;
-        visibility: visible;
-    }
-
-    /* right or prev direction */
-    .active.carousel-item-right+.carousel-item-prev.carousel-item-right,
-    .carousel-item-prev.carousel-item-right+.carousel-item,
-    .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item,
-    .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item+.carousel-item,
-    .carousel-item-prev.carousel-item-right+.carousel-item+.carousel-item+.carousel-item+.carousel-item {
-        position: relative;
-        transform: translate3d(100%, 0, 0);
-        visibility: visible;
-        display: block;
-        visibility: visible;
-    }
-
+  /* right or prev direction */
+  .active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+  .carousel-item-prev.carousel-item-right + .carousel-item,
+  .carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item,
+  .carousel-item-prev.carousel-item-right
+    + .carousel-item
+    + .carousel-item
+    + .carousel-item,
+  .carousel-item-prev.carousel-item-right
+    + .carousel-item
+    + .carousel-item
+    + .carousel-item
+    + .carousel-item {
+    position: relative;
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+    display: block;
+    visibility: visible;
+  }
 }
 
 /* Bootstrap Lightbox using Modal */
 
 #profile-grid {
-    overflow: auto;
-    white-space: normal;
+  overflow: auto;
+  white-space: normal;
 }
 
 #profile-grid .profile {
-    padding-bottom: 40px;
+  padding-bottom: 40px;
 }
 
 #profile-grid .panel {
-    padding: 0
+  padding: 0;
 }
 
 #profile-grid .panel-body {
-    padding: 15px
+  padding: 15px;
 }
 
 #profile-grid .profile-name {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 #profile-grid .thumbnail {
-    margin-bottom: 6px;
+  margin-bottom: 6px;
 }
 
 #profile-grid .panel-thumbnail {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 #profile-grid .img-rounded {
-    border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0;
 }
 
 .carousel-control-prev-icon {
-    background-image: url(../../images/wido/boton-slider-prev.png);
-    padding: 25px;
+  background-image: url(../../images/wido/boton-slider-prev.png);
+  padding: 25px;
 }
 
 .carousel-control-next-icon {
-    background-image: url(../../images/wido/boton-slider.png);
-    padding: 25px;
+  background-image: url(../../images/wido/boton-slider.png);
+  padding: 25px;
 }
 
 .carousel-control-next,
 .carousel-control-prev {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    width: 2%;
-    color: black;
-    text-align: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 2%;
+  color: black;
+  text-align: center;
 }
 
 .botones-carrucel {
-    width: 75%;
+  width: 75%;
 }
 
 .botones-carrucel-cursos {
-    width: 100%;
-    margin-left: 25%;
+  width: 100%;
+  margin-left: 25%;
 }
-
-
-
-
-
-
-
 
 /* Estilos para la vista previa del video */
 .video-preview {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 /* Estilos para el ícono de reproducción */
 .play-icon {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70px;
-    /* Ajusta el tamaño del icono según sea necesario */
-    height: 70px;
-    background-image: url('../../images/boton/boton.png');
-    /* Ruta del ícono de reproducción */
-    background-size: cover;
-    cursor: pointer;
-    /* Cambia el cursor al pasar sobre el ícono */
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  /* Ajusta el tamaño del icono según sea necesario */
+  height: 70px;
+  background-image: url("../../images/boton/boton.png");
+  /* Ruta del ícono de reproducción */
+  background-size: cover;
+  cursor: pointer;
+  /* Cambia el cursor al pasar sobre el ícono */
 }
 
 /* Estilos para la ventana emergente */
 
 .video-popup {
-    position: fixed;
-    top: 0;
-    left: 15%;
-    width: 70%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    /* Fondo oscuro semi-transparente */
-    display: none;
-    z-index: 9999;
-    /* Asegura que esté por encima de otros elementos */
-    border-radius: 20px;
-    /* Bordes redondeados */
+  position: fixed;
+  top: 0;
+  left: 15%;
+  width: 70%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  /* Fondo oscuro semi-transparente */
+  display: none;
+  z-index: 9999;
+  /* Asegura que esté por encima de otros elementos */
+  border-radius: 20px;
+  /* Bordes redondeados */
 }
 
 .video-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    /* Ancho del contenedor de video */
-    height: 100%;
-    /* Altura del contenedor de video */
-    border-radius: 20px;
-    /* Bordes redondeados */
-    overflow: hidden;
-    /* Oculta el contenido que se desborda */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  /* Ancho del contenedor de video */
+  height: 100%;
+  /* Altura del contenedor de video */
+  border-radius: 20px;
+  /* Bordes redondeados */
+  overflow: hidden;
+  /* Oculta el contenido que se desborda */
 }
 
-
-
-
 #video-popup-player {
-    width: 100%;
-    height: 100%;
-    display: block;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .close-btn {
-    position: absolute;
-    top: 10px;
-    /* Ajusta la posición vertical según sea necesario */
-    right: 10px;
-    /* Ajusta la posición horizontal según sea necesario */
-    background-color: black;
-    border: none;
-    color: #fff;
-    font-size: 15px;
-    cursor: pointer;
-    z-index: 10000;
-    /* Asegura que esté por encima del video */
+  position: absolute;
+  top: 10px;
+  /* Ajusta la posición vertical según sea necesario */
+  right: 10px;
+  /* Ajusta la posición horizontal según sea necesario */
+  background-color: black;
+  border: none;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  z-index: 10000;
+  /* Asegura que esté por encima del video */
 }
-

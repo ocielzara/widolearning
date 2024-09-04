@@ -80,8 +80,12 @@ let swiperCards = new Swiper(".card__content", {
   loop: true,
   spaceBetween: 20,
   grabCursor: false,
+  autoplay: {
+    delay: 2000,
+    disableOnInteraction: false,
+  },
 
-  pagination: {
+  /*pagination: {
     el: ".swiper-pagination",
     clickable: true,
     dynamicBullets: true,
@@ -90,23 +94,25 @@ let swiperCards = new Swiper(".card__content", {
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
-  },
+  },*/
 
+  scrollbars: {
+    el: ".swiper-scrollbar",
+    draggable: true, // Permite arrastrar el scrollbar
+    hide: false, // Muestra el scrollbar de forma permanente
+  },
   breakpoints: {
     600: {
-      slidesPerView: 2,
+      slidesPerView: 1,
+      spaceBetween: 10,
     },
 
     1024: {
       slidesPerView: 2,
     },
 
-    1440: {
+    1280: {
       slidesPerView: 4,
-    },
-
-    1448: {
-      slidesPerView: 3,
     },
   },
 });
@@ -115,9 +121,13 @@ let swiperCards2 = new Swiper(".swiper-container-2", {
   loop: true,
   spaceBetween: 20,
   grabCursor: false,
+  autoplay: {
+    delay: 2000,
+    disableOnInteraction: false,
+  },
   breakpoints: {
     600: {
-      slidesPerView: 2,
+      slidesPerView: 1,
     },
     1024: {
       slidesPerView: 2,
@@ -126,6 +136,13 @@ let swiperCards2 = new Swiper(".swiper-container-2", {
       slidesPerView: 3,
     },
   },
+});
+
+/**   */
+
+document.addEventListener("DOMContentLoaded", function () {
+  var splide = new Splide(".splide");
+  splide.mount();
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -142,16 +159,30 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
+//CAMBIOS JULIO 24
+let swiperInstance;
+//fin
 function mostrarContenidoAreas() {
   var contenidoAdicional = document.getElementById("contenido-areas");
   contenidoAdicional.style.display = "block";
+  //CAMBIOS JULIO 24
+  var contenidoTop = document.getElementById("contenido-top");
+  contenidoTop.style.display = "block";
+  var contenidoProgramacion = document.getElementById("contenido-programacion");
+  contenidoProgramacion.style.display = "block";
+  var contenidoAdministracion = document.getElementById("contenido-administracion");
+  contenidoAdministracion.style.display = "block";
+  //fin
   var contenidoFooter = document.getElementById("footer");
   contenidoFooter.style.display = "flex";
 
   // Oculta el contenido adicional de Master Teach si está visible
   var contenidoMasterTeach = document.getElementById("contenido-master-teach");
   contenidoMasterTeach.style.display = "none";
+  //CAMBIOS JULIO 24
+  toggleButtonStyles('btn-areas', 'btn-master');
+  reinitSwiper();
+  //fin
 }
 
 function mostrarContenidoMasterTeach() {
@@ -167,6 +198,17 @@ function mostrarContenidoMasterTeach() {
   // Oculta el contenido adicional de "contenido-mas" si está visible
   var contenidoMas = document.getElementById("contenido-mas");
   contenidoMas.style.display = "none";
+  //CAMBIOS JULIO 24
+  var contenidoTop = document.getElementById("contenido-top");
+  contenidoTop.style.display = "none";
+  var contenidoProgramacion = document.getElementById("contenido-programacion");
+  contenidoProgramacion.style.display = "none";
+  var contenidoAdministracion = document.getElementById("contenido-administracion");
+  contenidoAdministracion.style.display = "none";
+  //fin
+  //CAMBIOS JULIO 24
+  toggleButtonStyles('btn-master', 'btn-areas');
+  //fin
 }
 
 function mostrarMas() {
@@ -201,3 +243,68 @@ closeVideoPopup.addEventListener("click", function () {
   videoPopup.style.display = "none";
   videoPopupPlayer.pause(); // Pausar el video al cerrar la ventana emergente
 });
+
+//NUEVOS ESTILOS JULIO 24 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+function toggleButtonStyles(activeButtonId, inactiveButtonId) {
+    const activeButton = document.getElementById(activeButtonId);
+    const inactiveButton = document.getElementById(inactiveButtonId);
+
+    // Clases para el botón activo
+    const activeButtonClasses = ['bg-[#4F7CAC]', 'text-[#FEC400]'];
+    // Clases para el botón inactivo
+    const inactiveButtonClasses = ['bg-[#2E3532]', 'text-white'];
+
+    // Remover clases activas del botón inactivo y agregar clases inactivas
+    inactiveButton.classList.remove(...activeButtonClasses);
+    inactiveButton.classList.add(...inactiveButtonClasses);
+
+    // Remover clases inactivas del botón activo y agregar clases activas
+    activeButton.classList.remove(...inactiveButtonClasses);
+    activeButton.classList.add(...activeButtonClasses);
+}
+
+function reinitSwiper() {
+  // Destruir la instancia existente de Swiper si existe
+  if (swiperInstance) {
+    swiperInstance.destroy(true, true);
+  }
+
+  // Inicializar Swiper después de un pequeño retraso
+  setTimeout(function() {
+    swiperInstance = new Swiper(".card__content", {
+      loop: true,
+      spaceBetween: 20,
+      grabCursor: false,
+
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        dynamicBullets: true,
+      },
+
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+
+      breakpoints: {
+        600: {
+          slidesPerView: 1,
+        },
+
+        1024: {
+          slidesPerView: 2,
+        },
+
+        1440: {
+          slidesPerView: 2,
+        },
+
+        1448: {
+          slidesPerView: 4,
+        },
+      },
+    });
+  }, 100); // Ajusta el tiempo según sea necesario
+}

@@ -25,7 +25,7 @@
 
     /*========== VARIABLES CSS ==========*/
     :root {
-        --header-height: 3.5rem;
+        /*--header-height: 3.5rem;*/
         --nav-width: 219px;
 
         /*========== Colors ==========*/
@@ -152,9 +152,24 @@
         color: var(--first-color);
     }
 
+    .nav__linkSub {
+        display: flex;
+        align-items: center;
+        color: #D7F9FF;
+    }
+
+    .nav__linkSub:hover {
+        color: ;
+    }
+
+
     .nav__icon {
         font-size: 1.2rem;
         margin-right: .5rem;
+    }
+
+    .nav__iconSub {
+        font-size: 1.2rem;
     }
 
     .nav__name {
@@ -170,35 +185,49 @@
     /* Dropdown */
     .nav__dropdown {
         overflow: hidden;
-        max-height: 21px;
-        transition: .4s ease-in-out;
     }
 
     .nav__dropdown-collapse {
         background-color: var(--first-color-light);
         border-radius: .25rem;
-        margin-top: 1rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-in-out;
+    }
+
+    .nav__dropdown:hover .nav__dropdown-collapse {
+        max-height: 100rem;
+        /* Ajusta este valor según la altura de tu submenú */
+    }
+
+    .nav__submenu {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        margin-left: 0;
+        padding-left: 1rem;
+        box-shadow: 1px 0 0 rgba(22, 8, 43, 0.1);
+        z-index: var(--z-fixed);
+        background-color: #4F7CAC;
+        width: 490px;
+    }
+
+    .nav__dropdown:hover .nav__submenu {
+        max-height: 100rem;
+        /* Ajusta este valor según la altura de tu submenú */
     }
 
     .nav__dropdown-content {
         display: grid;
         row-gap: .5rem;
-        padding: .75rem 2.5rem .75rem 1.8rem;
+        padding: .75rem 1rem;
+        /* Ajusta el padding según tus necesidades */
     }
 
     .nav__dropdown-item {
         font-size: var(--smaller-font-size);
         font-weight: var(--font-medium);
-        color: var(--text-color);
-    }
-
-    .nav__dropdown-item:hover {
-        color: var(--first-color);
-    }
-
-    .nav__dropdown-icon {
-        margin-left: auto;
-        transition: .4s;
+        color: #D7F9FF;
     }
 
     /* Show dropdown collapse */
@@ -210,6 +239,9 @@
     .nav__dropdown:hover .nav__dropdown-icon {
         transform: rotate(180deg);
     }
+
+
+
 
     /*===== Show menu =====*/
     .show-menu {
@@ -308,8 +340,6 @@
         }
     }
 
-    /****************************************************************************** */
-
     .cerrar {
         background-color: var(--first-color);
         /* Color de fondo del botón */
@@ -331,6 +361,163 @@
         background-color: #5318a8;
         /* Cambiar el color de fondo al pasar por encima */
     }
+
+    /* Estilo para el contenedor del icono */
+    .icon-circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        /* Ajusta el tamaño según tus necesidades */
+        height: 30px;
+        /* Ajusta el tamaño según tus necesidades */
+        background-color: #D7F9FF;
+        /* Color de fondo del círculo */
+        border-radius: 50%;
+        /* Hace que el contenedor sea un círculo */
+        margin-right: .5rem;
+    }
+
+    /* Opcional: Estilo adicional para el icono dentro del círculo */
+    .icon-circle i {
+        color: black;
+        /* Cambia este valor según el color que prefieras para el icono */
+    }
+
+    .sidebar__programacion {
+        border-radius: .25rem;
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 60%;
+        margin-left: 10px;
+        padding-left: 1rem;
+        box-shadow: 1px 0 0 rgba(22, 8, 43, 0.1);
+        z-index: calc(var(--z-fixed) + 1);
+        /* Asegurarse de que esté por encima */
+        background-color: #D7F9FF;
+        width: 200px;
+        height: 30rem;
+    }
+
+    .nav__contenedorProgramacion:hover .sidebar__programacion {
+        display: block;
+    }
+    
+    .sidebar__juegos {
+        border-radius: .25rem;
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 60%;
+        margin-left: 10px;
+        padding-left: 1rem;
+        box-shadow: 1px 0 0 rgba(22, 8, 43, 0.1);
+        z-index: calc(var(--z-fixed) + 1);
+        /* Asegurarse de que esté por encima */
+        background-color: #D7F9FF;
+        width: 200px;
+        transition: max-height 0.4s ease-in-out;
+        height: 30rem;
+    }
+
+    .nav__contenedorJuegos:hover .sidebar__juegos {
+        display: block;
+    }
+    
+    .sidebar__dibujo {
+        border-radius: .25rem;
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 60%;
+        margin-left: 10px;
+        padding-left: 1rem;
+        box-shadow: 1px 0 0 rgba(22, 8, 43, 0.1);
+        z-index: calc(var(--z-fixed) + 1);
+        /* Asegurarse de que esté por encima */
+        background-color: #D7F9FF;
+        width: 200px;
+        transition: max-height 0.4s ease-in-out;
+        height: 30rem;
+    }
+
+    .nav__contenedorDibujo:hover .sidebar__dibujo {
+        display: block;
+    }
+    
+    .sidebar__ingenieria {
+        border-radius: .25rem;
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 60%;
+        margin-left: 10px;
+        padding-left: 1rem;
+        box-shadow: 1px 0 0 rgba(22, 8, 43, 0.1);
+        z-index: calc(var(--z-fixed) + 1);
+        /* Asegurarse de que esté por encima */
+        background-color: #D7F9FF;
+        width: 200px;
+        transition: max-height 0.4s ease-in-out;
+        height: 30rem;
+    }
+
+    .nav__contenedorIngenieria:hover .sidebar__ingenieria {
+        display: block;
+    }
+    
+     .sidebar__administracion {
+        border-radius: .25rem;
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 60%;
+        margin-left: 10px;
+        padding-left: 1rem;
+        box-shadow: 1px 0 0 rgba(22, 8, 43, 0.1);
+        z-index: calc(var(--z-fixed) + 1);
+        /* Asegurarse de que esté por encima */
+        background-color: #D7F9FF;
+        width: 200px;
+        transition: max-height 0.4s ease-in-out;
+        height: 30rem;
+    }
+
+    .nav__contenedorAdministracion:hover .sidebar__administracion {
+        display: block;
+    }
+    
+     .sidebar__otras {
+        border-radius: .25rem;
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 60%;
+        margin-left: 10px;
+        padding-left: 1rem;
+        box-shadow: 1px 0 0 rgba(22, 8, 43, 0.1);
+        z-index: calc(var(--z-fixed) + 1);
+        /* Asegurarse de que esté por encima */
+        background-color: #D7F9FF;
+        width: 200px;
+        transition: max-height 0.4s ease-in-out;
+        height: 30rem;
+    }
+
+    .nav__contenedorOtras:hover .sidebar__otras {
+        display: block;
+    }
+
+    .nav__dropdown-item2 {
+        font-size: var(--smaller-font-size);
+        font-weight: var(--font-medium);
+        color: #4F7CAC;
+        display: grid;
+        row-gap: .5rem;
+        padding: .20rem 1rem;
+        /* Ajusta el padding según tus necesidades */
+    }
 </style>
 
 <body>
@@ -338,60 +525,196 @@
     <div class="nav" id="navbar">
         <nav class="nav__container">
             <div>
-                <a href="#" class="nav__link nav__logo">
+                <!--CHECAR ESTA LOGICA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+                 <?php
+                    // session_start();
+                    // Verificar si la variable de sesión existe antes de usarla para evitar errores
+                    if (isset($_SESSION['id_usuario'])) {
+                        //CAMBIOS ULTIMOMOMENTO 
+                        $id_usuario = $_SESSION['id_usuario'];
+                ?>
+                <a href="https://www.widolearn.com/index.php?c=Usuarios&a=index&n=<?php echo $id_usuario; ?>" class="nav__link nav__logo">
                     <span class="nav__logo-name">Wido</span>
                 </a>
+                <?php
+                    } else { 
+                ?>
+                <a href="https://widolearn.com/" class="nav__link nav__logo">
+                    <span class="nav__logo-name">Wido</span>
+                </a>
+                 <?php
+                    } // Fin del bloque condicional
+                ?>
+                
+                
 
                 <div class="nav__list">
                     <div class="nav__items">
-                        <a href="#" class="nav__link active">
+                        <!--
+                        <a href="#" class="nav__link">
                             <i class='bx bx-home nav__icon'></i>
                             <span class="nav__name">Home</span>
                         </a>
+                        -->
 
                         <div class="nav__dropdown">
-                            <a href="#" class="nav__link">
-                                <i class='bx bxs-graduation nav__icon'></i>
-                                <span class="nav__name">Areas</span>
+                            <a href="#" class="nav__link nav__toggle">
+                                <i class='bx bx-chalkboard nav__icon'></i>
+                                <span class="nav__name">Cursos</span>
                                 <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
                             </a>
 
-                            <div class="nav__dropdown-collapse">
+                            <div class="nav__dropdown-collapse nav__submenu">
                                 <div class="nav__dropdown-content">
-                                    <a href="#" class="nav__dropdown-item">Área de Programación:</a>
-                                    <a href="#" class="nav__dropdown-item">-Python</a>
-                                    <a href="#" class="nav__dropdown-item">-Inteligencia Artificial Python</a>
-                                    <a href="#" class="nav__dropdown-item">-Diseño Web (HTML, Java y C++)</a>
-                                    <a href="#" class="nav__dropdown-item">Área de videojuegos:</a>
-                                    <a href="#" class="nav__dropdown-item">-Roblox</a>
-                                    <a href="#" class="nav__dropdown-item">-Unity 3D</a>
-                                    <a href="#" class="nav__dropdown-item">-Gdevelop</a>
-                                    <a href="#" class="nav__dropdown-item">-Minecraft</a>
-                                    <a href="#" class="nav__dropdown-item">Área de Diseño y dibujo:</a>
-                                    <a href="#" class="nav__dropdown-item">-Dibujo tradicional</a>
-                                    <a href="#" class="nav__dropdown-item">-Diseño digital en Illustrator</a>
-                                    <a href="#" class="nav__dropdown-item">-Diseño digital en Photoshop</a>
-                                    <a href="#" class="nav__dropdown-item">-Diseño digital en Krita</a>
-                                    <a href="#" class="nav__dropdown-item">-Animación 2D</a>
-                                    <a href="#" class="nav__dropdown-item">-Animación 3D en Blender</a>
-                                    <a href="#" class="nav__dropdown-item">Área de ingeniería:</a>
-                                    <a href="#" class="nav__dropdown-item">-Robótica y circuitos eléctricos</a>
-                                    <a href="#" class="nav__dropdown-item">Área de administración:</a>
-                                    <a href="#" class="nav__dropdown-item">-Finanzas personales</a>
-                                    <a href="#" class="nav__dropdown-item">-Emprendimiento e innovación</a>
-                                    <a href="#" class="nav__dropdown-item">-Excel</a>
-                                    <a href="#" class="nav__dropdown-item">-Estrategias de inversión</a>
-                                    <a href="#" class="nav__dropdown-item">Otras áreas:</a>
-                                    <a href="#" class="nav__dropdown-item">-Ajedrez</a>
+                                    <div href="#" class="nav__contenedorProgramacion">
+                                        <a href="#" class="nav__linkSub nav__toggle">
+                                            <span class="icon-circle">
+                                                <i class='bx bx-code nav__iconSub'></i>
+                                            </span>
+                                            <span class="nav__name">Área de programación</span>
+                                        </a>
+                                        <div class="sidebar__programacion">
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=15&nombreCurso=Inteligencia%20artificial%20con%20Python"
+                                                class="nav__dropdown-item2">Inteligencia artificial con Python</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=44&nombreCurso=mysql"
+                                                class="nav__dropdown-item2">MYSQL</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=18&nombreCurso=Apps%20moviles%20con%20Thunkable"
+                                                class="nav__dropdown-item2">Apps moviles con Thunkable</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=27&nombreCurso=chatgpt"
+                                                class="nav__dropdown-item2">chatgpt</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=29&nombreCurso=ciberseguridad"
+                                                class="nav__dropdown-item2">ciberseguridad</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=30&nombreCurso=Dise%C3%B1o%20p%C3%A1ginas%20Web"
+                                                class="nav__dropdown-item2">Diseño páginas Web</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=32&nombreCurso=python"
+                                                class="nav__dropdown-item2">Python</a>
+                                        </div>
+                                    </div>
+
+                                    <div href="#" class="nav__contenedorJuegos">
+                                        <a href="#" class="nav__linkSub nav__toggle">
+                                            <span class="icon-circle">
+                                                <i class='bx bx-paper-plane nav__iconSub'></i>
+                                            </span>
+                                            <span class="nav__name">Área de videojuegos</span>
+                                        </a>
+                                        <div class="sidebar__juegos">
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=8&nombreCurso=gdevelop"
+                                                class="nav__dropdown-item2">Gdevelop</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=9&nombreCurso=unity%202d"
+                                                class="nav__dropdown-item2">Unity 2d</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=10&nombreCurso=unity%203d"
+                                                class="nav__dropdown-item2">Unity 3d</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=11&nombreCurso=minecraft"
+                                                class="nav__dropdown-item2">Minecraft</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=23&nombreCurso=roblox%20studio"
+                                                class="nav__dropdown-item2">Roblox studio</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=24&nombreCurso=lego%20fornite"
+                                                class="nav__dropdown-item2">Lego fornite</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=7&nombreCurso=Blender%202D%20y%203D"
+                                                class="nav__dropdown-item2">Blender 2D y 3D</a>
+                                        </div>
+                                    </div>
+                                    <div href="#" class="nav__contenedorDibujo">
+                                        <a href="#" class="nav__linkSub nav__toggle">
+                                            <span class="icon-circle">
+                                                <i class='bx bx-edit nav__iconSub'></i>
+                                            </span>
+                                            <span class="nav__name">Área de Diseño y Dibujo</span>
+                                        </a>
+                                        <div class="sidebar__dibujo">
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=4&nombreCurso=dibujo%20tradicional"
+                                                class="nav__dropdown-item2">Dibujo tradicional</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=5&nombreCurso=unity%202d"
+                                                class="nav__dropdown-item2">Photoshop</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=6&nombreCurso=illustrator"
+                                                class="nav__dropdown-item2">Illustrator</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=42&nombreCurso=Dibujo%20manga"
+                                                class="nav__dropdown-item2">Dibujo manga</a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div href="#" class="nav__contenedorIngenieria">
+                                        <a href="#" class="nav__linkSub nav__toggle">
+                                            <span class="icon-circle">
+                                                <i class='bx bx-wrench nav__iconSub'></i>
+                                            </span>
+                                            <span class="nav__name">Área de Ingeniería</span>
+                                        </a>
+                                        <div class="sidebar__ingenieria">
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=17&nombreCurso=robotica"
+                                                class="nav__dropdown-item2">robotica</a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div href="#" class="nav__contenedorAdministracion">
+                                         <a href="#" class="nav__linkSub nav__toggle">
+                                            <span class="icon-circle">
+                                                <i class='bx bx-calculator nav__iconSub'></i>
+                                            </span>
+                                            <span class="nav__name">Área de administración</span>
+                                        </a>
+                                        <div class="sidebar__administracion">
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=1&nombreCurso=finanzas%20personales"
+                                                class="nav__dropdown-item2">Finanzas personales</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=2&nombreCurso=emprendimiento%20e%20innovacion"
+                                                class="nav__dropdown-item2">Emprendimiento e innovacion</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=16&nombreCurso=Estrategias%20de%20inversi%C3%B3n"
+                                                class="nav__dropdown-item2">Estrategias de inversión</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=19&nombreCurso=excel"
+                                                class="nav__dropdown-item2">Excel</a>
+                                        </div>
+                                    </div>
+                                   
+                                    <a href="#" class="nav__linkSub nav__toggle">
+                                        <span class="icon-circle">
+                                            <i class='bx bx-cloud nav__iconSub'></i>
+                                        </span>
+                                        <span class="nav__name">Emprendimiento e innovación</span>
+                                    </a>
+                                    
+                                    <div href="#" class="nav__contenedorOtras">
+                                          <a href="#" class="nav__linkSub nav__toggle">
+                                            <span class="icon-circle">
+                                                <i class='bx bx-rocket nav__iconSub'></i>
+                                            </span>
+                                            <span class="nav__name">Otras áreas</span>
+                                        </a>
+                                        <div class="sidebar__otras">
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=14&nombreCurso=ajedrez"
+                                                class="nav__dropdown-item2">Ajedrez</a>
+                                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=48&nombreCurso=oratoria"
+                                                class="nav__dropdown-item2">Oratoria</a>
+                                            
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="nav__dropdown">
+                            <a href="#" class="nav__link nav__toggle">
+                                <i class='bx bx-glasses nav__icon'></i>
+                                <span class="nav__name">Asesorias</span>
+                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                            </a>
+
+                            <div class="nav__dropdown-collapse nav__submenu">
+                                <div class="nav__dropdown-content">
+                                    <a href="#" class="nav__dropdown-item">Matematicas ingreso universidad</a>
+                                    <a href="#" class="nav__dropdown-item">Matematicas todos los grados escolares</a>
+                                    <a href="#" class="nav__dropdown-item">Quimica</a>
                                 </div>
                             </div>
                         </div>
 
                         <?php
                         // session_start();
-// Verificar si la variable de sesión existe antes de usarla para evitar errores
-                        if (isset($_SESSION['idUsuario'])) {
-
+                        // Verificar si la variable de sesión existe antes de usarla para evitar errores
+                        if (isset($_SESSION['id_usuario'])) {
+                            //CAMBIOS ULTIMOMOMENTO 
+                             $id_usuario = $_SESSION['id_usuario'];
                             ?>
                             <div class="nav__dropdown">
                                 <a href="#" class="nav__link">
@@ -428,10 +751,11 @@
                                     </div>
                                 </div>
                             </div>
+                
 
-                            <a href="#" class="nav__link">
+                            <a href="https://www.widolearn.com/index.php?c=Usuarios&a=vistaAprendizajeDiseno&idUsuario=<?php echo $id_usuario; ?>" onclick="redirigirVistaAprendizaje()" class="nav__link">
                                 <i class='bx bx-star nav__icon'></i>
-                                <span class="nav__name">Learning Rewards</span>
+                                <span class="nav__name">Mi ruta</span>
                             </a>
 
                         </div>
@@ -443,7 +767,7 @@
 
                 <a href="#" class="nav__link">
                     <i class='bx bx-user nav__icon'></i>
-                    <span class="nav__name"><?php echo $nombreUsuario; ?></span>
+                    <span class="nav__name"><?php echo $_SESSION['nombre']; ?></span>
                 </a>
 
                 <a class="nav__link nav__logout">
@@ -460,6 +784,17 @@
 
     <!--========== MAIN JS ==========-->
     <script src="assets/js/main.js">
+
+        document.querySelectorAll('.nav__dropdown').forEach(function (dropdown) {
+            dropdown.addEventListener('mouseenter', function () {
+                this.querySelector('.nav__dropdown-collapse').style.maxHeight = '100rem';
+            });
+
+            dropdown.addEventListener('mouseleave', function () {
+                this.querySelector('.nav__dropdown-collapse').style.maxHeight = '0';
+            });
+        });
+
         /*==================== SHOW NAVBAR ====================*/
         const showMenu = (headerToggle, navbarId) => {
             const toggleBtn = document.getElementById(headerToggle),

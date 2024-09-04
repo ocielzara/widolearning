@@ -16,10 +16,73 @@ body {
   margin: 0;
 }
 
+.border1 {
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
+
+.splide__pagination {
+  display: none;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  margin-block: 15rem;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  border-radius: 20px; /* Cambia este valor para ajustar la redondez */
+}
+
+#modalImage {
+  width: 90%;
+  height: 50%;
+  object-fit: cover;
+}
+
+#modalImageNoInicio {
+  width: 80%;
+  height: 70%;
+  object-fit: cover;
+}
+
+/* The Close Button */
+.close {
+  color: #000000;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .imageBackground {
   background-image: url("../../public/images/home/homeweb.png");
   background-repeat: no-repeat;
-  background-position: center;
+  /**background-position: center;**/
+  /**NUEVO JULIO 24**/
+  background-position: right center; /* Ajusta la posición hacia la derecha */
+  /**fin**/
   background-size: contain;
 }
 
@@ -98,28 +161,48 @@ a:hover {
   text-decoration: none;
 }
 
+/*========== SWIPER ==========*/
+
 .containderCard {
-  width: auto;
+  width: 320px;
+  margin-right: 0.5rem; /* Cambiado a margin-right */
   overflow: hidden;
   border-radius: 2rem;
+  flex-shrink: 0; /* Asegura que las tarjetas no se reduzcan */
 }
 
+/* El sub contenido de la tarjeta */
 .subContentCard {
-  width: 23rem;
+  width: 100%;
   height: 27rem;
   border-radius: 2rem;
   background-color: #2e3532;
 }
 
+/* Estilo para la imagen de la tarjeta */
 .cardImage {
   width: 100%;
   height: 15rem;
 }
 
+/* Imagen dentro de la tarjeta */
 .cardImage img {
   width: 100%;
   height: 100%;
-  object-fit: fill;
+  object-fit: cover; /* Cambia a cover para mantener la proporción */
+}
+
+.cardImageMentor {
+  width: 100%;
+  height: 15rem;
+  overflow: hidden; /* Para ocultar cualquier parte de la imagen que exceda el contenedor */
+  border-top-left-radius: 0px; /* Borde redondeado en la esquina superior izquierda */
+}
+
+.cardImageMentor img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .cardContent {
@@ -192,8 +275,7 @@ a:hover {
 }
 
 .imageBuscador {
-  cursor: pointer;
-  width: 8rem;
+  width: 1rem;
   margin-inline: 0.75rem;
 }
 
@@ -287,22 +369,16 @@ h3 {
 
 .intereses-container label {
   display: block;
-  /* Establece los labels como elementos de bloque */
   margin-bottom: 0.5rem;
-  /* Espacio entre cada checkbox y su título */
   margin-left: 120px;
   margin-top: 15px;
 }
 
 .bottom-content {
   position: absolute;
-  /* Posiciona el contenedor de forma absoluta */
   bottom: 3rem;
-  /* Coloca el contenedor 20px desde el borde inferior */
   right: 5rem;
-  /* Coloca el contenedor 20px desde el borde derecho */
   text-align: right;
-  /* Alinea el texto a la derecha dentro del contenedor */
 }
 
 .cuenta-gratis,
@@ -371,13 +447,343 @@ h3 {
   margin-inline: 1rem;
 }
 
-@media screen and (min-width: 1440px) {
+.fechaContent {
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fechaContent :is(p) {
+  height: 1.4rem;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 0.4rem;
+  padding-inline: 0.5rem;
+  margin: 0.5rem;
+  color: #ffffff;
+  background: #2e3532;
+}
+
+.button-modal {
+  background: #25d366;
+  width: 7rem;
+  border-radius: 1rem;
+  height: 2rem;
+  color: #dffaff;
+  margin-inline: 2rem;
+}
+
+/*NUEVOS ESTILOS JULIO 24 *********************************************************************************************************/
+/* Estilo de fondo y sombra al hacer hover */
+.hover-item {
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.hover-item:hover {
+  background-color: #edf2f7; /* Color de fondo al hacer hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra al hacer hover */
+}
+
+.espacioAgenda {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Alineación a la izquierda */
+            /**height: 100vh;*/
+            margin: 0;
+            padding-left: 20%; /* Espacio adicional a la izquierda */
+        }
+        .agenda {
+            text-align: center;
+        }
+        .header {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        .cell {
+            background-color: #e0f7fa;
+            border: 1px solid #b2ebf2;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 10px;
+        }
+        .cell:hover {
+            background-color: #b2ebf2;
+        }
+        .header-cell {
+            background-color: #00acc1;
+            color: white;
+            font-weight: bold;
+            font-size: 0.7em;
+        }
+        .time {
+            font-size: 0.7em;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .navigation button {
+            background-color: #00acc1;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 0.7em;
+            border-radius: 10px;
+        }
+        .navigation button:hover {
+            background-color: #007c91;
+        }
+        .current-date {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        
+        
+    .modalCompra {
+        display: none;
+        position: fixed;
+        z-index: 1000; /* Asegúrate de que el z-index sea alto */
+        padding-top: 60px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+  
+    }
+
+    .modal-contentCompra {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+        border-radius: 20px; /* Ajusta el valor según tus necesidades */
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    .button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Ajusta el valor para separar más o menos los botones */
+  padding: 5px; /* Ajusta el valor para centrar verticalmente */
+}
+
+    .payment-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .payment-option {
+      flex: 1;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .payment-option.left {
+      text-align: left;
+    }
+
+    .payment-option.right {
+      text-align: left;
+    }
+    
+    .logo-wido-rutaAprendizaje {
+    width: 150px;
+    /* Ajusta el tamaño según sea necesario */
+    height: auto;
+    /* Mantiene la proporción de la imagen */
+    position: relative;
+    z-index: 20;
+}
+
+.icon-circle-ruta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background-color: #D7F9FF;
+    border-radius: 50%;
+    margin-right: 1rem;
+    /*margin-bottom: -10rem;*/
+    box-shadow: 10px 1px 4px rgba(0, 0, 0, 0.25);
+    position: relative;
+    z-index: 10;
+    /* Asegura que esté encima del .icon-content */
+}
+
+.nav__iconSub {
+    font-size: 1.9rem;
+    color: #000;
+}
+
+.icon-content-ruta {
+    position: absolute;
+    left: 45%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    padding: 1rem 3rem;
+    border-radius: 40px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+    width: 320px;
+    /* Ancho fijo */
+    word-wrap: break-word;
+    /* Rompe las palabras largas para que no desborden */
+    z-index: 1;
+    /* Asegura que esté debajo del .icon-circle */
+}
+
+.contenedor-iconos-ruta {
+    position: relative;
+    /* Establece el contexto de apilamiento */
+    display: flex;
+    /* Asegúrate de que el contenedor sea un flexbox */
+    flex-wrap: wrap;
+    /* Permite que los íconos se ajusten si es necesario */
+    gap: 30px 260px;
+    /* Espaciado entre íconos primer parametro (30) aplica a espacio vertical, segundo parametro aplica a espacio horizontal*/
+    margin-top: 0rem;
+    /* Ajusta según sea necesario */
+    background-color: #c9dbe1;
+    padding: 1rem 1rem;
+    border-top-left-radius: 45px;
+    /* Ajusta el valor según tu diseño */
+    border-top-right-radius: 45px;
+    /* Ajusta el valor según tu diseño */
+    border-bottom-left-radius: 45px;
+    /* Ajusta el valor según tu diseño */
+    border-bottom-right-radius: 45px;
+    /* Ajusta el valor según tu diseño */
+}
+
+
+
+
+
+
+.navbar-creditos {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border-radius: 0 0 15px 15px; /* Bordes redondeados en la parte inferior */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Efecto de sombra */
+    z-index: 1000; /* Asegúrate de que esté encima de otros elementos */
+}
+
+.highlighted-bottom-border-creditos {
+    border-bottom: 3px solid #f6ff36; /* Ajusta el grosor y color del borde como desees */
+    padding-bottom: 5px; /* Añade un poco de relleno en la parte inferior para el borde */
+}
+
+.text-small-creditos {
+    font-size: 1.70rem; /* Ajusta según tus necesidades */
+}
+
+/*CAMBIOS SEP-DIC****************/
+
+/*Tablas administradores y mentores*/
+
+.btn-primary {
+  background-color: #3498db; /* Cambia este color por el que prefieras */
+  border-color: #3498db; /* Cambia este color por el que prefieras */
+  color: white; /* Cambia el color del texto si es necesario */
+}
+
+.btn-primary:hover {
+  background-color: #4F7CAC; /* Cambia el color al pasar el mouse */
+  border-color: #4F7CAC; /* Cambia el color al pasar el mouse */
+}
+
+
+/**crearAsignacion.php**/
+
+.form-container-crearAsignacion {
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.form-group-crearAsignacion {
+    margin-bottom: 15px;
+}
+
+.label-crearAsignacion {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.select-crearAsignacion {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+.section-crearAsignacion {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+
+
+
+/***FIN**/
+
+@media screen and (max-width: 1440px) {
+  .imageBackground {
+    background-image: url("../../public/images/home/homeweb.png");
+    background-repeat: no-repeat;
+    background-size: 70%;
+  }
   .containderCard {
-    width: 23.8rem !important;
+    width: 305px !important;
+    margin-inline: 0.5rem !important;
+    overflow: hidden;
+    border-radius: 2rem;
   }
 
-  .containderCard2 {
-    width: 23.8rem !important;
+  .subContentCard {
+    width: 100%;
+    height: 27rem;
+    border-radius: 2rem;
+    background-color: #2e3532;
   }
 }
 
@@ -450,23 +856,48 @@ h3 {
   .boton {
     margin-left: 20%;
   }
+
+  #modalImage {
+    width: 50%;
+    height: 10%;
+    object-fit: cover;
+  }
+
+  #modalImageNoInicio {
+    width: 50%;
+    height: 40%;
+    object-fit: cover;
+  }
 }
 
 /* For small devices */
-@media only screen and (min-width: 450px) and (max-width: 320px) {
+@media only screen and (max-width: 450px) {
   .imageBackground {
     background-image: url("../../public/images/home/portadamobil.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-  }
-
-  .containderCard {
-    width: 2rem !important;
   }
 
   .contentMentores {
     flex-direction: row;
+  }
+
+  .containderCard {
+    overflow: hidden;
+    border-radius: 2rem;
+  }
+
+  .swiper-button-next {
+    display: none !important;
+  }
+
+  .swiper-button-prev {
+    display: none !important;
+  }
+
+  .subContentCard {
+    width: 100%;
+    height: 27rem;
+    border-radius: 2rem;
+    background-color: #2e3532;
   }
 
   .card__data {
@@ -481,6 +912,18 @@ h3 {
   .imagenContenedor {
     width: 2rem;
     height: 2rem;
+  }
+
+  #modalImage {
+    width: 50%;
+    height: 10%;
+    object-fit: cover;
+  }
+
+  #modalImageNoInicio {
+    width: 50%;
+    height: 40%;
+    object-fit: cover;
   }
 }
 

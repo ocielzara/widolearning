@@ -96,6 +96,11 @@ class UsuariosController
     {
         require_once "Views/login/index.php";
     }
+    
+    public function revisaCorreo()
+    {
+        require_once "Views/login/vistaRevisaCorreo.php";
+    }
 
     public function vistaRegistro()
     {
@@ -150,54 +155,65 @@ class UsuariosController
     }
 
     public function iniciarSesion()
-    {
-        ini_set('display_errors', 1);
-        ini_set('display_startup_errors', 1);
-        error_reporting(E_ALL);
+{
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $input = file_get_contents("php://input");
-            $data = json_decode($input, true);
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $input = file_get_contents("php://input");
+        $data = json_decode($input, true);
 
-            $correo = isset($data['correo']) ? $data['correo'] : null;
-            $contrasena = isset($data['contraseña']) ? $data['contraseña'] : null;
+        $correo = isset($data['correo']) ? $data['correo'] : null;
+        $contrasena = isset($data['contraseña']) ? $data['contraseña'] : null;
 
-            if (empty($correo) || empty($contrasena)) {
-                $response = array(
-                    'success' => false,
-                    'message' => 'Email and password are required.',
-                );
-                echo json_encode($response);
-                exit;
-            }
-
-            $model = new UsuarioModel();
-            $usuario = $model->validarUsuario($correo, $contrasena);
-
-            if ($usuario && is_array($usuario)) {
-                $idUsuario = $usuario['id_usuario'];
-                session_start();
-                $_SESSION['idUsuario'] = $idUsuario;
-                $response = array(
-                    'success' => true,
-                    'message' => 'Login successful',
-                    'idUsuario' => $idUsuario,
-                );
-                echo json_encode($response);
-                exit;
-            } else {
-                $response = array(
-                    'success' => false,
-                    'message' => 'Inicio de sesión fallido. Por favor, verifica tu correo electrónico o contraseña.',
-                );
-                echo json_encode($response);
-                exit;
-            }
-        } else {
-            header('Location: index.php');
+        if (empty($correo) || empty($contrasena)) {
+            $response = array(
+                'success' => false,
+                'message' => 'Email and password are required.',
+            );
+            echo json_encode($response);
             exit;
         }
+
+        $model = new UsuarioModel();
+        $usuario = $model->validarUsuario($correo, $contrasena);
+        if ($usuario && is_array($usuario)) {
+            session_start();
+            $idUsuario = $usuario['id_usuario'];
+            $nombre = $usuario['nombre'];
+            $correo_electronico = $usuario['correo_electronico'];
+            $tipo = $usuario['tipo'];
+
+            $_SESSION['id_usuario'] = $idUsuario;
+            $_SESSION['nombre'] = $nombre;
+            $_SESSION['correo_electronico'] = $correo_electronico;
+            $_SESSION['tipo'] = $tipo;
+
+            $response = array(
+                'success' => true,
+                'message' => 'Login successful',
+                'idUsuario' => $idUsuario,
+                'nombre' => $nombre,
+                'correo' => $correo_electronico,
+                'tipo' => $tipo,
+            );
+            echo json_encode($response);
+            exit;
+        } else {
+            $response = array(
+                'success' => false,
+                'message' => 'Inicio de sesión fallido. Por favor, verifica tu correo electrónico o contraseña.',
+            );
+            echo json_encode($response);
+            exit;
+        }
+    } else {
+        header('Location: index.php');
+        exit;
     }
+}
+
 
     public function cerrarSesion()
     {
@@ -282,6 +298,9 @@ class UsuariosController
             $mail->Subject = 'Wido bienvenida ' . $nombre;
             $mail->Body = $htmlContent;
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            
+            //Activamos caracteres de latinos
+            $mail->CharSet = 'UTF-8';
 
             $mail->send();
         } catch (Exception $e) {
@@ -306,7 +325,7 @@ class UsuariosController
     public function claseMuestraNavegacion()
     {
         if (!isset($_GET['nombreCurso']) || !isset($_GET['idCurso'])) {
-            echo "Parámetros no recibidos correctamente.";
+            require_once "Views/error/error.php";
             exit;
         }
 
@@ -329,8 +348,6 @@ class UsuariosController
             require_once "Views/docente/index.php";
         }
     }
-
-
 
     public function claseMuestraNavegacionAsesoria()
     {
@@ -385,71 +402,6 @@ class UsuariosController
         }
     }
 
-    public function apartarCita()
-    {
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Validar y sanar los datos de entrada
-            $fecha = $_POST['fecha_seleccionada'];
-            $hora = $_POST['hora_seleccionada'];
-            $idDocente = $_POST['idDocente'];
-            //echo $fecha, " ", $idUsuario;
-            session_start();
-            // Verificar si la variable de sesión existe antes de usarla para evitar errores
-            if (isset($_SESSION['idUsuario'])) {
-                $objetivo = $_SESSION['objetivoUsario'];
-                $nombreCurso = $_SESSION['nombreCurso'];
-                if (isset($objetivo) && isset($nombreCurso) && !empty($objetivo) && !empty($nombreCurso)) {
-                    $inicializador = "";
-                    $inicioUsuario = $_SESSION['idUsuario'];
-                    $model = new UsuarioModel();
-                    $informacion = $model->informacionUsario($inicioUsuario);
-                    $idUsuarioInicio = $informacion['id_usuario'];
-                    $nombreUsuario = $informacion['nombre'];
-                    $edadUsuario = $informacion['edad'];
-                    if ($model->agendaCitaDocenteBuscado($idDocente, $fecha, $hora, $inicioUsuario, $nombreUsuario, $edadUsuario, $nombreCurso, $objetivo)) {
-                        // Redirigir a alguna página después de registrar al usuario
-                        $_SESSION['objetivoUsario'] = $inicializador;
-                        $_SESSION['nombreCurso'] = $inicializador;
-                        echo '<script>alert("Se ha agendado la cita, espera a que el docente confirme la cita.");';
-                        echo 'window.location.href = "index.php?c=Usuarios&a=index";</script>';
-                    } else {
-                        // Manejar el caso en que la inserción falla
-                        // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
-                        // Por ejemplo:
-                        echo "Error al registrar el usuario.";
-                    }
-                } else {
-                    $inicioUsuario = $_SESSION['idUsuario'];
-                    $model = new UsuarioModel();
-                    $informacion = $model->informacionUsario($inicioUsuario);
-                    $idUsuarioInicio = $informacion['id_usuario'];
-                    $nombreUsuario = $informacion['nombre'];
-                    $edadUsuario = $informacion['edad'];
-                    $interesUsuario = $informacion['interes'];
-                    if ($model->agendaCitaDocente($idDocente, $fecha, $hora, $inicioUsuario, $nombreUsuario, $edadUsuario, $interesUsuario)) {
-                        echo '<script>alert("Se ha agendado la cita, espera a que el docente confirme la cita.");';
-                        echo 'window.location.href = "index.php?c=Usuarios&a=index";</script>';
-                    } else {
-                        // Manejar el caso en que la inserción falla
-                        // Esto podría implicar mostrar un mensaje de error al usuario o redirigirlo a otra página
-                        // Por ejemplo:
-                        echo "Error al registrar el usuario.";
-                    }
-                }
-            } else {
-                //echo "Para agendar cita, debes iniciar sesion";
-                echo '<script>alert("Para agendar cita, debes iniciar sesion");';
-                echo 'window.location.href = "index.php?c=Usuarios&a=login";</script>';
-            }
-        } else {
-            // Redirigir si se intenta acceder directamente a través de GET
-            header('Location: index.php');
-        }
-    }
-
-
-
     public function enviarCorreoRecuperacion($correo, $contrasena)
     {
         // Generar una nueva contraseña aleatoria
@@ -473,7 +425,7 @@ class UsuariosController
 
             $mail->isHTML(true);
             $mail->Subject = 'Recuperación de contraseña';
-            $mail->Body = "Tu nueva contraseña es: $nuevaContrasena";
+            $mail->Body = "Tu nueva contraseña es: $nuevaContrasena, o si tu quieres crearla y actualizarla ingresa a: https://www.widolearn.com/index.php?c=Usuarios&a=vistaRecuperacionContrasena";
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $mail->send();
@@ -481,8 +433,131 @@ class UsuariosController
             if ($mail->ErrorInfo) {
                 echo "Error al enviar el correo de recuperación: {$mail->ErrorInfo}";
             } else {
-                echo "Correo de recuperación enviado correctamente";
+                //echo "Correo de recuperación enviado correctamente";
             }
+        } catch (Exception $e) {
+            echo "Error al enviar el correo de recuperación: {$e->getMessage()}";
+        }
+    }
+
+    public function agendarCita()
+    {
+        error_log('Método agendarCita llamado'); // Registro para depuración
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            error_log('Método de solicitud: POST'); // Registro para depuración
+
+            $input = file_get_contents("php://input");
+            $data = json_decode($input, true);
+
+            error_log('Datos recibidos: ' . print_r($data, true)); // Registro para depuración
+
+            $mentorID = isset($data['mentorID']) ? $data['mentorID'] : null;
+            $hora = isset($data['hora']) ? $data['hora'] : null;
+            $dia = isset($data['dia']) ? $data['dia'] : null;
+            $mentorName = isset($data['mentorName']) ? $data['mentorName'] : null;
+            $cursoName = isset($data['cursoName']) ? $data['cursoName'] : null;
+            $alumnoName = isset($data['alumnoName']) ? $data['alumnoName'] : null;
+            $correoUsuario = isset($data['correoUsuario']) ? $data['correoUsuario'] : null;
+            $edad = isset($data['edad']) ? $data['edad'] : null;
+            $conocimientos = isset($data['conocimientos']) ? $data['conocimientos'] : null;
+
+            if (empty($mentorID) || empty($hora) || empty($dia) || empty($mentorName) || empty($cursoName) || empty($alumnoName) || empty($correoUsuario)) {
+                $response = array(
+                    'success' => false,
+                    'message' => 'Faltan datos necesarios para agendar la cita.',
+                );
+                echo json_encode($response);
+                exit;
+            }
+            
+            //CAMBIOS JULIO 24
+            //Obtener ID de curso 
+            $model = new UsuarioModel();
+            $idCurso = $model->informacionIDcurso($cursoName);
+            //Obtener ID asignacion
+            $idAsignacion = $model->informacionIDasignacion($mentorID, $idCurso);
+            //Obtener ID usuario
+            $idUsario = $model->informacionIDusuario($correoUsuario);
+            // Verifica si ya existe una inscripción con esos datos
+            $existeInscripcion = $model->verificarInscripcion($idUsario, $idAsignacion);
+            if (!$existeInscripcion) {
+                // Solo inserta si no existe un registro
+                //Inserto en la tabla inscripcion 
+                $resultado = $model->insertaInscripcion($idUsario, $idAsignacion);
+            } else {
+                // El registro ya existe, puedes manejar esto como desees
+                
+            }
+            $correoMentor = $model->informacionCorreoMentor($mentorID);
+            //FIN
+
+            $this->enviarAgendaMentor($correoUsuario, $mentorName, $hora, $dia, $cursoName, $alumnoName, $correoMentor, $edad, $conocimientos);
+            exit;
+        } else {
+            error_log('Método de solicitud no permitido: ' . $_SERVER["REQUEST_METHOD"]); // Registro para depuración
+
+            $response = array(
+                'success' => false,
+                'message' => 'Método de solicitud no permitido.',
+            );
+            echo json_encode($response);
+            exit;
+        }
+    }
+
+    public function enviarAgendaMentor($correo, $mentorName, $hora, $dia, $cursoName, $alumnoName, $correoMentor, $edad, $conocimientos)
+    {
+        try {
+            $mail = new PHPMailer(true);
+
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.hostinger.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'hola@widolearn.com';
+            $mail->Password = 'Wido2024!';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
+            $mail->setFrom('hola@widolearn.com', 'Wido');
+            $correoDefecto = "hola@widolearn.com";
+            $mail->addAddress($correo);
+            $mail->addAddress($correoDefecto);
+            
+            // Dirección de correo del mentor
+            $mail->addAddress($correoMentor);
+            
+            $htmlContent = file_get_contents('Views/contenido/compra-curso.php');
+
+            $htmlContent = str_replace('{{MENTOR_NAME}}', htmlspecialchars($mentorName), $htmlContent);
+            $htmlContent = str_replace('{{HORA}}', htmlspecialchars($hora), $htmlContent);
+            $htmlContent = str_replace('{{DIA}}', htmlspecialchars($dia), $htmlContent);
+            $htmlContent = str_replace('{{CURSO_NAME}}', htmlspecialchars($cursoName), $htmlContent);
+            $htmlContent = str_replace('{{ALUMNO_NAME}}', htmlspecialchars($alumnoName), $htmlContent);
+            $htmlContent = str_replace('{{ALUMNO_EDAD}}', htmlspecialchars($edad), $htmlContent);
+            $htmlContent = str_replace('{{ALUMNO_CONOCIMIENTOS}}', htmlspecialchars($conocimientos), $htmlContent);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Curso Agendado';
+            $mail->Body = $htmlContent;
+            
+            //Activamos caracteres de latinos
+            $mail->CharSet = 'UTF-8';
+
+            $mail->send();
+
+            if ($mail->ErrorInfo) {
+                $response = array(
+                    'success' => false,
+                    'message' => "Error al enviar el correo de recuperación: {$mail->ErrorInfo}"
+                );
+            } else {
+                $response = array(
+                    'success' => true,
+                    'message' => "Curso agendado y enviado correctamente"
+                );
+            }
+            echo json_encode($response);
         } catch (Exception $e) {
             echo "Error al enviar el correo de recuperación: {$e->getMessage()}";
         }
@@ -498,12 +573,24 @@ class UsuariosController
             if ($usuario) {
                 // Generar una nueva contraseña aleatoria
                 $nuevaContrasena = $usuarioModel->generarContraseñaAleatoria();
+                
+                // Mostrar la nueva contraseña en la consola para depuración (Solo para desarrollo)
+                echo "<script>console.log('Nueva contraseña para $correo: $nuevaContrasena');</script>";
+                
 
                 // Actualizar la contraseña en la base de datos
                 if ($usuarioModel->actualizarContrasena($usuario['id_usuario'], $nuevaContrasena)) {
                     // Enviar correo electrónico con la nueva contraseña
                     $this->enviarCorreoRecuperacion($correo, $nuevaContrasena);
-                    echo "Se ha enviado un correo electrónico con instrucciones para recuperar tu contraseña.";
+                    // Mensaje de alerta y redirección en dos etapas
+                    echo "<script>
+                    setTimeout(function() {
+                        window.location.href = 'https://www.widolearn.com/index.php?c=Usuarios&a=revisaCorreo';
+                        setTimeout(function() {
+                            window.location.href = 'https://www.widolearn.com/index.php?c=Usuarios&a=login';
+                        }, 3000);
+                    }, 0);
+                    </script>";
                 } else {
                     echo "Error al actualizar la contraseña.";
                 }
@@ -522,4 +609,137 @@ class UsuariosController
         session_destroy();
         header('location: index.php');
     }
+
+    public function agendar()
+    {
+    }
+    
+    //***********NUEVOS
+    
+    public function vistaRecuperacionContrasena()
+    {
+        require_once "Views/login/actualizacionContrasena.php";
+    }
+    
+    public function actualizarContrasena()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $correo = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+            $contrasena = $_POST['newPassword'];
+
+            // Validar que el correo existe en la base de datos
+            $usuarioModel = new UsuarioModel();
+            $usuario = $usuarioModel->obtenerUsuarioPorCorreo($correo);
+                // Actualizar la contraseña en la base de datos
+                if ($usuarioModel->actualizarContrasena($usuario['id_usuario'], $contrasena)) {
+                    header('Location: index.php?c=Usuarios&a=login');
+                } else {
+                    echo "Error al actualizar la contraseña.";
+                }
+        } else {
+            // Redirigir si se intenta acceder directamente a través de GET
+            header('Location: index.php');
+        }
+    }
+    
+    public function verMentores()
+ {
+    $usuarioModel = new UsuarioModel();
+    $mentoresCursos = $usuarioModel->getAllMentoresYCursos();
+    
+    header('Content-Type: application/json');
+    
+    echo json_encode($mentoresCursos);
+ }
+ 
+ public function verMentoresPorTipo()
+{
+    if (isset($_GET['tipoCurso'])) {
+        $tipoCurso = $_GET['tipoCurso'];
+        $usuarioModel = new UsuarioModel();
+        $resultado = $usuarioModel->getMentoresPorTipoCurso($tipoCurso);
+
+        header('Content-Type: application/json');
+        echo json_encode($resultado);
+    } else {
+        echo json_encode(["error" => "No se proporcionó el tipo de curso"]);
+    }
+}
+
+//CAMBIOS JULIO 24
+
+public function vistaAprendizajeDiseno()
+{
+    if (isset($_GET['idUsuario'])) {
+        $idUsuario = $_GET['idUsuario'];
+        
+    } else {
+        echo json_encode(["error" => "No se proporcionó el ID de usuario"]);
+    }
+    
+    require_once "Views/alumno/rutaAprendizaje.php";
+}
+ 
+ public function vistaAprendizaje()
+{
+    if (isset($_GET['idUsuario'])) {
+        $idUsuario = $_GET['idUsuario'];
+        $usuarioModel = new UsuarioModel();
+        $resultado = $usuarioModel->getCursosPorUsuario($idUsuario);
+
+        header('Content-Type: application/json');
+        echo json_encode($resultado);
+    } else {
+        echo json_encode(["error" => "No se proporcionó el ID de usuario"]);
+    }
+    
+    // require_once "Views/alumno/rutaAprendizaje.php";
+}
+
+public function vistaCreditos()
+{
+    if (isset($_GET['idUsuario'])) {
+        $idUsuario = $_GET['idUsuario'];
+        
+    } else {
+        echo json_encode(["error" => "No se proporcionó el ID de usuario"]);
+    }
+    
+    require_once "Views/alumno/creditos.php";
+}
+
+public function creditosCursos()
+{
+    if (isset($_GET['idUsuario']) && isset($_GET['idCurso'])) {
+        $idUsuario = $_GET['idUsuario'];
+        $idCurso = $_GET['idCurso'];
+        $idMentor = $_GET['idMentor'];
+        $usuarioModel = new UsuarioModel();
+        $resultado = $usuarioModel->getCreditosCursos($idUsuario, $idCurso, $idMentor);
+
+        header('Content-Type: application/json');
+        echo json_encode($resultado);
+    } else {
+        echo json_encode(["error" => "No se proporcionó el ID de usuario"]);
+    }
+    
+}
+
+public function getEstado() 
+{
+     if (isset($_GET['idUsuario']) && isset($_GET['idCurso'])) {
+        $idUsuario = $_GET['idUsuario'];
+        $idCurso = $_GET['idCurso'];
+        $usuarioModel = new UsuarioModel();
+        $resultado = $usuarioModel->verEstadoInscripcion($idUsuario, $idCurso);
+
+        header('Content-Type: application/json');
+        echo json_encode(['estado' => $resultado]);
+    } else {
+        echo json_encode(["error" => "No se proporcionó el ID de usuario"]);
+    }
+}
+
+
+
 }

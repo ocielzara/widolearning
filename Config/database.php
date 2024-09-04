@@ -7,9 +7,9 @@ class Conectar
 	{
 
 		$servidor = "localhost"; // Dirección del servidor de la base de datos
-		$usuario = "root"; // Nombre de usuario de la base de datos
-		$contraseña = "12345"; // Contraseña de la base de datos (deja en blanco si no tiene contraseña)
-		$baseDeDatos = "aerobotLearning"; // Nombre de la base de datos
+		$usuario = "u814072684_widolearn"; // Nombre de usuario de la base de datos
+		$contraseña = "Koutilab23!"; // Contraseña de la base de datos (deja en blanco si no tiene contraseña)
+		$baseDeDatos = "u814072684_widolearn"; // Nombre de la base de datos
 
 		// Crear y devolver la conexión
 		$conexion = new mysqli($servidor, $usuario, $contraseña, $baseDeDatos);
