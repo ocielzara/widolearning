@@ -27,13 +27,14 @@ if (isset($_SESSION['mentor_id'])) {
         --nav-width: 219px;
 
         /*========== Colors ==========*/
-        --first-color: #6923D0;
+        --first-color: #3498db;
         --first-color-light: #F4F0FA;
         --title-color: #19181B;
         --text-color: #58555E;
         --text-color-light: #A5A1AA;
         --body-color: #F9F6FD;
         --container-color: #FFFFFF;
+
 
         /*========== Font and typography ==========*/
         --body-font: 'Poppins', sans-serif;
@@ -69,7 +70,7 @@ if (isset($_SESSION['mentor_id'])) {
         padding: 0rem 0rem 0 0rem;
         font-family: var(--body-font);
         font-size: var(--normal-font-size);
-        background-color: var(--body-color);
+        background-color: white;
         color: var(--text-color);
     }
 
@@ -241,7 +242,6 @@ if (isset($_SESSION['mentor_id'])) {
         }
 
         .header__search {
-            width: 300px;
             padding: .55rem .75rem;
         }
 
@@ -307,8 +307,6 @@ if (isset($_SESSION['mentor_id'])) {
         }
     }
 
-    /****************************************************************************** */
-
     .cerrar {
         background-color: var(--first-color);
         /* Color de fondo del botón */
@@ -327,31 +325,7 @@ if (isset($_SESSION['mentor_id'])) {
     }
 
     .cerrar:hover {
-        background-color: #5318a8;
-        /* Cambiar el color de fondo al pasar por encima */
-    }
-
-    .button-cr {
-        background-color: var(--first-color);
-        /* Color de fondo del botón */
-        color: white;
-        /* Color del texto */
-        padding: 0.5rem 1rem;
-        /* Espaciado interno */
-        border: none;
-        /* Eliminar borde */
-        border-radius: 5px;
-        /* Borde redondeado */
-        cursor: pointer;
-        /* Cambiar el cursor al pasar por encima */
-        transition: background-color 0.3s ease;
-        /* Efecto de transición */
-        width: 90%;
-        font-size: 12px;
-    }
-
-    .button-cr:hover {
-        background-color: #5318a8;
+        background-color: #4F7CAC;
         /* Cambiar el color de fondo al pasar por encima */
     }
 </style>
@@ -367,10 +341,12 @@ if (isset($_SESSION['mentor_id'])) {
 
                 <div class="nav__list">
                     <div class="nav__items">
-                        <a href="#" class="nav__link active">
+                        <!--
+                        <a href="#" class="nav__link">
                             <i class='bx bx-home nav__icon'></i>
                             <span class="nav__name">Home</span>
                         </a>
+                        
 
                         <div class="nav__dropdown">
                             <a href="#" class="nav__link">
@@ -430,10 +406,16 @@ if (isset($_SESSION['mentor_id'])) {
                                 </div>
                             </div>
                         </div>
+                        -->
                         
                         <a href="index.php?c=Docentes&a=vistaMentorias&id=<?php echo $_SESSION['mentor_id']; ?>" class="nav__link">
                                 <i class='bx bxs-graduation nav__icon'></i>
                                 <span class="nav__name">Mentorias</span>
+                        </a>
+                        
+                        <a href="index.php?c=Docentes&a=vistaHistorialMuestras&id=<?php echo $_SESSION['mentor_id']; ?>" class="nav__link">
+                                <i class='bx bx-book-content nav__icon'></i>
+                                <span class="nav__name">H. clases muestra</span>
                         </a>
 
 

@@ -304,6 +304,8 @@ class UsuarioModel
                 SUBSTRING(m.acercademi, 1, 80 + LOCATE(' ', SUBSTRING(m.acercademi, 81))) AS acercademi
               FROM 
                 Mentor m
+              WHERE
+                m.estado = 'activo'
               ";
 
     // Preparar la consulta
@@ -354,7 +356,7 @@ public function getMentoresPorTipoCurso($tipoCurso)
               INNER JOIN 
                 cursos c ON a.id_curso = c.id_curso
               WHERE 
-                c.tipo = ?
+                c.tipo = ? AND m.estado = 'activo' AND a.estado = 'activo'
               GROUP BY 
                 m.Mentor_ID";
 

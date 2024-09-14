@@ -596,7 +596,29 @@ public function agendaCrearApp()
     //Nuevos cambios julio 24
     public function vistaMentorias()
     {
+        session_start();
         require_once "Views/docente/mentoria/vistaMentoria.php";
+    }
+
+    //CARGAR VISTA
+    public function vistaHistorialMuestras()
+    {
+        session_start();
+        require_once "Views/docente/historialClaseMuestra/vistaClasesMuestras.php";
+    }
+    
+    public function historialClaseMuestra()
+    {
+        if (isset($_GET['id'])) {
+            $idMentor = $_GET['id'];
+            $model = new DocenteModel();
+            $getHistorial = $model->getHistorialClaseMuestra($idMentor);
+
+            header('Content-Type: application/json');
+            echo json_encode($getHistorial);
+        } else {
+            echo json_encode(["error" => "No se proporcionó el ID del maestro"]);
+        }
     }
     
     public function mentorias()

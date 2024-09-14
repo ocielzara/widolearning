@@ -19,23 +19,20 @@
 <body>
 
     <!--========== CONTENTS ==========-->
-    <?php include 'Views/contenido/lateralAdministrador.php'; ?>
+    <?php include 'Views/contenido/lateralDocente.php'; ?>
     
    <main>
         <section>
             <div class="container">
-                <a href="index.php?c=Administradors&a=crearMentorVista&id=<?php echo $_SESSION['id_usuario']; ?>" class="btn btn-dark mb-3">Crear</a>
                 <table class="table table-hover text-center">
                     <thead class="table-dark">
                         <tr>
-                            <th scope="col">Nombre</th>
+                            <th scope="col">Usuario</th>
                             <th scope="col">Correo</th>
-                            <th scope="col">Telefono</th>
-                            <th scope="col">Informacion</th>
-                            <th scope="col">Accion</th>
+                            <th scope="col">Curso</th>
                         </tr>
                     </thead>
-                    <tbody id="contenedor-mentores">
+                    <tbody id="contenedor-clase-muestra">
                         <!-- Las filas se añadirán aquí por JavaScript -->
                     </tbody>
                 </table>
