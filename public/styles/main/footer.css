@@ -1,0 +1,146 @@
+@import url('header.css');
+
+footer {
+    width: 100%;
+    padding: 0 0;
+    background-color: var(--gray);
+    color: #7a7a7a;
+}
+
+.container__footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 95%;
+    margin: auto;
+    padding: 0 20px;
+    margin-left: 2.5%;
+    align-items: flex-start; /* Alinear los elementos en la parte superior */
+}
+
+.logoo {
+    flex-basis: 100%; /* La imagen ocupa el 100% del ancho */
+    text-align: center; /* Centrar la imagen */
+    margin-bottom: 20px; /* Añadir margen para separar de las columnas */
+}
+
+.logoo img {
+    width: 180px;
+}
+
+.box__footer {
+    flex: 1;
+    min-width: 200px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.box__footer .terms {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.box__footer h2 {
+    margin-bottom: 15px;
+    color: var(--secondary);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.box__footer a {
+    display: block;
+    margin: 10px 0;
+    color: #7a7a7a;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.box__footer a:hover {
+    color: var(--secondary);
+}
+
+.box__footer i {
+    margin-right: 8px;
+    color: red;
+}
+
+.box__copyright {
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+}
+
+.box__copyright p {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #7a7a7a;
+}
+
+.box__copyright hr {
+    margin-bottom: 10px;
+    border: none;
+    height: 1px;
+    background-color: #7a7a7a;
+}
+
+/* Media Queries para hacerlo responsivo */
+
+/* Pantallas medianas (tabletas) */
+@media (max-width: 768px) {
+    .container__footer {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .logoo img {
+        width: 150px;
+    }
+    
+    .box__footer {
+        margin: 10px 0;
+        text-align: center;
+    }
+    
+    .box__footer h2 {
+        font-size: 16px;
+    }
+    
+    .box__footer .terms, .box__footer a {
+        font-size: 14px;
+    }
+}
+
+/* Pantallas pequeñas (móviles) */
+@media (max-width: 480px) {
+    footer {
+        padding: 30px 0;
+    }
+    
+    .logoo img {
+        width: 120px;
+    }
+    
+    .box__footer {
+        margin: 10px 0;
+    }
+    
+    .box__footer h2 {
+        font-size: 14px;
+    }
+    
+    .box__footer a {
+        font-size: 12px;
+    }
+    
+    .box__footer .terms {
+        font-size: 13px;
+    }
+    
+    .box__copyright p {
+        font-size: 12px;
+    }
+}

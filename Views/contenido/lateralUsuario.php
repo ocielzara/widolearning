@@ -158,9 +158,6 @@
         color: #D7F9FF;
     }
 
-    .nav__linkSub:hover {
-        color: ;
-    }
 
 
     .nav__icon {

@@ -31,14 +31,7 @@
   background-color: #d4ebff;
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #d4ebff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
+
 
 /* Estilos para los resultados de la búsqueda */
 #search-results {

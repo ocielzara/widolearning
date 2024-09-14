@@ -163,53 +163,41 @@ document.addEventListener("DOMContentLoaded", function () {
 let swiperInstance;
 //fin
 function mostrarContenidoAreas() {
-  var contenidoAdicional = document.getElementById("contenido-areas");
-  contenidoAdicional.style.display = "block";
-  //CAMBIOS JULIO 24
-  var contenidoTop = document.getElementById("contenido-top");
-  contenidoTop.style.display = "block";
-  var contenidoProgramacion = document.getElementById("contenido-programacion");
-  contenidoProgramacion.style.display = "block";
-  var contenidoAdministracion = document.getElementById("contenido-administracion");
-  contenidoAdministracion.style.display = "block";
-  //fin
+  var contenidoAreas = document.getElementById("contenido-areas");
+  contenidoAreas.style.display = "block";  // Mostrar contenido de áreas de aprendizaje
+
+  // Asegúrate de que los otros contenidos estén ocultos
+  var contenidoMasterTeach = document.getElementById("contenido-master-teach");
+  contenidoMasterTeach.style.display = "none";
+
+  // Mostrar footer u otros elementos si es necesario
   var contenidoFooter = document.getElementById("footer");
   contenidoFooter.style.display = "flex";
 
-  // Oculta el contenido adicional de Master Teach si está visible
-  var contenidoMasterTeach = document.getElementById("contenido-master-teach");
-  contenidoMasterTeach.style.display = "none";
-  //CAMBIOS JULIO 24
+  // Cambiar el estilo de los botones
   toggleButtonStyles('btn-areas', 'btn-master');
+  
+  // Reiniciar carruseles u otros elementos interactivos si es necesario
   reinitSwiper();
-  //fin
 }
 
 function mostrarContenidoMasterTeach() {
   var contenidoMasterTeach = document.getElementById("contenido-master-teach");
-  contenidoMasterTeach.style.display = "block";
+  contenidoMasterTeach.style.display = "block";  // Mostrar contenido Master Teach
 
-  // Oculta el contenido adicional de "Areas de aprendizaje" si está visible
-  var contenidoAdicional = document.getElementById("contenido-areas");
-  contenidoAdicional.style.display = "none";
-  // Oculta el contenido footer si está visible
+  // Ocultar el contenido de áreas de aprendizaje
+  var contenidoAreas = document.getElementById("contenido-areas");
+  contenidoAreas.style.display = "none";
+
+  // Ocultar el footer si no es necesario
   var contenidoFooter = document.getElementById("footer");
   contenidoFooter.style.display = "none";
-  // Oculta el contenido adicional de "contenido-mas" si está visible
-  var contenidoMas = document.getElementById("contenido-mas");
-  contenidoMas.style.display = "none";
-  //CAMBIOS JULIO 24
-  var contenidoTop = document.getElementById("contenido-top");
-  contenidoTop.style.display = "none";
-  var contenidoProgramacion = document.getElementById("contenido-programacion");
-  contenidoProgramacion.style.display = "none";
-  var contenidoAdministracion = document.getElementById("contenido-administracion");
-  contenidoAdministracion.style.display = "none";
-  //fin
-  //CAMBIOS JULIO 24
+
+  // Cambiar el estilo de los botones
   toggleButtonStyles('btn-master', 'btn-areas');
-  //fin
 }
+
+
 
 function mostrarMas() {
   var contenidoMas = document.getElementById("contenido-mas");

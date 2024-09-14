@@ -12,11 +12,11 @@ function mostrarToastify(texto, tipo) {
 }
 
 window.onload = function () {
-    
+
   // Obtén el parámetro 'idUusario' de la URL actual
   const urlParams = new URLSearchParams(window.location.search);
   const idUsu = urlParams.get('n');
-  
+
   obtenerCursos(idUsu);
   obtenerAsesorias();
   obtenerMentores();
@@ -48,7 +48,7 @@ window.onload = function () {
   obtenerMentoresPorTipo("musica");
   obtenerMentoresPorTipo("salud");
   obtenerMentoresPorTipo("otros");
-  
+
   const idUsuario = urlParams.get('idUsuario');
   obtenerCursosPorUsuario(idUsuario);
   const idCurso = urlParams.get('idCurso');
@@ -79,12 +79,26 @@ function closePDF() {
   document.getElementById("pdfEmbed").src = "";
 }
 
+
+// Función para redirigir a la página de clase muestra
 function redirigirClaseMuestra(idCurso, nombreCurso) {
-  const url = `${baseUrl}/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=${idCurso}&nombreCurso=${encodeURIComponent(
-    nombreCurso
-  )}`;
+  const url = `${baseUrl}/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=${idCurso}&nombreCurso=${encodeURIComponent(nombreCurso)}`;
   window.location.href = url;
 }
+
+// Añadir event listener a los elementos de curso
+document.addEventListener('DOMContentLoaded', function () {
+  const cursoItems = document.querySelectorAll('.curso-item');
+
+  cursoItems.forEach(item => {
+    item.addEventListener('click', function () {
+      const idCurso = this.getAttribute('data-id-curso');
+      const nombreCurso = this.getAttribute('data-nombre-curso');
+      redirigirClaseMuestra(idCurso, nombreCurso);
+    });
+  });
+});
+
 
 //CAMBIOS JULIO 24
 function redirigirVerPerfil(Mentor_ID) {
@@ -127,33 +141,33 @@ function obtenerCursosPorUsuario(idUsuario) {
         // Crear el icono de círculo
         var iconCircle = document.createElement("div");
         iconCircle.className = "icon-circle-ruta";
-        
+
         // Crear el elemento i dentro del iconCircle
         var iconElement = document.createElement("i");
         iconElement.className = `bx ${curso.icono_curso} nav__iconSub`;
         iconCircle.appendChild(iconElement);
-        
+
         // Crear el contenido del icono
         var iconContent = document.createElement("div");
         iconContent.className = "icon-content-ruta";
         iconContent.textContent = curso.nombre_curso;
-        
+
         // Crear el elemento <p> en negrita
         var pElement = document.createElement("p");
         pElement.textContent = "Activo";
         let statusColor = "#FFD700"; // Amarillo para "Completado"
-        
+
         if (curso.cursados === null || curso.cursados < 20) {
           statusText = "Activo";
           statusColor = "#000000"; // Color por defecto o negro para "Activo"
         } else if (curso.creditos >= 20) {
           statusText = "Completado";
         }
-        
+
         pElement.textContent = statusText;
         pElement.style.fontWeight = "bold"; // Estilo en negrita
         pElement.style.color = statusColor; // Color dinámico
-        
+
         // Añadir el <p> al iconContent
         iconContent.appendChild(pElement);
 
@@ -163,7 +177,7 @@ function obtenerCursosPorUsuario(idUsuario) {
 
         // Configurar el enlace del contenedor
         newContent.href = `${baseUrl}/index.php?c=Usuarios&a=vistaCreditos&idUsuario=${idUsuario}&idCurso=${curso.id_curso}&idMentor=${curso.Mentor_ID}`;
-        
+
         contenedorIconos.appendChild(newContent);
       });
     })
@@ -181,33 +195,33 @@ function obtenerCreditosCursos(idUsuario, idCurso, idMentor) {
       return response.json();
     })
     .then((data) => {
-         const curso = data[0]; // Asumiendo que la respuesta contiene un solo objeto
+      const curso = data[0]; // Asumiendo que la respuesta contiene un solo objeto
 
-        // Inserta los datos en el HTML
-        document.getElementById('curso-nombre').innerText = `${curso.nombre_curso}`;
-        document.getElementById('mentor-nombre').innerText = `Mentor: ${curso.nombre_mentor}`;
-        document.getElementById('total-creditos').innerText = `Total créditos: ${curso.creditos}`;
-        document.getElementById('cursados').innerText = `Cursados: ${curso.cursados}`;
+      // Inserta los datos en el HTML
+      document.getElementById('curso-nombre').innerText = `${curso.nombre_curso}`;
+      document.getElementById('mentor-nombre').innerText = `Mentor: ${curso.nombre_mentor}`;
+      document.getElementById('total-creditos').innerText = `Total créditos: ${curso.creditos}`;
+      document.getElementById('cursados').innerText = `Cursados: ${curso.cursados}`;
 
-        // Inserta los iconos en el contenedor
-        var contenedorIconos = document.getElementById('contenedor-creditos');
-        contenedorIconos.innerHTML = ''; // Limpia el contenedor antes de agregar nuevos elementos
+      // Inserta los iconos en el contenedor
+      var contenedorIconos = document.getElementById('contenedor-creditos');
+      contenedorIconos.innerHTML = ''; // Limpia el contenedor antes de agregar nuevos elementos
 
-        for (let i = 0; i < curso.creditos; i++) {
-          var newContent = document.createElement("a");
-          newContent.className = "icon-circle";
-          
-          if (i < curso.cursados) {
-          
+      for (let i = 0; i < curso.creditos; i++) {
+        var newContent = document.createElement("a");
+        newContent.className = "icon-circle";
+
+        if (i < curso.cursados) {
+
           if (i === 0 || i === curso.creditos - 1) {
-          // Aplicar estilo normal u opaco según el número de cursados
+            // Aplicar estilo normal u opaco según el número de cursados
             newContent.innerHTML = `
             <a href='https://us02web.zoom.us/j/82296455704?pwd=SVR2d#success' class="icon-wrapper">
             <span class="icon-number-right">${i + 1}</span>
             <img src="public/images/wido/iconos-track-gold.png" alt="icono de oro" class="icon-background">
             <i class='bx ${curso.icono_curso} nav__iconSub icon'></i>
             </a>`;
-            
+
           } else {
             // Estilo para los elementos intermedios
             newContent.innerHTML = `
@@ -216,17 +230,17 @@ function obtenerCreditosCursos(idUsuario, idCurso, idMentor) {
             <img src="public/images/wido/iconos-track-blue-v.png" alt="icono de oro" class="icon-background">
             </a>`;
           }
-          
-          } else {
-            if (i === 0 || i === curso.creditos - 1) {
-          // Aplicar estilo normal u opaco según el número de cursados
+
+        } else {
+          if (i === 0 || i === curso.creditos - 1) {
+            // Aplicar estilo normal u opaco según el número de cursados
             newContent.innerHTML = `
             <a class="icon-wrapper">
             <span class="icon-number-right">${i + 1}</span>
             <img src="public/images/wido/iconos-track-gold.png" alt="icono de oro" class="icon-background">
             <i class='bx ${curso.icono_curso} nav__iconSub icon'></i>
             </a>`;
-            
+
           } else {
             // Estilo para los elementos intermedios
             newContent.innerHTML = `
@@ -235,31 +249,31 @@ function obtenerCreditosCursos(idUsuario, idCurso, idMentor) {
             <img src="public/images/wido/iconos-track-opasity-v-5.png" alt="icono de oro" class="icon-background">
             </a>`;
           }
-          }
-         
-          
-          contenedorIconos.appendChild(newContent);
         }
-        
-        // Ajustar las clases para la línea entre íconos
-        const iconCircles = document.querySelectorAll('.icon-circle');
-        iconCircles.forEach((iconCircle) => {
-            iconCircle.classList.add('show-line'); // Inicialmente mostrar línea en todos los íconos
-        });
 
-        const containerWidth = contenedorIconos.offsetWidth;
-        const iconWidth = iconCircles[0].offsetWidth;
-        const marginRight = parseFloat(getComputedStyle(iconCircles[0]).marginRight);
 
-        // Calcular el número de íconos en cada línea
-        const numIconsPerRow = Math.floor(containerWidth / (iconWidth + marginRight));
+        contenedorIconos.appendChild(newContent);
+      }
 
-        iconCircles.forEach((iconCircle, index) => {
-            if ((index + 1) % numIconsPerRow === 0) {
-                iconCircle.classList.remove('show-line'); // Ocultar línea en el último ícono de cada línea
-            }
-        });
-      
+      // Ajustar las clases para la línea entre íconos
+      const iconCircles = document.querySelectorAll('.icon-circle');
+      iconCircles.forEach((iconCircle) => {
+        iconCircle.classList.add('show-line'); // Inicialmente mostrar línea en todos los íconos
+      });
+
+      const containerWidth = contenedorIconos.offsetWidth;
+      const iconWidth = iconCircles[0].offsetWidth;
+      const marginRight = parseFloat(getComputedStyle(iconCircles[0]).marginRight);
+
+      // Calcular el número de íconos en cada línea
+      const numIconsPerRow = Math.floor(containerWidth / (iconWidth + marginRight));
+
+      iconCircles.forEach((iconCircle, index) => {
+        if ((index + 1) % numIconsPerRow === 0) {
+          iconCircle.classList.remove('show-line'); // Ocultar línea en el último ícono de cada línea
+        }
+      });
+
     })
     .catch((error) => {
       console.error("Error en la solicitud:", error);
@@ -276,7 +290,7 @@ function obtenerDatosMisAlumnos(idMentor) {
       return response.json();
     })
     .then((data) => {
-       var contenedor = document.getElementById('contenedor-datos-mentor');
+      var contenedor = document.getElementById('contenedor-datos-mentor');
 
       if (data.length > 0) {
         data.forEach((item) => {
@@ -314,7 +328,7 @@ function obtenerDatosDisponibilidadMentor(idMentor) {
       return response.json();
     })
     .then((data) => {
-       
+
     })
     .catch((error) => {
       console.error("Error en la solicitud:", error);
@@ -323,11 +337,11 @@ function obtenerDatosDisponibilidadMentor(idMentor) {
 
 function incrementarCursados(idRuta, cursados) {
   const data = {
-        idRuta: idRuta,
-        cursados: cursados
-    };
+    idRuta: idRuta,
+    cursados: cursados
+  };
 
-    console.log("Datos a enviar:", data); // Verificar datos antes de enviar
+  console.log("Datos a enviar:", data); // Verificar datos antes de enviar
   fetch(`${baseUrl}/index.php?c=Docentes&a=actualizarCursados`, {
     method: 'POST',
     headers: {
@@ -338,28 +352,28 @@ function incrementarCursados(idRuta, cursados) {
       cursados: cursados
     })
   })
-  .then((response) => response.json())
-  .then((data) => {
-    console.log('Respuesta del servidor:', data); // Log para verificar respuesta
-    if (data.success) {
-      alert("Cursados actualizado exitosamente.");
-      location.reload(); // Recarga la página para ver los cambios
-    } else {
-      alert("Error al actualizar los cursados.");
-    }
-  })
-  .catch((error) => {
-    console.error("Error en la solicitud:", error);
-  });
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Respuesta del servidor:', data); // Log para verificar respuesta
+      if (data.success) {
+        alert("Cursados actualizado exitosamente.");
+        location.reload(); // Recarga la página para ver los cambios
+      } else {
+        alert("Error al actualizar los cursados.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
 }
 
 function decrementarCursados(idRuta, cursados) {
   const data = {
-        idRuta: idRuta,
-        cursados: cursados
-    };
+    idRuta: idRuta,
+    cursados: cursados
+  };
 
-    console.log("Datos a enviar:", data); // Verificar datos antes de enviar
+  console.log("Datos a enviar:", data); // Verificar datos antes de enviar
   fetch(`${baseUrl}/index.php?c=Docentes&a=actualizarCursadosDecrementar`, {
     method: 'POST',
     headers: {
@@ -370,19 +384,19 @@ function decrementarCursados(idRuta, cursados) {
       cursados: cursados
     })
   })
-  .then((response) => response.json())
-  .then((data) => {
-    console.log('Respuesta del servidor:', data); // Log para verificar respuesta
-    if (data.success) {
-      alert("Cursados actualizado exitosamente.");
-      location.reload(); // Recarga la página para ver los cambios
-    } else {
-      alert("Error al actualizar los cursados.");
-    }
-  })
-  .catch((error) => {
-    console.error("Error en la solicitud:", error);
-  });
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Respuesta del servidor:', data); // Log para verificar respuesta
+      if (data.success) {
+        alert("Cursados actualizado exitosamente.");
+        location.reload(); // Recarga la página para ver los cambios
+      } else {
+        alert("Error al actualizar los cursados.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
 }
 
 //MOSTRAR INSCRIPCIONES
@@ -395,7 +409,7 @@ function obtenerIscripciones(idAdministrador) {
       return response.json();
     })
     .then((data) => {
-       var contenedor = document.getElementById('contenedor-datos-administrador');
+      var contenedor = document.getElementById('contenedor-datos-administrador');
 
       if (data.length > 0) {
         data.forEach((item) => {
@@ -423,10 +437,10 @@ function obtenerIscripciones(idAdministrador) {
 
 function confirmaCompra(idInscripcion) {
   const data = {
-        idInscripcion: idInscripcion
-    };
+    idInscripcion: idInscripcion
+  };
 
-    console.log("Datos a enviar:", data); // Verificar datos antes de enviar
+  console.log("Datos a enviar:", data); // Verificar datos antes de enviar
   fetch(`${baseUrl}/index.php?c=Administradors&a=confirmar`, {
     method: 'POST',
     headers: {
@@ -436,19 +450,19 @@ function confirmaCompra(idInscripcion) {
       idInscripcion: idInscripcion
     })
   })
-  .then((response) => response.json())
-  .then((data) => {
-    console.log('Respuesta del servidor:', data); // Log para verificar respuesta
-    if (data.success) {
-      alert("Confirmacion exitosa.");
-      location.reload(); // Recarga la página para ver los cambios
-    } else {
-      alert("Error al confirmar.");
-    }
-  })
-  .catch((error) => {
-    console.error("Error en la solicitud:", error);
-  });
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Respuesta del servidor:', data); // Log para verificar respuesta
+      if (data.success) {
+        alert("Confirmacion exitosa.");
+        location.reload(); // Recarga la página para ver los cambios
+      } else {
+        alert("Error al confirmar.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
 }
 
 
@@ -463,7 +477,7 @@ function obtenerAsignaciones(idAdministrador) {
       return response.json();
     })
     .then((data) => {
-       var contenedor = document.getElementById('contenedor-asignaciones');
+      var contenedor = document.getElementById('contenedor-asignaciones');
 
       if (data.length > 0) {
         data.forEach((item) => {
@@ -490,9 +504,9 @@ function obtenerAsignaciones(idAdministrador) {
 
 function eliminarAsignacion(idMentor, idCurso) {
   const data = {
-        idMentor: idMentor,
-        idCurso: idCurso
-    };
+    idMentor: idMentor,
+    idCurso: idCurso
+  };
 
   console.log("Datos a enviar:", data); // Verificar datos antes de enviar
   fetch(`${baseUrl}/index.php?c=Administradors&a=eliminarAsignacion`, {
@@ -502,19 +516,19 @@ function eliminarAsignacion(idMentor, idCurso) {
     },
     body: JSON.stringify(data) // Corregido para enviar los datos correctos
   })
-  .then((response) => response.json())
-  .then((data) => {
-    console.log('Respuesta del servidor:', data); // Log para verificar respuesta
-    if (data.success) {
-      alert("Confirmacion exitosa.");
-      location.reload(); // Recarga la página para ver los cambios
-    } else {
-      alert("Error al confirmar.");
-    }
-  })
-  .catch((error) => {
-    console.error("Error en la solicitud:", error);
-  });
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Respuesta del servidor:', data); // Log para verificar respuesta
+      if (data.success) {
+        alert("Confirmacion exitosa.");
+        location.reload(); // Recarga la página para ver los cambios
+      } else {
+        alert("Error al confirmar.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
 }
 
 
@@ -528,7 +542,7 @@ function obtenerMentorAdmin(idAdministrador) {
       return response.json();
     })
     .then((data) => {
-       var contenedor = document.getElementById('contenedor-mentores');
+      var contenedor = document.getElementById('contenedor-mentores');
 
       if (data.length > 0) {
         data.forEach((item) => {
@@ -565,7 +579,7 @@ function obtenerUsuarioAdmin(idAdministrador) {
       return response.json();
     })
     .then((data) => {
-       var contenedor = document.getElementById('contenedor-usuarios');
+      var contenedor = document.getElementById('contenedor-usuarios');
 
       if (data.length > 0) {
         data.forEach((item) => {
@@ -602,7 +616,7 @@ function obtenerAprendizajeAdmin(idAdministrador) {
       return response.json();
     })
     .then((data) => {
-       var contenedor = document.getElementById('contenedor-aprendizajes');
+      var contenedor = document.getElementById('contenedor-aprendizajes');
 
       if (data.length > 0) {
         data.forEach((item) => {
@@ -641,9 +655,9 @@ function obtenerMentorCurso(idAdministrador) {
       return response.json();
     })
     .then((data) => {
-        // Llena los select con los datos obtenidos
-        llenarSelect('mentor', data.mentores, 'Mentor_ID', 'Nombre');
-        llenarSelect('curso', data.cursos, 'id_curso', 'nombre');
+      // Llena los select con los datos obtenidos
+      llenarSelect('mentor', data.mentores, 'Mentor_ID', 'Nombre');
+      llenarSelect('curso', data.cursos, 'id_curso', 'nombre');
     })
     .catch((error) => {
       console.error("Error en la solicitud:", error);
@@ -655,7 +669,7 @@ function llenarSelect(selectId, items, valueKey, textKey) {
   selectElement.innerHTML = ''; // Limpia las opciones existentes
   // Añade una opción por defecto
   selectElement.appendChild(new Option('Selecciona una opción', ''));
-  
+
   items.forEach(item => {
     const option = document.createElement('option');
     option.value = item[valueKey];
@@ -675,8 +689,8 @@ function cursosAdmi() {
       return response.json();
     })
     .then((data) => {
-    // Llamar a una función para mostrar los cursos en un select
-    mostrarCursos(data);
+      // Llamar a una función para mostrar los cursos en un select
+      mostrarCursos(data);
     })
     .catch((error) => {
       console.error("Error en la solicitud:", error);
@@ -769,31 +783,58 @@ function mostrarContraseña() {
 
 const mostrarAsesorias = (data) => {
   var carruselAsesorias = document.getElementById("content-asesorias");
+  carruselAsesorias.innerHTML = ''; // Limpiar contenido anterior
+
+  // Crear y añadir las tarjetas al contenedor
   data.forEach((curso) => {
     var newContent = document.createElement("div");
-    newContent.className = "containderCard";
+    newContent.className = "containderCard1"; // Usar la misma clase de estilo
+
     newContent.innerHTML = `
-      <div class="subContentCard">
-          <div class="cardImage">
-              <img src="public/${curso.foto}" alt="Descripción de la imagen">
-          </div>
-          <div class="cardContent">
-              <form action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
-  
-                  <input type="hidden" name="nombreCurso" value="${curso.nombre}">
-                  <button class="button1">
-                      <span>Clase muestra</span>
-                  </button>
-              </form>
-              <button class="button2">
-                  <span>Temario</span>
+      <div class="subContentCard1"> <!-- Usar la clase de subContentCard1 para mantener el estilo -->
+        <div class="cardImage1">
+          <img src="public/${curso.foto}" alt="Descripción de la imagen">
+        </div>
+        <div class="cardContent1">
+          <h4 class="cardTitle1">${curso.nombre}</h4>
+          <p class="cardText1">Crea gráficos, diseña envases con especificaciones precisas o dibuja obras de arte.</p>
+        </div>
+         <div class="cardFooter1">
+            <form action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
+              <input type="hidden" name="nombreCurso" value="${curso.nombre}">
+              <button class="button1">
+                <span>Clase muestra</span>
               </button>
-          </div>
+            </form>
+            <button class="button2">
+              <span>Temario</span>
+            </button>
+         </div>
       </div>
-      `;
+    `;
+
     carruselAsesorias.appendChild(newContent);
   });
+
+  // Funcionalidad de los botones de navegación
+  const prevBtnn = document.getElementById("prevBtn");
+  const nextBtnn = document.getElementById("nextBtn");
+
+  prevBtnn.addEventListener('click', function () {
+    carruselAsesorias.scrollBy({
+      left: -carruselAsesorias.offsetWidth, // Mover la misma cantidad que el ancho visible hacia la izquierda
+      behavior: 'smooth'
+    });
+  });
+
+  nextBtnn.addEventListener('click', function () {
+    carruselAsesorias.scrollBy({
+      left: carruselAsesorias.offsetWidth, // Mover la misma cantidad que el ancho visible hacia la derecha
+      behavior: 'smooth'
+    });
+  });
 };
+
 
 async function mostrarMasCategorias(idUsuario, typoCurso) {
   try {
@@ -803,68 +844,125 @@ async function mostrarMasCategorias(idUsuario, typoCurso) {
     }
     const cursos = await response.json();
     const carruselcurso = document.getElementById(typoCurso);
-    
+
+    carruselcurso.innerHTML = ''; // Limpiar contenido anterior
+
     for (const curso of cursos) {
-      // Obtén el estado de inscripción para el curso actual
       const estado = await obtenerEstadoInscripcion(idUsuario, curso.id_curso);
-      
+
       const newContent = document.createElement("div");
-      newContent.className = "containderCard";
+      newContent.className = "containderCard1";
+
       newContent.innerHTML = `
-        <div class="subContentCard">
-          <div class="cardImage">
-            <img src="public/${curso.foto}" alt="Descripción de la imagen">
+        <div class="subContentCard1">
+          <div class="cardImage1">
+            <img src="public/${curso.foto}" alt="Imagen del curso">
           </div>
-          <div class="cardContent">
+          <div class="cardContent1">
+            <h4 class="cardTitle1">${curso.nombre}</h4>
+            <p class="cardText1">Crea gráficos, diseña envases con especificaciones precisas o dibuja obras de arte.</p>
+          </div>
+          <div class="cardFooter1">
             ${generarBotonSegunEstado(curso.id_curso, curso.nombre, curso.pdf, estado)}
           </div>
         </div>
       `;
       carruselcurso.appendChild(newContent);
     }
+
+    // Usar los IDs únicos de cada sección
+    const prevBtn = document.getElementById(`prevBtn-${typoCurso}`);
+    const nextBtn = document.getElementById(`nextBtn-${typoCurso}`);
+
+    prevBtn.addEventListener('click', function () {
+      carruselcurso.scrollBy({
+        left: -carruselcurso.offsetWidth, // Mover a la izquierda
+        behavior: 'smooth'
+      });
+    });
+
+    nextBtn.addEventListener('click', function () {
+      carruselcurso.scrollBy({
+        left: carruselcurso.offsetWidth, // Mover a la derecha
+        behavior: 'smooth'
+      });
+    });
+
   } catch (error) {
     console.error("Error en la solicitud:", error);
   }
 }
+
 
 
 async function obtenerCursos(idUsuario) {
   try {
     const response = await fetch(`${baseUrl}/index.php?c=Cursos&a=verCursos`);
     if (!response.ok) {
-      throw new Error(
-        "Error al obtener los cursos. Código de estado: " + response.status
-      );
+      throw new Error("Error al obtener los cursos. Código de estado: " + response.status);
     }
     const cursos = await response.json();
-    filtrarDatos.push(...cursos);
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ago
-    //Mantener en pantalla solo 6 tarjetas maximo
-    const primerosDiez = cursos.slice(0, 6);
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    // Limitar a solo 7 cursos
+    const cursosLimitados = cursos.slice(0, 7);
+    filtrarDatos.push(...cursosLimitados);
+
     var carruselcurso = document.getElementById("content-cursos");
-    for (const curso of primerosDiez) {
+    carruselcurso.innerHTML = ''; // Limpiar contenido viejo
+
+    // Crear y añadir las tarjetas al contenedor
+    for (const curso of cursosLimitados) {
       const estado = await obtenerEstadoInscripcion(idUsuario, curso.id_curso);
-       // Mostrar alert con la información del estado
-      //alert(`Curso: ${curso.id_curso}\nEstado: ${estado}`);
+
       var newContent = document.createElement("div");
-       newContent.className = "containderCard";
+      newContent.className = "containderCard1";
+
       newContent.innerHTML = `
-        <div class="subContentCard">
-          <div class="cardImage">
-            <img src="public/${curso.foto}" alt="Descripción de la imagen">
+        <div class="subContentCard1">
+          <div class="cardImage1">
+            <img src="public/${curso.foto}" alt="Imagen del curso">
           </div>
-          <div class="cardContent">
+          <div class="cardContent1">
+            <h4 class="cardTitle1">${curso.nombre}</h4>
+            <p class="cardText1">Crea gráficos, diseña envases con especificaciones precisas o dibuja obras de arte.</p>
+          </div>
+          <div class="cardFooter1">
             ${generarBotonSegunEstado(curso.id_curso, curso.nombre, curso.pdf, estado)}
           </div>
         </div>
       `;
+
       carruselcurso.appendChild(newContent);
     }
+
+    // Funcionalidad de los botones de navegación
+    const prevBtnn = document.getElementById("prevBtnn");
+    const nextBtnn = document.getElementById("nextBtnn");
+
+    prevBtnn.addEventListener('click', function () {
+      carruselcurso.scrollBy({
+        left: -carruselcurso.offsetWidth, // Mover la misma cantidad que el ancho visible hacia la izquierda
+        behavior: 'smooth'
+      });
+    });
+
+    nextBtnn.addEventListener('click', function () {
+      carruselcurso.scrollBy({
+        left: carruselcurso.offsetWidth, // Mover la misma cantidad que el ancho visible hacia la derecha
+        behavior: 'smooth'
+      });
+    });
+
   } catch (error) {
     console.error("Error en la solicitud:", error);
   }
 }
+
+
+
+
+
+
 
 async function obtenerEstadoInscripcion(idUsuario, idCurso) {
   try {
@@ -918,7 +1016,7 @@ function mostrarModalCompra(cursoName) {
   const modal = document.getElementById("myModalCompra");
   const modalTitle = document.getElementById("mentor-dataCompra");
   modalTitle.textContent = "Elije tu forma de pago";
-  
+
   const cursoData = document.getElementById("curso-dataCompra");
   cursoData.textContent = cursoName;
 
@@ -929,11 +1027,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("myModalCompra");
   const closeModal = document.getElementsByClassName("close")[0];
 
-  closeModal.addEventListener("click", function() {
+  closeModal.addEventListener("click", function () {
     modal.style.display = "none";
   });
 
-  window.addEventListener("click", function(event) {
+  window.addEventListener("click", function (event) {
     if (event.target === modal) {
       modal.style.display = "none";
     }
@@ -944,64 +1042,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //CAMBIOS JULIO 24
 function obtenerMentores() {
-        fetch(`${baseUrl}/index.php?c=Usuarios&a=verMentores`)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(
-                        "Error al obtener los mentores. Código de estado: " + response.status
-                    );
-                }
-                return response.json();
-            })
-            .then((data) => {
-                var carruselMentores = document.getElementById("content-mentores");
-                data.forEach((mentor) => {
-                    var newContent = document.createElement("div");
-                    newContent.className = "containderCard w-[320px]";
-                    newContent.innerHTML = `
-                        <div class="subContentCard">
-                            <div class="cardImageMentor">
-                                <img src="public/images/docente/${mentor.Mentor_Foto}/${mentor.Mentor_Foto}.png" alt="${mentor.Mentor_Nombre}">
-                            </div>
-                            <div class="cardContent flex flex-col items-end p-4">
-                                <h1 class="text-white font-bold mb-2 justify-end">${mentor.Mentor_Nombre}</h1>
-                                <p class="text-white mb-2">${mentor.acercademi}...</p>
-                                <button class="button1" onclick="redirigirVerPerfil(${mentor.Mentor_ID})">
-                                <span>Ver perfil</span>
-                                </button>
-                            </div>
-                        </div>
-                    `;
-                    carruselMentores.appendChild(newContent);
-                });
+  fetch(`${baseUrl}/index.php?c=Usuarios&a=verMentores`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(
+          "Error al obtener los mentores. Código de estado: " + response.status
+        );
+      }
+      return response.json();
+    })
+    .then((data) => {
+      var carruselMentores = document.getElementById("content-mentores");
+      data.forEach((mentor) => {
+        var newContent = document.createElement("div");
+        newContent.className = "containderCard1";
+        
+        newContent.innerHTML = `
+          <div class="subContentCard1">
+            <div class="cardImage1">
+              <img src="public/images/docente/${mentor.Mentor_Foto}/${mentor.Mentor_Foto}.png" alt="${mentor.Mentor_Nombre}">
+            </div>
+            <div class="cardContent1">
+              <h4 class="cardTitle1">${mentor.Mentor_Nombre}</h4>
+              <p class="cardText1">${mentor.acercademi}</p>
+            </div>
 
-                // Inicializar el slider de Swiper después de cargar los mentores
-                var swiperMentores = new Swiper(".swiper", {
-                    loop: true,
-                    spaceBetween: 20,
-                    grabCursor: true,
-                    navigation: {
-                        nextEl: ".swiper-button-next",
-                        prevEl: ".swiper-button-prev",
-                    },
-                    breakpoints: {
-                        600: {
-                            slidesPerView: 1,
-                        },
-                        1024: {
-                            slidesPerView: 2,
-                        },
-                        1440: {
-                            slidesPerView: 3,
-                        },
-                    },
-                });
-            })
-            .catch((error) => {
-                console.error("Error en la solicitud:", error);
-            });
-    }
-    
+            <div class="cardFooter1">
+                <button class="button1" onclick="redirigirVerPerfil(${mentor.Mentor_ID})">
+                  <span>Ver perfil</span>
+                </button>
+              </div>
+          </div>
+        `;     
+        carruselMentores.appendChild(newContent);
+      });
+
+      // Inicializar el slider de Swiper después de cargar los mentores
+      var swiperMentores = new Swiper(".swiper", {
+        loop: true,
+        spaceBetween: 20,
+        grabCursor: true,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+          600: {
+            slidesPerView: 1,
+          },
+          1024: {
+            slidesPerView: 2,
+          },
+          1440: {
+            slidesPerView: 3,
+          },
+        },
+      });
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
+}
+
 function obtenerMentoresPorTipo(tipoCurso) {
   fetch(`${baseUrl}/index.php?c=Usuarios&a=verMentoresPorTipo&tipoCurso=${encodeURIComponent(tipoCurso)}`)
     .then((response) => {
@@ -1010,7 +1112,7 @@ function obtenerMentoresPorTipo(tipoCurso) {
       }
       return response.json();
     })
-   .then((data) => {
+    .then((data) => {
       var carruselMentores = document.getElementById(`${tipoCurso}-mentores`);
       data.forEach((mentor) => {
         var newContent = document.createElement("div");
@@ -1032,26 +1134,26 @@ function obtenerMentoresPorTipo(tipoCurso) {
         carruselMentores.appendChild(newContent);
       });
       // Inicializar el slider de Swiper después de cargar los mentores
-                var swiperMentores = new Swiper(".swiper", {
-                    loop: true,
-                    spaceBetween: 20,
-                    grabCursor: true,
-                    navigation: {
-                        nextEl: ".swiper-button-next",
-                        prevEl: ".swiper-button-prev",
-                    },
-                    breakpoints: {
-                        600: {
-                            slidesPerView: 1,
-                        },
-                        1024: {
-                            slidesPerView: 2,
-                        },
-                        1440: {
-                            slidesPerView: 3,
-                        },
-                    },
-                });
+      var swiperMentores = new Swiper(".swiper", {
+        loop: true,
+        spaceBetween: 20,
+        grabCursor: true,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+          600: {
+            slidesPerView: 1,
+          },
+          1024: {
+            slidesPerView: 2,
+          },
+          1440: {
+            slidesPerView: 3,
+          },
+        },
+      });
     })
     .catch((error) => {
       console.error("Error en la solicitud:", error);
@@ -1196,14 +1298,14 @@ document.addEventListener("DOMContentLoaded", function () {
           mentor.Curso
         );
       });
-      
+
       //NUEVO CAMBIO AGENDA
       function getDateAfterHours(hours) {
         const now = new Date();
         now.setHours(now.getHours() + hours, 0, 0, 0);
         return now;
-    }
-    //FIN AGENDA
+      }
+      //FIN AGENDA
 
       function populateCalendar(
         mentorId,
@@ -1259,7 +1361,7 @@ document.addEventListener("DOMContentLoaded", function () {
           "20:00",
           "21:00",
         ];
-        
+
         //NUEVO CAMBIO AGENDA
         // Calcular la fecha límite (48 horas a partir de ahora)
         const dateLimit = getDateAfterHours(48);
@@ -1604,66 +1706,66 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-document.getElementById("registroForm").addEventListener("submit", (e) => {
-  e.preventDefault();
-  
-  //alert("¡Se ha presionado el botón de Registrarse!"); // Depuración para verificar el evento submit
-  
-  const nombre = document.getElementById("nombre").value;
-  const edad = document.getElementById("edad").value;
-  const correo = document.getElementById("correo").value;
-  const telefono = document.getElementById("telefono").value;
-  const contraseña = document.getElementById("contraseña").value;
-  const intereses = document.querySelectorAll(
-    'input[name="intereses[]"]:checked'
-  );
-  const selectedIntereses = [];
+  document.getElementById("registroForm").addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  intereses.forEach(function (checkbox) {
-    selectedIntereses.push(checkbox.value);
+    //alert("¡Se ha presionado el botón de Registrarse!"); // Depuración para verificar el evento submit
+
+    const nombre = document.getElementById("nombre").value;
+    const edad = document.getElementById("edad").value;
+    const correo = document.getElementById("correo").value;
+    const telefono = document.getElementById("telefono").value;
+    const contraseña = document.getElementById("contraseña").value;
+    const intereses = document.querySelectorAll(
+      'input[name="intereses[]"]:checked'
+    );
+    const selectedIntereses = [];
+
+    intereses.forEach(function (checkbox) {
+      selectedIntereses.push(checkbox.value);
+    });
+
+    const nombreError = document.getElementById("nombre-error");
+    const edadError = document.getElementById("edad-error");
+    const correoError = document.getElementById("correo-error");
+    const telefonoError = document.getElementById("telefono-error");
+    const contraseñaError = document.getElementById("contraseña-error");
+    const interesesError = document.getElementById("intereses-error");
+    let isValid = true;
+
+    if (nombre === "" || /\d/.test(nombre)) {
+      nombreError.textContent = "Favor de ingresar un nombre";
+      isValid = false;
+    }
+
+    if (edad === "") {
+      edadError.textContent = "Favor de ingresar su edad";
+      isValid = false;
+    }
+
+    if (correo === "" || !correo.includes("@")) {
+      correoError.textContent = "Favor de ingresar un correo valido";
+      isValid = false;
+    }
+
+    if (telefono === "" || telefono.length < 9) {
+      telefonoError.textContent = "Favord de ingresar un numero de telefono";
+      isValid = false;
+    }
+    if (contraseñaError === "" || contraseña.length < 6) {
+      contraseñaError.textContent =
+        "Favor de ingresar una contraseña con al menos 6 digitos";
+      isValid = false;
+    }
+    if (selectedIntereses.length < 2) {
+      interesesError.textContent = "Favor de seleccionar mas de dos interese";
+      isValid = false;
+    }
+
+    if (isValid) {
+      enviarForm(nombre, edad, telefono, correo, contraseña, selectedIntereses);
+    }
   });
-
-  const nombreError = document.getElementById("nombre-error");
-  const edadError = document.getElementById("edad-error");
-  const correoError = document.getElementById("correo-error");
-  const telefonoError = document.getElementById("telefono-error");
-  const contraseñaError = document.getElementById("contraseña-error");
-  const interesesError = document.getElementById("intereses-error");
-  let isValid = true;
-
-  if (nombre === "" || /\d/.test(nombre)) {
-    nombreError.textContent = "Favor de ingresar un nombre";
-    isValid = false;
-  }
-
-  if (edad === "") {
-    edadError.textContent = "Favor de ingresar su edad";
-    isValid = false;
-  }
-
-  if (correo === "" || !correo.includes("@")) {
-    correoError.textContent = "Favor de ingresar un correo valido";
-    isValid = false;
-  }
-
-  if (telefono === "" || telefono.length < 9) {
-    telefonoError.textContent = "Favord de ingresar un numero de telefono";
-    isValid = false;
-  }
-  if (contraseñaError === "" || contraseña.length < 6) {
-    contraseñaError.textContent =
-      "Favor de ingresar una contraseña con al menos 6 digitos";
-    isValid = false;
-  }
-  if (selectedIntereses.length < 2) {
-    interesesError.textContent = "Favor de seleccionar mas de dos interese";
-    isValid = false;
-  }
-
-  if (isValid) {
-    enviarForm(nombre, edad, telefono, correo, contraseña, selectedIntereses);
-  }
-});
 });
 
 function enviarForm(
@@ -1754,171 +1856,171 @@ function agendar() {
 
 //*******************************************************************
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("registroFormMentores").addEventListener("submit", (e) => {
-        e.preventDefault();
-    
-        // alert("¡Se ha presionado el botón de Registrarse!"); // Depuración para verificar el evento submit
+  document.getElementById("registroFormMentores").addEventListener("submit", (e) => {
+    e.preventDefault();
 
-        const nombreMentor = document.getElementById("nombreMentor").value.trim();
-        //const areaMentor = document.getElementById("selectArea").value;
-        const correoMentor = document.getElementById("correoMentor").value.trim();
-        const tipoMentor = document.getElementById("tipoMentor").value.trim();
-        const telefonoMentor = document.getElementById("telefonoMentor").value.trim();
-        const acercaMentor = document.getElementById("acercaMentor").value.trim();
-        const fotoMentor = document.getElementById("fotoMentorPerfil").files[0];
-        const fotoMentorTarjeta = document.getElementById("fotoMentorTarejta").files[0];
-        const fotoMentorPortada = document.getElementById("fotoMentorPortada").files[0];
-        
-        const cursoId = document.getElementById("selectCursos").value; // Capturar el valor del select
+    // alert("¡Se ha presionado el botón de Registrarse!"); // Depuración para verificar el evento submit
 
-        const nombreMentorError = document.getElementById("nombreMentor-error");
-        //const areaMentorError = document.getElementById("areaMentor-error");
-        const correoMentorError = document.getElementById("correoMentor-error");
-        const tipoMentorError = document.getElementById("tipoMentor-error");
-        const telefonoMentorError = document.getElementById("telefonoMentor-error");
-        const acercaMentorError = document.getElementById("acercaMentor-error");
-    
-        // alert("¡Se ha presionado el botón de Registrarse!"+nombreMentor); // Depuración para verificar el evento submit
+    const nombreMentor = document.getElementById("nombreMentor").value.trim();
+    //const areaMentor = document.getElementById("selectArea").value;
+    const correoMentor = document.getElementById("correoMentor").value.trim();
+    const tipoMentor = document.getElementById("tipoMentor").value.trim();
+    const telefonoMentor = document.getElementById("telefonoMentor").value.trim();
+    const acercaMentor = document.getElementById("acercaMentor").value.trim();
+    const fotoMentor = document.getElementById("fotoMentorPerfil").files[0];
+    const fotoMentorTarjeta = document.getElementById("fotoMentorTarejta").files[0];
+    const fotoMentorPortada = document.getElementById("fotoMentorPortada").files[0];
 
-        let isValid = true;
+    const cursoId = document.getElementById("selectCursos").value; // Capturar el valor del select
 
-        // Limpiar mensajes de error previos
-        nombreMentorError.textContent = "";
-        //areaMentorError.textContent = "";
-        correoMentorError.textContent = "";
-        tipoMentorError.textContent = "";
-        telefonoMentorError.textContent = "";
-        acercaMentorError.textContent = "";
+    const nombreMentorError = document.getElementById("nombreMentor-error");
+    //const areaMentorError = document.getElementById("areaMentor-error");
+    const correoMentorError = document.getElementById("correoMentor-error");
+    const tipoMentorError = document.getElementById("tipoMentor-error");
+    const telefonoMentorError = document.getElementById("telefonoMentor-error");
+    const acercaMentorError = document.getElementById("acercaMentor-error");
 
-        if (nombreMentor === "" || /\d/.test(nombreMentor)) {
-            nombreMentorError.textContent = "Favor de ingresar un nombre válido";
-            isValid = false;
-        }
+    // alert("¡Se ha presionado el botón de Registrarse!"+nombreMentor); // Depuración para verificar el evento submit
 
-        /*
-        if (areaMentor === "") {
-            areaMentorError.textContent = "Favor de ingresar un área válida";
-            isValid = false;
-        }
-        */
+    let isValid = true;
 
-        if (correoMentor === "" || !correoMentor.includes("@")) {
-            correoMentorError.textContent = "Favor de ingresar un correo válido";
-            isValid = false;
-        }
+    // Limpiar mensajes de error previos
+    nombreMentorError.textContent = "";
+    //areaMentorError.textContent = "";
+    correoMentorError.textContent = "";
+    tipoMentorError.textContent = "";
+    telefonoMentorError.textContent = "";
+    acercaMentorError.textContent = "";
 
-        if (tipoMentor === "") {
-            tipoMentorError.textContent = "Favor de ingresar un curso o asesoría";
-            isValid = false;
-        }
+    if (nombreMentor === "" || /\d/.test(nombreMentor)) {
+      nombreMentorError.textContent = "Favor de ingresar un nombre válido";
+      isValid = false;
+    }
 
-        if (telefonoMentor === "" || telefonoMentor.length < 9) {
-            telefonoMentorError.textContent = "Favor de ingresar un número de teléfono válido";
-            isValid = false;
-        }
+    /*
+    if (areaMentor === "") {
+        areaMentorError.textContent = "Favor de ingresar un área válida";
+        isValid = false;
+    }
+    */
 
-        if (acercaMentor === "") {
-            acercaMentorError.textContent = "Favor de ingresar información y hobbies del mentor";
-            isValid = false;
-        }
-        
-        if (cursoId === "") {
-            //Agregar validación para el select
-            alert("Por favor, seleccione un curso.");
-            isValid = false;
-        }
+    if (correoMentor === "" || !correoMentor.includes("@")) {
+      correoMentorError.textContent = "Favor de ingresar un correo válido";
+      isValid = false;
+    }
 
-        if (isValid) {
-            const formData = new FormData();
-            formData.append("nombreMentor", nombreMentor);
-            //formData.append("areaMentor", areaMentor);
-            formData.append("correoMentor", correoMentor);
-            formData.append("tipoMentor", tipoMentor);
-            formData.append("telefonoMentor", telefonoMentor);
-            formData.append("acercaMentor", acercaMentor);
-            formData.append("fotoMentorPerfil", fotoMentor);
-            formData.append("fotoMentorTarjeta", fotoMentorTarjeta);
-            formData.append("fotoMentorPortada", fotoMentorPortada);
-            formData.append("cursoId", cursoId); // Agregar el cursoId al FormData
+    if (tipoMentor === "") {
+      tipoMentorError.textContent = "Favor de ingresar un curso o asesoría";
+      isValid = false;
+    }
 
-            enviarFormularioMentor(formData);
-        }
-    });
+    if (telefonoMentor === "" || telefonoMentor.length < 9) {
+      telefonoMentorError.textContent = "Favor de ingresar un número de teléfono válido";
+      isValid = false;
+    }
+
+    if (acercaMentor === "") {
+      acercaMentorError.textContent = "Favor de ingresar información y hobbies del mentor";
+      isValid = false;
+    }
+
+    if (cursoId === "") {
+      //Agregar validación para el select
+      alert("Por favor, seleccione un curso.");
+      isValid = false;
+    }
+
+    if (isValid) {
+      const formData = new FormData();
+      formData.append("nombreMentor", nombreMentor);
+      //formData.append("areaMentor", areaMentor);
+      formData.append("correoMentor", correoMentor);
+      formData.append("tipoMentor", tipoMentor);
+      formData.append("telefonoMentor", telefonoMentor);
+      formData.append("acercaMentor", acercaMentor);
+      formData.append("fotoMentorPerfil", fotoMentor);
+      formData.append("fotoMentorTarjeta", fotoMentorTarjeta);
+      formData.append("fotoMentorPortada", fotoMentorPortada);
+      formData.append("cursoId", cursoId); // Agregar el cursoId al FormData
+
+      enviarFormularioMentor(formData);
+    }
+  });
 });
 
 function enviarFormularioMentor(formData) {
-    fetch(`${baseUrl}/index.php?c=Administradors&a=registro`, {
-        method: "POST",
-        body: formData,
-    })
+  fetch(`${baseUrl}/index.php?c=Administradors&a=registro`, {
+    method: "POST",
+    body: formData,
+  })
     .then((response) => {
-        if (response.ok) {
-            //alert("Va bien"); // Depuración 
-            return response.json();
-        } else {
-            console.error("Error sending data to API:", response);
-            throw new Error("Error sending data to API: " + response.statusText);
-        }
+      if (response.ok) {
+        //alert("Va bien"); // Depuración 
+        return response.json();
+      } else {
+        console.error("Error sending data to API:", response);
+        throw new Error("Error sending data to API: " + response.statusText);
+      }
     })
     .then((data) => {
-        if (data.success) {
-            //alert("Va bien"); // Depuración 
-            console.log("Data sent successfully: " + data.message);
-            document.getElementById("registroFormMentores").reset(); // Resetear el formulario
-            mostrarToastify(data.message, "success"); // Mostrar mensaje de éxito
-        } else {
-            mostrarToastify(data.error, "error if (data.success)"); // Mostrar mensaje de error
-        }
+      if (data.success) {
+        //alert("Va bien"); // Depuración 
+        console.log("Data sent successfully: " + data.message);
+        document.getElementById("registroFormMentores").reset(); // Resetear el formulario
+        mostrarToastify(data.message, "success"); // Mostrar mensaje de éxito
+      } else {
+        mostrarToastify(data.error, "error if (data.success)"); // Mostrar mensaje de error
+      }
     })
     .catch((error) => {
-        console.error("Network error:", error);
-        mostrarToastify("Network error enviarFormularioMentor: " + error.message, "error"); // Mostrar error de red
+      console.error("Network error:", error);
+      mostrarToastify("Network error enviarFormularioMentor: " + error.message, "error"); // Mostrar error de red
     });
 }
 
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById('formAsignacion').addEventListener('submit', function (e) {
-        e.preventDefault();
+  document.getElementById('formAsignacion').addEventListener('submit', function (e) {
+    e.preventDefault();
 
-        const mentorId = document.getElementById('mentor').value;
-        const cursoId = document.getElementById('curso').value;
+    const mentorId = document.getElementById('mentor').value;
+    const cursoId = document.getElementById('curso').value;
 
-        if (!mentorId || !cursoId) {
-            alert('Por favor, selecciona un mentor y un curso.');
-            return;
+    if (!mentorId || !cursoId) {
+      alert('Por favor, selecciona un mentor y un curso.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('mentor', mentorId);
+    formData.append('curso', cursoId);
+
+    fetch(`${baseUrl}/index.php?c=Administradors&a=crearAsignacion`, {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => response.text()) // Cambiar a text() para depuración
+      .then(responseText => {
+        console.log('Respuesta del servidor:', responseText); // Depuración
+        try {
+          const data = JSON.parse(responseText);
+          if (data.success) {
+            alert('Asignación registrada exitosamente.');
+            // Recargar la página
+            location.reload();
+          } else {
+            alert('Error al registrar la asignación: ' + data.message);
+          }
+        } catch (e) {
+          console.error('Error al parsear JSON:', e);
+          alert('Error al procesar la respuesta del servidor.');
         }
-
-        const formData = new FormData();
-        formData.append('mentor', mentorId);
-        formData.append('curso', cursoId);
-
-        fetch(`${baseUrl}/index.php?c=Administradors&a=crearAsignacion`, {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.text()) // Cambiar a text() para depuración
-        .then(responseText => {
-            console.log('Respuesta del servidor:', responseText); // Depuración
-            try {
-                const data = JSON.parse(responseText);
-                if (data.success) {
-                    alert('Asignación registrada exitosamente.');
-                    // Recargar la página
-                    location.reload();
-                } else {
-                    alert('Error al registrar la asignación: ' + data.message);
-                }
-            } catch (e) {
-                console.error('Error al parsear JSON:', e);
-                alert('Error al procesar la respuesta del servidor.');
-            }
-        })
-        .catch(error => {
-            console.error('Error en la solicitud:', error);
-            alert('Error en la solicitud: ' + error.message);
-        });
-    });
+      })
+      .catch(error => {
+        console.error('Error en la solicitud:', error);
+        alert('Error en la solicitud: ' + error.message);
+      });
+  });
 });
 

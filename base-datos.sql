@@ -162,7 +162,7 @@ INSERT INTO `maestros` (`id_maestro`, `nombre`, `foto`, `areas`, `descripcion`, 
 
 INSERT INTO `cursos` (`id_curso`, `nombre`, `foto`, `descripcion`, `temario`, `requerimientos`, `pdf`, `precio`) VALUES
 (1, 'finanzas personales', 'images/curso/finanzas-personales.png', 'null', 'null', 'null', 'images/curso-pdf/finanzas-pdf.pdf', 0.00),
-(2, 'emprendimiento e innovacion', 'images/curso/emprendimiento-e-innovacion.png', 'null', 'null', 'null', 'images/curso-pdf/emprendimiento-pdf.pdf', 0.00),
+(2, 'Emprendimiento e innovacion', 'images/curso/emprendimiento-e-innovacion.png', 'null', 'null', 'null', 'images/curso-pdf/emprendimiento-pdf.pdf', 0.00),
 (3, 'robotica proyecto brazo robotico', 'images/curso/robotica-brazo.png', 'null', 'null', 'null', 'images/curso-pdf/roboticabrazo-pdf.pdf', 0.00),
 (4, 'dibujo tradicional', 'images/curso/dibujo.png', 'null', 'null', 'null', 'images/curso-pdf/dibujo-pdf.pdf', 0.00),
 (5, 'photoshop', 'images/curso/photoshop.png', 'null', 'null', 'null', 'images/curso-pdf/photoshop-pdf.pdf', 0.00),

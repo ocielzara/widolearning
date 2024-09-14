@@ -224,28 +224,7 @@ a:hover {
   flex-direction: column;
 }
 
-.button1 {
-  width: 80%;
-  background-color: #fec400;
-  border-radius: 1.5rem;
-  margin-inline: auto;
-  color: #2e3532;
-  font-weight: bold;
-}
 
-.button2 {
-  width: 80%;
-  margin: 0 auto;
-  margin-top: 0.75rem;
-  background-color: #fec400;
-  margin-top: 0.75rem;
-  margin-bottom: 1rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(100 116 139 / var(--tw-bg-opacity));
-  border-radius: 1.5rem;
-  --tw-text-opacity: 1;
-  color: #ffffff;
-}
 
 .bg-recuperar {
   background-image: url("../../public/images/wido/login.png");
