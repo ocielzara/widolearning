@@ -62,6 +62,7 @@ window.onload = function () {
   obtenerUsuarioAdmin(id);
   obtenerAprendizajeAdmin(id);
   obtenerMentorCurso(id);
+  obtenerHistorialClaseMuestra(id);
   const mentorId = urlParams.get('mentorId');
   obtenerDatosDisponibilidadMentor(mentorId);
 };
@@ -555,6 +556,34 @@ function obtenerMentorAdmin(idAdministrador) {
     });
 }
 
+function eliminarMentor(idMentor) {
+  const data = {
+        idMentor: idMentor
+    };
+
+  console.log("Datos a enviar:", data); // Verificar datos antes de enviar
+  fetch(`${baseUrl}/index.php?c=Administradors&a=eliminarMentor`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data) // Corregido para enviar los datos correctos
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log('Respuesta del servidor:', data); // Log para verificar respuesta
+    if (data.success) {
+      alert("Confirmacion exitosa.");
+      location.reload(); // Recarga la página para ver los cambios
+    } else {
+      alert("Error al confirmar.");
+    }
+  })
+  .catch((error) => {
+    console.error("Error en la solicitud:", error);
+  });
+}
+
 //MOSTRAR USUARIO EN EL PORTAL ADMINISTRADOR
 function obtenerUsuarioAdmin(idAdministrador) {
   fetch(`${baseUrl}/index.php?c=Administradors&a=usuario&id=${encodeURIComponent(idAdministrador)}`)
@@ -629,6 +658,41 @@ function obtenerAprendizajeAdmin(idAdministrador) {
     });
 }
 
+
+//MOSTRAR HISTORIAL CLASES MUESTRA EN EL PROTAL DEL MENTOR
+function obtenerHistorialClaseMuestra(idMentor) {
+  fetch(`${baseUrl}/index.php?c=Docentes&a=historialClaseMuestra&id=${encodeURIComponent(idMentor)}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener los cursos. Código de estado: " + response.status);
+      }
+      return response.json();
+    })
+    .then((data) => {
+       var contenedor = document.getElementById('contenedor-clase-muestra');
+
+      if (data.length > 0) {
+        data.forEach((item) => {
+          var row = document.createElement('tr');
+
+          row.innerHTML = `
+            <td>${item.NombreUsuario}</td>
+            <td>${item.CorreoUsuario}</td>
+            <td>${item.NombreCurso}</td>
+          `;
+
+          contenedor.appendChild(row);
+        });
+      } else {
+        var row = document.createElement('tr');
+        row.innerHTML = '<td colspan="6">No hay datos disponibles</td>';
+        contenedor.appendChild(row);
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
+}
 
 
 //MOSTRAR MENTOR Y CURSOS
@@ -1866,6 +1930,7 @@ function enviarFormularioMentor(formData) {
             console.log("Data sent successfully: " + data.message);
             document.getElementById("registroFormMentores").reset(); // Resetear el formulario
             mostrarToastify(data.message, "success"); // Mostrar mensaje de éxito
+            location.reload(); // Recarga la página para ver los cambios
         } else {
             mostrarToastify(data.error, "error if (data.success)"); // Mostrar mensaje de error
         }

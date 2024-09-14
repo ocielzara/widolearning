@@ -311,7 +311,8 @@ class DocenteModel
     LEFT JOIN disponibilidadMaestro d ON m.Mentor_ID = d.id_maestro
     WHERE 
         c.id_curso = ? 
-        AND a.estado = 'activo';
+        AND a.estado = 'activo'
+        AND m.estado = 'activo';
     ";
 
         $stmt = $this->db->prepare($sql);
@@ -387,6 +388,51 @@ class DocenteModel
         return ["success" => false];
     }
 }
+
+//OBTENER
+public function getHistorialClaseMuestra($idMentor)
+{
+    $query = "
+        SELECT 
+            u.nombre AS NombreUsuario,
+            u.correo_electronico AS CorreoUsuario,
+            c.nombre AS NombreCurso
+        FROM 
+            inscripciones i
+        JOIN 
+            usuarios u ON i.id_usuario = u.id_usuario
+        JOIN 
+            asignaciones a ON i.id_asignacion = a.id_asignacion
+        JOIN 
+            cursos c ON a.id_curso = c.id_curso
+        JOIN 
+            Mentor m ON a.id_maestro = m.Mentor_ID
+        WHERE 
+            m.Mentor_ID = ?;
+    ";
+
+    $stmt = $this->db->prepare($query);
+    if (!$stmt) {
+        throw new Exception("Error al preparar la consulta: " . $this->db->error);
+    }
+
+    $stmt->bind_param('i', $idMentor); // 'i' indica que el parámetro es de tipo entero
+    $stmt->execute();
+
+    $result = $stmt->get_result(); // Obtener el resultado de la consulta
+
+    $aprendizajes = array();
+    if ($result) {
+        while ($aprendizaje = $result->fetch_assoc()) {
+            $aprendizajes[] = $aprendizaje;
+        }
+    }
+
+    // Devolver los resultados obtenidos de la base de datos
+    return $aprendizajes;
+}
+
+
     
     
 }

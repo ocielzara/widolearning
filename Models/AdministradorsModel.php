@@ -189,7 +189,7 @@ class AdministradorModel
     //OBTENER 
     public function getAllMentoresA()
     {
-        $query = "SELECT * FROM Mentor";
+        $query = "SELECT * FROM Mentor WHERE estado = 'activo' ";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
 
@@ -350,8 +350,41 @@ class AdministradorModel
 }
 
     
+ //ELIMINAR MENTOR
     
+ public function eliminarMentor($idMentor)
+ {
+     // Iniciar una transacción para asegurar la consistencia de los datos
+     $this->db->begin_transaction();
+ 
+     try {
+         // Actualizar la tabla asignaciones para marcar la asignación como inactiva
+         $query = "UPDATE Mentor SET estado = 'inactivo' WHERE Mentor_ID = ?";
+         $stmt = $this->db->prepare($query);
+         $stmt->bind_param("i", $idMentor);
+ 
+         // Ejecutar la consulta
+         if ($stmt->execute()) {
+             // Confirmar la transacción
+             $stmt->close();
+             $this->db->commit();
+             return ['success' => true, 'message' => 'Mentor eliminado correctamente.'];
+         } else {
+             // Revertir la transacción en caso de error
+             $stmt->close();
+             $this->db->rollback();
+             return ['success' => false, 'message' => 'Error al eliminar el mentor.'];
+         }
+     } catch (Exception $e) {
+         // Revertir la transacción en caso de excepción
+         $this->db->rollback();
+         return ['success' => false, 'message' => 'Error: ' . $e->getMessage()];
+     }
+ }   
     
-    
+ 
+ 
+
+ 
 
 }

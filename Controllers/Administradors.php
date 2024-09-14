@@ -247,6 +247,12 @@ class AdministradorsController
         require_once "Views/administrador/asignacion/crearAsignaciones.php";
     }
     
+    //CARGAR VISTA
+    public function crearMentorVista()
+    {
+        require_once "Views/administrador/mentor/crearMentores.php";
+    }
+    
     //REGRESAR INFORMACION 
      public function inscripcion()
     {
@@ -391,6 +397,36 @@ public function eliminarAsignacion()
 
             $model = new AdministradorModel();
             $resultado = $model->eliminarAsignacion($idMentor, $idCurso);
+
+            header('Content-Type: application/json');
+            echo json_encode($resultado);
+        } else {
+            // Si no hay datos JSON, devolver un error
+            echo json_encode(["error" => "No se proporcionaron los datos necesarios"]);
+        }
+    } else {
+        // Si no es una solicitud POST, devolver un error
+        header('HTTP/1.1 405 Method Not Allowed');
+        echo json_encode(["error" => "Método no permitido"]);
+    }
+}
+
+//ELIMINAR MENTOR
+
+public function eliminarMentor()
+{
+    
+    // Asegurarse de que se está usando POST para la solicitud
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Capturar los datos del cuerpo de la solicitud JSON
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        // Verificar si los datos vienen en formato JSON
+        if ($data && isset($data['idMentor'])) {
+            $idMentor = $data['idMentor'];
+
+            $model = new AdministradorModel();
+            $resultado = $model->eliminarMentor($idMentor);
 
             header('Content-Type: application/json');
             echo json_encode($resultado);
