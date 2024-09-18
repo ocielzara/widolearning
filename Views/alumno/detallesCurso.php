@@ -27,13 +27,14 @@ $correo = $isLoggedIn ? $_SESSION['correo_electronico'] : '';
 </head>
 
 <body>
-    <?php include 'Views/contenido/lateralUsuario.php'; ?>
+    <?php include 'Views/contenido/Header-footer/header-new.php'; ?>
+
     <script>
         var nombreUsuario = <?php echo json_encode($nombreUsuario); ?>;
         var isLoggedIn = <?php echo json_encode($isLoggedIn); ?>;
         console.log("isLoggedIn:", isLoggedIn);
     </script>
-    <div>
+    <div style="margin-top: 100px;">
         <div class="sm:w-[90%] 2xl:h-[20rem] lg:h-[15rem] h-40">
             <img src="public/images/muestra-cursos/<?php echo $tipo; ?>.png" class="w-full h-full" alt="">
         </div>

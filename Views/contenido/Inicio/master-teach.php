@@ -35,13 +35,13 @@
                 <span class="circle"></span>
             </div>
         </div>
-        <div class="flex my-10">
-            <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                <div class="card__content overflow-hidden ">
-                    <div class="swiper-wrapper" id="administracion-mentores">
-                    </div>
-                </div>
-            </div>
+
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtnn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="administracion-mentores" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtnn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
 
         <div class="subheading">
@@ -51,13 +51,12 @@
                 <span class="circle"></span>
             </div>
         </div>
-        <div class="flex my-10">
-            <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                <div class="card__content overflow-hidden ">
-                    <div class="swiper-wrapper" id="programacion-mentores">
-                    </div>
-                </div>
-            </div>
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtnn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="programacion-mentores" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtnn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
 
         <div class="subheading">
@@ -67,13 +66,12 @@
                 <span class="circle"></span>
             </div>
         </div>
-        <div class="flex my-10">
-            <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                <div class="card__content overflow-hidden ">
-                    <div class="swiper-wrapper" id="CAD-mentores">
-                    </div>
-                </div>
-            </div>
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtnn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="CAD-mentores" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtnn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
 
         <div class="subheading">
@@ -83,13 +81,12 @@
                 <span class="circle"></span>
             </div>
         </div>
-        <div class="flex my-10">
-            <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                <div class="card__content overflow-hidden ">
-                    <div class="swiper-wrapper" id="CAD-mentores">
-                    </div>
-                </div>
-            </div>
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtnn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="CAD-mentores" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtnn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
 
         <div class="subheading">
@@ -99,13 +96,12 @@
                 <span class="circle"></span>
             </div>
         </div>
-        <div class="flex my-10">
-            <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                <div class="card__content overflow-hidden ">
-                    <div class="swiper-wrapper" id="dibujo-ilustracion-mentores">
-                    </div>
-                </div>
-            </div>
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtnn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="dibujo-ilustracion-mentores" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtnn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
 
         <div class="subheading">
@@ -115,13 +111,12 @@
                 <span class="circle"></span>
             </div>
         </div>
-        <div class="flex my-10">
-            <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                <div class="card__content overflow-hidden ">
-                    <div class="swiper-wrapper" id="modelado-animacion-mentores">
-                    </div>
-                </div>
-            </div>
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtnn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="modelado-animacion-mentores" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtnn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
 
         <div class="subheading">
@@ -131,13 +126,12 @@
                 <span class="circle"></span>
             </div>
         </div>
-        <div class="flex my-10">
-            <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                <div class="card__content overflow-hidden ">
-                    <div class="swiper-wrapper" id="robotica-electronica-mentores">
-                    </div>
-                </div>
-            </div>
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtnn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="robotica-electronica-mentores" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtnn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
 
         <div class="subheading">
@@ -147,13 +141,12 @@
                 <span class="circle"></span>
             </div>
         </div>
-        <div class="flex my-10">
-            <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                <div class="card__content overflow-hidden ">
-                    <div class="swiper-wrapper" id="videojuegos-mentores">
-                    </div>
-                </div>
-            </div>
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtnn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="videojuegos-mentores" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtnn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
 
         <div class="subheading">
@@ -163,13 +156,12 @@
                 <span class="circle"></span>
             </div>
         </div>
-        <div class="flex my-10">
-            <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                <div class="card__content overflow-hidden ">
-                    <div class="swiper-wrapper" id="mkt-mentores">
-                    </div>
-                </div>
-            </div>
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtnn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="mkt-mentores" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtnn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
 
         <div class="subheading">
@@ -179,13 +171,12 @@
                 <span class="circle"></span>
             </div>
         </div>
-        <div class="flex my-10">
-            <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                <div class="card__content overflow-hidden">
-                    <div class="swiper-wrapper" id="data-mining-mentores">
-                    </div>
-                </div>
-            </div>
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtnn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="data-mining-mentores" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtnn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
         <!--
                     <div class="border-b-2 my-10 inline-block border-[#4F7CAC]">
@@ -211,13 +202,12 @@
                 <span class="circle"></span>
             </div>
         </div>
-        <div class="flex my-10">
-            <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                <div class="card__content overflow-hidden">
-                    <div class="swiper-wrapper" id="idiomas-mentores">
-                    </div>
-                </div>
-            </div>
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtnn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="idiomas-mentores" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtnn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
 
         <div class="subheading">
@@ -227,13 +217,12 @@
                 <span class="circle"></span>
             </div>
         </div>
-        <div class="flex my-10">
-            <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                <div class="card__content overflow-hidden">
-                    <div class="swiper-wrapper" id="musica-mentores">
-                    </div>
-                </div>
-            </div>
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtnn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="musica-mentores" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtnn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
 
         <div class="subheading">
@@ -243,14 +232,12 @@
                 <span class="circle"></span>
             </div>
         </div>
-        <div class="flex my-10">
-            <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                <div class="card__content overflow-hidden">
-                    <div class="swiper-wrapper" id="salud-mentores">
-                    </div>
-                </div>
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtnn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
 
-            </div>
+            <div id="salud-mentores" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtnn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
 
         <div class="subheading">
@@ -260,11 +247,12 @@
                 <span class="circle"></span>
             </div>
         </div>
-        <div class="flex my-10">
-            <div class="py-10 sm:px-5 px-0 xl:mx-32 md:mx-16 swiper">
-                <div class="flex overflow-x-auto space-x-4 p-4" id="otros-mentores">
-                </div>
-            </div>
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtnn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="otros-mentores" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtnn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
     </section>
 </body>

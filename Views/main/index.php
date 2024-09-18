@@ -34,7 +34,7 @@
 
 <body>
     <!--========== HEADER ==========-->
-    <?php include 'Views/contenido/Inicio/header-new.php'; ?>
+    <?php include 'Views/contenido/Header-footer/header-new.php'; ?>
     <!--==========         ==========-->
 
     <!--========== SLIDER ==========-->
@@ -62,7 +62,7 @@
     <section class="sectiona1 my-16 como-funciona sm:max-w-7xl 2xl:max-w-7xl xl:max-w-5xl  mx-auto">
 
         <div class="p-4 bg-[#fff] flex sm:flex-row flex-col justify-around">
-            <button id="btn-areas" class="bg-[#4F7CAC] sm:w-80 h-16 sm:mb-0 mb-3 font-bold rounded-full text-base text-[#FEC400]" style="outline:none"
+            <button id="btn-areas" class="bg-[#4F7CAC] sm:w-80 h-16 sm:mb-0 mb-3 font-bold rounded-full text-base text-[#FFFFFF]" style="outline:none"
                 type="button" onclick="mostrarContenidoAreas()">Areas
                 de
                 aprendizaje</button>
@@ -372,7 +372,7 @@
     </main>
 
     <!--========== Cursos ==========-->
-    <?php include 'Views/contenido/Inicio/footer.php'; ?>
+    <?php include 'Views/contenido/Header-footer/footer.php'; ?>
     <!--==========         ==========-->
 
 

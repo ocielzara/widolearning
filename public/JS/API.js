@@ -1,5 +1,6 @@
 const baseUrl = "https://www.widolearn.com";
 //const baseUrl = "http://localhost/widolearning";
+//const baseUrl = "http://localhost/GitHub/widolearning";
 function mostrarToastify(texto, tipo) {
   const background = tipo === "success" ? "green" : "red";
   Toastify({
@@ -1180,22 +1181,29 @@ function obtenerMentoresPorTipo(tipoCurso) {
       var carruselMentores = document.getElementById(`${tipoCurso}-mentores`);
       data.forEach((mentor) => {
         var newContent = document.createElement("div");
-        newContent.className = "containderCard w-[320px]";
+        newContent.className = "containderCard1"; // Manteniendo las clases del primer código
+        
         newContent.innerHTML = `
-          <div class="subContentCard">
-            <div class="cardImageMentor">
+          <div class="subContentCard1">
+            <div class="cardImage1">
               <img src="public/images/docente/${mentor.Mentor_Foto}/${mentor.Mentor_Foto}.png" alt="${mentor.Mentor_Nombre}">
             </div>
-            <div class="cardContent flex flex-col items-end p-4">
-              <h3 class="text-white font-bold mb-2">${mentor.Mentor_Nombre}</h3>
-              <p class="text-white mb-2">${mentor.acercademi}...</p>
+            <div class="cardContent1">
+              <h4 class="cardTitle1">${mentor.Mentor_Nombre}</h4>
+              <p class="cardText1">${mentor.acercademi}...</p>
+            </div>
+            <div class="cardFooter1">
               <button class="button1" onclick="redirigirVerPerfil(${mentor.Mentor_ID})">
-              <span>Ver perfil</span>
+                <span>Ver perfil</span>
               </button>
             </div>
           </div>
         `;
-        carruselMentores.appendChild(newContent);
+        
+        
+        
+        carruselMentores.appendChild(newContent); // Agregar el nuevo contenido al carrusel
+      
       });
       // Inicializar el slider de Swiper después de cargar los mentores
       var swiperMentores = new Swiper(".swiper", {
