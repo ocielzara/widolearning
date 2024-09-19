@@ -14,104 +14,243 @@
     <link rel="stylesheet" href="public/styles/tailwind.css">
     <link rel="stylesheet" href="styles/output.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <title>Registro administrador</title>
+    <title>Index</title>
 </head>
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Roboto', sans-serif;
-    }
 
-    body {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-image: url(public/images/wido/registro.png);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        color: #DFFAFF;
-    }
+:root {
+    --clr-primary: #7380ec;
+    --clr-danger: #ff7782;
+    --clr-success: #41f1b6;
+    --clr-white: #fff;
+    --clr-dark: #363949;
     
-     select.datos option {
-        color: black; /* Color de texto negro para las opciones */
-    }
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
     
-     select.datos {
-        color: white; /* Color de texto negro para el select */
-    }
-    
+    --card-padding: 1.8rem;
+}
+
+html, body {
+    background-color: #f6f6f9;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.administrador-main h1 {
+    color: #000; /* Color negro */
+    font-size: 2rem; /* Tamaño más grande, ajusta según lo necesites */
+    font-weight: bold; /* Para hacerlo más destacado */
+}
+
+
+.administrador-main h2 {
+    color: #000; /* Color negro */
+    font-size: 1.2rem; /* Tamaño más grande, ajusta según lo necesites */
+    font-weight: bold; /* Para hacerlo más destacado */
+}
+.administrador {
+    background: #f6f6f9;
+}
+
+.administrador-main {
+    margin-top: 1.4rem;
+    width: auto;
+}
+
+
+.administrador-main .insights{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1.6rem;
+}
+
+.administrador-main .insights>div {
+    background-color: var(--clr-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow: var(--box-shadow);
+    transition: all .3s ease;
+}
+
+.administrador-main .insights > div:hover{
+    box-shadow: none;
+}
+
+.administrador-main .insights > div span{
+    background: #4f7cac;
+    padding 0.5rem;
+    border-radius: 50%;
+    color: var(--clr-white);
+    font-size: 2rem;
+}
+
+.administrador-main .insights > div.expenses span{
+    background: #FEC400;
+}
+
+.icon {
+    width: 40px;
+    height:40px;
+}
+
+.administrador-main .insights > div.income span{
+    background: #2e3532;
+}
+
+.administrador-main .insights > div .middle{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.administrador-main .insights > div .middle h1{
+    font-size: 1.6rem;
+}
+
+.administrador-main h1{
+    color: var(--clr-dark);
+}
+
+.administrador-main .insights h3{
+    color: var(--clr-dark);
+}
+
+.administrador-main .insights p{
+    color: var(--clr-dark);
+}
+
+.administrador-main .insights .progress{
+    position: relative;
+    height: 78px;
+    width: 78px;
+    border-radius: 50px;
+    overflow: hidden; /* Oculta cualquier contenido que sobresalga */
+}
+
+.administrador-main .recent_order table{
+    background-color: var(--clr-white);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+}
 </style>
 
 <body>
     
     <?php include 'Views/contenido/lateralAdministrador.php'; ?>
 
-
-    <!-- Header -->
-    <header class="bg-blue-500 text-white shadow-md">
-        <div class="max-w-7xl mx-auto px-4 py-6">
-            <h1 class="text-3xl font-bold">Bienvenido al Panel de Administración</h1>
-            <p class="mt-2">Gestiona tu plataforma de aprendizaje con facilidad y eficiencia.</p>
-        </div>
-    </header>
-
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 mt-6">
-        <!-- Tarjetas informativas -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Tarjeta 1 -->
-            <div class="bg-white shadow-lg rounded-lg p-6">
-                <div class="flex items-center space-x-4">
-                    <div class="p-3 bg-green-100 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 10a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1zm0-4a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1z" clip-rule="evenodd" />
-                        </svg>
+    <main class="administrador">
+        <div class="administrador-main">
+            <h1>Bienvenido al Panel de Administración</h1>
+            <p class="mt-2">Gestiona tu plataforma de aprendizaje con facilidad y eficiencia.</p>
+            
+            <div class="insights">
+
+                <div class="sales">
+                    <span class="material-symbols-sharp"><i class='icon bx bx-face'></i></span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Total alumnos</h3>
+                            <h1 id="totalAlumnos">200</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle r="30" cy="40" cx="40"></circle>
+                            </svg>
+                            <div class="number">80%</div>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-700">Total de Cursos</h3>
-                        <p class="text-gray-500 mt-1">34 cursos disponibles</p>
-                    </div>
+                    <small>Ultimo minuto</small>
                 </div>
+
+                <div class="expenses">
+                    <span class="material-symbols-sharp"><i class='icon bx bxs-face' ></i></span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Total mentores</h3>
+                            <h1 id="totalMentores">200</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle r="30" cy="40" cx="40"></circle>
+                            </svg>
+                            <div class="number">80%</div>
+                        </div>
+                    </div>
+                    <small>Ultimo minuto</small>
+                </div>
+
+                <div class="income">
+                    <span class="material-symbols-sharp"><i class='icon bx bxs-food-menu' ></i></span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Total Cursos</h3>
+                            <h1 id="totalCursos">200</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle r="30" cy="40" cx="40"></circle>
+                            </svg>
+                            <div class="number">80%</div>
+                        </div>
+                    </div>
+                    <small>Ultimo minuto</small>
+                </div>
+
             </div>
 
-            <!-- Tarjeta 2 -->
-            <div class="bg-white shadow-lg rounded-lg p-6">
-                <div class="flex items-center space-x-4">
-                    <div class="p-3 bg-blue-100 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M10 2a2 2 0 00-2 2v1H5a3 3 0 00-3 3v8a3 3 0 003 3h10a3 3 0 003-3V8a3 3 0 00-3-3h-3V4a2 2 0 00-2-2zm-2 4V4a2 2 0 114 0v2H8z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-700">Total de Estudiantes</h3>
-                        <p class="text-gray-500 mt-1">120 estudiantes activos</p>
-                    </div>
-                </div>
+            <div class="recent_order">
+                <h2>Top mentores</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product name</th>
+                            <th>product number</th>
+                            <th>Payment</th>
+                            <th>status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>mini usb</td>
+                            <td>465</td>
+                            <td>Due</td>
+                            <td class="waring">Peding</td>
+                            <td class="primary">Details</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
-            <!-- Tarjeta 3 -->
-            <div class="bg-white shadow-lg rounded-lg p-6">
-                <div class="flex items-center space-x-4">
-                    <div class="p-3 bg-yellow-100 rounded-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5 3a1 1 0 011-1h8a1 1 0 011 1v10a1 1 0 01-1 1H6a1 1 0 01-1-1V3z" clip-rule="evenodd" />
-                            <path d="M4 14.5a.5.5 0 01.5-.5h11a.5.5 0 01.5.5V15a2 2 0 01-2 2H6a2 2 0 01-2-2v-.5z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-700">Total de Mentores</h3>
-                        <p class="text-gray-500 mt-1">10 mentores registrados</p>
-                    </div>
-                </div>
+            
+            <div class="recent_order">
+                <h2>Top cursos</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product name</th>
+                            <th>product number</th>
+                            <th>Payment</th>
+                            <th>status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>mini usb</td>
+                            <td>465</td>
+                            <td>Due</td>
+                            <td class="waring">Peding</td>
+                            <td class="primary">Details</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-
     </main>
+
 
    
     

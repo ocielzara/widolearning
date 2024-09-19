@@ -27,9 +27,11 @@
                 <table class="table table-hover text-center">
                     <thead class="table-dark">
                         <tr>
+                            <th scope="col">Fecha</th->
                             <th scope="col">Usuario</th>
                             <th scope="col">Correo</th>
                             <th scope="col">Curso</th>
+                            <th scope="col">Estado</th>
                         </tr>
                     </thead>
                     <tbody id="contenedor-clase-muestra">

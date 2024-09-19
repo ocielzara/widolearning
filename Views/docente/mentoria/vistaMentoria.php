@@ -15,8 +15,8 @@
 
 <body>
     
-    <?php include 'Views/contenido/lateralDocente.php'; ?>
-    
+     <?php include 'Views/contenido/lateralDocente.php'; ?>
+
     <!--========== CONTENTS ==========-->
     <main>
         <section>

@@ -396,7 +396,9 @@ public function getHistorialClaseMuestra($idMentor)
         SELECT 
             u.nombre AS NombreUsuario,
             u.correo_electronico AS CorreoUsuario,
-            c.nombre AS NombreCurso
+            c.nombre AS NombreCurso,
+            i.fechaCreacion AS fecha,
+            i.estado AS estado
         FROM 
             inscripciones i
         JOIN 

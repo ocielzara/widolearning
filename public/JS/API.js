@@ -684,16 +684,21 @@ function obtenerHistorialClaseMuestra(idMentor) {
       return response.json();
     })
     .then((data) => {
-      var contenedor = document.getElementById('contenedor-clase-muestra');
+       var contenedor = document.getElementById('contenedor-clase-muestra');
 
       if (data.length > 0) {
         data.forEach((item) => {
           var row = document.createElement('tr');
+          
+          //Verifica el estado
+          var estadoCompra = item.estado === 'cursando' ? 'comprado' : 'no comprado';
 
           row.innerHTML = `
+            <td>${item.fecha}</td>
             <td>${item.NombreUsuario}</td>
             <td>${item.CorreoUsuario}</td>
             <td>${item.NombreCurso}</td>
+            <td>${estadoCompra}</td>
           `;
 
           contenedor.appendChild(row);
@@ -708,6 +713,33 @@ function obtenerHistorialClaseMuestra(idMentor) {
       console.error("Error en la solicitud:", error);
     });
 }
+
+
+
+//MOSTRAR TOTAL USUARIOS
+function obtenerTotalUsuarios() {
+  fetch(`${baseUrl}/index.php?c=Administradors&a=totalUsuario`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener los cursos. Código de estado: " + response.status);
+      }
+      return response.json();
+    })
+    .then((data) => {
+        // Actualizar los elementos del DOM con los datos obtenidos
+      if (data) {
+        document.getElementById('totalAlumnos').textContent = data.totalUsuarios || '0';
+        document.getElementById('totalCursos').textContent = data.totalCursos || '0';
+        document.getElementById('totalMentores').textContent = data.totalMentores || '0';
+      } else {
+        console.error("Formato de datos inesperado:", data);
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
+}
+
 
 
 //MOSTRAR MENTOR Y CURSOS

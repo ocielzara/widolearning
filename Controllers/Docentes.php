@@ -593,13 +593,13 @@ public function agendaCrearApp()
 
 
     
-    //Nuevos cambios julio 24
+    //CARGAR VISTA
     public function vistaMentorias()
     {
         session_start();
         require_once "Views/docente/mentoria/vistaMentoria.php";
     }
-
+    
     //CARGAR VISTA
     public function vistaHistorialMuestras()
     {

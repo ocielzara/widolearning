@@ -350,6 +350,17 @@ class AdministradorsController
         }
     }
     
+    //REGRESAR INFORMACION 
+    public function totalUsuario()
+    {
+        
+        $model = new AdministradorModel();
+        $getTotal = $model->getNumerosTotalA();
+
+        header('Content-Type: application/json');
+        echo json_encode($getTotal);
+    }
+    
     
     public function confirmar()
 {

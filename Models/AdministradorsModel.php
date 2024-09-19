@@ -227,6 +227,29 @@ class AdministradorModel
     }
     
     //OBTENER 
+    public function getNumerosTotalA()
+    {
+        // Consulta SQL para contar usuarios, cursos y mentores activos
+        $query = "
+            SELECT 
+                (SELECT COUNT(*) FROM usuarios) AS totalUsuarios,
+                (SELECT COUNT(*) FROM cursos) AS totalCursos,
+                (SELECT COUNT(*) FROM Mentor WHERE estado = 'activo') AS totalMentores
+        ";
+        
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        
+        $result = $stmt->get_result(); // Obtener el resultado de la consulta
+        
+        // Obtener el conteo total
+        $data = $result->fetch_assoc();
+        
+        // Devolver los conteos obtenidos de la base de datos
+        return $data;
+    }
+    
+    //OBTENER 
     public function getAllAprendizajeA()
     {
         $query = "SELECT 
@@ -349,42 +372,42 @@ class AdministradorModel
     }
 }
 
-    
- //ELIMINAR MENTOR
-    
- public function eliminarMentor($idMentor)
- {
-     // Iniciar una transacción para asegurar la consistencia de los datos
-     $this->db->begin_transaction();
- 
-     try {
-         // Actualizar la tabla asignaciones para marcar la asignación como inactiva
-         $query = "UPDATE Mentor SET estado = 'inactivo' WHERE Mentor_ID = ?";
-         $stmt = $this->db->prepare($query);
-         $stmt->bind_param("i", $idMentor);
- 
-         // Ejecutar la consulta
-         if ($stmt->execute()) {
-             // Confirmar la transacción
-             $stmt->close();
-             $this->db->commit();
-             return ['success' => true, 'message' => 'Mentor eliminado correctamente.'];
-         } else {
-             // Revertir la transacción en caso de error
-             $stmt->close();
-             $this->db->rollback();
-             return ['success' => false, 'message' => 'Error al eliminar el mentor.'];
-         }
-     } catch (Exception $e) {
-         // Revertir la transacción en caso de excepción
-         $this->db->rollback();
-         return ['success' => false, 'message' => 'Error: ' . $e->getMessage()];
-     }
- }   
-    
- 
- 
 
- 
+//ELIMINAR MENTOR
+    
+    public function eliminarMentor($idMentor)
+{
+    // Iniciar una transacción para asegurar la consistencia de los datos
+    $this->db->begin_transaction();
+
+    try {
+        // Actualizar la tabla asignaciones para marcar la asignación como inactiva
+        $query = "UPDATE Mentor SET estado = 'inactivo' WHERE Mentor_ID = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $idMentor);
+
+        // Ejecutar la consulta
+        if ($stmt->execute()) {
+            // Confirmar la transacción
+            $stmt->close();
+            $this->db->commit();
+            return ['success' => true, 'message' => 'Mentor eliminado correctamente.'];
+        } else {
+            // Revertir la transacción en caso de error
+            $stmt->close();
+            $this->db->rollback();
+            return ['success' => false, 'message' => 'Error al eliminar el mentor.'];
+        }
+    } catch (Exception $e) {
+        // Revertir la transacción en caso de excepción
+        $this->db->rollback();
+        return ['success' => false, 'message' => 'Error: ' . $e->getMessage()];
+    }
+}
+
+    
+    
+    
+    
 
 }
