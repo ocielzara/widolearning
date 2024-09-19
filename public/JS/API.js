@@ -573,8 +573,8 @@ function obtenerMentorAdmin(idAdministrador) {
 
 function eliminarMentor(idMentor) {
   const data = {
-        idMentor: idMentor
-    };
+    idMentor: idMentor
+  };
 
   console.log("Datos a enviar:", data); // Verificar datos antes de enviar
   fetch(`${baseUrl}/index.php?c=Administradors&a=eliminarMentor`, {
@@ -584,19 +584,19 @@ function eliminarMentor(idMentor) {
     },
     body: JSON.stringify(data) // Corregido para enviar los datos correctos
   })
-  .then((response) => response.json())
-  .then((data) => {
-    console.log('Respuesta del servidor:', data); // Log para verificar respuesta
-    if (data.success) {
-      alert("Confirmacion exitosa.");
-      location.reload(); // Recarga la página para ver los cambios
-    } else {
-      alert("Error al confirmar.");
-    }
-  })
-  .catch((error) => {
-    console.error("Error en la solicitud:", error);
-  });
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Respuesta del servidor:', data); // Log para verificar respuesta
+      if (data.success) {
+        alert("Confirmacion exitosa.");
+        location.reload(); // Recarga la página para ver los cambios
+      } else {
+        alert("Error al confirmar.");
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
 }
 
 //MOSTRAR USUARIO EN EL PORTAL ADMINISTRADOR
@@ -684,7 +684,7 @@ function obtenerHistorialClaseMuestra(idMentor) {
       return response.json();
     })
     .then((data) => {
-       var contenedor = document.getElementById('contenedor-clase-muestra');
+      var contenedor = document.getElementById('contenedor-clase-muestra');
 
       if (data.length > 0) {
         data.forEach((item) => {
@@ -1119,26 +1119,28 @@ function obtenerMentores() {
     .then((data) => {
       var carruselMentores = document.getElementById("content-mentores");
       data.forEach((mentor) => {
-        var newContent = document.createElement("div");
-        newContent.className = "containderCard1";
-        
-        newContent.innerHTML = `
-          <div class="subContentCard1">
-            <div class="cardImage1">
-              <img src="public/images/docente/${mentor.Mentor_Foto}/${mentor.Mentor_Foto}.png" alt="${mentor.Mentor_Nombre}">
-            </div>
-            <div class="cardContent1">
-              <h4 class="cardTitle1">${mentor.Mentor_Nombre}</h4>
-              <p class="cardText1">${mentor.acercademi}</p>
-            </div>
 
-            <div class="cardFooter1">
-                <button class="button1" onclick="redirigirVerPerfil(${mentor.Mentor_ID})">
-                  <span>Ver perfil</span>
-                </button>
-              </div>
-          </div>
-        `;     
+
+        var newContent = document.createElement("div");
+        newContent.className = "containderCard1";  // Asignas la clase
+        newContent.style.borderRadius = "47px 47px 0px 0px";  // Asignas el estilo directamente
+
+        newContent.innerHTML = `
+  <div class="subContentCard1">
+    <div class="cardImage1">
+      <img src="public/images/docente/${mentor.Mentor_Foto}/${mentor.Mentor_Foto}.png" alt="${mentor.Mentor_Nombre}">
+    </div>
+    <div class="cardContent1">
+      <h4 class="cardTitle1">${mentor.Mentor_Nombre}</h4>
+      <p class="cardText1">${mentor.acercademi}</p>
+    </div>
+    <div class="cardFooter1">
+      <button class="button1" onclick="redirigirVerPerfil(${mentor.Mentor_ID})">
+        <span>Ver perfil</span>
+      </button>
+    </div>
+  </div>
+`;
         carruselMentores.appendChild(newContent);
       });
 
@@ -1181,8 +1183,10 @@ function obtenerMentoresPorTipo(tipoCurso) {
       var carruselMentores = document.getElementById(`${tipoCurso}-mentores`);
       data.forEach((mentor) => {
         var newContent = document.createElement("div");
-        newContent.className = "containderCard1"; // Manteniendo las clases del primer código
-        
+        newContent.className = "containderCard1";  // Asignas la clase
+        newContent.style.borderRadius = "47px 47px 0px 0px";  // Asignas el estilo directamente
+
+
         newContent.innerHTML = `
           <div class="subContentCard1">
             <div class="cardImage1">
@@ -1199,11 +1203,8 @@ function obtenerMentoresPorTipo(tipoCurso) {
             </div>
           </div>
         `;
-        
-        
-        
         carruselMentores.appendChild(newContent); // Agregar el nuevo contenido al carrusel
-      
+
       });
       // Inicializar el slider de Swiper después de cargar los mentores
       var swiperMentores = new Swiper(".swiper", {
@@ -2041,10 +2042,10 @@ function enviarFormularioMentor(formData) {
         document.getElementById("registroFormMentores").reset(); // Resetear el formulario
         mostrarToastify(data.message, "success"); // Mostrar mensaje de éxito
         location.reload(); // Recarga la página para ver los cambios
-    } else {
+      } else {
         mostrarToastify(data.error, "error if (data.success)"); // Mostrar mensaje de error
-    }
-    
+      }
+
     })
     .catch((error) => {
       console.error("Network error:", error);
