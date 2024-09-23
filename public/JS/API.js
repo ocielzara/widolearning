@@ -1300,58 +1300,53 @@ function obtenerMentores() {
     })
     .then((data) => {
       var carruselMentores = document.getElementById("content-mentores");
+      carruselMentores.innerHTML = '';  // Limpiar el contenedor antes de agregar nuevos mentores
       data.forEach((mentor) => {
-
-
         var newContent = document.createElement("div");
-        newContent.className = "containderCard1";  // Asignas la clase
-        newContent.style.borderRadius = "47px 47px 0px 0px";  // Asignas el estilo directamente
+        newContent.className = "containderCard1";
+        newContent.style.borderRadius = "47px 47px 0px 0px";
 
         newContent.innerHTML = `
-  <div class="subContentCard1">
-    <div class="cardImage1">
-      <img src="public/images/docente/${mentor.Mentor_Foto}/${mentor.Mentor_Foto}.png" alt="${mentor.Mentor_Nombre}">
-    </div>
-    <div class="cardContent1">
-      <h4 class="cardTitle1">${mentor.Mentor_Nombre}</h4>
-      <p class="cardText1">${mentor.acercademi}</p>
-    </div>
-    <div class="cardFooter1">
-      <button class="button1" onclick="redirigirVerPerfil(${mentor.Mentor_ID})">
-        <span>Ver perfil</span>
-      </button>
-    </div>
-  </div>
-`;
+          <div class="subContentCard1">
+            <div class="cardImage1">
+              <img src="public/images/docente/${mentor.Mentor_Foto}/${mentor.Mentor_Foto}.png" alt="${mentor.Mentor_Nombre}">
+            </div>
+            <div class="cardContent1">
+              <h4 class="cardTitle1">${mentor.Mentor_Nombre}</h4>
+              <p class="cardText1">${mentor.acercademi}</p>
+            </div>
+            <div class="cardFooter1">
+              <button class="button1" onclick="redirigirVerPerfil(${mentor.Mentor_ID})">
+                <span>Ver perfil</span>
+              </button>
+            </div>
+          </div>
+        `;
         carruselMentores.appendChild(newContent);
-      });
-
-      // Inicializar el slider de Swiper después de cargar los mentores
-      var swiperMentores = new Swiper(".swiper", {
-        loop: true,
-        spaceBetween: 20,
-        grabCursor: true,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-        breakpoints: {
-          600: {
-            slidesPerView: 1,
-          },
-          1024: {
-            slidesPerView: 2,
-          },
-          1440: {
-            slidesPerView: 3,
-          },
-        },
       });
     })
     .catch((error) => {
-      console.error("Error en la solicitud:", error);
+      console.error("Error:", error);
     });
 }
+
+function buscarMentores() {
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+  const mentorCards = document.querySelectorAll('#content-mentores .containderCard1');
+
+  mentorCards.forEach(card => {
+    const mentorName = card.querySelector('.cardTitle1').textContent.toLowerCase();
+    
+    if (mentorName.includes(searchTerm)) {
+      card.style.display = ''; // Mostrar la tarjeta si coincide con la búsqueda
+    } else {
+      card.style.display = 'none'; // Ocultar la tarjeta si no coincide
+    }
+  });
+}
+
+  
+
 
 function obtenerMentoresPorTipo(tipoCurso) {
   fetch(`${baseUrl}/index.php?c=Usuarios&a=verMentoresPorTipo&tipoCurso=${encodeURIComponent(tipoCurso)}`)

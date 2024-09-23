@@ -51,6 +51,13 @@ h2 {
     padding: 0 10px 0 0;
 }
 
+.btn {
+    transition: background-color 0.3s ease; /* Transición suave entre colores */
+    color: white;
+}
+
+
+
 /*ESTILO DE LOS CURSOS*/
 
 
@@ -107,7 +114,6 @@ h2 {
 }
 
 .cardContent1 {
-    padding: 10px;
     text-align: center;
     height: auto;
     transition: transform 0.3s ease;
@@ -118,14 +124,18 @@ h2 {
     margin-bottom: 10px;
     text-transform: uppercase;
     font-size: 18px;
-    height: 40px;
+    height: 55px;
     overflow: hidden;
+    background-color: #72aacb;
+    color: white;
+    align-content: center;
 }
 
 .cardText1 {
     font-size: 14px;
     color: #555;
     text-align: left;
+    padding: 10px;
 }
 
 .cardFooter1 {
@@ -269,6 +279,12 @@ h2 {
     #nextBtnn {
         font-size: 18px;
     }
+}
+
+@media (max-width: 640px) {
+   #btn-asesorias{
+    margin-top: 15px;
+   }
 }
 
 @media (max-width: 480px) {

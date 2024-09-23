@@ -59,26 +59,27 @@
     <?php include 'Views/contenido/Inicio/curso-category.php'; ?>
     <!--==========         ==========-->
 
-    <section class="sectiona1 my-16 como-funciona sm:max-w-7xl 2xl:max-w-7xl xl:max-w-5xl  mx-auto">
-
+    <section class="sectiona1 my-16 como-funciona sm:max-w-7xl 2xl:max-w-7xl xl:max-w-5xl mx-auto">
         <div class="p-4 bg-[#fff] flex sm:flex-row flex-col justify-around">
-            <button id="btn-areas" class="bg-[#4F7CAC] sm:w-80 h-16 sm:mb-0 mb-3 font-bold rounded-full text-base text-[#FFFFFF]" style="outline:none"
-                type="button" onclick="mostrarContenidoAreas()">Areas
-                de
-                aprendizaje</button>
-            <button id="btn-master" class="bg-[#2E3532] sm:w-64 h-16 font-bold rounded-full text-base" type="button" style="color: #FFF; outline:none"
-                onclick="mostrarContenidoMasterTeach()">Profesores</button>
+            <button id="btn-areas" class="btn bg-[#4F7CAC] sm:w-80 h-16 sm:mb-0 mb-3 font-bold rounded-full text-base text-[#FFFFFF]"
+                type="button" onclick="mostrarContenidoAreas()">Áreas de aprendizaje</button>
+            <button id="btn-master" class="btn bg-[#2E3532] sm:w-64 h-16 font-bold rounded-full text-base text-[#FFFFFF]"
+                type="button" onclick="mostrarContenidoMasterTeach()">Profesores</button>
+            <button id="btn-asesorias" class="btn bg-[#2E3532] sm:w-64 h-16 font-bold rounded-full text-base mb-10 text-[#FFFFFF]"
+                type="button" onclick="mostrarContenidoAsesorias()">Asesorías</button>
         </div>
 
     </section>
+
+
 
 
     <!--========== Cursos ==========-->
     <?php include 'Views/contenido/Inicio/cursos-section.php'; ?>
     <!--==========         ==========-->
 
-     <!--========== Cursos ==========-->
-     <?php include 'Views/contenido/Inicio/master-teach.php'; ?>
+    <!--========== Cursos ==========-->
+    <?php include 'Views/contenido/Inicio/master-teach.php'; ?>
     <!--==========         ==========-->
 
     <!--========== Contenido ==========-->
@@ -135,13 +136,13 @@
             </div>
 
 
-           
-            <div id="footer" class="flex justify-center my-10 w-full">
+
+            <!-- <div id="footer" class="flex justify-center my-10 w-full">
                 <button class="text-[#FAC400] bg-[#4F7CAC] rounded-full font-bold w-96  text-xl" type="button"
                     id="toggleButton">Mostrar
                     más
                     categorías</button>
-            </div>
+            </div> -->
 
             <div id="extraContent" class="hidden">
                 <div id="contenido-mas" class="prices-1">
