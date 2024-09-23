@@ -361,6 +361,27 @@ class AdministradorsController
         echo json_encode($getTotal);
     }
     
+    //REGRESAR INFORMACION 
+    public function cursoTop()
+    {
+        
+        $model = new AdministradorModel();
+        $getTop = $model->getTopCursos();
+
+        header('Content-Type: application/json');
+        echo json_encode($getTop);
+    }
+    
+     public function mentorTop()
+    {
+        
+        $model = new AdministradorModel();
+        $getTop = $model->getTopMentores();
+
+        header('Content-Type: application/json');
+        echo json_encode($getTop);
+    }
+    
     
     public function confirmar()
 {
@@ -451,6 +472,38 @@ public function eliminarMentor()
         echo json_encode(["error" => "Método no permitido"]);
     }
 }
+
+
+//ELIMINAR USUARIO
+public function eliminarUsuario()
+{
+    
+    // Asegurarse de que se está usando POST para la solicitud
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Capturar los datos del cuerpo de la solicitud JSON
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        // Verificar si los datos vienen en formato JSON
+        if ($data && isset($data['idUsuario'])) {
+            $idUsuario = $data['idUsuario'];
+
+            $model = new AdministradorModel();
+            $resultado = $model->eliminarUsuario($idUsuario);
+
+            header('Content-Type: application/json');
+            echo json_encode($resultado);
+        } else {
+            // Si no hay datos JSON, devolver un error
+            echo json_encode(["error" => "No se proporcionaron los datos necesarios"]);
+        }
+    } else {
+        // Si no es una solicitud POST, devolver un error
+        header('HTTP/1.1 405 Method Not Allowed');
+        echo json_encode(["error" => "Método no permitido"]);
+    }
+}
+
+
 
     public function allCursos()
     {

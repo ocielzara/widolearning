@@ -66,6 +66,9 @@ window.onload = function () {
   obtenerHistorialClaseMuestra(id);
   const mentorId = urlParams.get('mentorId');
   obtenerDatosDisponibilidadMentor(mentorId);
+  obtenerTotalUsuarios() 
+  obtenerTopMentor()
+  obtenerTopCurso()
 };
 
 
@@ -621,6 +624,7 @@ function obtenerUsuarioAdmin(idAdministrador) {
             <td>${item.telefono}</td>
             <td>${item.interes}</td>
             <td>${item.correo_electronico}</td>
+            <td><button class="btn btn-primary" onclick="eliminarUsuario(${item.id_usuario})">Eliminar</button></td>
           `;
 
           contenedor.appendChild(row);
@@ -629,6 +633,34 @@ function obtenerUsuarioAdmin(idAdministrador) {
         var row = document.createElement('tr');
         row.innerHTML = '<td colspan="6">No hay datos disponibles</td>';
         contenedor.appendChild(row);
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
+}
+
+function eliminarUsuario(idUsuario) {
+  const data = {
+    idUsuario: idUsuario
+  };
+
+  console.log("Datos a enviar:", data); // Verificar datos antes de enviar
+  fetch(`${baseUrl}/index.php?c=Administradors&a=eliminarUsuario`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data) // Corregido para enviar los datos correctos
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Respuesta del servidor:', data); // Log para verificar respuesta
+      if (data.success) {
+        alert("Confirmacion exitosa.");
+        location.reload(); // Recarga la página para ver los cambios
+      } else {
+        alert("Error al confirmar.");
       }
     })
     .catch((error) => {
@@ -739,6 +771,124 @@ function obtenerTotalUsuarios() {
       console.error("Error en la solicitud:", error);
     });
 }
+
+
+
+//MOSTRAR TOP MENTOR
+function obtenerTopMentor() {
+  fetch(`${baseUrl}/index.php?c=Administradors&a=mentorTop`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener los mentores. Código de estado: " + response.status);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const topMentorTableBody = document.querySelector('.recent_order_mentor tbody');
+      topMentorTableBody.innerHTML = ''; // Limpiar tabla actual
+
+      if (Array.isArray(data) && data.length > 0) {
+        // Encontrar el mentor con más inscripciones para calcular el progreso relativo
+        const maxInscripciones = Math.max(...data.map(mentor => mentor.TotalInscripciones));
+
+        // Crear filas dinámicamente
+        data.forEach(mentor => {
+          const row = document.createElement('tr');
+          
+          const nombreTd = document.createElement('td');
+          nombreTd.textContent = mentor.NombreMentor;
+
+          const inscripcionesTd = document.createElement('td');
+          inscripcionesTd.textContent = mentor.TotalInscripciones;
+
+          const progresoTd = document.createElement('td');
+          const progressBar = document.createElement('div');
+          progressBar.classList.add('progress-bar');
+          
+          const progressFill = document.createElement('div');
+          progressFill.classList.add('progress-fill');
+          const porcentajeProgreso = (mentor.TotalInscripciones / maxInscripciones) * 100;
+          progressFill.style.width = `${porcentajeProgreso}%`;
+          progressFill.style.backgroundColor = '#FEC400';
+          
+          progressBar.appendChild(progressFill);
+          progresoTd.appendChild(progressBar);
+
+          // Añadir celdas a la fila
+          row.appendChild(nombreTd);
+          row.appendChild(inscripcionesTd);
+          row.appendChild(progresoTd);
+
+          // Añadir la fila a la tabla
+          topMentorTableBody.appendChild(row);
+        });
+      } else {
+        console.error("Formato de datos inesperado o no se encontraron mentores:", data);
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
+}
+
+
+//MOSTRAR TOP CURSO
+function obtenerTopCurso() {
+  fetch(`${baseUrl}/index.php?c=Administradors&a=cursoTop`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener los mentores. Código de estado: " + response.status);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const topCursoTableBody = document.querySelector('.recent_order_curso tbody');
+      topCursoTableBody.innerHTML = ''; // Limpiar tabla actual
+
+      if (Array.isArray(data) && data.length > 0) {
+        // Encontrar el curso con más inscripciones para calcular el progreso relativo
+        const maxInscripciones = Math.max(...data.map(curso => curso.TotalCompras));
+
+        // Crear filas dinámicamente
+        data.forEach(curso => {
+          const row = document.createElement('tr');
+          
+          const nombreTd = document.createElement('td');
+          nombreTd.textContent = curso.NombreCurso;
+
+          const inscripcionesTd = document.createElement('td');
+          inscripcionesTd.textContent = curso.TotalCompras;
+
+          const progresoTd = document.createElement('td');
+          const progressBar = document.createElement('div');
+          progressBar.classList.add('progress-bar');
+          
+          const progressFill = document.createElement('div');
+          progressFill.classList.add('progress-fill');
+          const porcentajeProgreso = (curso.TotalCompras / maxInscripciones) * 100;
+          progressFill.style.width = `${porcentajeProgreso}%`;
+          progressFill.style.backgroundColor = '#2e3532';
+          
+          progressBar.appendChild(progressFill);
+          progresoTd.appendChild(progressBar);
+
+          // Añadir celdas a la fila
+          row.appendChild(nombreTd);
+          row.appendChild(inscripcionesTd);
+          row.appendChild(progresoTd);
+
+          // Añadir la fila a la tabla
+          topCursoTableBody.appendChild(row);
+        });
+      } else {
+        console.error("Formato de datos inesperado o no se encontraron mentores:", data);
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
+}
+
 
 
 

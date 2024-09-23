@@ -32,6 +32,7 @@
                             <th scope="col">Telefono</th>
                             <th scope="col">Intereses</th>
                             <th scope="col">Correo</th>
+                            <th scope="col">Accion</th>
                             <!--<th scope="col">Accion</th>-->
                         </tr>
                     </thead>
