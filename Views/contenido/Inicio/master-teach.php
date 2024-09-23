@@ -11,6 +11,9 @@
 
     <section class="corse-container" id="contenido-master-teach" style="display: none;">
 
+    <input type="text" id="searchInput" placeholder="Buscar mentor..." oninput="buscarMentores()">
+
+
         <div class="subheading">
             <h2>TODOS LOS MENTORES</h2>
             <div class="line-container">

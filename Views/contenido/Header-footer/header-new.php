@@ -27,7 +27,9 @@
             <li><a href="" class="active">Inicio</a></li>
             <li><a href="">Cursos</a></li>
             <li><a href="">Profesores</a></li>
+            <li><a href="">Asesorias</a></li>
             <li><a href="">Precios</a></li>
+          
             
 
             <?php

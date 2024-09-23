@@ -163,40 +163,47 @@ document.addEventListener("DOMContentLoaded", function () {
 let swiperInstance;
 //fin
 function mostrarContenidoAreas() {
-  var contenidoAreas = document.getElementById("contenido-areas");
-  contenidoAreas.style.display = "block";  // Mostrar contenido de áreas de aprendizaje
-
-  // Asegúrate de que los otros contenidos estén ocultos
-  var contenidoMasterTeach = document.getElementById("contenido-master-teach");
-  contenidoMasterTeach.style.display = "none";
-
-  // Mostrar footer u otros elementos si es necesario
-  var contenidoFooter = document.getElementById("footer");
-  contenidoFooter.style.display = "flex";
+  document.getElementById("contenido-areas").style.display = "block";
+  document.getElementById("contenido-master-teach").style.display = "none";
+  document.getElementById("asesorias-Cursos").style.display = "none";
 
   // Cambiar el estilo de los botones
-  toggleButtonStyles('btn-areas', 'btn-master');
-  
-  // Reiniciar carruseles u otros elementos interactivos si es necesario
-  reinitSwiper();
+  toggleButtonStyles('btn-areas');
 }
 
 function mostrarContenidoMasterTeach() {
-  var contenidoMasterTeach = document.getElementById("contenido-master-teach");
-  contenidoMasterTeach.style.display = "block";  // Mostrar contenido Master Teach
-
-  // Ocultar el contenido de áreas de aprendizaje
-  var contenidoAreas = document.getElementById("contenido-areas");
-  contenidoAreas.style.display = "none";
-
-  // Ocultar el footer si no es necesario
-  var contenidoFooter = document.getElementById("footer");
-  contenidoFooter.style.display = "none";
+  document.getElementById("contenido-master-teach").style.display = "block";
+  document.getElementById("contenido-areas").style.display = "none";
+  document.getElementById("asesorias-Cursos").style.display = "none";
 
   // Cambiar el estilo de los botones
-  toggleButtonStyles('btn-master', 'btn-areas');
+  toggleButtonStyles('btn-master');
 }
 
+function mostrarContenidoAsesorias() {
+  document.getElementById("asesorias-Cursos").style.display = "block";
+  document.getElementById("contenido-areas").style.display = "none";
+  document.getElementById("contenido-master-teach").style.display = "none";
+
+  // Cambiar el estilo de los botones
+  toggleButtonStyles('btn-asesorias');
+}
+
+function toggleButtonStyles(activeButtonId) {
+  // Obtener todos los botones
+  var buttons = document.querySelectorAll('.btn');
+
+  // Iterar sobre los botones para actualizar su fondo de manera manual
+  buttons.forEach(function(button) {
+    if (button.id === activeButtonId) {
+      // Cambiar el color de fondo al color activo (#4F7CAC)
+      button.style.backgroundColor = '#4F7CAC';
+    } else {
+      // Restablecer el color de fondo al color inactivo (#2E3532)
+      button.style.backgroundColor = '#2E3532';
+    }
+  });
+}
 
 
 function mostrarMas() {
@@ -234,23 +241,7 @@ closeVideoPopup.addEventListener("click", function () {
 
 //NUEVOS ESTILOS JULIO 24 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-function toggleButtonStyles(activeButtonId, inactiveButtonId) {
-    const activeButton = document.getElementById(activeButtonId);
-    const inactiveButton = document.getElementById(inactiveButtonId);
 
-    // Clases para el botón activo
-    const activeButtonClasses = ['bg-[#4F7CAC]', 'text-[#FEC400]'];
-    // Clases para el botón inactivo
-    const inactiveButtonClasses = ['bg-[#2E3532]', 'text-white'];
-
-    // Remover clases activas del botón inactivo y agregar clases inactivas
-    inactiveButton.classList.remove(...activeButtonClasses);
-    inactiveButton.classList.add(...inactiveButtonClasses);
-
-    // Remover clases inactivas del botón activo y agregar clases activas
-    activeButton.classList.remove(...inactiveButtonClasses);
-    activeButton.classList.add(...activeButtonClasses);
-}
 
 function reinitSwiper() {
   // Destruir la instancia existente de Swiper si existe

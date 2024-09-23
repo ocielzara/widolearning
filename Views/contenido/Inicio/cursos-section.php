@@ -29,27 +29,6 @@
             <button class="boton-adelante" id="nextBtnn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
 
-
-
-        <div class="subheading">
-            <h2>ASESORÍAS ACADEMICAS/LABORALES</h2>
-            <div class="line-container">
-                <span class="line"></span>
-                <span class="circle"></span>
-            </div>
-        </div>
-
-        <div id="carousel-container">
-            <button class="boton-atras" id="prevBtn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
-
-            <div id="content-asesorias" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
-
-            <button class="boton-adelante" id="nextBtn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
-        </div>
-
-
-
-
         <div class="subheading">
             <h2>CURSOS DE PROGRAMACIÓN</h2>
             <div class="line-container">
@@ -81,6 +60,26 @@
 
             <button class="boton-adelante" id="nextBtn-administracion"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
+    </section>
+
+    <section class="corse-container"
+        <div id="asesorias-Cursos">
+        <div class="subheading">
+            <h2>ASESORÍAS ACADEMICAS/LABORALES</h2>
+            <div class="line-container">
+                <span class="line"></span>
+                <span class="circle"></span>
+            </div>
+        </div>
+
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="content-asesorias" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+                <button   button class="boton-adelante" id="nextBtn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
+            </div>
+        </div>
+
     </section>
 
 </body>
