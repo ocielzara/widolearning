@@ -69,6 +69,7 @@ window.onload = function () {
   obtenerTotalUsuarios() 
   obtenerTopMentor()
   obtenerTopCurso()
+  obtenerPrediccionInteres()
 };
 
 
@@ -879,6 +880,82 @@ function obtenerTopCurso() {
 
           // Añadir la fila a la tabla
           topCursoTableBody.appendChild(row);
+        });
+      } else {
+        console.error("Formato de datos inesperado o no se encontraron mentores:", data);
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
+}
+
+
+
+//MOSTRAR INTERESES
+function obtenerPrediccionInteres() {
+  fetch(`${baseUrl}/index.php?c=Administradors&a=interesUsuario`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener los mentores. Código de estado: " + response.status);
+      }
+      return response.json();
+    })
+    .then((data) => {
+                    // Asegúrate de que 'data' tenga el formato correcto
+            if (typeof data === 'object') {
+                const labels = Object.keys(data); // Las etiquetas son las claves del objeto
+                const values = Object.values(data); // Los valores son las frecuencias
+                
+                // Crear el gráfico de pastel
+                const ctx = document.getElementById('interesesPieChart').getContext('2d');
+                const interesesPieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Frecuencia de Intereses',
+                            data: values,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.6)',
+                                'rgba(54, 162, 235, 0.6)',
+                                'rgba(255, 206, 86, 0.6)',
+                                'rgba(75, 192, 192, 0.6)',
+                                'rgba(153, 102, 255, 0.6)',
+                                'rgba(255, 159, 64, 0.6)',
+                                'rgba(201, 203, 207, 0.6)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(201, 203, 207, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        const total = tooltipItem.dataset.data.reduce((a, b) => a + b, 0);
+                                        const currentValue = tooltipItem.raw;
+                                        const percentage = ((currentValue / total) * 100).toFixed(2) + '%';
+                                        return tooltipItem.label + ': ' + currentValue + ' (' + percentage + ')';
+                                    }
+                                }
+                            }
+                        }
+                    }
         });
       } else {
         console.error("Formato de datos inesperado o no se encontraron mentores:", data);

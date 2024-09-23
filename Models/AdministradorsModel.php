@@ -232,7 +232,7 @@ class AdministradorModel
         // Consulta SQL para contar usuarios, cursos y mentores activos
         $query = "
             SELECT 
-                (SELECT COUNT(*) FROM usuarios) AS totalUsuarios,
+                (SELECT COUNT(*) FROM usuarios WHERE estado = 'activo') AS totalUsuarios,
                 (SELECT COUNT(*) FROM cursos) AS totalCursos,
                 (SELECT COUNT(*) FROM Mentor WHERE estado = 'activo') AS totalMentores
         ";
@@ -359,6 +359,26 @@ class AdministradorModel
 
         // Devolver los cursos obtenidos de la base de datos
         return $cursosTops;
+    }
+    
+    //OBTENER
+    public function getAllInteresesActivos()
+    {
+        $query = "SELECT interes FROM usuarios WHERE estado = 'activo'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+    
+        $result = $stmt->get_result(); // Obtener el resultado de la consulta
+    
+        $intereses = array();
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $intereses[] = $row['interes'];
+            }
+        }
+    
+        // Devolver los intereses obtenidos de la base de datos
+        return $intereses;
     }
     
     

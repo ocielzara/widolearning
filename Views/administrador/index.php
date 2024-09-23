@@ -15,6 +15,12 @@
     <link rel="stylesheet" href="styles/output.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>Index</title>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
 </head>
 
 <style>
@@ -181,6 +187,13 @@ thead th:nth-child(3), tbody td:nth-child(3) {
         border-radius: 20px;
     }
     
+#interesesPieChart {
+    display: block;  /* Asegúrate de que se comporte como un bloque */
+    margin: 0 auto; /* Centrar el canvas horizontalmente */
+    width: 500px;  /* Ajusta el ancho visual */
+    height: 500px; /* Ajusta la altura visual */
+}
+    
     
 </style>
 
@@ -281,6 +294,8 @@ thead th:nth-child(3), tbody td:nth-child(3) {
                 </table>
             </div>
         </div>
+        
+        <canvas id="interesesPieChart"></canvas>
     </main>
 
 

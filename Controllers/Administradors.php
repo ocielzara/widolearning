@@ -372,6 +372,7 @@ class AdministradorsController
         echo json_encode($getTop);
     }
     
+    //REGRESAR INFORMACION
      public function mentorTop()
     {
         
@@ -381,6 +382,23 @@ class AdministradorsController
         header('Content-Type: application/json');
         echo json_encode($getTop);
     }
+    
+    //REGRESAR INFORMACION
+    public function interesUsuario()
+    {
+        
+        $model = new AdministradorModel();
+        $interesesActivos = $model->getAllInteresesActivos();
+        
+        // Procesar los intereses para contar su frecuencia
+        $conteoIntereses = $this->contarIntereses($interesesActivos);
+
+        // Devolver los intereses contados en formato JSON
+        header('Content-Type: application/json');
+        echo json_encode($conteoIntereses);
+    }
+    
+    
     
     
     public function confirmar()
@@ -513,6 +531,59 @@ public function eliminarUsuario()
             header('Content-Type: application/json');
             echo json_encode($cursos);
     }
+    
+    
+// OTRAS
+public function contarIntereses($interesesActivos)
+{
+    // Inicializar un array para contar la frecuencia de cada interés
+    $conteoIntereses = array();
+
+    // Función para normalizar intereses
+    function normalizarInteres($interes) {
+        // Convertir a minúsculas
+        $interes = strtolower($interes);
+        // Remover acentos
+        $interes = str_replace(
+            ['á', 'é', 'í', 'ó', 'ú', 'ñ', 'ü'],
+            ['a', 'e', 'i', 'o', 'u', 'n', 'u'],
+            $interes
+        );
+        return $interes;
+    }
+
+    // Recorrer cada cadena de intereses
+    foreach ($interesesActivos as $interes) {
+        // Normalizar la cadena a minúsculas
+        $interes = strtolower($interes);
+        
+        // Dividir los intereses por comas o espacios
+        $interesesSeparados = preg_split('/\s*,\s*|\s+/', $interes); 
+
+        // Recorrer cada interés individual
+        foreach ($interesesSeparados as $interesIndividual) {
+            $interesIndividual = trim($interesIndividual); // Eliminar espacios en blanco
+            // Normalizar el interés
+            $interesIndividual = normalizarInteres($interesIndividual); 
+
+            // Si el interés ya está en el array, incrementar su contador
+            if (array_key_exists($interesIndividual, $conteoIntereses)) {
+                $conteoIntereses[$interesIndividual]++;
+            } else {
+                // Si no está en el array, añadirlo con un contador inicial de 1
+                $conteoIntereses[$interesIndividual] = 1;
+            }
+        }
+    }
+
+    // Ordenar los intereses de mayor a menor
+    arsort($conteoIntereses);
+
+    return $conteoIntereses;
+}
+
+
+
 
 
      private function isAjaxRequest()
