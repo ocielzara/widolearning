@@ -7,6 +7,7 @@ class AdministradorsController
     public function __construct()
     {
         require_once "Models/AdministradorsModel.php";
+        require_once "Models/UsuariosModel.php";
     }
     
     public function index()
@@ -204,6 +205,49 @@ class AdministradorsController
         }
     }
     
+    //OPERACION ACTUALIZACION
+    public function updateUsuario()
+    {
+        session_start();
+        
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $json_data = file_get_contents('php://input');
+            $data = json_decode($json_data, true);
+
+            $nombre = strtolower($data['nombre']);
+            $edad = $data['edad'];
+            $telefono = $data['telefono'];
+            $correo = filter_var($data['correo'], FILTER_SANITIZE_EMAIL);
+            $interesesSeleccionados = $data['intereses'];
+            $interesesComoTexto = implode(" ", $interesesSeleccionados);
+            $idUsuario = $data['idUsuario'];
+
+            $model = new UsuarioModel();
+            $mensaje = $model->updateUsuario($nombre, $correo, $edad, $telefono, $interesesComoTexto, $idUsuario);
+            header('Content-Type: application/json');
+            if ($mensaje === "La actualizacion fue exitosa") {
+                
+               // En lugar de redirigir aquí, responde con el éxito y la URL
+                $response = array(
+                    'success' => true,
+                    'message' => 'Actualizacion exitosa',
+                    'redirect' => 'index.php?c=Administradors&a=vistaUsuarios&id=' . $_SESSION['id_usuario']
+                );
+
+                echo json_encode($response);
+                exit;
+            } else {
+                // Hubo un problema durante el registro
+                $_SESSION['mensaje_registro'] = $mensaje;
+                echo json_encode(array('success' => false, 'error' => $mensaje));
+                exit;
+            }
+        } else {
+            header('Location: index.php');
+            exit;
+        }
+    }
+    
     
 
     //CARGAR VISTA
@@ -251,6 +295,28 @@ class AdministradorsController
     public function crearMentorVista()
     {
         require_once "Views/administrador/mentor/crearMentores.php";
+    }
+    
+    //CARGA VISTA
+    public function edit()
+    {
+        require_once "Views/administrador/usuario/edit.php";
+     
+    }
+    
+    //REGRESA INFORMACION
+    public function consultaUsuario()
+    {
+        if (isset($_GET['idUsuario'])) {
+            $idUsuario = $_GET['idUsuario'];
+            $model = new UsuarioModel();
+            $get = $model->getUsuario($idUsuario);
+
+            header('Content-Type: application/json');
+            echo json_encode($get);
+        } else {
+            echo json_encode(["error" => "No se proporcionó el ID"]);
+        }
     }
     
     //REGRESAR INFORMACION 

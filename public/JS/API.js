@@ -70,6 +70,7 @@ window.onload = function () {
   obtenerTopMentor()
   obtenerTopCurso()
   obtenerPrediccionInteres()
+  obtenerUsuarioEdit(idUsuario)
 };
 
 
@@ -625,7 +626,12 @@ function obtenerUsuarioAdmin(idAdministrador) {
             <td>${item.telefono}</td>
             <td>${item.interes}</td>
             <td>${item.correo_electronico}</td>
-            <td><button class="btn btn-primary" onclick="eliminarUsuario(${item.id_usuario})">Eliminar</button></td>
+            <td>
+              <div class="btn-container">
+                <button class="btn btn-primary" onclick="eliminarUsuario(${item.id_usuario})">Eliminar</button>
+                <button class="btn btn-primary" onclick="editUsuario(${item.id_usuario})">Editar</button>
+              </div>
+            </td>
           `;
 
           contenedor.appendChild(row);
@@ -635,6 +641,43 @@ function obtenerUsuarioAdmin(idAdministrador) {
         row.innerHTML = '<td colspan="6">No hay datos disponibles</td>';
         contenedor.appendChild(row);
       }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
+}
+
+function editUsuario(idUsuario) {
+  const url = `${baseUrl}/index.php?c=Administradors&a=edit&idUsuario=${idUsuario}`;
+  window.location.href = url;
+}
+
+//MOSTRAR USUARIO EN EL PORTAL ADMINISTRADOR
+function obtenerUsuarioEdit(idUsuario) {
+  fetch(`${baseUrl}/index.php?c=Administradors&a=consultaUsuario&idUsuario=${encodeURIComponent(idUsuario)}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener los cursos. Código de estado: " + response.status);
+      }
+      return response.json();
+    })
+    .then((data) => {
+        // Asigna los valores a los campos del formulario
+      document.getElementById('nombreUsuarioAd').value = data.nombre || '';
+      document.getElementById('edadUsuarioAd').value = data.edad || '';
+      document.getElementById('correoUsuarioAd').value = data.correo_electronico || '';
+      document.getElementById('telefonoUsuarioAd').value = data.telefono || '';
+
+      // Para intereses, revisamos y marcamos las casillas correspondientes
+      const interesesArray = data.interes ? data.interes.split(' ') : [];
+      const checkboxes = document.querySelectorAll('input[name="intereses[]"]');
+
+      checkboxes.forEach((checkbox) => {
+        if (interesesArray.includes(checkbox.value)) {
+          checkbox.checked = true;
+        }
+      });
+ 
     })
     .catch((error) => {
       console.error("Error en la solicitud:", error);
@@ -2353,3 +2396,126 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("editFormAdmi").addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+    // Obtener el idUsuario de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const idUsuario = urlParams.get('idUsuario'); // Aquí se obtiene el idUsuario
+
+    //alert("¡Se ha presionado el botón de Registrarse!"); // Depuración para verificar el evento submit
+
+    const nombre = document.getElementById("nombreUsuarioAd").value;
+    const edad = document.getElementById("edadUsuarioAd").value;
+    const correo = document.getElementById("correoUsuarioAd").value;
+    const telefono = document.getElementById("telefonoUsuarioAd").value;
+    const intereses = document.querySelectorAll(
+      'input[name="intereses[]"]:checked'
+    );
+    const selectedIntereses = [];
+
+    intereses.forEach(function (checkbox) {
+      selectedIntereses.push(checkbox.value);
+    });
+
+    const nombreError = document.getElementById("nombre-error");
+    const edadError = document.getElementById("edad-error");
+    const correoError = document.getElementById("correo-error");
+    const telefonoError = document.getElementById("telefono-error");
+    const interesesError = document.getElementById("intereses-error");
+    let isValid = true;
+
+    if (nombre === "" || /\d/.test(nombre)) {
+      nombreError.textContent = "Favor de ingresar un nombre";
+      isValid = false;
+    }
+
+    if (edad === "") {
+      edadError.textContent = "Favor de ingresar su edad";
+      isValid = false;
+    }
+
+    if (correo === "" || !correo.includes("@")) {
+      correoError.textContent = "Favor de ingresar un correo valido";
+      isValid = false;
+    }
+
+    if (telefono === "" || telefono.length < 9) {
+      telefonoError.textContent = "Favord de ingresar un numero de telefono";
+      isValid = false;
+    }
+    
+    if (selectedIntereses.length < 2) {
+      interesesError.textContent = "Favor de seleccionar mas de dos interese";
+      isValid = false;
+    }
+    
+    // Muestra los valores capturados en la consola para depuración
+    console.log("Nombre:", nombre);
+    console.log("Edad:", edad);
+    console.log("Correo:", correo);
+    console.log("Teléfono:", telefono);
+    console.log("Intereses seleccionados:", selectedIntereses);
+    console.log("idUsuario:", idUsuario); // Para depuración
+
+    if (isValid) {
+      enviarFormUsuarioAdm(nombre, edad, telefono, correo, selectedIntereses, idUsuario);
+      console.log("Validado");
+    }
+  });
+});
+
+function enviarFormUsuarioAdm(
+  nombre,
+  edad,
+  telefono,
+  correo,
+  selectedIntereses,
+  idUsuario
+) {
+console.log("Enviando datos al servidor..."); // Depuración
+  fetch(`${baseUrl}/index.php?c=Administradors&a=updateUsuario`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      nombre: nombre,
+      edad: edad,
+      telefono: telefono,
+      correo: correo,
+      intereses: selectedIntereses,
+      idUsuario: idUsuario,
+    }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        //alert("Va bien"); // Depuración
+        return response.json();
+      } else {
+        console.error("Error sending data to API:", response);
+        alert("mal response"); // Depuración 
+        throw new Error("Error sending data to API: " + response.statusText);
+      }
+    })
+    .then((data) => {
+    console.log("Respuesta de la API:", data); // Depuración
+      if (data.success) {
+        //alert("Va bien"); // Depuración 
+        console.log("Data sent successfully: " + data.message);
+        // Redirigir a la nueva URL
+        window.location.href = data.redirect; // Usa la URL proporcionada en la respuesta
+      } else {
+        mostrarToastify(data.error, "error");
+      }
+    })
+    .catch((error) => {
+      console.error("Network error:", error);
+      // Show error message to the user
+      mostrarToastify("Network error: " + error.message, "error");
+      alert("mal error"); // Depuración 
+    });
+}

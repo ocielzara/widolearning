@@ -38,6 +38,20 @@ class UsuarioModel
             }
         }
     }
+    
+    public function updateUsuario($nombre, $correo, $edad, $telefono, $interesesComoTexto, $idUsuario)
+    {
+        // Solo actualiza los campos que quieres cambiar
+        $query = "UPDATE usuarios SET nombre = ?, edad = ?, telefono = ?, interes = ?, correo_electronico = ? WHERE id_usuario = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("sisssi", $nombre, $edad, $telefono, $interesesComoTexto, $correo, $idUsuario);
+    
+        if ($stmt->execute()) {
+            return "La actualizacion fue exitosa";
+        } else {
+            return "Error al crear la cuenta. Por favor, inténtalo de nuevo más tarde.";
+        }
+    }
 
     public function validarUsuario($correo, $contrasena)
     {
@@ -269,6 +283,30 @@ class UsuarioModel
 
         return false;
     }
+    
+    public function getUsuario($idUsuario)
+    {
+        $query = "SELECT * FROM usuarios WHERE id_usuario = ?";
+        $stmt = $this->db->prepare($query);
+        
+        // Vincula el parámetro con el valor del ID
+        $stmt->bind_param('i', $idUsuario);
+        
+        // Ejecuta la consulta
+        $stmt->execute();
+        
+        // Obtiene el resultado de la consulta
+        $result = $stmt->get_result();
+        
+        // Comprueba si se encontró un registro
+        if ($result->num_rows > 0) {
+            // Devuelve los datos del usuario
+            return $result->fetch_assoc(); // fetch_assoc obtiene un solo registro como array asociativo
+        } else {
+            return null; // No se encontró el usuario
+        }
+    }
+    
 
     public function actualizarContrasena($idUsuario, $nuevaContrasena)
 {
