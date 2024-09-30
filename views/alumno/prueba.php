@@ -5,22 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda de Citas</title>
     <style>
-       
+        .espacioAgenda {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .agenda {
+            text-align: center;
+        }
+        .header {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        .cell {
+            background-color: #e0f7fa;
+            border: 1px solid #b2ebf2;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 10px;
+        }
+        .cell:hover {
+            background-color: #b2ebf2;
+        }
+        .header-cell {
+            background-color: #00acc1;
+            color: white;
+            font-weight: bold;
+        }
+        .time {
+            font-size: 0.8em;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .navigation button {
+            background-color: #00acc1;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+            border-radius: 10px;
+        }
+        .navigation button:hover {
+            background-color: #007c91;
+        }
+        .current-date {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
     <div class="espacioAgenda">
-        <div class="agenda">
-            <div class="current-date" id="currentDate"></div>
-            <div class="navigation">
-                <button id="prevWeek">Anterior</button>
-                <div class="header" id="timezone"></div>
-                <button id="nextWeek">Siguiente</button>
-            </div>
-            <div class="grid" id="calendar">
-                <!-- Celdas de fechas y horas -->
-            </div>
+    <div class="agenda">
+        <div class="current-date" id="currentDate"></div>
+        <div class="navigation">
+            <button id="prevWeek">Anterior</button>
+            <div class="header" id="timezone"></div>
+            <button id="nextWeek">Siguiente</button>
         </div>
+        <div class="grid" id="calendar">
+            <!-- Celdas de fechas y horas -->
+        </div>
+    </div>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
