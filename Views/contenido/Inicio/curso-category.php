@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <section style="margin-top:-80px; position: relative;">
+    <section style="margin-top:-50px; position: relative;">
         <?php
         // Incluir el archivo de conexión
         require_once __DIR__ . '/../../../Config/database.php'; // Ajusta esta ruta si es necesario

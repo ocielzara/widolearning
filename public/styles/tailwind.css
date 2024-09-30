@@ -46,7 +46,8 @@ body {
   padding: 20px;
   border: 1px solid #888;
   width: 50%;
-  border-radius: 20px; /* Cambia este valor para ajustar la redondez */
+  border-radius: 20px;
+  /* Cambia este valor para ajustar la redondez */
 }
 
 #modalImage {
@@ -81,7 +82,8 @@ body {
   background-repeat: no-repeat;
   /**background-position: center;**/
   /**NUEVO JULIO 24**/
-  background-position: right center; /* Ajusta la posición hacia la derecha */
+  background-position: right center;
+  /* Ajusta la posición hacia la derecha */
   /**fin**/
   background-size: contain;
 }
@@ -142,6 +144,7 @@ body {
   box-shadow: 2px 2px 3px #999;
   z-index: 100;
 }
+
 .float:hover {
   text-decoration: none;
   color: #25d366;
@@ -153,11 +156,15 @@ body {
 }
 
 a {
-  text-decoration: none; /* Remove default underline */
-  border: none; /* Remove default border */
+  text-decoration: none;
+  /* Remove default underline */
+  border: none;
+  /* Remove default border */
 }
+
 a:hover {
-  color: inherit; /* Keep the default text color on hover */
+  color: inherit;
+  /* Keep the default text color on hover */
   text-decoration: none;
 }
 
@@ -165,10 +172,12 @@ a:hover {
 
 .containderCard {
   width: 320px;
-  margin-right: 0.5rem; /* Cambiado a margin-right */
+  margin-right: 0.5rem;
+  /* Cambiado a margin-right */
   overflow: hidden;
   border-radius: 2rem;
-  flex-shrink: 0; /* Asegura que las tarjetas no se reduzcan */
+  flex-shrink: 0;
+  /* Asegura que las tarjetas no se reduzcan */
 }
 
 /* El sub contenido de la tarjeta */
@@ -189,14 +198,17 @@ a:hover {
 .cardImage img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Cambia a cover para mantener la proporción */
+  object-fit: cover;
+  /* Cambia a cover para mantener la proporción */
 }
 
 .cardImageMentor {
   width: 100%;
   height: 15rem;
-  overflow: hidden; /* Para ocultar cualquier parte de la imagen que exceda el contenedor */
-  border-top-left-radius: 0px; /* Borde redondeado en la esquina superior izquierda */
+  overflow: hidden;
+  /* Para ocultar cualquier parte de la imagen que exceda el contenedor */
+  border-top-left-radius: 0px;
+  /* Borde redondeado en la esquina superior izquierda */
 }
 
 .cardImageMentor img {
@@ -459,207 +471,348 @@ h3 {
 }
 
 .hover-item:hover {
-  background-color: #edf2f7; /* Color de fondo al hacer hover */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra al hacer hover */
+  background-color: #edf2f7;
+  /* Color de fondo al hacer hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Sombra al hacer hover */
+}
+
+/*CALENDARIO*/
+.mentor-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.mentor-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mentor-profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.mentor-photo {
+  width: 80px; /* Ajusta el tamaño según necesites */
+  height: 80px; /* Ajusta el tamaño según necesites */
+  overflow: hidden;
+  border-radius: 50%;
+  border: 2px solid #007bff; /* Borde azul alrededor de la foto */
+}
+
+.mentor-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mentor-name {
+  margin-left: 20px; /* Espaciado entre foto y nombre */
+  font-size: 21px;
+  font-weight: bold;
+  color: #333; /* Color de texto */
+  margin-top: 10px;
+}
+
+.mentor-details {
+  margin-left: 70px; /* Espaciado entre foto y nombre */
+  font-size: 15px;
+  font-weight: bold;
+  color: #555; /* Color de texto */
+}
+
+.specialty-button,
+.portal-button {
+  margin: 5px;
+  padding: 8px 15px; /* Mayor tamaño de botones */
+  border-radius: 25px; /* Bordes más redondeados */
+  cursor: pointer;
+  background-color: #007bff; /* Color de fondo del botón */
+  color: white; /* Color de texto */
+  border: none; /* Sin borde */
+  transition: background-color 0.3s, transform 0.2s; /* Transición para hover */
+}
+
+.specialty-button:hover,
+.portal-button:hover {
+  background-color: #0056b3; /* Color al pasar el ratón */
+  transform: scale(1.05); /* Efecto de aumento en hover */
+}
+
+.agenda-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.agenda {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.current-date {
+  margin-bottom: 10px;
+  font-size: 1.5em; /* Aumentar tamaño de fuente */
+  text-align: center;
+  color: #007bff; /* Color del texto */
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}
+
+.navigation button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 0.9em;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s; /* Transición para hover */
+}
+
+.navigation button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Efecto de aumento en hover */
+}
+
+.header {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #007bff;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.cell {
+  background-color: #e8f4f8;
+  border: 1px solid #b3e5fc;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Transición para hover */
+  border-radius: 10px;
+  text-align: center;
+  color: #555;
+}
+
+.cell:hover {
+  background-color: #b3e5fc;
+  transform: scale(1.02); /* Efecto de aumento en hover */
+}
+
+.header-cell {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.time {
+  font-size: 0.9em;
+  margin-top: 5px;
 }
 
 .espacioAgenda {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start; /* Alineación a la izquierda */
-            /**height: 100vh;*/
-            margin: 0;
-            padding-left: 20%; /* Espacio adicional a la izquierda */
-        }
-        .agenda {
-            text-align: center;
-        }
-        .header {
-            font-size: 0.9em;
-            margin-bottom: 10px;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-        }
-        .cell {
-            background-color: #e0f7fa;
-            border: 1px solid #b2ebf2;
-            padding: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            border-radius: 10px;
-        }
-        .cell:hover {
-            background-color: #b2ebf2;
-        }
-        .header-cell {
-            background-color: #00acc1;
-            color: white;
-            font-weight: bold;
-            font-size: 0.7em;
-        }
-        .time {
-            font-size: 0.7em;
-        }
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        .navigation button {
-            background-color: #00acc1;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 0.7em;
-            border-radius: 10px;
-        }
-        .navigation button:hover {
-            background-color: #007c91;
-        }
-        .current-date {
-            margin-bottom: 10px;
-            font-size: 1em;
-        }
-        
-        
-    .modalCompra {
-        display: none;
-        position: fixed;
-        z-index: 1000; /* Asegúrate de que el z-index sea alto */
-        padding-top: 60px;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-  
-    }
-
-    .modal-contentCompra {
-        background-color: #fefefe;
-        margin: 5% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 50%;
-        border-radius: 20px; /* Ajusta el valor según tus necesidades */
-    }
-
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-    
-    .button-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 20px; /* Ajusta el valor para separar más o menos los botones */
-  padding: 5px; /* Ajusta el valor para centrar verticalmente */
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-    .payment-options {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+@media (max-width: 768px) {
+  .grid {
+      grid-template-columns: repeat(3, 1fr); /* 3 columnas en tablets */
+      gap: 5px; /* Espaciado reducido */
+  }
 
-    .payment-option {
-      flex: 1;
-      text-align: center;
-      font-size: 0.9rem;
-    }
+  .cell {
+      font-size: 0.75em; /* Tamaño de fuente aún más pequeño */
+      padding: 4px; /* Ajustar padding */
+  }
+}
 
-    .payment-option.left {
-      text-align: left;
-    }
+@media (max-width: 480px) {
+  .grid {
+      grid-template-columns: repeat(2, 1fr); /* 2 columnas en móviles */
+      gap: 5px; /* Espaciado reducido */
+  }
 
-    .payment-option.right {
-      text-align: left;
-    }
-    
-    .logo-wido-rutaAprendizaje {
-    width: 150px;
-    /* Ajusta el tamaño según sea necesario */
-    height: auto;
-    /* Mantiene la proporción de la imagen */
-    position: relative;
-    z-index: 20;
+  .cell {
+      font-size: 0.6em; /* Tamaño de fuente más pequeño */
+      padding: 2px; /* Ajustar padding */
+  }
+
+  .current-date {
+      font-size: 0.9em; /* Tamaño de fuente reducido para la fecha actual */
+  }
+
+  .navigation button {
+      padding: 4px 6px; /* Ajustar el tamaño del botón */
+      font-size: 0.6em; /* Ajustar tamaño de fuente */
+  }
+}
+
+
+.modalCompra {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  /* Asegúrate de que el z-index sea alto */
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+
+}
+
+.modal-contentCompra {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  border-radius: 20px;
+  /* Ajusta el valor según tus necesidades */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  /* Ajusta el valor para separar más o menos los botones */
+  padding: 5px;
+  /* Ajusta el valor para centrar verticalmente */
+}
+
+.payment-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payment-option {
+  flex: 1;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.payment-option.left {
+  text-align: left;
+}
+
+.payment-option.right {
+  text-align: left;
+}
+
+.logo-wido-rutaAprendizaje {
+  width: 150px;
+  /* Ajusta el tamaño según sea necesario */
+  height: auto;
+  /* Mantiene la proporción de la imagen */
+  position: relative;
+  z-index: 20;
 }
 
 .icon-circle-ruta {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80px;
-    height: 80px;
-    background-color: #D7F9FF;
-    border-radius: 50%;
-    margin-right: 1rem;
-    /*margin-bottom: -10rem;*/
-    box-shadow: 10px 1px 4px rgba(0, 0, 0, 0.25);
-    position: relative;
-    z-index: 10;
-    /* Asegura que esté encima del .icon-content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background-color: #D7F9FF;
+  border-radius: 50%;
+  margin-right: 1rem;
+  /*margin-bottom: -10rem;*/
+  box-shadow: 10px 1px 4px rgba(0, 0, 0, 0.25);
+  position: relative;
+  z-index: 10;
+  /* Asegura que esté encima del .icon-content */
 }
 
 .nav__iconSub {
-    font-size: 1.9rem;
-    color: #000;
+  font-size: 1.9rem;
+  color: #000;
 }
 
 .icon-content-ruta {
-    position: absolute;
-    left: 45%;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: white;
-    padding: 1rem 3rem;
-    border-radius: 40px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    white-space: nowrap;
-    width: 320px;
-    /* Ancho fijo */
-    word-wrap: break-word;
-    /* Rompe las palabras largas para que no desborden */
-    z-index: 1;
-    /* Asegura que esté debajo del .icon-circle */
+  position: absolute;
+  left: 45%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  padding: 1rem 3rem;
+  border-radius: 40px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+  width: 320px;
+  /* Ancho fijo */
+  word-wrap: break-word;
+  /* Rompe las palabras largas para que no desborden */
+  z-index: 1;
+  /* Asegura que esté debajo del .icon-circle */
 }
 
 .contenedor-iconos-ruta {
-    position: relative;
-    /* Establece el contexto de apilamiento */
-    display: flex;
-    /* Asegúrate de que el contenedor sea un flexbox */
-    flex-wrap: wrap;
-    /* Permite que los íconos se ajusten si es necesario */
-    gap: 30px 260px;
-    /* Espaciado entre íconos primer parametro (30) aplica a espacio vertical, segundo parametro aplica a espacio horizontal*/
-    margin-top: 0rem;
-    /* Ajusta según sea necesario */
-    background-color: #c9dbe1;
-    padding: 1rem 1rem;
-    border-top-left-radius: 45px;
-    /* Ajusta el valor según tu diseño */
-    border-top-right-radius: 45px;
-    /* Ajusta el valor según tu diseño */
-    border-bottom-left-radius: 45px;
-    /* Ajusta el valor según tu diseño */
-    border-bottom-right-radius: 45px;
-    /* Ajusta el valor según tu diseño */
+  position: relative;
+  /* Establece el contexto de apilamiento */
+  display: flex;
+  /* Asegúrate de que el contenedor sea un flexbox */
+  flex-wrap: wrap;
+  /* Permite que los íconos se ajusten si es necesario */
+  gap: 30px 260px;
+  /* Espaciado entre íconos primer parametro (30) aplica a espacio vertical, segundo parametro aplica a espacio horizontal*/
+  margin-top: 0rem;
+  /* Ajusta según sea necesario */
+  background-color: #c9dbe1;
+  padding: 1rem 1rem;
+  border-top-left-radius: 45px;
+  /* Ajusta el valor según tu diseño */
+  border-top-right-radius: 45px;
+  /* Ajusta el valor según tu diseño */
+  border-bottom-left-radius: 45px;
+  /* Ajusta el valor según tu diseño */
+  border-bottom-right-radius: 45px;
+  /* Ajusta el valor según tu diseño */
 }
 
 
@@ -668,23 +821,29 @@ h3 {
 
 
 .navbar-creditos {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: white;
-    border-radius: 0 0 15px 15px; /* Bordes redondeados en la parte inferior */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Efecto de sombra */
-    z-index: 1000; /* Asegúrate de que esté encima de otros elementos */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border-radius: 0 0 15px 15px;
+  /* Bordes redondeados en la parte inferior */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Efecto de sombra */
+  z-index: 1000;
+  /* Asegúrate de que esté encima de otros elementos */
 }
 
 .highlighted-bottom-border-creditos {
-    border-bottom: 3px solid #f6ff36; /* Ajusta el grosor y color del borde como desees */
-    padding-bottom: 5px; /* Añade un poco de relleno en la parte inferior para el borde */
+  border-bottom: 3px solid #f6ff36;
+  /* Ajusta el grosor y color del borde como desees */
+  padding-bottom: 5px;
+  /* Añade un poco de relleno en la parte inferior para el borde */
 }
 
 .text-small-creditos {
-    font-size: 1.70rem; /* Ajusta según tus necesidades */
+  font-size: 1.70rem;
+  /* Ajusta según tus necesidades */
 }
 
 /*CAMBIOS SEP-DIC****************/
@@ -692,52 +851,57 @@ h3 {
 /*Tablas administradores y mentores*/
 
 .btn-primary {
-  background-color: #3498db; /* Cambia este color por el que prefieras */
-  border-color: #3498db; /* Cambia este color por el que prefieras */
-  color: white; /* Cambia el color del texto si es necesario */
+  background-color: #3498db;
+  /* Cambia este color por el que prefieras */
+  border-color: #3498db;
+  /* Cambia este color por el que prefieras */
+  color: white;
+  /* Cambia el color del texto si es necesario */
 }
 
 .btn-primary:hover {
-  background-color: #4F7CAC; /* Cambia el color al pasar el mouse */
-  border-color: #4F7CAC; /* Cambia el color al pasar el mouse */
+  background-color: #4F7CAC;
+  /* Cambia el color al pasar el mouse */
+  border-color: #4F7CAC;
+  /* Cambia el color al pasar el mouse */
 }
 
 
 /**crearAsignacion.php**/
 
 .form-container-crearAsignacion {
-    background-color: #ffffff;
-    padding: 20px 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
+  background-color: #ffffff;
+  padding: 20px 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
 }
 
 .form-group-crearAsignacion {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .label-crearAsignacion {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .select-crearAsignacion {
-    width: 100%;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
 }
 
 .section-crearAsignacion {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 40px;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
 }
 
 
@@ -751,6 +915,7 @@ h3 {
     background-repeat: no-repeat;
     background-size: 70%;
   }
+
   .containderCard {
     width: 305px !important;
     margin-inline: 0.5rem !important;
@@ -794,6 +959,7 @@ h3 {
     margin: auto 0;
     font-size: 1.8rem;
   }
+
   .subContentCard {
     width: 23rem;
   }
@@ -805,6 +971,7 @@ h3 {
   .logo-wido {
     margin-inline: auto;
   }
+
   .container-form {
     height: auto;
     flex-direction: row;
@@ -927,6 +1094,7 @@ h3 {
   .swiper-button-prev {
     left: -1rem;
   }
+
   .swiper-button-next {
     right: -1rem;
   }

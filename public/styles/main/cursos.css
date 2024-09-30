@@ -16,6 +16,41 @@
     position: relative;
 }
 
+#searchInput {
+    padding: 10px;             /* Espaciado interno del input */
+    font-size: 16px;           /* Tamaño de la fuente */
+    border-radius: 8px;        /* Bordes redondeados */
+    border: 1px solid #ccc;    /* Bordes con color gris claro */
+    width: 400px;              /* Ancho del input */
+    max-width: 100%;           /* Asegura que el input no sobresalga en pantallas pequeñas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    outline: none;             /* Quita el borde azul cuando el input está enfocado */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Animación suave en el focus */
+  }
+  
+  #searchInput:focus {
+    border-color: #007bff;     /* Color del borde cuando está enfocado (azul) */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Sombra azul cuando está enfocado */
+  }
+  
+
+  #searchInput1 {
+    padding: 10px;             /* Espaciado interno del input */
+    font-size: 16px;           /* Tamaño de la fuente */
+    border-radius: 8px;        /* Bordes redondeados */
+    border: 1px solid #ccc;    /* Bordes con color gris claro */
+    width: 400px;              /* Ancho del input */
+    max-width: 100%;           /* Asegura que el input no sobresalga en pantallas pequeñas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    outline: none;             /* Quita el borde azul cuando el input está enfocado */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Animación suave en el focus */
+  }
+  
+  #searchInput1:focus {
+    border-color: #007bff;     /* Color del borde cuando está enfocado (azul) */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Sombra azul cuando está enfocado */
+  }
+
 h2 {
     margin: 0;
     padding: 0;
@@ -136,6 +171,7 @@ h2 {
     color: #555;
     text-align: left;
     padding: 10px;
+    height: 130px;
 }
 
 .cardFooter1 {
@@ -197,6 +233,13 @@ h2 {
 
 /* Media Queries para responsividad */
 
+@media (max-width: 1424px) {
+
+    .cardText1 {
+        height: 145px;
+    }
+}
+
 @media (max-width: 1224px) {
     .containderCard1 {
         flex: 0 0 calc(25% - 10px);
@@ -220,6 +263,10 @@ h2 {
 
     .line {
         height: 2.5px;
+    }
+
+    .cardText1 {
+        height: 140px;
     }
 }
 

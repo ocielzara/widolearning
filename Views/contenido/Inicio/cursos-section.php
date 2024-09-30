@@ -13,6 +13,11 @@
 
     <!--========== Secciones para los cursos ==========-->
     <section class="corse-container" id="contenido-areas">
+
+        <div style="display:flex; justify-content:right;">
+            <input type="text" id="searchInput1" placeholder="Buscar mentor..." oninput="buscarCursos()">
+        </div>
+
         <div class="subheading">
             <h2>CURSOS CON MAYOR DEMANDA</h2>
             <div class="line-container">
@@ -76,8 +81,8 @@
             <button class="boton-atras" id="prevBtn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
 
             <div id="content-asesorias" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
-                <button   button class="boton-adelante" id="nextBtn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
-            </div>
+            <button button class="boton-adelante" id="nextBtn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
+        </div>
         </div>
 
     </section>

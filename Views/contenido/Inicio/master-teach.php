@@ -11,7 +11,9 @@
 
     <section class="corse-container" id="contenido-master-teach" style="display: none;">
 
-    <input type="text" id="searchInput" placeholder="Buscar mentor..." oninput="buscarMentores()">
+        <div style="display:flex; justify-content:right;">
+            <input type="text" id="searchInput" placeholder="Buscar mentor..." oninput="buscarMentores()">
+        </div>
 
 
         <div class="subheading">
@@ -20,6 +22,7 @@
                 <span class="line"></span>
                 <span class="circle"></span>
             </div>
+
         </div>
 
         <div id="carousel-container">

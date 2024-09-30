@@ -41,7 +41,7 @@
     <?php include 'Views/contenido/Inicio/slider-main.php'; ?>
     <!--==========         ==========-->
 
-    <div style="width:100%; margin-top:-70px;">
+    <div style="width:100%; margin-top:-10px;">
         <div class="max-w-5xl mx-auto my-28">
             <div class="header__container">
                 <div class="header__search">

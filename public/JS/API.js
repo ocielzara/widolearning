@@ -894,7 +894,7 @@ const mostrarAsesorias = (data) => {
         </div>
         <div class="cardContent1">
           <h4 class="cardTitle1">${curso.nombre}</h4>
-          <p class="cardText1">Crea gráficos, diseña envases con especificaciones precisas o dibuja obras de arte.</p>
+          <p class="cardText1">${limitarPalabras(curso.descripcion, 20)}</p> <!-- Límite de palabras -->
         </div>
          <div class="cardFooter1">
             <form action="index.php?c=Usuarios&a=claseMuestraNavegacion" method="post">
@@ -957,7 +957,7 @@ async function mostrarMasCategorias(idUsuario, typoCurso) {
           </div>
           <div class="cardContent1">
             <h4 class="cardTitle1">${curso.nombre}</h4>
-            <p class="cardText1">Crea gráficos, diseña envases con especificaciones precisas o dibuja obras de arte.</p>
+            <p class="cardText1">${limitarPalabras(curso.descripcion, 20)}</p> <!-- Límite de palabras -->
           </div>
           <div class="cardFooter1">
             ${generarBotonSegunEstado(curso.id_curso, curso.nombre, curso.pdf, estado)}
@@ -1000,15 +1000,14 @@ async function obtenerCursos(idUsuario) {
     }
     const cursos = await response.json();
 
-    // Limitar a solo 7 cursos
-    const cursosLimitados = cursos.slice(0, 7);
-    filtrarDatos.push(...cursosLimitados);
+    // No se limita la cantidad de cursos
+    filtrarDatos.push(...cursos);
 
     var carruselcurso = document.getElementById("content-cursos");
     carruselcurso.innerHTML = ''; // Limpiar contenido viejo
 
     // Crear y añadir las tarjetas al contenedor
-    for (const curso of cursosLimitados) {
+    for (const curso of cursos) {  // Se itera sobre todos los cursos
       const estado = await obtenerEstadoInscripcion(idUsuario, curso.id_curso);
 
       var newContent = document.createElement("div");
@@ -1021,7 +1020,7 @@ async function obtenerCursos(idUsuario) {
           </div>
           <div class="cardContent1">
             <h4 class="cardTitle1">${curso.nombre}</h4>
-            <p class="cardText1">Crea gráficos, diseña envases con especificaciones precisas o dibuja obras de arte.</p>
+            <p class="cardText1">${limitarPalabras(curso.descripcion, 20)}</p> <!-- Límite de palabras -->
           </div>
           <div class="cardFooter1">
             ${generarBotonSegunEstado(curso.id_curso, curso.nombre, curso.pdf, estado)}
@@ -1055,11 +1054,13 @@ async function obtenerCursos(idUsuario) {
   }
 }
 
-
-
-
-
-
+function limitarPalabras(texto, limite) {
+  const palabras = texto.split(' '); // Dividir el texto en palabras
+  if (palabras.length > limite) {
+    return palabras.slice(0, limite).join(' ') + '...'; // Tomar solo el número de palabras permitido
+  }
+  return texto; // Si tiene menos palabras que el límite, devolver el texto completo
+}
 
 async function obtenerEstadoInscripcion(idUsuario, idCurso) {
   try {
@@ -1195,6 +1196,21 @@ function buscarMentores() {
   });
 }
 
+
+function buscarCursos() {
+  const searchTerm = document.getElementById('searchInput1').value.toLowerCase();
+  const mentorCards = document.querySelectorAll('#content-cursos .containderCard1');
+
+  mentorCards.forEach(card => {
+    const mentorName = card.querySelector('.cardTitle1').textContent.toLowerCase();
+    
+    if (mentorName.includes(searchTerm)) {
+      card.style.display = ''; // Mostrar la tarjeta si coincide con la búsqueda
+    } else {
+      card.style.display = 'none'; // Ocultar la tarjeta si no coincide
+    }
+  });
+}
   
 
 
@@ -1346,40 +1362,40 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         var newContent = document.createElement("div");
-        newContent.className =
-          "flex sm:flex-row flex-col rounded-3xl p-10 bg-white contentMentor";
+        newContent.className = "mentor-container";
         newContent.innerHTML = `
-                <div class="xl:w-[40%] sm:w-[23%] sm:border-r-2 sm:border-black">
-                    <div class="flex sm:flex-row flex-col">
-                        <div class="sm:w-1/2 2xl:w-[40%] w-40 sm:h-36 h-40 mx-auto">
-                          <img src="${mentorFoto}" class="w-full h-full rounded-full" alt="">
-                        </div>
-                        <div class="sm:w-1/2 my-auto textMentor">
-                            <h1 class="sm:w-16 text-center font-semibold">${mentor.Mentor}</h1>
-                        </div>
+            <div class="mentor-info">
+                <div class="mentor-profile">
+                    <div class="mentor-photo">
+                        <img src="${mentorFoto}" alt="">
                     </div>
-                    <div class="m-5">
-                        <p class="font-bold sm:text-left text-center">Especialista en:</p>
-                        <div class="flex flex-col sm:items-start items-center py-2">
-                            <button class="w-[90%] my-1 h-8 font-semibold">${nombre}</button>
-                            <button class="mt-2 bottonBG font-bold h-8 rounded-full cursor-pointer" onclick="verPerfilMentor(${mentorId})" id="navigateDocente">Ver portal</button>
-                        </div>
+                    <div class="mentor-name">
+                        <h1>${mentor.Mentor}</h1>
                     </div>
                 </div>
-                <div class="espacioAgenda">
-                  <div class="agenda">
-                      <div class="current-date" id="currentDate-${mentorId}"></div>
-                      <div class="navigation">
-                      <button id="prevWeek-${mentorId}">Anterior</button>
-                      <div class="header" id="timezone-${mentorId}"></div>
-                      <button id="nextWeek-${mentorId}">Siguiente</button>
-                      </div>
-                   <div class="grid" id="calendar-${mentorId}">
-                  <!-- Celdas de fechas y horas -->
-                   </div>
-                   </div>
-               </div>
-                `;
+                <div class="mentor-details">
+                    <p>Especialista en:</p>
+                    <div class="mentor-buttons">
+                        <button class="specialty-button">${nombre}</button>
+                        <button class="portal-button" onclick="verPerfilMentor(${mentorId})">Ver portal</button>
+                    </div>
+                </div>
+            </div>
+            <div class="agenda-container">
+                <div class="agenda">
+                    <div class="current-date" id="currentDate-${mentorId}"></div>
+                    <div class="navigation">
+                        <button id="prevWeek-${mentorId}">Anterior</button>
+                        <div class="header" id="timezone-${mentorId}"></div>
+                        <button id="nextWeek-${mentorId}">Siguiente</button>
+                    </div>
+                    <div class="grid" id="calendar-${mentorId}">
+                        <!-- Celdas de fechas y horas -->
+                    </div>
+                </div>
+            </div>
+        `;
+        
         carruselcurso.appendChild(newContent);
 
         const closeButtons = document.querySelectorAll(".close");
@@ -1421,45 +1437,16 @@ document.addEventListener("DOMContentLoaded", function () {
         timezoneElement.textContent = `(-06:00) ${timezone}`;
 
         const daysOfWeek = [
-          "lunes",
-          "martes",
-          "miércoles",
-          "jueves",
-          "viernes",
-          "sábado",
-          "domingo",
+          "lunes","martes","miércoles","jueves","viernes","sábado","domingo",
         ];
         const daysOfWeekShort = [
-          "Lun",
-          "Mar",
-          "Mie",
-          "Jue",
-          "Vie",
-          "Sab",
-          "Dom",
+          "Lun","Mar","Mie","Jue","Vie","Sab","Dom",
         ];
         let startDate = new Date(); // Fecha de inicio como hoy
         startDate.setDate(startDate.getDate() - startDate.getDay() + 1); // Ajusta para comenzar en lunes
 
         const timeSlots = [
-          "08:00",
-          "09:00",
-          "10:00",
-          "11:00",
-          "12:00",
-          "12:30",
-          "13:00",
-          "14:00",
-          "15:00",
-          "15:30",
-          "16:00",
-          "17:00",
-          "17:30",
-          "18:00",
-          "18:30",
-          "19:00",
-          "20:00",
-          "21:00",
+          "08:00","09:00","10:00","11:00","12:00","12:30","13:00","14:00","15:00","15:30","16:00","17:00","17:30","18:00","18:30","19:00","20:00","21:00",
         ];
 
         //NUEVO CAMBIO AGENDA
@@ -1471,81 +1458,78 @@ document.addEventListener("DOMContentLoaded", function () {
         function updateCalendar() {
           calendarElement.innerHTML = "";
           for (let i = 0; i < daysOfWeek.length; i++) {
-            const date = new Date(startDate);
-            date.setDate(startDate.getDate() + i);
-            const headerCell = document.createElement("div");
-            headerCell.classList.add("cell", "header-cell");
-            headerCell.innerHTML = `${daysOfWeekShort[
-              i
-            ].toUpperCase()}<br>${date.getDate()} ${date.toLocaleString("es", {
-              month: "short",
-            })}`;
-            calendarElement.appendChild(headerCell);
+              const date = new Date(startDate);
+              date.setDate(startDate.getDate() + i);
+              const headerCell = document.createElement("div");
+              headerCell.classList.add("cell", "header-cell");
+              headerCell.innerHTML = `${daysOfWeekShort[i].toUpperCase()}<br>${date.getDate()} ${date.toLocaleString("es", { month: "short" })}`;
+              calendarElement.appendChild(headerCell);
           }
-
-          for (let i = 0; i < timeSlots.length; i++) {
-            for (let j = 0; j < daysOfWeek.length; j++) {
-              const cell = document.createElement("div");
-              cell.classList.add("cell", "time");
+      
+          for (let j = 0; j < daysOfWeek.length; j++) {
               const day = daysOfWeek[j];
-              console.log(disponibilidades[day]);
-              //CAMBIOS AJENDA
+              const dayElement = document.createElement("div");
+              dayElement.classList.add("cell", "day-column"); // Clase para el día
               const date = new Date(startDate);
               date.setDate(startDate.getDate() + j);
-              const cellDateTime = new Date(`${date.toDateString()} ${timeSlots[i]}`);
-              // Mostrar en la consola
-              console.log(`Fecha y hora combinadas: ${cellDateTime}`);
-              //FIN AGENDA
-              if (
-                disponibilidades[day] &&
-                disponibilidades[day].includes(timeSlots[i]) && cellDateTime >= dateLimit
-              ) {
-                cell.textContent = timeSlots[i];
-                // Añadir identificador a la celda
-                cell.dataset.hora = timeSlots[i];
-                cell.dataset.dia = daysOfWeek[j];
-                cell.dataset.mentorId = mentorId;
-                cell.dataset.mentorName = mentorName;
-                cell.dataset.cursoName = cursoName;
-                // Añadir evento de clic
-                cell.addEventListener("click", function () {
-                  if (!isLoggedIn) {
-                    showLoginModal();
-                    return;
+              let hasAvailableSlots = false; // Variable para verificar si hay horarios disponibles
+      
+              for (let i = 0; i < timeSlots.length; i++) {
+                  const cell = document.createElement("div");
+                  cell.classList.add("cell", "time");
+                  const cellDateTime = new Date(`${date.toDateString()} ${timeSlots[i]}`);
+      
+                  if (disponibilidades[day] && disponibilidades[day].includes(timeSlots[i]) && cellDateTime >= dateLimit) {
+                      cell.textContent = timeSlots[i];
+                      cell.dataset.hora = timeSlots[i];
+                      cell.dataset.dia = day;
+                      cell.dataset.mentorId = mentorId;
+                      cell.dataset.mentorName = mentorName;
+                      cell.dataset.cursoName = cursoName;
+      
+                      // Añadir evento de clic
+                      cell.addEventListener("click", function () {
+                          if (!isLoggedIn) {
+                              showLoginModal();
+                              return;
+                          }
+                          // Obtener los datos directamente de los atributos dataset de la celda
+                          const mentorId = this.dataset.mentorId;
+                          const mentorName = this.dataset.mentorName;
+                          const cursoName = this.dataset.cursoName;
+                          const hora = this.dataset.hora;
+                          const dia = this.dataset.dia;
+      
+                          document.getElementById("nextBtn").dataset.mentorId = mentorId;
+                          document.getElementById("nextBtn").dataset.hora = hora;
+                          document.getElementById("nextBtn").dataset.dia = dia;
+                          document.getElementById("nextBtn").dataset.mentorName = mentorName;
+                          document.getElementById("nextBtn").dataset.cursoName = cursoName;
+      
+                          var additionalInfoModal = document.getElementById("additionalInfoModal");
+                          additionalInfoModal.style.display = "block";
+                      });
+      
+                      dayElement.appendChild(cell); // Añadir la celda solo si hay disponibilidad
+                      hasAvailableSlots = true; // Hay al menos un horario disponible
                   }
-                  // Obtener los datos directamente de los atributos dataset de la celda
-                  const mentorId = this.dataset.mentorId;
-                  const mentorName = this.dataset.mentorName;
-                  const cursoName = this.dataset.cursoName;
-                  const hora = this.dataset.hora;
-                  const dia = this.dataset.dia;
-
-                  if (mentorName && cursoName && hora && dia) {
-                    document.getElementById("nextBtn").dataset.mentorId =
-                      mentorId;
-                    document.getElementById("nextBtn").dataset.hora = hora;
-                    document.getElementById("nextBtn").dataset.dia = dia;
-                    document.getElementById("nextBtn").dataset.mentorName =
-                      mentorName;
-                    document.getElementById("nextBtn").dataset.cursoName =
-                      cursoName;
-
-                    var additionalInfoModal = document.getElementById(
-                      "additionalInfoModal"
-                    );
-                    additionalInfoModal.style.display = "block";
-                  } else {
-                    console.error("Faltan datos para mostrar en el modal.");
-                  }
-                });
-              } else {
-                cell.style.padding = "5px"; // Aplicar padding de 1px a las celdas vacías
-                //cell.textContent = "";
               }
-              calendarElement.appendChild(cell);
-            }
+      
+              // Si no hay horarios disponibles, mostrar un guion
+              if (!hasAvailableSlots) {
+                  const emptyCell = document.createElement("div");
+                  emptyCell.classList.add("cell", "time");
+                  emptyCell.textContent = "-"; // Mostrar guion
+                  dayElement.appendChild(emptyCell);
+              }
+      
+              // Añadir la columna del día solo si tiene celdas
+              if (dayElement.children.length > 0) {
+                  calendarElement.appendChild(dayElement);
+              }
           }
-        }
+      }
+      
 
         function updateCurrentDate() {
           const today = new Date();
@@ -1713,6 +1697,9 @@ document.addEventListener("DOMContentLoaded", function () {
     agendadoModal.style.display = "none";
   });
 
+
+  
+
   function showLoginModal() {
     var loginModal = document.getElementById("loginModal");
     loginModal.style.display = "block";
@@ -1775,34 +1762,42 @@ document.addEventListener("DOMContentLoaded", function () {
       const mentorName3 = document.getElementById("mentor-cursos");
       var carruselcurso = document.getElementById("mentor-cursos-carrusel");
 
+      carruselcurso.innerHTML = '';
+
       mentorName.textContent = `PORTAL DE ${data[0].Mentor}`;
       mentorName2.textContent = `¡Hola, soy ${data[0].Mentor}!`;
       mentorBio.textContent = data[0].MentorAcerca;
-      mentorName3.textContent = `¿Que otros cursos imparte ${data[0].Mentor}?`;
+      mentorName3.textContent = `¿Qué otros cursos imparte ${data[0].Mentor}?`;
       mentorPhoto.src = `public/images/docente/${data[0].MentorFoto}/${data[0].MentorFoto}-description.png`;
-      data.forEach((curso) => {
-        var newContent = document.createElement("div");
-        newContent.className = "containderCard w-[320px]";
-        newContent.innerHTML = `
-          <div class="subContentCard">
-            <div class="cardImage">
-              <img src="public/${curso.CursoFoto}" alt="Descripción de la imagen">
+
+      // Verificar si hay datos
+      if (Array.isArray(data) && data.length > 0) {
+        // Filtrar cursos únicos
+        const uniqueCursos = Array.from(new Set(data.map(curso => curso.id_curso)))
+                                  .map(id => data.find(curso => curso.id_curso === id));
+
+        uniqueCursos.forEach((curso) => {
+          var newContent = document.createElement("div");
+          newContent.className = "containderCard w-[320px]";
+          newContent.innerHTML = `
+            <div class="subContentCard">
+              <div class="cardImage">
+                <img src="public/${curso.CursoFoto}" alt="Descripción de la imagen">
+              </div>
+              <div class="cardContent rounded-full">
+                ${generarBotonSegunEstado(curso.id_curso, curso.Curso, curso.pdf, curso.estado)}
+              </div>
             </div>
-            <div class="cardContent rounded-full">
-              <button class="button1" onclick="redirigirClaseMuestra(${curso.id_curso}, '${curso.Curso}')">
-                <span>Clase muestra</span>
-              </button>
-              <button class="button2" onclick="openPDF('public/${curso.pdf}')">
-                <span>Temario</span>
-              </button>
-            </div>
-          </div>
-        `;
-        carruselcurso.appendChild(newContent);
-      });
+          `;
+          carruselcurso.appendChild(newContent);
+        });
+      } else {
+        console.warn("No hay cursos disponibles para este mentor.");
+      }
     })
     .catch((error) => console.error("Error al obtener los datos:", error));
 });
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -1901,20 +1896,22 @@ function enviarForm(
     .then((data) => {
       if (data.success) {
         console.log("Data sent successfully: " + data.message);
-        // Optionally, reset the form
-        document.getElementById("registroForm").reset();
-        // Show success message to the user
-        mostrarToastify(data.message, "success");
+        // Redirigir a la función iniciarSesion
+        iniciarSesion();
       } else {
         mostrarToastify(data.error, "error");
+        // Redirigir a la función iniciarSesion en caso de error
+        //iniciarSesion();
       }
     })
     .catch((error) => {
       console.error("Network error:", error);
-      // Show error message to the user
-      mostrarToastify("Network error: " + error.message, "error");
+      mostrarToastify("Network error: " + error.message);
+      // Redirigir a la función iniciarSesion en caso de error
+      //iniciarSesion();
     });
 }
+
 
 function login() {
   const correo = document.getElementById("email").value;
