@@ -7,6 +7,7 @@ class AdministradorsController
     public function __construct()
     {
         require_once "Models/AdministradorsModel.php";
+        require_once "Models/UsuariosModel.php";
     }
     
     public function index()
@@ -204,6 +205,49 @@ class AdministradorsController
         }
     }
     
+    //OPERACION ACTUALIZACION
+    public function updateUsuario()
+    {
+        session_start();
+        
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $json_data = file_get_contents('php://input');
+            $data = json_decode($json_data, true);
+
+            $nombre = strtolower($data['nombre']);
+            $edad = $data['edad'];
+            $telefono = $data['telefono'];
+            $correo = filter_var($data['correo'], FILTER_SANITIZE_EMAIL);
+            $interesesSeleccionados = $data['intereses'];
+            $interesesComoTexto = implode(" ", $interesesSeleccionados);
+            $idUsuario = $data['idUsuario'];
+
+            $model = new UsuarioModel();
+            $mensaje = $model->updateUsuario($nombre, $correo, $edad, $telefono, $interesesComoTexto, $idUsuario);
+            header('Content-Type: application/json');
+            if ($mensaje === "La actualizacion fue exitosa") {
+                
+               // En lugar de redirigir aquí, responde con el éxito y la URL
+                $response = array(
+                    'success' => true,
+                    'message' => 'Actualizacion exitosa',
+                    'redirect' => 'index.php?c=Administradors&a=vistaUsuarios&id=' . $_SESSION['id_usuario']
+                );
+
+                echo json_encode($response);
+                exit;
+            } else {
+                // Hubo un problema durante el registro
+                $_SESSION['mensaje_registro'] = $mensaje;
+                echo json_encode(array('success' => false, 'error' => $mensaje));
+                exit;
+            }
+        } else {
+            header('Location: index.php');
+            exit;
+        }
+    }
+    
     
 
     //CARGAR VISTA
@@ -251,6 +295,28 @@ class AdministradorsController
     public function crearMentorVista()
     {
         require_once "Views/administrador/mentor/crearMentores.php";
+    }
+    
+    //CARGA VISTA
+    public function edit()
+    {
+        require_once "Views/administrador/usuario/edit.php";
+     
+    }
+    
+    //REGRESA INFORMACION
+    public function consultaUsuario()
+    {
+        if (isset($_GET['idUsuario'])) {
+            $idUsuario = $_GET['idUsuario'];
+            $model = new UsuarioModel();
+            $get = $model->getUsuario($idUsuario);
+
+            header('Content-Type: application/json');
+            echo json_encode($get);
+        } else {
+            echo json_encode(["error" => "No se proporcionó el ID"]);
+        }
     }
     
     //REGRESAR INFORMACION 
@@ -361,6 +427,45 @@ class AdministradorsController
         echo json_encode($getTotal);
     }
     
+    //REGRESAR INFORMACION 
+    public function cursoTop()
+    {
+        
+        $model = new AdministradorModel();
+        $getTop = $model->getTopCursos();
+
+        header('Content-Type: application/json');
+        echo json_encode($getTop);
+    }
+    
+    //REGRESAR INFORMACION
+     public function mentorTop()
+    {
+        
+        $model = new AdministradorModel();
+        $getTop = $model->getTopMentores();
+
+        header('Content-Type: application/json');
+        echo json_encode($getTop);
+    }
+    
+    //REGRESAR INFORMACION
+    public function interesUsuario()
+    {
+        
+        $model = new AdministradorModel();
+        $interesesActivos = $model->getAllInteresesActivos();
+        
+        // Procesar los intereses para contar su frecuencia
+        $conteoIntereses = $this->contarIntereses($interesesActivos);
+
+        // Devolver los intereses contados en formato JSON
+        header('Content-Type: application/json');
+        echo json_encode($conteoIntereses);
+    }
+    
+    
+    
     
     public function confirmar()
 {
@@ -452,6 +557,38 @@ public function eliminarMentor()
     }
 }
 
+
+//ELIMINAR USUARIO
+public function eliminarUsuario()
+{
+    
+    // Asegurarse de que se está usando POST para la solicitud
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Capturar los datos del cuerpo de la solicitud JSON
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        // Verificar si los datos vienen en formato JSON
+        if ($data && isset($data['idUsuario'])) {
+            $idUsuario = $data['idUsuario'];
+
+            $model = new AdministradorModel();
+            $resultado = $model->eliminarUsuario($idUsuario);
+
+            header('Content-Type: application/json');
+            echo json_encode($resultado);
+        } else {
+            // Si no hay datos JSON, devolver un error
+            echo json_encode(["error" => "No se proporcionaron los datos necesarios"]);
+        }
+    } else {
+        // Si no es una solicitud POST, devolver un error
+        header('HTTP/1.1 405 Method Not Allowed');
+        echo json_encode(["error" => "Método no permitido"]);
+    }
+}
+
+
+
     public function allCursos()
     {
             $model = new AdministradorModel();
@@ -460,6 +597,59 @@ public function eliminarMentor()
             header('Content-Type: application/json');
             echo json_encode($cursos);
     }
+    
+    
+// OTRAS
+public function contarIntereses($interesesActivos)
+{
+    // Inicializar un array para contar la frecuencia de cada interés
+    $conteoIntereses = array();
+
+    // Función para normalizar intereses
+    function normalizarInteres($interes) {
+        // Convertir a minúsculas
+        $interes = strtolower($interes);
+        // Remover acentos
+        $interes = str_replace(
+            ['á', 'é', 'í', 'ó', 'ú', 'ñ', 'ü'],
+            ['a', 'e', 'i', 'o', 'u', 'n', 'u'],
+            $interes
+        );
+        return $interes;
+    }
+
+    // Recorrer cada cadena de intereses
+    foreach ($interesesActivos as $interes) {
+        // Normalizar la cadena a minúsculas
+        $interes = strtolower($interes);
+        
+        // Dividir los intereses por comas o espacios
+        $interesesSeparados = preg_split('/\s*,\s*|\s+/', $interes); 
+
+        // Recorrer cada interés individual
+        foreach ($interesesSeparados as $interesIndividual) {
+            $interesIndividual = trim($interesIndividual); // Eliminar espacios en blanco
+            // Normalizar el interés
+            $interesIndividual = normalizarInteres($interesIndividual); 
+
+            // Si el interés ya está en el array, incrementar su contador
+            if (array_key_exists($interesIndividual, $conteoIntereses)) {
+                $conteoIntereses[$interesIndividual]++;
+            } else {
+                // Si no está en el array, añadirlo con un contador inicial de 1
+                $conteoIntereses[$interesIndividual] = 1;
+            }
+        }
+    }
+
+    // Ordenar los intereses de mayor a menor
+    arsort($conteoIntereses);
+
+    return $conteoIntereses;
+}
+
+
+
 
 
      private function isAjaxRequest()

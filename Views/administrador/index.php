@@ -15,6 +15,12 @@
     <link rel="stylesheet" href="styles/output.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>Index</title>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
 </head>
 
 <style>
@@ -131,11 +137,64 @@ html, body {
     overflow: hidden; /* Oculta cualquier contenido que sobresalga */
 }
 
-.administrador-main .recent_order table{
+.administrador-main .recent_order_mentor table{
     background-color: var(--clr-white);
     width: 100%;
     border-radius: var(--card-border-radius);
 }
+
+.administrador-main .recent_order_curso table{
+    background-color: var(--clr-white);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+}
+
+thead th {
+    text-align: left;
+    padding: 10px; /* Añade algo de padding para que el texto no se vea pegado a los bordes */
+    background-color: #d5d5d5; /* Cambia el color de fondo del encabezado si es necesario */
+}
+
+tbody td {
+    text-align: left;
+    padding: 10px;
+    background-color: var(--clr-white);
+    border-top: 1px solid #e0e0e0; /* Línea para separar las filas */
+}
+
+thead th:nth-child(1), tbody td:nth-child(1) {
+    width: 40%; /* La primera columna será del 40% */
+}
+
+thead th:nth-child(2), tbody td:nth-child(2) {
+    width: 30%; /* La segunda columna será del 30% */
+}
+    
+thead th:nth-child(3), tbody td:nth-child(3) {
+    width: 30%; /* La tercera columna será del 30% */
+}
+
+ .progress-bar {
+        width: 100%;
+        background-color: #e0e0e0;
+        border-radius: 20px;
+        height: 20px;
+        margin-top: 5px;
+    }
+
+    .progress-fill {
+        height: 100%;
+        border-radius: 20px;
+    }
+    
+#interesesPieChart {
+    display: block;  /* Asegúrate de que se comporte como un bloque */
+    margin: 0 auto; /* Centrar el canvas horizontalmente */
+    width: 500px;  /* Ajusta el ancho visual */
+    height: 500px; /* Ajusta la altura visual */
+}
+    
+    
 </style>
 
 <body>
@@ -203,52 +262,40 @@ html, body {
 
             </div>
 
-            <div class="recent_order">
+            <div class="recent_order_mentor">
                 <h2>Top mentores</h2>
                 <table>
                     <thead>
                         <tr>
-                            <th>Product name</th>
-                            <th>product number</th>
-                            <th>Payment</th>
-                            <th>status</th>
+                            <th>Nombre Mentor</th>
+                            <th>Inscripciones</th>
+                            <th>Progreso</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>mini usb</td>
-                            <td>465</td>
-                            <td>Due</td>
-                            <td class="waring">Peding</td>
-                            <td class="primary">Details</td>
-                        </tr>
+                        <!-- Las filas se llenarán dinámicamente aquí -->
                     </tbody>
                 </table>
             </div>
             
-            <div class="recent_order">
+            <div class="recent_order_curso">
                 <h2>Top cursos</h2>
                 <table>
                     <thead>
                         <tr>
-                            <th>Product name</th>
-                            <th>product number</th>
-                            <th>Payment</th>
-                            <th>status</th>
+                            <th>Nombre Curso</th>
+                            <th>Inscripciones</th>
+                            <th>Progreso</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>mini usb</td>
-                            <td>465</td>
-                            <td>Due</td>
-                            <td class="waring">Peding</td>
-                            <td class="primary">Details</td>
-                        </tr>
+                        <!-- Las filas se llenarán dinámicamente aquí -->
                     </tbody>
                 </table>
             </div>
         </div>
+        
+        <canvas id="interesesPieChart"></canvas>
     </main>
 
 

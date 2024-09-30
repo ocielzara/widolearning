@@ -66,6 +66,11 @@ window.onload = function () {
   obtenerHistorialClaseMuestra(id);
   const mentorId = urlParams.get('mentorId');
   obtenerDatosDisponibilidadMentor(mentorId);
+  obtenerTotalUsuarios() 
+  obtenerTopMentor()
+  obtenerTopCurso()
+  obtenerPrediccionInteres()
+  obtenerUsuarioEdit(idUsuario)
 };
 
 
@@ -621,6 +626,12 @@ function obtenerUsuarioAdmin(idAdministrador) {
             <td>${item.telefono}</td>
             <td>${item.interes}</td>
             <td>${item.correo_electronico}</td>
+            <td>
+              <div class="btn-container">
+                <button class="btn btn-primary" onclick="eliminarUsuario(${item.id_usuario})">Eliminar</button>
+                <button class="btn btn-primary" onclick="editUsuario(${item.id_usuario})">Editar</button>
+              </div>
+            </td>
           `;
 
           contenedor.appendChild(row);
@@ -629,6 +640,71 @@ function obtenerUsuarioAdmin(idAdministrador) {
         var row = document.createElement('tr');
         row.innerHTML = '<td colspan="6">No hay datos disponibles</td>';
         contenedor.appendChild(row);
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
+}
+
+function editUsuario(idUsuario) {
+  const url = `${baseUrl}/index.php?c=Administradors&a=edit&idUsuario=${idUsuario}`;
+  window.location.href = url;
+}
+
+//MOSTRAR USUARIO EN EL PORTAL ADMINISTRADOR
+function obtenerUsuarioEdit(idUsuario) {
+  fetch(`${baseUrl}/index.php?c=Administradors&a=consultaUsuario&idUsuario=${encodeURIComponent(idUsuario)}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener los cursos. Código de estado: " + response.status);
+      }
+      return response.json();
+    })
+    .then((data) => {
+        // Asigna los valores a los campos del formulario
+      document.getElementById('nombreUsuarioAd').value = data.nombre || '';
+      document.getElementById('edadUsuarioAd').value = data.edad || '';
+      document.getElementById('correoUsuarioAd').value = data.correo_electronico || '';
+      document.getElementById('telefonoUsuarioAd').value = data.telefono || '';
+
+      // Para intereses, revisamos y marcamos las casillas correspondientes
+      const interesesArray = data.interes ? data.interes.split(' ') : [];
+      const checkboxes = document.querySelectorAll('input[name="intereses[]"]');
+
+      checkboxes.forEach((checkbox) => {
+        if (interesesArray.includes(checkbox.value)) {
+          checkbox.checked = true;
+        }
+      });
+ 
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
+}
+
+function eliminarUsuario(idUsuario) {
+  const data = {
+    idUsuario: idUsuario
+  };
+
+  console.log("Datos a enviar:", data); // Verificar datos antes de enviar
+  fetch(`${baseUrl}/index.php?c=Administradors&a=eliminarUsuario`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data) // Corregido para enviar los datos correctos
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Respuesta del servidor:', data); // Log para verificar respuesta
+      if (data.success) {
+        alert("Confirmacion exitosa.");
+        location.reload(); // Recarga la página para ver los cambios
+      } else {
+        alert("Error al confirmar.");
       }
     })
     .catch((error) => {
@@ -739,6 +815,200 @@ function obtenerTotalUsuarios() {
       console.error("Error en la solicitud:", error);
     });
 }
+
+
+
+//MOSTRAR TOP MENTOR
+function obtenerTopMentor() {
+  fetch(`${baseUrl}/index.php?c=Administradors&a=mentorTop`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener los mentores. Código de estado: " + response.status);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const topMentorTableBody = document.querySelector('.recent_order_mentor tbody');
+      topMentorTableBody.innerHTML = ''; // Limpiar tabla actual
+
+      if (Array.isArray(data) && data.length > 0) {
+        // Encontrar el mentor con más inscripciones para calcular el progreso relativo
+        const maxInscripciones = Math.max(...data.map(mentor => mentor.TotalInscripciones));
+
+        // Crear filas dinámicamente
+        data.forEach(mentor => {
+          const row = document.createElement('tr');
+          
+          const nombreTd = document.createElement('td');
+          nombreTd.textContent = mentor.NombreMentor;
+
+          const inscripcionesTd = document.createElement('td');
+          inscripcionesTd.textContent = mentor.TotalInscripciones;
+
+          const progresoTd = document.createElement('td');
+          const progressBar = document.createElement('div');
+          progressBar.classList.add('progress-bar');
+          
+          const progressFill = document.createElement('div');
+          progressFill.classList.add('progress-fill');
+          const porcentajeProgreso = (mentor.TotalInscripciones / maxInscripciones) * 100;
+          progressFill.style.width = `${porcentajeProgreso}%`;
+          progressFill.style.backgroundColor = '#FEC400';
+          
+          progressBar.appendChild(progressFill);
+          progresoTd.appendChild(progressBar);
+
+          // Añadir celdas a la fila
+          row.appendChild(nombreTd);
+          row.appendChild(inscripcionesTd);
+          row.appendChild(progresoTd);
+
+          // Añadir la fila a la tabla
+          topMentorTableBody.appendChild(row);
+        });
+      } else {
+        console.error("Formato de datos inesperado o no se encontraron mentores:", data);
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
+}
+
+
+//MOSTRAR TOP CURSO
+function obtenerTopCurso() {
+  fetch(`${baseUrl}/index.php?c=Administradors&a=cursoTop`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener los mentores. Código de estado: " + response.status);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const topCursoTableBody = document.querySelector('.recent_order_curso tbody');
+      topCursoTableBody.innerHTML = ''; // Limpiar tabla actual
+
+      if (Array.isArray(data) && data.length > 0) {
+        // Encontrar el curso con más inscripciones para calcular el progreso relativo
+        const maxInscripciones = Math.max(...data.map(curso => curso.TotalCompras));
+
+        // Crear filas dinámicamente
+        data.forEach(curso => {
+          const row = document.createElement('tr');
+          
+          const nombreTd = document.createElement('td');
+          nombreTd.textContent = curso.NombreCurso;
+
+          const inscripcionesTd = document.createElement('td');
+          inscripcionesTd.textContent = curso.TotalCompras;
+
+          const progresoTd = document.createElement('td');
+          const progressBar = document.createElement('div');
+          progressBar.classList.add('progress-bar');
+          
+          const progressFill = document.createElement('div');
+          progressFill.classList.add('progress-fill');
+          const porcentajeProgreso = (curso.TotalCompras / maxInscripciones) * 100;
+          progressFill.style.width = `${porcentajeProgreso}%`;
+          progressFill.style.backgroundColor = '#2e3532';
+          
+          progressBar.appendChild(progressFill);
+          progresoTd.appendChild(progressBar);
+
+          // Añadir celdas a la fila
+          row.appendChild(nombreTd);
+          row.appendChild(inscripcionesTd);
+          row.appendChild(progresoTd);
+
+          // Añadir la fila a la tabla
+          topCursoTableBody.appendChild(row);
+        });
+      } else {
+        console.error("Formato de datos inesperado o no se encontraron mentores:", data);
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
+}
+
+
+
+//MOSTRAR INTERESES
+function obtenerPrediccionInteres() {
+  fetch(`${baseUrl}/index.php?c=Administradors&a=interesUsuario`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Error al obtener los mentores. Código de estado: " + response.status);
+      }
+      return response.json();
+    })
+    .then((data) => {
+                    // Asegúrate de que 'data' tenga el formato correcto
+            if (typeof data === 'object') {
+                const labels = Object.keys(data); // Las etiquetas son las claves del objeto
+                const values = Object.values(data); // Los valores son las frecuencias
+                
+                // Crear el gráfico de pastel
+                const ctx = document.getElementById('interesesPieChart').getContext('2d');
+                const interesesPieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Frecuencia de Intereses',
+                            data: values,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.6)',
+                                'rgba(54, 162, 235, 0.6)',
+                                'rgba(255, 206, 86, 0.6)',
+                                'rgba(75, 192, 192, 0.6)',
+                                'rgba(153, 102, 255, 0.6)',
+                                'rgba(255, 159, 64, 0.6)',
+                                'rgba(201, 203, 207, 0.6)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(201, 203, 207, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(tooltipItem) {
+                                        const total = tooltipItem.dataset.data.reduce((a, b) => a + b, 0);
+                                        const currentValue = tooltipItem.raw;
+                                        const percentage = ((currentValue / total) * 100).toFixed(2) + '%';
+                                        return tooltipItem.label + ': ' + currentValue + ' (' + percentage + ')';
+                                    }
+                                }
+                            }
+                        }
+                    }
+        });
+      } else {
+        console.error("Formato de datos inesperado o no se encontraron mentores:", data);
+      }
+    })
+    .catch((error) => {
+      console.error("Error en la solicitud:", error);
+    });
+}
+
 
 
 
@@ -2123,3 +2393,126 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("editFormAdmi").addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+    // Obtener el idUsuario de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const idUsuario = urlParams.get('idUsuario'); // Aquí se obtiene el idUsuario
+
+    //alert("¡Se ha presionado el botón de Registrarse!"); // Depuración para verificar el evento submit
+
+    const nombre = document.getElementById("nombreUsuarioAd").value;
+    const edad = document.getElementById("edadUsuarioAd").value;
+    const correo = document.getElementById("correoUsuarioAd").value;
+    const telefono = document.getElementById("telefonoUsuarioAd").value;
+    const intereses = document.querySelectorAll(
+      'input[name="intereses[]"]:checked'
+    );
+    const selectedIntereses = [];
+
+    intereses.forEach(function (checkbox) {
+      selectedIntereses.push(checkbox.value);
+    });
+
+    const nombreError = document.getElementById("nombre-error");
+    const edadError = document.getElementById("edad-error");
+    const correoError = document.getElementById("correo-error");
+    const telefonoError = document.getElementById("telefono-error");
+    const interesesError = document.getElementById("intereses-error");
+    let isValid = true;
+
+    if (nombre === "" || /\d/.test(nombre)) {
+      nombreError.textContent = "Favor de ingresar un nombre";
+      isValid = false;
+    }
+
+    if (edad === "") {
+      edadError.textContent = "Favor de ingresar su edad";
+      isValid = false;
+    }
+
+    if (correo === "" || !correo.includes("@")) {
+      correoError.textContent = "Favor de ingresar un correo valido";
+      isValid = false;
+    }
+
+    if (telefono === "" || telefono.length < 9) {
+      telefonoError.textContent = "Favord de ingresar un numero de telefono";
+      isValid = false;
+    }
+    
+    if (selectedIntereses.length < 2) {
+      interesesError.textContent = "Favor de seleccionar mas de dos interese";
+      isValid = false;
+    }
+    
+    // Muestra los valores capturados en la consola para depuración
+    console.log("Nombre:", nombre);
+    console.log("Edad:", edad);
+    console.log("Correo:", correo);
+    console.log("Teléfono:", telefono);
+    console.log("Intereses seleccionados:", selectedIntereses);
+    console.log("idUsuario:", idUsuario); // Para depuración
+
+    if (isValid) {
+      enviarFormUsuarioAdm(nombre, edad, telefono, correo, selectedIntereses, idUsuario);
+      console.log("Validado");
+    }
+  });
+});
+
+function enviarFormUsuarioAdm(
+  nombre,
+  edad,
+  telefono,
+  correo,
+  selectedIntereses,
+  idUsuario
+) {
+console.log("Enviando datos al servidor..."); // Depuración
+  fetch(`${baseUrl}/index.php?c=Administradors&a=updateUsuario`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      nombre: nombre,
+      edad: edad,
+      telefono: telefono,
+      correo: correo,
+      intereses: selectedIntereses,
+      idUsuario: idUsuario,
+    }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        //alert("Va bien"); // Depuración
+        return response.json();
+      } else {
+        console.error("Error sending data to API:", response);
+        alert("mal response"); // Depuración 
+        throw new Error("Error sending data to API: " + response.statusText);
+      }
+    })
+    .then((data) => {
+    console.log("Respuesta de la API:", data); // Depuración
+      if (data.success) {
+        //alert("Va bien"); // Depuración 
+        console.log("Data sent successfully: " + data.message);
+        // Redirigir a la nueva URL
+        window.location.href = data.redirect; // Usa la URL proporcionada en la respuesta
+      } else {
+        mostrarToastify(data.error, "error");
+      }
+    })
+    .catch((error) => {
+      console.error("Network error:", error);
+      // Show error message to the user
+      mostrarToastify("Network error: " + error.message, "error");
+      alert("mal error"); // Depuración 
+    });
+}

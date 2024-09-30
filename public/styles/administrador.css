@@ -1,0 +1,10 @@
+.btn-container {
+    display: flex;
+    gap: 5px; /* Espacio entre los botones */
+  }
+
+  .btn {
+    flex: none; /* Evitar que los botones se estiren */
+    margin: 0; /* Asegura que no tengan márgenes adicionales */
+    padding: 5px 10px; /* Ajusta el tamaño y relleno del botón */
+  }

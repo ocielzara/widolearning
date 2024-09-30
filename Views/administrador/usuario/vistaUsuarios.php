@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <link rel="stylesheet" href="public/styles/tailwind.css">
+    <link rel="stylesheet" href="public/styles/administrador.css">
     
 </head>
 
@@ -32,6 +33,7 @@
                             <th scope="col">Telefono</th>
                             <th scope="col">Intereses</th>
                             <th scope="col">Correo</th>
+                            <th scope="col">Accion</th>
                             <!--<th scope="col">Accion</th>-->
                         </tr>
                     </thead>

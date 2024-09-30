@@ -209,7 +209,7 @@ class AdministradorModel
     //OBTENER 
     public function getAllUsuariosA()
     {
-        $query = "SELECT * FROM usuarios";
+        $query = "SELECT * FROM usuarios WHERE estado = 'activo'";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
 
@@ -232,7 +232,7 @@ class AdministradorModel
         // Consulta SQL para contar usuarios, cursos y mentores activos
         $query = "
             SELECT 
-                (SELECT COUNT(*) FROM usuarios) AS totalUsuarios,
+                (SELECT COUNT(*) FROM usuarios WHERE estado = 'activo') AS totalUsuarios,
                 (SELECT COUNT(*) FROM cursos) AS totalCursos,
                 (SELECT COUNT(*) FROM Mentor WHERE estado = 'activo') AS totalMentores
         ";
@@ -287,6 +287,100 @@ class AdministradorModel
         // Devolver los cursos obtenidos de la base de datos
         return $aprendizajes;
     }
+    
+    
+    //OBTENER 
+    public function getTopCursos()
+    {
+        $query = "
+    SELECT 
+        c.nombre AS NombreCurso, 
+        COUNT(i.id_inscripcion) AS TotalCompras
+    FROM 
+        cursos c
+    JOIN 
+        asignaciones a ON c.id_curso = a.id_curso
+    JOIN 
+        inscripciones i ON a.id_asignacion = i.id_asignacion
+    WHERE 
+        i.estado = 'cursando'
+    GROUP BY 
+        c.id_curso
+    ORDER BY 
+        TotalCompras DESC;
+        ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        $result = $stmt->get_result(); // Obtener el resultado de la consulta
+
+        $cursosTops = array();
+        if ($result) {
+            while ($cursosTop = $result->fetch_assoc()) {
+                $cursosTops[] = $cursosTop;
+            }
+        }
+
+        // Devolver los cursos obtenidos de la base de datos
+        return $cursosTops;
+    }
+    
+    //OBTENER 
+    public function getTopMentores()
+    {
+        $query = "
+    SELECT 
+        m.Nombre AS NombreMentor, 
+        COUNT(i.id_inscripcion) AS TotalInscripciones
+    FROM 
+        Mentor m
+    JOIN 
+        asignaciones a ON m.Mentor_ID = a.id_maestro
+    JOIN 
+        inscripciones i ON a.id_asignacion = i.id_asignacion
+    WHERE 
+        i.estado = 'cursando' AND m.estado = 'activo'
+    GROUP BY 
+        m.Mentor_ID
+    ORDER BY 
+        TotalInscripciones DESC;
+        ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+
+        $result = $stmt->get_result(); // Obtener el resultado de la consulta
+
+        $cursosTops = array();
+        if ($result) {
+            while ($cursosTop = $result->fetch_assoc()) {
+                $cursosTops[] = $cursosTop;
+            }
+        }
+
+        // Devolver los cursos obtenidos de la base de datos
+        return $cursosTops;
+    }
+    
+    //OBTENER
+    public function getAllInteresesActivos()
+    {
+        $query = "SELECT interes FROM usuarios WHERE estado = 'activo'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+    
+        $result = $stmt->get_result(); // Obtener el resultado de la consulta
+    
+        $intereses = array();
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $intereses[] = $row['interes'];
+            }
+        }
+    
+        // Devolver los intereses obtenidos de la base de datos
+        return $intereses;
+    }
+    
     
     public function asignacionCursoMentor($idMentor, $cursoId) {
         // Implementar la inserción en la tabla asignacionCursoMentor
@@ -397,6 +491,39 @@ class AdministradorModel
             $stmt->close();
             $this->db->rollback();
             return ['success' => false, 'message' => 'Error al eliminar el mentor.'];
+        }
+    } catch (Exception $e) {
+        // Revertir la transacción en caso de excepción
+        $this->db->rollback();
+        return ['success' => false, 'message' => 'Error: ' . $e->getMessage()];
+    }
+}
+
+
+
+//ELIMINAR Usuario
+    public function eliminarUsuario($idUsuario)
+{
+    // Iniciar una transacción para asegurar la consistencia de los datos
+    $this->db->begin_transaction();
+
+    try {
+        // Actualizar la tabla asignaciones para marcar la asignación como inactiva
+        $query = "UPDATE usuarios SET estado = 'inactivo' WHERE id_usuario = ?";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("i", $idUsuario);
+
+        // Ejecutar la consulta
+        if ($stmt->execute()) {
+            // Confirmar la transacción
+            $stmt->close();
+            $this->db->commit();
+            return ['success' => true, 'message' => 'Usuario eliminado correctamente.'];
+        } else {
+            // Revertir la transacción en caso de error
+            $stmt->close();
+            $this->db->rollback();
+            return ['success' => false, 'message' => 'Error al eliminar al usuario.'];
         }
     } catch (Exception $e) {
         // Revertir la transacción en caso de excepción
