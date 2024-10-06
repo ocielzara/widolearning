@@ -28,6 +28,7 @@
                 <table class="table table-hover text-center">
                     <thead class="table-dark">
                         <tr>
+                            <th scope="col">Fecha</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Edad</th>
                             <th scope="col">Telefono</th>

@@ -401,7 +401,7 @@
 
             <h3 class="nav__subtitle">Usuario</h3>
 
-            <a href="#" class="nav__link">
+            <a href="index.php?c=Administradors&a=index&id=<?php echo $_SESSION['id_usuario']; ?>" class="nav__link">
                 <i class='bx bx-user nav__icon'></i>
                 <span class="nav__name"><?php echo $_SESSION['nombre']; ?></span>
             </a>
