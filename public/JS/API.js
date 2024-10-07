@@ -1332,6 +1332,68 @@ function limitarPalabras(texto, limite) {
   return texto; // Si tiene menos palabras que el límite, devolver el texto completo
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const urlParams = new URLSearchParams(window.location.search);
+  const idCurso = urlParams.get("idCurso");
+
+  fetch(
+    `${baseUrl}/index.php?c=Docentes&a=informacionMentorId&idCurso=${idCurso}`,
+    {
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    }
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const mentorName = document.getElementById("mentor-name");
+      const mentorPhoto = document.getElementById("mentor-photo");
+      const mentorName2 = document.getElementById("mentor-name2");
+      const mentorBio = document.getElementById("mentor-bio");
+      const mentorName3 = document.getElementById("mentor-cursos");
+      var carruselcurso = document.getElementById("mentor-cursos-carrusel");
+
+      carruselcurso.innerHTML = '';
+
+      mentorName.textContent = `PORTAL DE ${data[0].Mentor}`;
+      mentorName2.textContent = `¡Hola, soy ${data[0].Mentor}!`;
+      mentorBio.textContent = data[0].MentorAcerca;
+      mentorName3.textContent = `¿Qué otros cursos imparte ${data[0].Mentor}?`;
+      mentorPhoto.src = `public/images/docente/${data[0].MentorFoto}/${data[0].MentorFoto}-description.png`;
+
+      // Verificar si hay datos
+      if (Array.isArray(data) && data.length > 0) {
+        // Filtrar cursos únicos
+        const uniqueCursos = Array.from(new Set(data.map(curso => curso.id_curso)))
+                                  .map(id => data.find(curso => curso.id_curso === id));
+
+        uniqueCursos.forEach((curso) => {
+          var newContent = document.createElement("div");
+          newContent.className = "containderCard w-[320px]";
+          newContent.innerHTML = `
+            <div class="subContentCard">
+              <div class="cardImage">
+                <img src="public/${curso.CursoFoto}" alt="Descripción de la imagen">
+              </div>
+              <div class="cardContent rounded-full">
+                ${generarBotonSegunEstado(curso.id_curso, curso.nombre, curso.pdf, estado)}
+              </div>
+            </div>
+          `;
+          carruselcurso.appendChild(newContent);
+        });
+      } else {
+        console.warn("No hay cursos disponibles para este mentor.");
+      }
+    })
+    .catch((error) => console.error("Error al obtener los datos:", error));
+});
+
 async function obtenerEstadoInscripcion(idUsuario, idCurso) {
   try {
     const response = await fetch(`${baseUrl}/index.php?c=Usuarios&a=getEstado&idUsuario=${idUsuario}&idCurso=${idCurso}`);
@@ -1354,7 +1416,7 @@ function generarBotonSegunEstado(idCurso, nombreCurso, pdfCurso, estado) {
       <button class="button1" onclick="mostrarModalCompra('${nombreCurso}')">
         <span>Comprar</span>
       </button>
-      <button class="button2" onclick="openPDF('public/${pdfCurso}')">
+      <button class="button2" onclick="redirigirTemario(${idCurso})">
         <span>Temario</span>
       </button>
     `;
@@ -1363,7 +1425,7 @@ function generarBotonSegunEstado(idCurso, nombreCurso, pdfCurso, estado) {
       <button class="button1" onclick="redirigirClaseMuestra(${idCurso}, '${nombreCurso}')">
         <span>Mi curso</span>
       </button>
-      <button class="button2" onclick="openPDF('public/${pdfCurso}')">
+      <button class="button2" onclick="redirigirTemario(${idCurso})">
         <span>Temario</span>
       </button>
     `;
@@ -1372,11 +1434,22 @@ function generarBotonSegunEstado(idCurso, nombreCurso, pdfCurso, estado) {
       <button class="button1" onclick="redirigirClaseMuestra(${idCurso}, '${nombreCurso}')">
         <span>Clase muestra</span>
       </button>
-      <button class="button2" onclick="openPDF('public/${pdfCurso}')">
+      <button class="button2" onclick="redirigirTemario(${idCurso})">
         <span>Temario</span>
       </button>
     `;
   }
+}
+
+
+function redirigirTemario(idCurso) {
+   const url = `${baseUrl}/index.php?c=Temario&a=ver&idCurso=${idCurso}`;
+  window.location.href = url;
+}
+
+function redirigirClaseMuestra(idCurso, nombreCurso) {
+  const url = `${baseUrl}/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=${idCurso}&nombreCurso=${encodeURIComponent(nombreCurso)}`;
+  window.location.href = url;
 }
 
 //NEW JULIO 24
@@ -2006,67 +2079,7 @@ function iniciarSesion() {
   window.location.href = url;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  const urlParams = new URLSearchParams(window.location.search);
-  const idCurso = urlParams.get("idCurso");
 
-  fetch(
-    `${baseUrl}/index.php?c=Docentes&a=informacionMentorId&idCurso=${idCurso}`,
-    {
-      headers: {
-        "X-Requested-With": "XMLHttpRequest",
-      },
-    }
-  )
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      const mentorName = document.getElementById("mentor-name");
-      const mentorPhoto = document.getElementById("mentor-photo");
-      const mentorName2 = document.getElementById("mentor-name2");
-      const mentorBio = document.getElementById("mentor-bio");
-      const mentorName3 = document.getElementById("mentor-cursos");
-      var carruselcurso = document.getElementById("mentor-cursos-carrusel");
-
-      carruselcurso.innerHTML = '';
-
-      mentorName.textContent = `PORTAL DE ${data[0].Mentor}`;
-      mentorName2.textContent = `¡Hola, soy ${data[0].Mentor}!`;
-      mentorBio.textContent = data[0].MentorAcerca;
-      mentorName3.textContent = `¿Qué otros cursos imparte ${data[0].Mentor}?`;
-      mentorPhoto.src = `public/images/docente/${data[0].MentorFoto}/${data[0].MentorFoto}-description.png`;
-
-      // Verificar si hay datos
-      if (Array.isArray(data) && data.length > 0) {
-        // Filtrar cursos únicos
-        const uniqueCursos = Array.from(new Set(data.map(curso => curso.id_curso)))
-                                  .map(id => data.find(curso => curso.id_curso === id));
-
-        uniqueCursos.forEach((curso) => {
-          var newContent = document.createElement("div");
-          newContent.className = "containderCard w-[320px]";
-          newContent.innerHTML = `
-            <div class="subContentCard">
-              <div class="cardImage">
-                <img src="public/${curso.CursoFoto}" alt="Descripción de la imagen">
-              </div>
-              <div class="cardContent rounded-full">
-                ${generarBotonSegunEstado(curso.id_curso, curso.Curso, curso.pdf, curso.estado)}
-              </div>
-            </div>
-          `;
-          carruselcurso.appendChild(newContent);
-        });
-      } else {
-        console.warn("No hay cursos disponibles para este mentor.");
-      }
-    })
-    .catch((error) => console.error("Error al obtener los datos:", error));
-});
 
 
 
