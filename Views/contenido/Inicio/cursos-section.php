@@ -15,7 +15,7 @@
     <section class="corse-container" id="contenido-areas">
 
         <div style="display:flex; justify-content:right;">
-            <input type="text" id="searchInput1" placeholder="Buscar mentor..." oninput="buscarCursos()">
+            <input type="text" id="searchInput1" placeholder="Buscar cursos..." oninput="buscarCursos()">
         </div>
 
         <div class="subheading">

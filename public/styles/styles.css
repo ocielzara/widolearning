@@ -1,0 +1,223 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 160px;
+}
+
+.course-info {
+    flex: 2;
+    margin-right: 20px;
+}
+
+.course-header {
+    display: flex;
+    justify-content: space-between; /* Alinea el título y la imagen a los extremos */
+    align-items: center; /* Alinea verticalmente el título y la imagen */
+}
+
+.course-header h1 {
+    margin: 0; /* Elimina el margen por defecto del h1 */
+    color: #0073b1;
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+.course-image {
+    max-width: 300px; /* Puedes ajustar el tamaño de la imagen */
+    height: auto;
+}
+
+p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.learning ul {
+    list-style-type: none;
+    column-count: 2;
+    margin-bottom: 20px;
+    padding-left: 0;
+}
+
+.learning ul li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+}
+
+.learning ul li::before {
+    content: '•';
+    color: #f5a623;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 22px;
+}
+
+.requirements {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.requirements h3 {
+    color: #383838;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.requirements ul {
+    padding-left: 20px;
+}
+
+.requirements ul li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: #555;
+}
+
+.payment-plans {
+    flex: 1;
+    background-color: #f6f6f6;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 10%;
+    /* Espacio superior en móviles */
+}
+
+.payment-plans h2 {
+    color: #0073b1;
+    margin-bottom: 20px;
+}
+
+.plan {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: white;
+    border: 2px solid #fec400;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.plan:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.plan input[type="radio"] {
+    margin-right: 10px;
+}
+
+.plan label {
+    font-size: 16px;
+}
+
+button {
+    background-color: #0073b1;
+    color: white;
+    padding: 15px 28px;
+    /* Aumento de padding para mayor tamaño */
+    border: 2px solid transparent;
+    /* Borde transparente para el efecto de hover */
+    border-radius: 20px;
+    /* Esquinas más redondeadas */
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s, transform 0.3s, border-color 0.3s;
+    /* Transiciones para más efectos */
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #fec400;
+    transform: translateY(-2px);
+    /* Efecto de elevación al pasar el mouse */
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .course-info {
+        margin-right: 0;
+        margin-bottom: 30px;
+    }
+
+    .course-header h1 {
+        margin: 0; /* Elimina el margen por defecto del h1 */
+        color: #0073b1;
+        font-weight: 700;
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem; /* Reduce el tamaño del texto */
+    }
+
+    .course-image {
+        max-width: 150px; /* Asegura que la imagen no exceda el ancho en móviles */
+        margin-left: 0; /* Elimina el margen en móviles */
+    }
+
+    .learning ul {
+        column-count: 1; /* Muestra una sola columna en móviles */
+        font-size: 0.9rem; /* Ajusta el tamaño del texto de la lista */
+    }
+
+    .requirements ul li {
+        font-size: 0.9rem; /* Reduce el tamaño de los requisitos */
+    }
+
+    .payment-plans h2 {
+        font-size: 1.4rem; /* Ajusta el tamaño del encabezado */
+    }
+
+    button {
+        font-size: 0.9rem; /* Reduce el tamaño del botón en móviles */
+        padding: 10px 18px; /* Ajusta el padding del botón */
+    }
+
+    .plan label {
+        font-size: 0.9rem; /* Ajusta el tamaño del texto en los planes */
+    }
+}
+
+
+@media screen and (max-width: 480px) {
+    .learning ul {
+        column-count: 1;
+        /* Muestra una columna en móviles pequeños */
+    }
+
+    .course-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .plan {
+        padding: 15px;
+        /* Reduce el padding en los planes de pago */
+    }
+
+    button {
+        padding: 10px 20px;
+        /* Reduce el tamaño del botón en móviles */
+    }
+}

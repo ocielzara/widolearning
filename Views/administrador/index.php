@@ -88,7 +88,7 @@ html, body {
 
 .administrador-main .insights > div span{
     background: #4f7cac;
-    padding 0.5rem;
+    padding: 0.5rem;
     border-radius: 50%;
     color: var(--clr-white);
     font-size: 2rem;

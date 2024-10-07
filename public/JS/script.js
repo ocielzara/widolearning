@@ -184,7 +184,6 @@ function mostrarContenidoAsesorias() {
   document.getElementById("asesorias-Cursos").style.display = "block";
   document.getElementById("contenido-areas").style.display = "none";
   document.getElementById("contenido-master-teach").style.display = "none";
-
   // Cambiar el estilo de los botones
   toggleButtonStyles('btn-asesorias');
 }

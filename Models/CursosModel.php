@@ -91,4 +91,28 @@ class CursoModel
         // Devolver los asesorias obtenidos de la base de datos
         return $asesorias;
     }
+    public function getCursoById($idCurso)
+    {
+        $query = "SELECT * FROM cursos WHERE id_curso = ?"; // Asegúrate de que 'curso_id' sea el nombre correcto de la columna
+        $stmt = $this->db->prepare($query);
+    
+        // Comprobar si la preparación falló
+        if (!$stmt) {
+            die("Error en la preparación de la consulta: " . $this->db->error); // Imprime el error
+        }
+    
+        $stmt->bind_param('i', $idCurso);
+        $stmt->execute();
+    
+        $result = $stmt->get_result(); // Obtener el resultado de la consulta
+    
+        if ($result) {
+            return $result->fetch_assoc(); // Devolver el curso encontrado
+        }
+    
+        return null; // Devolver null si no se encuentra el curso
+    }
+    
+    
+    
 }
