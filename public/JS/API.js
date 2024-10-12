@@ -621,7 +621,6 @@ function obtenerUsuarioAdmin(idAdministrador) {
           var row = document.createElement('tr');
 
           row.innerHTML = `
-            <td>${item.fechaCreacion}</td>
             <td>${item.nombre}</td>
             <td>${item.edad}</td>
             <td>${item.telefono}</td>
@@ -1204,6 +1203,7 @@ const mostrarAsesorias = (data) => {
 };
 
 
+
 async function mostrarMasCategorias(idUsuario, typoCurso) {
   try {
     const response = await fetch(`${baseUrl}/index.php?c=Cursos&a=verCursosCategorias&tipo=${typoCurso}`);
@@ -1359,7 +1359,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const mentorName3 = document.getElementById("mentor-cursos");
       var carruselcurso = document.getElementById("mentor-cursos-carrusel");
 
-      carruselcurso.innerHTML = '';
+      carruselcurso.innerHTML = ''; // Limpiar contenido viejo
 
       mentorName.textContent = `PORTAL DE ${data[0].Mentor}`;
       mentorName2.textContent = `¡Hola, soy ${data[0].Mentor}!`;
@@ -1373,20 +1373,36 @@ document.addEventListener("DOMContentLoaded", function () {
         const uniqueCursos = Array.from(new Set(data.map(curso => curso.id_curso)))
                                   .map(id => data.find(curso => curso.id_curso === id));
 
+        // Iterar sobre cada curso
         uniqueCursos.forEach((curso) => {
-          var newContent = document.createElement("div");
-          newContent.className = "containderCard w-[320px]";
-          newContent.innerHTML = `
-            <div class="subContentCard">
-              <div class="cardImage">
-                <img src="public/${curso.CursoFoto}" alt="Descripción de la imagen">
+          const idUsuario = 123; // Asigna el idUsuario correcto
+
+          // Acceder al nombre del curso (asegúrate que 'Curso' sea el campo correcto)
+          const nombreCurso = curso.Curso; // o curso.nombre si se llama así en la base de datos
+
+          // Llamar a obtenerEstadoInscripcion para obtener el estado
+          obtenerEstadoInscripcion(idUsuario, curso.id_curso).then((estado) => {
+            // Crear la estructura del contenido del curso
+            var newContent = document.createElement("div");
+            newContent.className = "containderCard1";
+
+            newContent.innerHTML = `
+              <div class="subContentCard1">
+                <div class="cardImage1">
+                  <img src="public/${curso.CursoFoto}" alt="Descripción de la imagen">
+                </div>
+                <div class="cardContent1">
+                  <h4 class="cardTitle1">${nombreCurso}</h4> <!-- Mostrar el nombre del curso -->
+                </div>
+           
+                <div class="cardFooter1">
+                  ${generarBotonSegunEstado(curso.id_curso, nombreCurso, curso.pdf, estado)}
+                </div>
               </div>
-              <div class="cardContent rounded-full">
-                ${generarBotonSegunEstado(curso.id_curso, curso.nombre, curso.pdf, estado)}
-              </div>
-            </div>
-          `;
-          carruselcurso.appendChild(newContent);
+            `;
+
+            carruselcurso.appendChild(newContent);
+          });
         });
       } else {
         console.warn("No hay cursos disponibles para este mentor.");
@@ -1394,6 +1410,8 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .catch((error) => console.error("Error al obtener los datos:", error));
 });
+
+
 
 async function obtenerEstadoInscripcion(idUsuario, idCurso) {
   try {
@@ -1411,6 +1429,7 @@ async function obtenerEstadoInscripcion(idUsuario, idCurso) {
   }
 }
 
+// Define la función de manera global para que esté accesible desde cualquier parte del código
 function generarBotonSegunEstado(idCurso, nombreCurso, pdfCurso, estado) {
   if (estado === 'empezo') {
     return `
@@ -1441,6 +1460,9 @@ function generarBotonSegunEstado(idCurso, nombreCurso, pdfCurso, estado) {
     `;
   }
 }
+
+
+
 
 
 function redirigirTemario(idCurso) {
@@ -1729,9 +1751,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="agenda">
                     <div class="current-date" id="currentDate-${mentorId}"></div>
                     <div class="navigation">
-                        <button id="prevWeek-${mentorId}">Anterior</button>
+                        <button id="prevWeek-${mentorId}"><i class="ri-arrow-drop-left-line"></i></button>
                         <div class="header" id="timezone-${mentorId}"></div>
-                        <button id="nextWeek-${mentorId}">Siguiente</button>
+                        <button id="nextWeek-${mentorId}"><i class="ri-arrow-drop-right-line"></i></button>
                     </div>
                     <div class="grid" id="calendar-${mentorId}">
                         <!-- Celdas de fechas y horas -->

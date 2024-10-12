@@ -482,9 +482,10 @@ h3 {
   display: flex;
   flex-direction: column;
   border-radius: 20px;
-  padding: 20px;
+  padding: 20px 20px 0px 20px;
   background-color: #ffffff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  margin-bottom: 5px;
 }
 
 .mentor-info {
@@ -642,29 +643,24 @@ h3 {
   padding: 20px;
 }
 
-@media (max-width: 768px) {
-  .grid {
-      grid-template-columns: repeat(3, 1fr); /* 3 columnas en tablets */
-      gap: 5px; /* Espaciado reducido */
-  }
-
-  .cell {
-      font-size: 0.75em; /* Tamaño de fuente aún más pequeño */
-      padding: 4px; /* Ajustar padding */
-  }
+@media (max-width: 868px) {
+ .cell{
+  font-size: 13px;
+  padding: 5px;
+ }
+ .agenda{
+  width: 127%;
+}
 }
 
 @media (max-width: 480px) {
-  .grid {
-      grid-template-columns: repeat(2, 1fr); /* 2 columnas en móviles */
-      gap: 5px; /* Espaciado reducido */
+  .agenda{
+    width: 127%;
   }
-
-  .cell {
-      font-size: 0.6em; /* Tamaño de fuente más pequeño */
-      padding: 2px; /* Ajustar padding */
-  }
-
+  .cell{
+    font-size: 10px;
+    padding: 1px;
+   }
   .current-date {
       font-size: 0.9em; /* Tamaño de fuente reducido para la fecha actual */
   }
