@@ -1,6 +1,6 @@
-//const baseUrl = "https://www.widolearn.com";
+const baseUrl = "https://www.widolearn.com";
 //const baseUrl = "http://localhost/widolearning";
-const baseUrl = "http://localhost/GitHub/widolearning";
+//const baseUrl = "http://localhost/GitHub/widolearning";
 function mostrarToastify(texto, tipo) {
   const background = tipo === "success" ? "green" : "red";
   Toastify({
