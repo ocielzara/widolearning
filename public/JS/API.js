@@ -66,7 +66,7 @@ window.onload = function () {
   obtenerHistorialClaseMuestra(id);
   const mentorId = urlParams.get('mentorId');
   obtenerDatosDisponibilidadMentor(mentorId);
-  obtenerTotalUsuarios() 
+  obtenerTotalUsuarios()
   obtenerTopMentor()
   obtenerTopCurso()
   obtenerPrediccionInteres()
@@ -662,7 +662,7 @@ function obtenerUsuarioEdit(idUsuario) {
       return response.json();
     })
     .then((data) => {
-        // Asigna los valores a los campos del formulario
+      // Asigna los valores a los campos del formulario
       document.getElementById('nombreUsuarioAd').value = data.nombre || '';
       document.getElementById('edadUsuarioAd').value = data.edad || '';
       document.getElementById('correoUsuarioAd').value = data.correo_electronico || '';
@@ -677,7 +677,7 @@ function obtenerUsuarioEdit(idUsuario) {
           checkbox.checked = true;
         }
       });
- 
+
     })
     .catch((error) => {
       console.error("Error en la solicitud:", error);
@@ -760,12 +760,12 @@ function obtenerHistorialClaseMuestra(idMentor) {
       return response.json();
     })
     .then((data) => {
-       var contenedor = document.getElementById('contenedor-clase-muestra');
+      var contenedor = document.getElementById('contenedor-clase-muestra');
 
       if (data.length > 0) {
         data.forEach((item) => {
           var row = document.createElement('tr');
-          
+
           //Verifica el estado
           var estadoCompra = item.estado === 'cursando' ? 'comprado' : 'no comprado';
 
@@ -802,7 +802,7 @@ function obtenerTotalUsuarios() {
       return response.json();
     })
     .then((data) => {
-        // Actualizar los elementos del DOM con los datos obtenidos
+      // Actualizar los elementos del DOM con los datos obtenidos
       if (data) {
         document.getElementById('totalAlumnos').textContent = data.totalUsuarios || '0';
         document.getElementById('totalCursos').textContent = data.totalCursos || '0';
@@ -838,7 +838,7 @@ function obtenerTopMentor() {
         // Crear filas dinámicamente
         data.forEach(mentor => {
           const row = document.createElement('tr');
-          
+
           const nombreTd = document.createElement('td');
           nombreTd.textContent = mentor.NombreMentor;
 
@@ -848,13 +848,13 @@ function obtenerTopMentor() {
           const progresoTd = document.createElement('td');
           const progressBar = document.createElement('div');
           progressBar.classList.add('progress-bar');
-          
+
           const progressFill = document.createElement('div');
           progressFill.classList.add('progress-fill');
           const porcentajeProgreso = (mentor.TotalInscripciones / maxInscripciones) * 100;
           progressFill.style.width = `${porcentajeProgreso}%`;
           progressFill.style.backgroundColor = '#FEC400';
-          
+
           progressBar.appendChild(progressFill);
           progresoTd.appendChild(progressBar);
 
@@ -896,7 +896,7 @@ function obtenerTopCurso() {
         // Crear filas dinámicamente
         data.forEach(curso => {
           const row = document.createElement('tr');
-          
+
           const nombreTd = document.createElement('td');
           nombreTd.textContent = curso.NombreCurso;
 
@@ -906,13 +906,13 @@ function obtenerTopCurso() {
           const progresoTd = document.createElement('td');
           const progressBar = document.createElement('div');
           progressBar.classList.add('progress-bar');
-          
+
           const progressFill = document.createElement('div');
           progressFill.classList.add('progress-fill');
           const porcentajeProgreso = (curso.TotalCompras / maxInscripciones) * 100;
           progressFill.style.width = `${porcentajeProgreso}%`;
           progressFill.style.backgroundColor = '#2e3532';
-          
+
           progressBar.appendChild(progressFill);
           progresoTd.appendChild(progressBar);
 
@@ -945,60 +945,60 @@ function obtenerPrediccionInteres() {
       return response.json();
     })
     .then((data) => {
-                    // Asegúrate de que 'data' tenga el formato correcto
-            if (typeof data === 'object') {
-                const labels = Object.keys(data); // Las etiquetas son las claves del objeto
-                const values = Object.values(data); // Los valores son las frecuencias
-                
-                // Crear el gráfico de pastel
-                const ctx = document.getElementById('interesesPieChart').getContext('2d');
-                const interesesPieChart = new Chart(ctx, {
-                    type: 'pie',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Frecuencia de Intereses',
-                            data: values,
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.6)',
-                                'rgba(54, 162, 235, 0.6)',
-                                'rgba(255, 206, 86, 0.6)',
-                                'rgba(75, 192, 192, 0.6)',
-                                'rgba(153, 102, 255, 0.6)',
-                                'rgba(255, 159, 64, 0.6)',
-                                'rgba(201, 203, 207, 0.6)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)',
-                                'rgba(201, 203, 207, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                display: true,
-                                position: 'top',
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(tooltipItem) {
-                                        const total = tooltipItem.dataset.data.reduce((a, b) => a + b, 0);
-                                        const currentValue = tooltipItem.raw;
-                                        const percentage = ((currentValue / total) * 100).toFixed(2) + '%';
-                                        return tooltipItem.label + ': ' + currentValue + ' (' + percentage + ')';
-                                    }
-                                }
-                            }
-                        }
-                    }
+      // Asegúrate de que 'data' tenga el formato correcto
+      if (typeof data === 'object') {
+        const labels = Object.keys(data); // Las etiquetas son las claves del objeto
+        const values = Object.values(data); // Los valores son las frecuencias
+
+        // Crear el gráfico de pastel
+        const ctx = document.getElementById('interesesPieChart').getContext('2d');
+        const interesesPieChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Frecuencia de Intereses',
+              data: values,
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(153, 102, 255, 0.6)',
+                'rgba(255, 159, 64, 0.6)',
+                'rgba(201, 203, 207, 0.6)'
+              ],
+              borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(201, 203, 207, 1)'
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                display: true,
+                position: 'top',
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (tooltipItem) {
+                    const total = tooltipItem.dataset.data.reduce((a, b) => a + b, 0);
+                    const currentValue = tooltipItem.raw;
+                    const percentage = ((currentValue / total) * 100).toFixed(2) + '%';
+                    return tooltipItem.label + ': ' + currentValue + ' (' + percentage + ')';
+                  }
+                }
+              }
+            }
+          }
         });
       } else {
         console.error("Formato de datos inesperado o no se encontraron mentores:", data);
@@ -1365,51 +1365,57 @@ document.addEventListener("DOMContentLoaded", function () {
       mentorName2.textContent = `¡Hola, soy ${data[0].Mentor}!`;
       mentorBio.textContent = data[0].MentorAcerca;
       mentorName3.textContent = `¿Qué otros cursos imparte ${data[0].Mentor}?`;
-      mentorPhoto.src = `public/images/docente/${data[0].MentorFoto}/${data[0].MentorFoto}-description.png`;
+      mentorPhoto.src = `public/images/docente/${data[0].MentorFoto.toLowerCase()}/${data[0].MentorFoto.toLowerCase()}-description.png`;
 
       // Verificar si hay datos
       if (Array.isArray(data) && data.length > 0) {
         // Filtrar cursos únicos
         const uniqueCursos = Array.from(new Set(data.map(curso => curso.id_curso)))
-                                  .map(id => data.find(curso => curso.id_curso === id));
+          .map(id => data.find(curso => curso.id_curso === id));
 
-        // Iterar sobre cada curso
-        uniqueCursos.forEach((curso) => {
-          const idUsuario = 123; // Asigna el idUsuario correcto
+        // Iterar sobre cada curso usando async/await
+        (async () => {
+          for (const curso of uniqueCursos) {
+            const idUsuario = 123; // Asigna el idUsuario correcto
 
-          // Acceder al nombre del curso (asegúrate que 'Curso' sea el campo correcto)
-          const nombreCurso = curso.Curso; // o curso.nombre si se llama así en la base de datos
+            // Acceder al nombre del curso (asegúrate de que 'Curso' sea el campo correcto)
+            const nombreCurso = curso.Curso; // o curso.nombre si se llama así en la base de datos
 
-          // Llamar a obtenerEstadoInscripcion para obtener el estado
-          obtenerEstadoInscripcion(idUsuario, curso.id_curso).then((estado) => {
-            // Crear la estructura del contenido del curso
-            var newContent = document.createElement("div");
-            newContent.className = "containderCard1";
+            try {
+              // Esperar a que se obtenga el estado de inscripción
+              const estado = await obtenerEstadoInscripcion(idUsuario, curso.id_curso);
 
-            newContent.innerHTML = `
-              <div class="subContentCard1">
-                <div class="cardImage1">
-                  <img src="public/${curso.CursoFoto}" alt="Descripción de la imagen">
+              // Crear la estructura del contenido del curso
+              var newContent = document.createElement("div");
+              newContent.className = "containderCard1";
+
+              newContent.innerHTML = `
+                <div class="subContentCard1">
+                  <div class="cardImage1">
+                    <img src="public/${curso.CursoFoto}" alt="Descripción de la imagen">
+                  </div>
+                  <div class="cardContent1">
+                    <h4 class="cardTitle1">${nombreCurso}</h4>
+                  </div>
+                  <div class="cardFooter1">
+                    ${generarBotonSegunEstado(curso.id_curso, nombreCurso, curso.pdf, estado)}
+                  </div>
                 </div>
-                <div class="cardContent1">
-                  <h4 class="cardTitle1">${nombreCurso}</h4> <!-- Mostrar el nombre del curso -->
-                </div>
-           
-                <div class="cardFooter1">
-                  ${generarBotonSegunEstado(curso.id_curso, nombreCurso, curso.pdf, estado)}
-                </div>
-              </div>
-            `;
+              `;
 
-            carruselcurso.appendChild(newContent);
-          });
-        });
+              carruselcurso.appendChild(newContent);
+            } catch (error) {
+              console.error('Error al obtener el estado de inscripción:', error);
+            }
+          }
+        })();
       } else {
         console.warn("No hay cursos disponibles para este mentor.");
       }
     })
     .catch((error) => console.error("Error al obtener los datos:", error));
 });
+
 
 
 
@@ -1466,7 +1472,7 @@ function generarBotonSegunEstado(idCurso, nombreCurso, pdfCurso, estado) {
 
 
 function redirigirTemario(idCurso) {
-   const url = `${baseUrl}/index.php?c=Temario&a=ver&idCurso=${idCurso}`;
+  const url = `${baseUrl}/index.php?c=Temario&a=ver&idCurso=${idCurso}`;
   window.location.href = url;
 }
 
@@ -1526,7 +1532,10 @@ function obtenerMentores() {
         newContent.innerHTML = `
           <div class="subContentCard1">
             <div class="cardImage1">
-              <img src="public/images/docente/${mentor.Mentor_Foto}/${mentor.Mentor_Foto}.png" alt="${mentor.Mentor_Nombre}">
+              <img src="public/images/docente/${mentor.Mentor_Foto.toLowerCase()}/${mentor.Mentor_Foto.toLowerCase()}.png" 
+                alt="${mentor.Mentor_Nombre}"
+                onerror="this.onerror=null; this.src='public/images/docente/default-mentor.png';">
+
             </div>
             <div class="cardContent1">
               <h4 class="cardTitle1">${mentor.Mentor_Nombre}</h4>
@@ -1553,7 +1562,7 @@ function buscarMentores() {
 
   mentorCards.forEach(card => {
     const mentorName = card.querySelector('.cardTitle1').textContent.toLowerCase();
-    
+
     if (mentorName.includes(searchTerm)) {
       card.style.display = ''; // Mostrar la tarjeta si coincide con la búsqueda
     } else {
@@ -1569,7 +1578,7 @@ function buscarCursos() {
 
   mentorCards.forEach(card => {
     const mentorName = card.querySelector('.cardTitle1').textContent.toLowerCase();
-    
+
     if (mentorName.includes(searchTerm)) {
       card.style.display = ''; // Mostrar la tarjeta si coincide con la búsqueda
     } else {
@@ -1577,7 +1586,7 @@ function buscarCursos() {
     }
   });
 }
-  
+
 
 
 function obtenerMentoresPorTipo(tipoCurso) {
@@ -1761,7 +1770,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
             </div>
         `;
-        
+
         carruselcurso.appendChild(newContent);
 
         const closeButtons = document.querySelectorAll(".close");
@@ -1803,16 +1812,16 @@ document.addEventListener("DOMContentLoaded", function () {
         timezoneElement.textContent = `(-06:00) ${timezone}`;
 
         const daysOfWeek = [
-          "lunes","martes","miércoles","jueves","viernes","sábado","domingo",
+          "lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo",
         ];
         const daysOfWeekShort = [
-          "Lun","Mar","Mie","Jue","Vie","Sab","Dom",
+          "Lun", "Mar", "Mie", "Jue", "Vie", "Sab", "Dom",
         ];
         let startDate = new Date(); // Fecha de inicio como hoy
         startDate.setDate(startDate.getDate() - startDate.getDay() + 1); // Ajusta para comenzar en lunes
 
         const timeSlots = [
-          "08:00","09:00","10:00","11:00","12:00","12:30","13:00","14:00","15:00","15:30","16:00","17:00","17:30","18:00","18:30","19:00","20:00","21:00",
+          "08:00", "09:00", "10:00", "11:00", "12:00", "12:30", "13:00", "14:00", "15:00", "15:30", "16:00", "17:00", "17:30", "18:00", "18:30", "19:00", "20:00", "21:00",
         ];
 
         //NUEVO CAMBIO AGENDA
@@ -1824,78 +1833,78 @@ document.addEventListener("DOMContentLoaded", function () {
         function updateCalendar() {
           calendarElement.innerHTML = "";
           for (let i = 0; i < daysOfWeek.length; i++) {
-              const date = new Date(startDate);
-              date.setDate(startDate.getDate() + i);
-              const headerCell = document.createElement("div");
-              headerCell.classList.add("cell", "header-cell");
-              headerCell.innerHTML = `${daysOfWeekShort[i].toUpperCase()}<br>${date.getDate()} ${date.toLocaleString("es", { month: "short" })}`;
-              calendarElement.appendChild(headerCell);
+            const date = new Date(startDate);
+            date.setDate(startDate.getDate() + i);
+            const headerCell = document.createElement("div");
+            headerCell.classList.add("cell", "header-cell");
+            headerCell.innerHTML = `${daysOfWeekShort[i].toUpperCase()}<br>${date.getDate()} ${date.toLocaleString("es", { month: "short" })}`;
+            calendarElement.appendChild(headerCell);
           }
-      
+
           for (let j = 0; j < daysOfWeek.length; j++) {
-              const day = daysOfWeek[j];
-              const dayElement = document.createElement("div");
-              dayElement.classList.add("cell", "day-column"); // Clase para el día
-              const date = new Date(startDate);
-              date.setDate(startDate.getDate() + j);
-              let hasAvailableSlots = false; // Variable para verificar si hay horarios disponibles
-      
-              for (let i = 0; i < timeSlots.length; i++) {
-                  const cell = document.createElement("div");
-                  cell.classList.add("cell", "time");
-                  const cellDateTime = new Date(`${date.toDateString()} ${timeSlots[i]}`);
-      
-                  if (disponibilidades[day] && disponibilidades[day].includes(timeSlots[i]) && cellDateTime >= dateLimit) {
-                      cell.textContent = timeSlots[i];
-                      cell.dataset.hora = timeSlots[i];
-                      cell.dataset.dia = day;
-                      cell.dataset.mentorId = mentorId;
-                      cell.dataset.mentorName = mentorName;
-                      cell.dataset.cursoName = cursoName;
-      
-                      // Añadir evento de clic
-                      cell.addEventListener("click", function () {
-                          if (!isLoggedIn) {
-                              showLoginModal();
-                              return;
-                          }
-                          // Obtener los datos directamente de los atributos dataset de la celda
-                          const mentorId = this.dataset.mentorId;
-                          const mentorName = this.dataset.mentorName;
-                          const cursoName = this.dataset.cursoName;
-                          const hora = this.dataset.hora;
-                          const dia = this.dataset.dia;
-      
-                          document.getElementById("nextBtn").dataset.mentorId = mentorId;
-                          document.getElementById("nextBtn").dataset.hora = hora;
-                          document.getElementById("nextBtn").dataset.dia = dia;
-                          document.getElementById("nextBtn").dataset.mentorName = mentorName;
-                          document.getElementById("nextBtn").dataset.cursoName = cursoName;
-      
-                          var additionalInfoModal = document.getElementById("additionalInfoModal");
-                          additionalInfoModal.style.display = "block";
-                      });
-      
-                      dayElement.appendChild(cell); // Añadir la celda solo si hay disponibilidad
-                      hasAvailableSlots = true; // Hay al menos un horario disponible
+            const day = daysOfWeek[j];
+            const dayElement = document.createElement("div");
+            dayElement.classList.add("cell", "day-column"); // Clase para el día
+            const date = new Date(startDate);
+            date.setDate(startDate.getDate() + j);
+            let hasAvailableSlots = false; // Variable para verificar si hay horarios disponibles
+
+            for (let i = 0; i < timeSlots.length; i++) {
+              const cell = document.createElement("div");
+              cell.classList.add("cell", "time");
+              const cellDateTime = new Date(`${date.toDateString()} ${timeSlots[i]}`);
+
+              if (disponibilidades[day] && disponibilidades[day].includes(timeSlots[i]) && cellDateTime >= dateLimit) {
+                cell.textContent = timeSlots[i];
+                cell.dataset.hora = timeSlots[i];
+                cell.dataset.dia = day;
+                cell.dataset.mentorId = mentorId;
+                cell.dataset.mentorName = mentorName;
+                cell.dataset.cursoName = cursoName;
+
+                // Añadir evento de clic
+                cell.addEventListener("click", function () {
+                  if (!isLoggedIn) {
+                    showLoginModal();
+                    return;
                   }
+                  // Obtener los datos directamente de los atributos dataset de la celda
+                  const mentorId = this.dataset.mentorId;
+                  const mentorName = this.dataset.mentorName;
+                  const cursoName = this.dataset.cursoName;
+                  const hora = this.dataset.hora;
+                  const dia = this.dataset.dia;
+
+                  document.getElementById("nextBtn").dataset.mentorId = mentorId;
+                  document.getElementById("nextBtn").dataset.hora = hora;
+                  document.getElementById("nextBtn").dataset.dia = dia;
+                  document.getElementById("nextBtn").dataset.mentorName = mentorName;
+                  document.getElementById("nextBtn").dataset.cursoName = cursoName;
+
+                  var additionalInfoModal = document.getElementById("additionalInfoModal");
+                  additionalInfoModal.style.display = "block";
+                });
+
+                dayElement.appendChild(cell); // Añadir la celda solo si hay disponibilidad
+                hasAvailableSlots = true; // Hay al menos un horario disponible
               }
-      
-              // Si no hay horarios disponibles, mostrar un guion
-              if (!hasAvailableSlots) {
-                  const emptyCell = document.createElement("div");
-                  emptyCell.classList.add("cell", "time");
-                  emptyCell.textContent = "-"; // Mostrar guion
-                  dayElement.appendChild(emptyCell);
-              }
-      
-              // Añadir la columna del día solo si tiene celdas
-              if (dayElement.children.length > 0) {
-                  calendarElement.appendChild(dayElement);
-              }
+            }
+
+            // Si no hay horarios disponibles, mostrar un guion
+            if (!hasAvailableSlots) {
+              const emptyCell = document.createElement("div");
+              emptyCell.classList.add("cell", "time");
+              emptyCell.textContent = "-"; // Mostrar guion
+              dayElement.appendChild(emptyCell);
+            }
+
+            // Añadir la columna del día solo si tiene celdas
+            if (dayElement.children.length > 0) {
+              calendarElement.appendChild(dayElement);
+            }
           }
-      }
-      
+        }
+
 
         function updateCurrentDate() {
           const today = new Date();
@@ -2064,7 +2073,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  
+
 
   function showLoginModal() {
     var loginModal = document.getElementById("loginModal");
@@ -2434,7 +2443,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("editFormAdmi").addEventListener("submit", (e) => {
     e.preventDefault();
-    
+
     // Obtener el idUsuario de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const idUsuario = urlParams.get('idUsuario'); // Aquí se obtiene el idUsuario
@@ -2480,12 +2489,12 @@ document.addEventListener("DOMContentLoaded", function () {
       telefonoError.textContent = "Favord de ingresar un numero de telefono";
       isValid = false;
     }
-    
+
     if (selectedIntereses.length < 2) {
       interesesError.textContent = "Favor de seleccionar mas de dos interese";
       isValid = false;
     }
-    
+
     // Muestra los valores capturados en la consola para depuración
     console.log("Nombre:", nombre);
     console.log("Edad:", edad);
@@ -2509,7 +2518,7 @@ function enviarFormUsuarioAdm(
   selectedIntereses,
   idUsuario
 ) {
-console.log("Enviando datos al servidor..."); // Depuración
+  console.log("Enviando datos al servidor..."); // Depuración
   fetch(`${baseUrl}/index.php?c=Administradors&a=updateUsuario`, {
     method: "POST",
     headers: {
@@ -2535,7 +2544,7 @@ console.log("Enviando datos al servidor..."); // Depuración
       }
     })
     .then((data) => {
-    console.log("Respuesta de la API:", data); // Depuración
+      console.log("Respuesta de la API:", data); // Depuración
       if (data.success) {
         //alert("Va bien"); // Depuración 
         console.log("Data sent successfully: " + data.message);
