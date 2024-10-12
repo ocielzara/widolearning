@@ -2,7 +2,7 @@
 
 class Conectar
 {
-
+/*
 	public static function conexion()
 	{
 
@@ -20,13 +20,9 @@ class Conectar
 		}
 
 		return $conexion;
-	}
-}
+	}*/
 
-
-
-/*
-public static function conexion()
+	public static function conexion()
 	{
 
 		$servidor = "localhost"; // Dirección del servidor de la base de datos
@@ -44,4 +40,9 @@ public static function conexion()
 
 		return $conexion;
 	}
-		*/
+		
+}
+
+
+
+
