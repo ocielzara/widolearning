@@ -1365,7 +1365,7 @@ document.addEventListener("DOMContentLoaded", function () {
       mentorName2.textContent = `¡Hola, soy ${data[0].Mentor}!`;
       mentorBio.textContent = data[0].MentorAcerca;
       mentorName3.textContent = `¿Qué otros cursos imparte ${data[0].Mentor}?`;
-      mentorPhoto.src = `public/images/docente/${data[0].MentorFoto.toLowerCase()}/${data[0].MentorFoto.toLowerCase()}-description.png`;
+      mentorPhoto.src = `public/images/docente/${data[0].MentorFoto}/${data[0].MentorFoto}-description.png`;
 
       // Verificar si hay datos
       if (Array.isArray(data) && data.length > 0) {
@@ -1398,7 +1398,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <h4 class="cardTitle1">${nombreCurso}</h4>
                   </div>
                   <div class="cardFooter1">
-                    ${generarBotonSegunEstado(curso.id_curso, nombreCurso, curso.pdf, estado)}
+                    ${generarBotonSegunEstado(curso.id_curso, curso.nombre, curso.pdf, estado)}
                   </div>
                 </div>
               `;
@@ -1437,6 +1437,11 @@ async function obtenerEstadoInscripcion(idUsuario, idCurso) {
 
 // Define la función de manera global para que esté accesible desde cualquier parte del código
 function generarBotonSegunEstado(idCurso, nombreCurso, pdfCurso, estado) {
+  // Si el usuario ya tomó una clase muestra, cambiamos el estado a 'empezo'
+  if (estado === 'muestra_completada') {
+    estado = 'empezo'; // Cambiar el estado a "empezo" después de tomar la clase muestra
+  }
+
   if (estado === 'empezo') {
     return `
       <button class="button1" onclick="mostrarModalCompra('${nombreCurso}')">
@@ -1455,7 +1460,7 @@ function generarBotonSegunEstado(idCurso, nombreCurso, pdfCurso, estado) {
         <span>Temario</span>
       </button>
     `;
-  } else {
+  } else { 
     return `
       <button class="button1" onclick="redirigirClaseMuestra(${idCurso}, '${nombreCurso}')">
         <span>Clase muestra</span>
@@ -1466,6 +1471,7 @@ function generarBotonSegunEstado(idCurso, nombreCurso, pdfCurso, estado) {
     `;
   }
 }
+
 
 
 
@@ -1532,9 +1538,7 @@ function obtenerMentores() {
         newContent.innerHTML = `
           <div class="subContentCard1">
             <div class="cardImage1">
-              <img src="public/images/docente/${mentor.Mentor_Foto.toLowerCase()}/${mentor.Mentor_Foto.toLowerCase()}.png" 
-                alt="${mentor.Mentor_Nombre}"
-                onerror="this.onerror=null; this.src='public/images/docente/default-mentor.png';">
+              <img src="public/images/docente/${mentor.Mentor_Foto}/${mentor.Mentor_Foto}.png" alt="${mentor.Mentor_Nombre}">
 
             </div>
             <div class="cardContent1">
