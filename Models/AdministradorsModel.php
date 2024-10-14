@@ -532,6 +532,34 @@ class AdministradorModel
     }
 }
 
+
+
+public function getCursoNombreById($cursoId)
+{
+    // Consulta SQL para obtener el nombre del curso basado en el ID
+    $query = "SELECT nombre FROM cursos WHERE id_curso = ?";
+    
+    // Preparar la consulta
+    $stmt = $this->db->prepare($query);
+    
+    // Vincular el parámetro, indicando que es un número entero (i)
+    $stmt->bind_param("i", $cursoId);
+    
+    // Ejecutar la consulta
+    $stmt->execute();
+    
+    // Obtener el resultado de la consulta
+    $stmt->bind_result($nombreCurso);
+    $stmt->fetch();
+    
+    // Cerrar la declaración
+    $stmt->close();
+    
+    // Devolver el nombre del curso
+    return $nombreCurso;
+}
+
+
     
     
     

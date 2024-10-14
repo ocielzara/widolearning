@@ -1,6 +1,14 @@
 <?php
 
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once 'PHPMailer/Exception.php';
+require_once 'PHPMailer/PHPMailer.php';
+require_once 'PHPMailer/SMTP.php';
+
+
 class AdministradorsController
 {
     //Incuimos los modelos que vamos a utilizar
@@ -163,6 +171,21 @@ class AdministradorsController
             }
             $asignacionCurso = $model->asignacionCursoMentor($idMentor, $cursoId);
         }
+        
+            // Obtener todos los usuarios activos
+            $usuariosActivos = $model->getAllUsuariosA(); // Llamada a la función que recupera los usuarios activos
+
+            // Extraer los correos electrónicos de los usuarios
+            $correosUsuarios = [];
+            foreach ($usuariosActivos as $usuario) {
+                $correosUsuarios[] = $usuario['correo_electronico'];
+            }
+            
+            
+            $cursoNombre = $model->getCursoNombreById($cursoId);
+            
+            // Llamar a la función para enviar el correo
+            $this->enviarCorreo($nombreMentor, $cursoNombre, $correosUsuarios);
         
 
         if ($mensaje === "¡Mentor registrado exitosamente!") {
@@ -647,6 +670,52 @@ public function contarIntereses($interesesActivos)
 
     return $conteoIntereses;
 }
+
+public function enviarCorreo($nombre, $curso, $correos)
+    {
+        try {
+            $mail = new PHPMailer(true);
+
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.hostinger.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'hola@widolearn.com';
+            $mail->Password = 'Wido2024!';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
+            $mail->setFrom('hola@widolearn.com', 'Wido');
+            $correoDefecto = "hola@widolearn.com";
+            $mail->addAddress($correoDefecto);
+            
+            // Dirección de correos
+            // Agregar direcciones de correo de los usuarios
+            foreach ($correos as $correoUsuario) {
+                $mail->addAddress($correoUsuario);
+            }
+            
+            $htmlContent = file_get_contents('Views/contenido/correo-nuevo-mentor.php');
+
+            $htmlContent = str_replace('{{MENTOR_NAME}}', htmlspecialchars($nombre), $htmlContent);
+            $htmlContent = str_replace('{{CURSO_NAME}}', htmlspecialchars($curso), $htmlContent);
+           
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Curso Agendado';
+            $mail->Body = $htmlContent;
+            
+            //Activamos caracteres de latinos
+            $mail->CharSet = 'UTF-8';
+
+            $mail->send();
+
+            
+            
+        } catch (Exception $e) {
+            echo "Error al enviar el correo de recuperación: {$e->getMessage()}";
+        }
+    }
+
 
 
 
