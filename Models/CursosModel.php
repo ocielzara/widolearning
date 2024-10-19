@@ -95,24 +95,45 @@ class CursoModel
     {
         $query = "SELECT * FROM cursos WHERE id_curso = ?"; // Asegúrate de que 'curso_id' sea el nombre correcto de la columna
         $stmt = $this->db->prepare($query);
-    
+
         // Comprobar si la preparación falló
         if (!$stmt) {
             die("Error en la preparación de la consulta: " . $this->db->error); // Imprime el error
         }
-    
+
         $stmt->bind_param('i', $idCurso);
         $stmt->execute();
-    
+
         $result = $stmt->get_result(); // Obtener el resultado de la consulta
-    
+
         if ($result) {
             return $result->fetch_assoc(); // Devolver el curso encontrado
         }
-    
+
         return null; // Devolver null si no se encuentra el curso
     }
-    
-    
+
+    public function getAsesoriaById($idAsesoria)
+    {
+        $query = "SELECT * FROM asesoria WHERE id_asesoria = ?"; // 'id_asesoria' debe ser el nombre correcto de la columna
+        $stmt = $this->db->prepare($query);
+
+        // Comprobar si la preparación falló
+        if (!$stmt) {
+            die("Error en la preparación de la consulta: " . $this->db->error); // Imprime el error
+        }
+
+        $stmt->bind_param('i', $idAsesoria); // El tipo de parámetro 'i' indica que es un entero
+        $stmt->execute();
+
+        $result = $stmt->get_result(); // Obtener el resultado de la consulta
+
+        if ($result) {
+            return $result->fetch_assoc(); // Devolver la asesoría encontrada como un array asociativo
+        }
+
+        return null; // Devolver null si no se encuentra la asesoría
+    }
+
     
 }

@@ -53,6 +53,7 @@ window.onload = function () {
   const idUsuario = urlParams.get('idUsuario');
   obtenerCursosPorUsuario(idUsuario);
   const idCurso = urlParams.get('idCurso');
+
   const idMentor = urlParams.get('idMentor');
   obtenerCreditosCursos(idUsuario, idCurso, idMentor);
   const id = urlParams.get('id');
@@ -1338,74 +1339,89 @@ document.addEventListener("DOMContentLoaded", async function () {
   const idCurso = urlParams.get("idCurso");
 
   try {
-    const response = await fetch(`${baseUrl}/index.php?c=Docentes&a=informacionMentorId&idCurso=${idCurso}`, {
-      headers: {
-        "X-Requested-With": "XMLHttpRequest",
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error("Error al obtener la información del mentor. Código de estado: " + response.statusText);
-    }
-
-    const data = await response.json();
-    const mentorName = document.getElementById("mentor-name");
-    const mentorPhoto = document.getElementById("mentor-photo");
-    const mentorName2 = document.getElementById("mentor-name2");
-    const mentorBio = document.getElementById("mentor-bio");
-    const mentorName3 = document.getElementById("mentor-cursos");
-    var carruselcurso = document.getElementById("mentor-cursos-carrusel");
-
-    carruselcurso.innerHTML = ''; // Limpiar contenido viejo
-
-    mentorName.textContent = `PORTAL DE ${data[0].Mentor}`;
-    mentorName2.textContent = `¡Hola, soy ${data[0].Mentor}!`;
-    mentorBio.textContent = data[0].MentorAcerca;
-    mentorName3.textContent = `¿Qué otros cursos imparte ${data[0].Mentor}?`;
-    mentorPhoto.src = `public/images/docente/${data[0].MentorFoto}/${data[0].MentorFoto}-description.png`;
-
-    // Verificar si hay datos
-    if (Array.isArray(data) && data.length > 0) {
-      // Filtrar cursos únicos
-      const uniqueCursos = Array.from(new Set(data.map(curso => curso.id_curso)))
-                                .map(id => data.find(curso => curso.id_curso === id));
-
-      // Aquí hacemos la función asíncrona y usamos for...of para asegurarnos de que los botones se actualizan correctamente
-      for (const curso of uniqueCursos) {
-        const idUsuario = 123; // Asigna el idUsuario correcto
-        const nombreCurso = curso.Curso; // o curso.nombre si se llama así en la base de datos
-
-        // Esperar a obtener el estado de inscripción
-        const estado = await obtenerEstadoInscripcion(idUsuario, curso.id_curso);
-
-        // Crear la estructura del contenido del curso después de obtener el estado
-        var newContent = document.createElement("div");
-        newContent.className = "containderCard1";
-
-        newContent.innerHTML = `
-          <div class="subContentCard1">
-            <div class="cardImage1">
-              <img src="public/${curso.CursoFoto}" alt="Descripción de la imagen">
-            </div>
-            <div class="cardContent1">
-              <h4 class="cardTitle1">${nombreCurso}</h4> <!-- Mostrar el nombre del curso -->
-            </div>
-            <div class="cardFooter1">
-              ${generarBotonSegunEstado(curso.id_curso, nombreCurso, curso.pdf, estado)} <!-- Aquí está la función que necesitas -->
-            </div>
-          </div>
-        `;
-
-        // Asegurarse de que el nuevo contenido se añade al DOM una vez que todo se ha generado
-        carruselcurso.appendChild(newContent);
-      }
-    } else {
-      console.warn("No hay cursos disponibles para este mentor.");
-    }
+    const mentorData = await fetchMentorData(idCurso);
+    updateMentorInfo(mentorData);
+    await renderCourses(mentorData);
   } catch (error) {
     console.error("Error al obtener los datos:", error);
   }
 });
+
+async function fetchMentorData(idCurso) {
+  const response = await fetch(`${baseUrl}/index.php?c=Docentes&a=informacionMentorId&idCurso=${idCurso}`, {
+    headers: {
+      "X-Requested-With": "XMLHttpRequest",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Error al obtener la información del mentor. Código de estado: " + response.statusText);
+  }
+
+  return await response.json();
+}
+
+function updateMentorInfo(data) {
+  const mentorName = document.getElementById("mentor-name");
+  const mentorPhoto = document.getElementById("mentor-photo");
+  const mentorName2 = document.getElementById("mentor-name2");
+  const mentorBio = document.getElementById("mentor-bio");
+  const mentorName3 = document.getElementById("mentor-cursos");
+  const carruselcurso = document.getElementById("mentor-cursos-carrusel");
+
+  carruselcurso.innerHTML = ''; // Limpiar contenido viejo
+
+  mentorName.textContent = `PORTAL DE ${data[0].Mentor}`;
+  mentorName2.textContent = `¡Hola, soy ${data[0].Mentor}!`;
+  mentorBio.textContent = data[0].MentorAcerca;
+  mentorName3.textContent = `¿Qué otros cursos imparte ${data[0].Mentor}?`;
+  mentorPhoto.src = `public/images/docente/${data[0].MentorFoto}/${data[0].MentorFoto}-description.png`;
+}
+
+async function renderCourses(data) {
+  const carruselcurso = document.getElementById("mentor-cursos-carrusel");
+  
+  // Verificar si hay datos
+  if (!Array.isArray(data) || data.length === 0) {
+    console.warn("No hay cursos disponibles para este mentor.");
+    return;
+  }
+
+  // Filtrar cursos únicos
+  const uniqueCursos = Array.from(new Set(data.map(curso => curso.id_curso)))
+                            .map(id => data.find(curso => curso.id_curso === id));
+
+  // Aquí hacemos la función asíncrona y usamos for...of para asegurarnos de que los botones se actualizan correctamente
+  for (const curso of uniqueCursos) {
+    const idUsuario = 123; // Asigna el idUsuario correcto
+    const nombreCurso = curso.Curso; // o curso.nombre si se llama así en la base de datos
+
+    // Esperar a obtener el estado de inscripción
+    const estado = await obtenerEstadoInscripcion(idUsuario, curso.id_curso);
+
+    // Crear la estructura del contenido del curso después de obtener el estado
+    const newContent = document.createElement("div");
+    newContent.className = "containderCard1";
+
+    newContent.innerHTML = `
+      <div class="subContentCard1">
+        <div class="cardImage1">
+          <img src="public/${curso.CursoFoto}" alt="Descripción de la imagen">
+        </div>
+        <div class="cardContent1">
+          <h4 class="cardTitle1">${nombreCurso}</h4> <!-- Mostrar el nombre del curso -->
+        </div>
+        <div class="cardFooter1">
+          ${generarBotonSegunEstado(curso.id_curso, nombreCurso, curso.pdf, estado)}
+        </div>
+      </div>
+    `;
+
+    // Asegurarse de que el nuevo contenido se añade al DOM una vez que todo se ha generado
+    carruselcurso.appendChild(newContent);
+  }
+}
+
 
 
 
@@ -1464,6 +1480,11 @@ function generarBotonSegunEstado(idCurso, nombreCurso, pdfCurso, estado) {
 
 function redirigirTemario(idCurso) {
    const url = `${baseUrl}/index.php?c=Temario&a=ver&idCurso=${idCurso}`;
+  window.location.href = url;
+}
+
+function redirigirAsesoria() {
+  const url = `${baseUrl}/index.php?c=Asesoria&a=ver`;
   window.location.href = url;
 }
 

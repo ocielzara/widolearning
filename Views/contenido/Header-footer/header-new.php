@@ -24,11 +24,11 @@
             <img src="public/images/home/logo2.png" alt="Logo" class="logo-img">
         </a>
         <ul class="navbar">
-            <li><a href="" class="active">Inicio</a></li>
+            <li><a href="widolearn.com" class="active">Inicio</a></li>
             <li><a href="">Cursos</a></li>
             <li><a href="">Profesores</a></li>
-            <li><a href="">Asesorias</a></li>
-            <li><a href="">Precios</a></li>
+            <li><a href="javascript:void(0);" onclick="redirigirAsesoria()">Asesorias</a></li>
+            <li><a href="" >Precios</a></li>
           
             
 
