@@ -220,6 +220,26 @@ class AdministradorsController
         $asignacionModel = new AdministradorModel();
         $resultado = $asignacionModel->crearAsignacionModel($mentorId, $cursoId);
 
+        
+
+
+
+        // Obtener todos los usuarios activos
+        $usuariosActivos = $asignacionModel->getAllUsuariosA(); // Llamada a la función que recupera los usuarios activos
+
+        // Extraer los correos electrónicos de los usuarios
+        $correosUsuarios = [];
+        foreach ($usuariosActivos as $usuario) {
+            $correosUsuarios[] = $usuario['correo_electronico'];
+        }
+        
+        
+        $cursoNombre = $asignacionModel->getCursoNombreById($cursoId);
+        $mentorNombre = $asignacionModel->getMentorNombreById($mentorId);
+        
+        // Llamar a la función para enviar el correo
+        $this->enviarCorreo($mentorNombre, $cursoNombre, $correosUsuarios);
+
         header('Content-Type: application/json');
         echo json_encode($resultado);
         } else {
@@ -701,7 +721,7 @@ public function enviarCorreo($nombre, $curso, $correos)
            
 
             $mail->isHTML(true);
-            $mail->Subject = 'Curso Agendado';
+            $mail->Subject = '¡Aviso nuevo mentor!';
             $mail->Body = $htmlContent;
             
             //Activamos caracteres de latinos

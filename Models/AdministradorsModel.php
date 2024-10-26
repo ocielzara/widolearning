@@ -560,6 +560,32 @@ public function getCursoNombreById($cursoId)
 }
 
 
+
+public function getMentorNombreById($mentorId)
+{
+    // Consulta SQL para obtener el nombre del curso basado en el ID
+    $query = "SELECT Nombre FROM Mentor WHERE Mentor_ID = ?";
+    
+    // Preparar la consulta
+    $stmt = $this->db->prepare($query);
+    
+    // Vincular el parámetro, indicando que es un número entero (i)
+    $stmt->bind_param("i", $mentorId);
+    
+    // Ejecutar la consulta
+    $stmt->execute();
+    
+    // Obtener el resultado de la consulta
+    $stmt->bind_result($nombreMentor);
+    $stmt->fetch();
+    
+    // Cerrar la declaración
+    $stmt->close();
+    
+    // Devolver el nombre del curso
+    return $nombreMentor;
+}
+
     
     
     

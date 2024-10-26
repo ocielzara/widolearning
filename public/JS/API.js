@@ -622,6 +622,7 @@ function obtenerUsuarioAdmin(idAdministrador) {
           var row = document.createElement('tr');
 
           row.innerHTML = `
+            <td>${item.fechaCreacion}</td>
             <td>${item.nombre}</td>
             <td>${item.edad}</td>
             <td>${item.telefono}</td>
