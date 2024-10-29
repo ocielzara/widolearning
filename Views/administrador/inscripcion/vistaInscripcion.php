@@ -26,7 +26,8 @@
             <div class="container mt-4">
                 <table class="table table-hover text-center">
                     <thead class="table-dark">
-                        <tr>
+                        <tr> 
+                            <th scope="col">Fecha</th>
                             <th scope="col">Nombre usuario</th>
                             <th scope="col">Nombre mentor</th>
                             <th scope="col">Nombre curso</th>

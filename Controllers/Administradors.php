@@ -4,6 +4,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+
 require_once 'PHPMailer/Exception.php';
 require_once 'PHPMailer/PHPMailer.php';
 require_once 'PHPMailer/SMTP.php';
@@ -19,15 +20,19 @@ class AdministradorsController
     }
     
     public function index()
-    {
-        session_start();
-        if (isset($_SESSION['id_usuario'])){
-            require_once "Views/administrador/index.php";
-        }else {
-            header('Location: index.php?c=Usuarios&a=login');
-            exit; // Asegúrate de que el script se detiene después de la redirección
-        }
+{
+    session_start();
+    if (isset($_SESSION['id_usuario'])) {
+        $inscripcionModel = new AdministradorModel();
+        $nuevasInscripciones = $inscripcionModel->getUltimasInscripciones(2); // Obtener las 2 últimas inscripciones
+
+        require_once "Views/administrador/index.php";
+    } else {
+        header('Location: index.php?c=Usuarios&a=login');
+        exit;
     }
+}
+
     
     public function registro()
 {
@@ -736,17 +741,10 @@ public function enviarCorreo($nombre, $curso, $correos)
         }
     }
 
-
-
-
-
-
      private function isAjaxRequest()
     {
         return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
     }
-    
-
 }
 
 ?>

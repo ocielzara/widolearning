@@ -11,22 +11,23 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+
     <link rel="stylesheet" href="public/styles/tailwind.css">
-    
+
 </head>
 
 <body>
 
     <!--========== CONTENTS ==========-->
     <?php include 'Views/contenido/lateralAdministrador.php'; ?>
-    
-   <main>
+
+    <main>
         <section>
             <div class="container">
                 <table class="table table-hover text-center">
                     <thead class="table-dark">
                         <tr>
+                            <th scope="col">Fecha</th>
                             <th scope="col">Curso</th>
                             <th scope="col">Mentor</th>
                             <th scope="col">Usuario</th>
