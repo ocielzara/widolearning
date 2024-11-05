@@ -24,7 +24,7 @@ class AdministradorsController
     session_start();
     if (isset($_SESSION['id_usuario'])) {
         $inscripcionModel = new AdministradorModel();
-        $nuevasInscripciones = $inscripcionModel->getUltimasInscripciones(2); // Obtener las 2 últimas inscripciones
+        $nuevasInscripciones = $inscripcionModel->getUltimasInscripciones(8); // Obtener las 2 últimas inscripciones
 
         require_once "Views/administrador/index.php";
     } else {

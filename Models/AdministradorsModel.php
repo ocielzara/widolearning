@@ -593,30 +593,43 @@ class AdministradorModel
         return $nombreMentor;
     }
 
-    public function getUltimasInscripciones($limit = 2)
+    public function getUltimasInscripciones($limit = 8)
 {
-    $query = "SELECT u.nombre AS nombre_usuario, i.fechaCreacion 
-              FROM inscripciones i
-              JOIN usuarios u ON i.id_usuario = u.id_usuario 
-              ORDER BY i.fechaCreacion DESC 
-              LIMIT ?"; // Aquí usamos el placeholder ?
+    $query = "
+        SELECT 
+            u.nombre AS NombreUsuario,
+            u.correo_electronico AS CorreoUsuario,
+            c.nombre AS NombreCurso,
+            m.nombre AS NombreMentor,
+            i.fechaCreacion AS fecha,
+            i.estado AS estado
+        FROM 
+            inscripciones i
+        JOIN 
+            usuarios u ON i.id_usuario = u.id_usuario
+        JOIN 
+            asignaciones a ON i.id_asignacion = a.id_asignacion
+        JOIN 
+            cursos c ON a.id_curso = c.id_curso
+        JOIN 
+            Mentor m ON a.id_maestro = m.Mentor_ID
+        ORDER BY 
+            i.fechaCreacion DESC 
+        LIMIT ?";
 
-    // Preparar la declaración
     $stmt = $this->db->prepare($query);
 
-    // Verifica si la preparación de la consulta fue exitosa
     if ($stmt === false) {
         die('Error en la consulta: ' . $this->db->error);
     }
 
-    // Vincular el parámetro
-    $stmt->bind_param("i", $limit); // Aquí vinculamos $limit como un entero
+    $stmt->bind_param("i", $limit); 
     $stmt->execute();
 
     $result = $stmt->get_result();
-    
-    // Retornar todas las inscripciones o un array vacío si no hay resultados
     return $result->fetch_all(MYSQLI_ASSOC) ?: [];
 }
+
+    
 
 }

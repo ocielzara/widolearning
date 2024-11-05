@@ -35,7 +35,7 @@
                         </tr>
                     </thead>
                     <tbody id="contenedor-clase-muestra">
-                        <!-- Las filas se añadirán aquí por JavaScript -->
+                        <!-- Las filas se añadirán aquí por JavScript -->
                     </tbody>
                 </table>
             </div>

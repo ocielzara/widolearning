@@ -175,21 +175,40 @@
 
     thead th:nth-child(1),
     tbody td:nth-child(1) {
-        width: 40%;
-        /* La primera columna será del 40% */
+        width: 20%;
+        /* La primera columna será del 20% */
     }
 
     thead th:nth-child(2),
     tbody td:nth-child(2) {
-        width: 30%;
-        /* La segunda columna será del 30% */
+        width: 15%;
+        /* La segunda columna será del 15% */
     }
 
     thead th:nth-child(3),
     tbody td:nth-child(3) {
-        width: 30%;
-        /* La tercera columna será del 30% */
+        width: 20%;
+        /* La tercera columna será del 20% */
     }
+
+    thead th:nth-child(4),
+    tbody td:nth-child(4) {
+        width: 15%;
+        /* La cuarta columna será del 15% */
+    }
+
+    thead th:nth-child(5),
+    tbody td:nth-child(5) {
+        width: 15%;
+        /* La quinta columna será del 15% */
+    }
+
+    thead th:nth-child(6),
+    tbody td:nth-child(6) {
+        width: 15%;
+        /* La sexta columna será del 15% */
+    }
+
 
     .progress-bar {
         width: 100%;
@@ -313,30 +332,39 @@
             </div>
 
             <div class="recent_order_curso">
-                <h2>Últimas Inscripciones</h2>
+                <h2>Historial de clases muestra</h2>
                 <table style="margin-bottom:20px">
                     <thead>
                         <tr>
                             <th>Usuario</th>
+                            <th>Correo Electrónico</th>
+                            <th>Curso</th>
+                            <th>Profesor</th>
                             <th>Fecha de Creación</th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if (!empty($nuevasInscripciones)): ?>
                             <?php foreach ($nuevasInscripciones as $inscripcion): ?>
                                 <tr>
-                                    <td><?php echo htmlspecialchars($inscripcion['nombre_usuario']); ?></td>
-                                    <td><?php echo htmlspecialchars($inscripcion['fechaCreacion']); ?></td>
+                                    <td><?php echo htmlspecialchars($inscripcion['NombreUsuario']); ?></td>
+                                    <td><?php echo htmlspecialchars($inscripcion['CorreoUsuario']); ?></td>
+                                    <td><?php echo htmlspecialchars($inscripcion['NombreCurso']); ?></td>
+                                    <td><?php echo htmlspecialchars($inscripcion['NombreMentor']); ?></td>
+                                    <td><?php echo htmlspecialchars($inscripcion['fecha']); ?></td>
+                                    <td><?php echo htmlspecialchars($inscripcion['estado']); ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
-                                <td colspan="2">No hay inscripciones recientes</td>
+                                <td colspan="6">No hay inscripciones recientes</td>
                             </tr>
                         <?php endif; ?>
                     </tbody>
                 </table>
             </div>
+
         </div>
 
         <canvas id="interesesPieChart"></canvas>
