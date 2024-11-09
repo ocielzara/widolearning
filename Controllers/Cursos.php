@@ -32,6 +32,7 @@ class CursosController
         }
     }
 
+    
     public function verCursos()
     {
         $cursoModel = new CursoModel();

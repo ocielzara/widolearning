@@ -9,9 +9,43 @@
     <link rel="icon" type="image/png" sizes="16x16" href="public/images/home/iconWido.png">
     <link rel="stylesheet" href="styles/output.css">
     <link rel="stylesheet" href="public/styles/styleDocente.css">
+    <!--------------------------------STRIPE----------------------------------->
+    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </head>
 
 <body>
+    <?php 
+    session_start();
+    $idUsuario = isset($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : ''; 
+    ?>
+    <input type="hidden" id="idUsuario" value="<?php echo htmlspecialchars($idUsuario); ?>">
+    <div id="myModalCompra" class="modalCompra">
+            <div class="modal-contentCompra">
+                <span class="close" style="color: #000000;">&times;</span>
+                <div class="p-5" id="data-mentor-id">
+                    <h1 class="text-[#4F7CAC] font-bold text-2xl" id="mentor-dataCompra"></h1>
+                    <p class="modal-parrafo my-8 font-medium" id="curso-dataCompra"></p>
+                    <div class="payment-options">
+                        <div class="payment-option left">
+                            Pago único
+                        </div>
+                        <div class="payment-option right">
+                            Pago en partes
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <stripe-buy-button
+                            buy-button-id="buy_btn_1OurNQCiGkywhmkuimUxFNd8"
+                            publishable-key="pk_live_51OuqPCCiGkywhmkuV2nok90bajPjNUHxaG9zVsaV9rxUW5DHk68o9X5bME8vma7Ks6x2ZAUDCSWbfHWnXGLR5KhZ00xrK59zi2">
+                        </stripe-buy-button>
+                        <stripe-buy-button
+                            buy-button-id="buy_btn_1PnpRyCiGkywhmku2TZTVfd2"
+                            publishable-key="pk_live_51OuqPCCiGkywhmkuV2nok90bajPjNUHxaG9zVsaV9rxUW5DHk68o9X5bME8vma7Ks6x2ZAUDCSWbfHWnXGLR5KhZ00xrK59zi2"
+                            </stripe-buy-button>
+                    </div>
+                </div>
+            </div>
+        </div>
     <main>
         <header>
             <div class="imagenBackground w-full sm:h-screen h-1/2">
