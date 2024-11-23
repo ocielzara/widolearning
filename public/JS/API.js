@@ -1374,6 +1374,7 @@ function updateMentorInfo(data) {
   const mentorBio = document.getElementById("mentor-bio");
   const mentorName3 = document.getElementById("mentor-cursos");
   const carruselcurso = document.getElementById("mentor-cursos-carrusel");
+  const idUsuario = document.getElementById("idUsuario").value;
 
   carruselcurso.innerHTML = ''; // Limpiar contenido viejo
 
@@ -1386,6 +1387,7 @@ function updateMentorInfo(data) {
 
 async function renderCourses(data) {
   const carruselcurso = document.getElementById("mentor-cursos-carrusel");
+  const idUsuario = document.getElementById("idUsuario").value;
 
   // Verificar si hay datos
   if (!Array.isArray(data) || data.length === 0) {
@@ -1399,7 +1401,7 @@ async function renderCourses(data) {
 
   // Aquí hacemos la función asíncrona y usamos for...of para asegurarnos de que los botones se actualizan correctamente
   for (const curso of uniqueCursos) {
-    const idUsuario = 123; // Asigna el idUsuario correcto
+    //const idUsuario = 123; // Asigna el idUsuario correcto
     const nombreCurso = curso.Curso; // o curso.nombre si se llama así en la base de datos
 
     // Esperar a obtener el estado de inscripción
