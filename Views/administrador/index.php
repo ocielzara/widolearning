@@ -15,12 +15,7 @@
     <link rel="stylesheet" href="styles/output.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>Index</title>
-
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
-
 </head>
 
 <style>
@@ -233,6 +228,80 @@
         height: 500px;
         /* Ajusta la altura visual */
     }
+
+    .recent_order_mentor,
+    .recent_order_curso {
+        position: relative;
+        padding-top: 10px;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+        background-color: #4F7CAC;
+        color: #fff;
+        margin: 0;
+        padding: 10px;
+        border-radius: 8px;
+        text-align: left;
+    }
+
+    .toggle-icon {
+        position: absolute;
+        right: 20px;
+        top: 15px;
+        font-size: 1.2rem;
+        color: #fff;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .toggle-table {
+        display: table;
+        /* Las tablas están visibles por defecto */
+        margin-top: 10px;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+    td {
+        text-align: center;
+    }
+    .btn-historial {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background-color: #4F7CAC;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-historial:hover {
+        background-color: #4F7CAC;
+        transform: translateY(-2px);
+    }
+
+    .btn-historial:active {
+        background-color: #004089;
+        transform: translateY(0);
+    }
 </style>
 
 <body>
@@ -243,6 +312,8 @@
         <div class="administrador-main">
             <h1>Bienvenido al Panel de Administración</h1>
             <p class="mt-2">Gestiona tu plataforma de aprendizaje con facilidad y eficiencia.</p>
+
+            <button class="btn-historial" onclick="redirigirHistorial()">Ver Historial</button>
 
             <div class="insights">
 
@@ -301,7 +372,8 @@
 
             <div class="recent_order_mentor">
                 <h2>Top mentores</h2>
-                <table>
+                <span id="icon-mentores" class="toggle-icon" onclick="toggleTable('table-mentores', 'icon-mentores')">&#9650;</span>
+                <table id="table-mentores" class="toggle-table">
                     <thead>
                         <tr>
                             <th>Nombre Mentor</th>
@@ -317,7 +389,8 @@
 
             <div class="recent_order_curso">
                 <h2>Top cursos</h2>
-                <table>
+                <span id="icon-cursos" class="toggle-icon" onclick="toggleTable('table-cursos', 'icon-cursos')">&#9650;</span>
+                <table id="table-cursos" class="toggle-table">
                     <thead>
                         <tr>
                             <th>Nombre Curso</th>
@@ -333,23 +406,27 @@
 
             <div class="recent_order_curso">
                 <h2>Historial de clases muestra</h2>
-                <table style="margin-bottom:20px">
+                <span id="icon-historial" class="toggle-icon" onclick="toggleTable('table-historial', 'icon-historial')">&#9650;</span>
+                <table id="table-historial" class="toggle-table">
                     <thead>
                         <tr>
                             <th>Usuario</th>
                             <th>Correo Electrónico</th>
+                            <th>Teléfono</th> <!-- Encabezado de teléfono -->
                             <th>Curso</th>
                             <th>Profesor</th>
                             <th>Fecha de Creación</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <?php if (!empty($nuevasInscripciones)): ?>
                             <?php foreach ($nuevasInscripciones as $inscripcion): ?>
                                 <tr>
                                     <td><?php echo htmlspecialchars($inscripcion['NombreUsuario']); ?></td>
                                     <td><?php echo htmlspecialchars($inscripcion['CorreoUsuario']); ?></td>
+                                    <td><?php echo htmlspecialchars($inscripcion['telefono']); ?></td> <!-- Nueva columna de teléfono -->
                                     <td><?php echo htmlspecialchars($inscripcion['NombreCurso']); ?></td>
                                     <td><?php echo htmlspecialchars($inscripcion['NombreMentor']); ?></td>
                                     <td><?php echo htmlspecialchars($inscripcion['fecha']); ?></td>
@@ -358,21 +435,29 @@
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
-                                <td colspan="6">No hay inscripciones recientes</td>
+                                <td colspan="7">No hay inscripciones recientes</td>
                             </tr>
                         <?php endif; ?>
                     </tbody>
+
                 </table>
             </div>
 
-        </div>
-
-        <canvas id="interesesPieChart"></canvas>
-
+            <canvas id="interesesPieChart"></canvas>
     </main>
 
+    <script>
+        function toggleTable(tableId, iconId) {
+            const table = document.getElementById(tableId);
+            const icon = document.getElementById(iconId);
 
+            // Alterna la visibilidad de la tabla
+            table.style.display = (table.style.display === 'none') ? 'table' : 'none';
 
+            // Cambia el ícono del triángulo
+            icon.innerHTML = table.style.display === 'none' ? '&#9660;' : '&#9650;'; // ▼ y ▲
+        }
+    </script>
 
     <script src="public/JS/API.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>

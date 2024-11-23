@@ -6,12 +6,122 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  list-style: none;
 }
 
 .imagenBackground {
   background-image: url("../../public/images/wido/header.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100% 100%;
+  background-size: cover;
+}
+
+#pdfModal {
+  display: none; /* Asegura que el modal esté oculto hasta ser activado */
+}
+
+
+.mentor-card {
+  border-image: linear-gradient(to bottom, #4F7CAC, #FAC400) 1; /* Gradiente en el borde izquierdo */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mentor-card:hover {
+  transform: translateY(-10px); /* Levanta la tarjeta al pasar el cursor */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Sombra más intensa en hover */
+}
+
+.mentor-card h1 {
+  color: #4F7CAC; /* Cambia el color del título */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra leve en el título */
+}
+
+.mentor-card p {
+  color: #333;
+}
+
+.cursos-section {
+  background: #f3f4f6 url('https://www.transparenttextures.com/patterns/cubes.png'); /* Fondo con textura */
+  padding: 4rem 0;
+}
+
+.cursos-container {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+ 
+}
+
+.cursos-title {
+  font-weight: 700;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+  position: relative;
+}
+
+.cursos-title::after {
+  content: '';
+  width: 60px;
+  height: 4px;
+  background-color: #4F7CAC;
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.cursos-carrusel {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+}
+
+.cursos-carrusel .curso-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  width: calc(33.333% - 1rem);
+  max-width: 280px;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.cursos-carrusel .curso-card:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.pdf-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.pdf-content {
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  max-width: 800px;
+  width: 90%;
+  position: relative;
+}
+
+.pdf-content .close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #333;
 }

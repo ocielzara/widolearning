@@ -80,7 +80,7 @@
         <div id="carousel-container">
             <button class="boton-atras" id="prevBtn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
 
-            <div id="content-asesorias" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+            <div id="asesorias2" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
             <button button class="boton-adelante" id="nextBtn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
         </div>
         </div>

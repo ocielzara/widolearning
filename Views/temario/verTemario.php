@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($curso['nombre']); ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="public/JS/API.js">
     <link rel="stylesheet" href="public/styles/styles.css">
-
 </head>
 
 <body>
@@ -16,7 +14,6 @@
     <!--========== HEADER ==========-->
     <?php include 'Views/contenido/Header-footer/header-new.php'; ?>
     <!--==========         ==========-->
-
 
     <div class="container">
         <div class="course-info">
@@ -61,22 +58,38 @@
                 </ul>
             </div>
         </div>
+
+        <!-- Planes de pago -->
         <div class="payment-plans">
-                <h2>PLANES DE PAGO</h2>
+            <h2>PLANES DE PAGO</h2>
+            <?php if ($curso['tipo'] === 'asesorias2'): ?>
+                <h2>Planes de Pago</h2>
+                <p>Aquí te explicaré cómo funciona esta calculadora. Según las horas que elijas, ese será el monto a pagar.</p>
+                <p>Si seleccionas 5 horas, recibirás un descuento de $15 por hora, y si seleccionas 10 horas o más, el descuento será de $30 por hora.</p>
+
                 <div class="plan">
-                   <!-- <input type="radio" id="hora" name="plan">-->
+                    <label for="hora"><strong>PRECIO POR HORA</strong><br>$290</label>
+                </div>
+                <div class="plan">
+                    <label for="cincoHoras"><strong>PRECIO POR 5 HORAS O MÁS</strong><br>$275 por hora (Total: $1375)</label>
+                </div>
+                <div class="plan">
+                    <label for="diezHoras"><strong>PRECIO POR 10 HORAS O MÁS</strong><br>$260 por hora</label>
+                </div>
+
+
+            <?php else: ?>
+                <div class="plan">
                     <label for="hora"><strong>PRECIO POR HORA</strong><br>$350</label>
                 </div>
                 <div class="plan">
-                   <!-- <input type="radio" id="unico" name="plan">-->
                     <label for="unico"><strong>PAGO ÚNICO</strong><br>$5,900 <span>Ahorra $400 al pagar en una sola exhibición.</span></label>
                 </div>
                 <div class="plan">
-                    <!--<input type="radio" id="mensual" name="plan"> -->
                     <label for="mensual"><strong>PAGO MENSUAL</strong><br>$2,100 <span>Realiza 3 pagos mensuales.</span></label>
                 </div>
-               <!-- <button>Pide tu clase muestra aquí</button>-->
-            </div>
+            <?php endif; ?>
+        </div>
     </div>
 </body>
 

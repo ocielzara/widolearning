@@ -122,10 +122,6 @@
             </div>
         </div>
 
-
-
-
-
         <section class="section2 cursos-demanda 2xl:max-w-[90rem] 2xl:mx-auto">
 
             <div id="pdfModal">

@@ -594,11 +594,12 @@ class AdministradorModel
     }
 
     public function getUltimasInscripciones($limit = 8)
-{
-    $query = "
+    {
+        $query = "
         SELECT 
             u.nombre AS NombreUsuario,
             u.correo_electronico AS CorreoUsuario,
+            u.telefono AS telefono,  -- Nuevo campo para el teléfono
             c.nombre AS NombreCurso,
             m.nombre AS NombreMentor,
             i.fechaCreacion AS fecha,
@@ -617,19 +618,52 @@ class AdministradorModel
             i.fechaCreacion DESC 
         LIMIT ?";
 
-    $stmt = $this->db->prepare($query);
+        $stmt = $this->db->prepare($query);
 
-    if ($stmt === false) {
-        die('Error en la consulta: ' . $this->db->error);
+        if ($stmt === false) {
+            die('Error en la consulta: ' . $this->db->error);
+        }
+
+        $stmt->bind_param("i", $limit);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC) ?: [];
     }
 
-    $stmt->bind_param("i", $limit); 
-    $stmt->execute();
+    public function getTodasInscripciones()
+    {
+        $query = "
+    SELECT 
+        u.nombre AS NombreUsuario,
+        u.correo_electronico AS CorreoUsuario,
+        u.telefono AS telefono,  -- Campo para el teléfono
+        c.nombre AS NombreCurso,
+        m.nombre AS NombreMentor,
+        i.fechaCreacion AS fecha,
+        i.estado AS estado
+    FROM 
+        inscripciones i
+    JOIN 
+        usuarios u ON i.id_usuario = u.id_usuario
+    JOIN 
+        asignaciones a ON i.id_asignacion = a.id_asignacion
+    JOIN 
+        cursos c ON a.id_curso = c.id_curso
+    JOIN 
+        Mentor m ON a.id_maestro = m.Mentor_ID
+    ORDER BY 
+        i.fechaCreacion DESC";
 
-    $result = $stmt->get_result();
-    return $result->fetch_all(MYSQLI_ASSOC) ?: [];
-}
+        $stmt = $this->db->prepare($query);
 
-    
+        if ($stmt === false) {
+            die('Error en la consulta: ' . $this->db->error);
+        }
 
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC) ?: [];
+    }
 }

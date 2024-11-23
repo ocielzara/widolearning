@@ -22,6 +22,7 @@ window.onload = function () {
   obtenerAsesorias();
   obtenerMentores();
   mostrarMasCategorias(idUsu, "otros");
+  mostrarMasCategorias(idUsu, "asesorias2");
   mostrarMasCategorias(idUsu, "programacion");
   mostrarMasCategorias(idUsu, "CAD");
   mostrarMasCategorias(idUsu, "administracion");
@@ -1330,6 +1331,7 @@ async function obtenerCursos(idUsuario) {
   }
 }
 
+
 function limitarPalabras(texto, limite) {
   const palabras = texto.split(' '); // Dividir el texto en palabras
   if (palabras.length > limite) {
@@ -1496,6 +1498,12 @@ function redirigirClaseMuestra(idCurso, nombreCurso) {
   const url = `${baseUrl}/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=${idCurso}&nombreCurso=${encodeURIComponent(nombreCurso)}`;
   window.location.href = url;
 }
+
+function redirigirHistorial() {
+  const url = `${baseUrl}/index.php?c=Administradors&a=verHistorial`;
+  window.location.href = url;
+}
+
 
 //NEW JULIO 24
 function mostrarModalCompra(cursoName) {

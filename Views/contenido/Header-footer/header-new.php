@@ -19,7 +19,7 @@
 
 <body>
 
-    <header>
+    <header class="header-inicio">
         <a href="https://www.widolearn.com/index.php?c=Usuarios&a=index&n=" class="logo">
             <img src="public/images/home/logo2.png" alt="Logo" class="logo-img">
         </a>

@@ -33,6 +33,16 @@ class AdministradorsController
     }
 }
 
+
+public function verHistorial() {
+    // Lógica para obtener el historial
+    $model = new AdministradorModel(); // Asumiendo que tienes un modelo para manejar inscripciones
+    $historial = $model->getTodasInscripciones(); // O el método que usas para obtener todos los datos
+    
+    require_once "Views/historial/verHistorial.php"; // Vista que muestra el historial
+}
+
+
     
     public function registro()
 {
@@ -695,6 +705,8 @@ public function contarIntereses($interesesActivos)
 
     return $conteoIntereses;
 }
+
+
 
 public function enviarCorreo($nombre, $curso, $correos)
     {
