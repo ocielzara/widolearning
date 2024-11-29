@@ -1237,7 +1237,7 @@ async function mostrarMasCategorias(idUsuario, typoCurso) {
             <p class="cardText1">${limitarPalabras(curso.descripcion, 20)}</p> <!-- Límite de palabras -->
           </div>
           <div class="cardFooter1">
-            ${generarBotonSegunEstado(curso.id_curso, curso.nombre, curso.pdf, estado)}
+            ${generarBotonSegunEstado(curso.id_curso, curso.nombre, curso.pdf, estado, curso.tipo)}
           </div>
         </div>
       `;
@@ -1300,7 +1300,7 @@ async function obtenerCursos(idUsuario) {
             <p class="cardText1">${limitarPalabras(curso.descripcion, 20)}</p> <!-- Límite de palabras -->
           </div>
           <div class="cardFooter1">
-            ${generarBotonSegunEstado(curso.id_curso, curso.nombre, curso.pdf, estado)}
+            ${generarBotonSegunEstado(curso.id_curso, curso.nombre, curso.pdf, estado, curso.tipo)}
           </div>
         </div>
       `;
@@ -1420,7 +1420,7 @@ async function renderCourses(data) {
           <h4 class="cardTitle1">${nombreCurso}</h4> <!-- Mostrar el nombre del curso -->
         </div>
         <div class="cardFooter1">
-          ${generarBotonSegunEstado(curso.id_curso, nombreCurso, curso.pdf, estado)}
+          ${generarBotonSegunEstado(curso.id_curso, nombreCurso, curso.pdf, estado, curso.tipo)}
         </div>
       </div>
     `;
@@ -1451,10 +1451,10 @@ async function obtenerEstadoInscripcion(idUsuario, idCurso) {
 }
 
 // Define la función de manera global para que esté accesible desde cualquier parte del código
-function generarBotonSegunEstado(idCurso, nombreCurso, pdfCurso, estado) {
+function generarBotonSegunEstado(idCurso, nombreCurso, pdfCurso, estado, tipoCurso1) {
   if (estado === 'empezo') {
     return `
-      <button class="button1" onclick="mostrarModalCompra('${nombreCurso}')">
+      <button class="button1" onclick="mostrarModalCompra('${nombreCurso}', '${tipoCurso1}')">
         <span>Comprar</span>
       </button>
       <button class="button2" onclick="redirigirTemario(${idCurso})">
@@ -1508,7 +1508,10 @@ function redirigirHistorial() {
 
 
 //NEW JULIO 24
-function mostrarModalCompra(cursoName, tipo) {
+function mostrarModalCompra(cursoName, tipoCurso1) {
+  console.log("Tipo recibido:", tipoCurso1); // Verifica el valor recibido
+
+
   const modal = document.getElementById("myModalCompra");
   const modalTitle = document.getElementById("mentor-dataCompra");
   const cursoData = document.getElementById("curso-dataCompra");
@@ -1522,7 +1525,7 @@ function mostrarModalCompra(cursoName, tipo) {
   paymentPlans.innerHTML = "<h2>PLANES DE PAGO</h2>";
 
   // Agregar contenido según el tipo
-  if (tipo === "asesorias2") {
+  if (tipoCurso1 === "asesorias2") {
     paymentPlans.innerHTML += `
       <p>Aquí te explicaré cómo funciona esta calculadora. Según las horas que elijas, ese será el monto a pagar.</p>
       <p>Si seleccionas 5 horas, recibirás un descuento de $15 por hora, y si seleccionas 10 horas o más, el descuento será de $30 por hora.</p>
@@ -1554,9 +1557,6 @@ function mostrarModalCompra(cursoName, tipo) {
     `;
   } else {
     paymentPlans.innerHTML += `
-      <div class="plan">
-        <label for="hora"><strong>PRECIO POR HORA</strong><br>$350</label>
-      </div>
       <div class="plan">
         <label for="unico"><strong>PAGO ÚNICO</strong><br>$5,900 <span>Ahorra $400 al pagar en una sola exhibición.</span></label>
       </div>
