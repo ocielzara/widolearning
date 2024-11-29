@@ -30,6 +30,144 @@
     <!--------------------------------STRIPE----------------------------------->
     <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 
+    <style>
+        /* Estilo general para el modal */
+        .modalCompra {
+            display: none;
+            /* Ocultar por defecto */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            /* Fondo semi-transparente */
+        }
+
+        /* Contenedor de contenido del modal */
+        .modal-contentCompra {
+            background: #ffffff;
+            margin: 10% auto;
+            /* Centramos vertical y horizontal */
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            /* Ancho responsivo */
+            max-width: 500px;
+            /* Máximo para pantallas grandes */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.3s ease-out;
+            /* Suavizar la aparición */
+        }
+
+        /* Animación de aparición */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Botón cerrar */
+        .close {
+            font-size: 24px;
+            font-weight: bold;
+            float: right;
+            cursor: pointer;
+            color: #333333;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: #ff0000;
+        }
+
+        /* Título y texto */
+        #mentor-dataCompra {
+            color: #4F7CAC;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        #curso-dataCompra {
+            text-align: center;
+            font-size: 18px;
+            color: #666666;
+        }
+
+        /* Opciones de pago */
+        .payment-options {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .payment-option {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background-color: #f7f9fc;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .payment-option:hover {
+            background-color: #4F7CAC;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            /* Botones responsivos */
+            gap: 20px;
+            /* Espacio entre botones */
+            margin-top: 20px;
+            justify-content: center;
+            /* Opcional: centra el contenido */
+        }
+
+
+        stripe-buy-button {
+            flex: 1;
+            /* Los botones ocupan espacio igual */
+            max-width: 200px;
+            /* Limita el ancho de los botones */
+        }
+
+        .payment-plans {
+            margin-top: 20px;
+        }
+
+        .plan {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .plan label {
+            font-weight: bold;
+        }
+
+        .plan span {
+            display: block;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
 </head>
 
 <body>
@@ -96,31 +234,16 @@
 
         <div id="myModalCompra" class="modalCompra">
             <div class="modal-contentCompra">
-                <span class="close" style="color: #000000;">&times;</span>
+                <span class="close">&times;</span>
                 <div class="p-5" id="data-mentor-id">
-                    <h1 class="text-[#4F7CAC] font-bold text-2xl" id="mentor-dataCompra"></h1>
-                    <p class="modal-parrafo my-8 font-medium" id="curso-dataCompra"></p>
-                    <div class="payment-options">
-                        <div class="payment-option left">
-                            Pago único
-                        </div>
-                        <div class="payment-option right">
-                            Pago en partes
-                        </div>
-                    </div>
-                    <div class="button-container">
-                        <stripe-buy-button
-                            buy-button-id="buy_btn_1OurNQCiGkywhmkuimUxFNd8"
-                            publishable-key="pk_live_51OuqPCCiGkywhmkuV2nok90bajPjNUHxaG9zVsaV9rxUW5DHk68o9X5bME8vma7Ks6x2ZAUDCSWbfHWnXGLR5KhZ00xrK59zi2">
-                        </stripe-buy-button>
-                        <stripe-buy-button
-                            buy-button-id="buy_btn_1PnpRyCiGkywhmku2TZTVfd2"
-                            publishable-key="pk_live_51OuqPCCiGkywhmkuV2nok90bajPjNUHxaG9zVsaV9rxUW5DHk68o9X5bME8vma7Ks6x2ZAUDCSWbfHWnXGLR5KhZ00xrK59zi2"
-                            </stripe-buy-button>
-                    </div>
+                    <h1 id="mentor-dataCompra">Elije tu forma de pago</h1>
+                    <p id="curso-dataCompra"></p>
+                    <div class="payment-plans"></div>
                 </div>
             </div>
         </div>
+
+
 
         <section class="section2 cursos-demanda 2xl:max-w-[90rem] 2xl:mx-auto">
 

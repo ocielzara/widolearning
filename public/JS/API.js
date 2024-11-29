@@ -1508,16 +1508,79 @@ function redirigirHistorial() {
 
 
 //NEW JULIO 24
-function mostrarModalCompra(cursoName) {
+function mostrarModalCompra(cursoName, tipo) {
   const modal = document.getElementById("myModalCompra");
   const modalTitle = document.getElementById("mentor-dataCompra");
-  modalTitle.textContent = "Elije tu forma de pago";
-
   const cursoData = document.getElementById("curso-dataCompra");
+  const paymentPlans = document.querySelector(".payment-plans");
+
+  // Configurar título y descripción del curso
+  modalTitle.textContent = "Elije tu forma de pago";
   cursoData.textContent = cursoName;
 
+  // Limpiar planes previos
+  paymentPlans.innerHTML = "<h2>PLANES DE PAGO</h2>";
+
+  // Agregar contenido según el tipo
+  if (tipo === "asesorias2") {
+    paymentPlans.innerHTML += `
+      <p>Aquí te explicaré cómo funciona esta calculadora. Según las horas que elijas, ese será el monto a pagar.</p>
+      <p>Si seleccionas 5 horas, recibirás un descuento de $15 por hora, y si seleccionas 10 horas o más, el descuento será de $30 por hora.</p>
+      <div class="plan">
+        <label for="hora"><strong>PRECIO POR HORA</strong><br>$290</label>
+      </div>
+      <div class="plan">
+        <label for="cincoHoras"><strong>PRECIO POR 5 HORAS O MÁS</strong><br>$275 por hora (Total: $1375)</label>
+      </div>
+      <div class="plan">
+        <label for="diezHoras"><strong>PRECIO POR 10 HORAS O MÁS</strong><br>$260 por hora</label>
+      </div>
+      <div class="stripe-buttons">
+        <stripe-buy-button
+          buy-button-id="buy_btn_1QO9qaCiGkywhmkuwprI9ftU"
+          publishable-key="pk_live_51OuqPCCiGkywhmkuV2nok90bajPjNUHxaG9zVsaV9rxUW5DHk68o9X5bME8vma7Ks6x2ZAUDCSWbfHWnXGLR5KhZ00xrK59zi2">
+        </stripe-buy-button>
+
+        <stripe-buy-button
+          buy-button-id="buy_btn_1QO9tfCiGkywhmkuxvpSftME"
+          publishable-key="pk_live_51OuqPCCiGkywhmkuV2nok90bajPjNUHxaG9zVsaV9rxUW5DHk68o9X5bME8vma7Ks6x2ZAUDCSWbfHWnXGLR5KhZ00xrK59zi2">
+        </stripe-buy-button>
+
+        <stripe-buy-button
+          buy-button-id="buy_btn_1QO9x6CiGkywhmkuV3sKTtJd"
+          publishable-key="pk_live_51OuqPCCiGkywhmkuV2nok90bajPjNUHxaG9zVsaV9rxUW5DHk68o9X5bME8vma7Ks6x2ZAUDCSWbfHWnXGLR5KhZ00xrK59zi2">
+        </stripe-buy-button>
+      </div>
+    `;
+  } else {
+    paymentPlans.innerHTML += `
+      <div class="plan">
+        <label for="hora"><strong>PRECIO POR HORA</strong><br>$350</label>
+      </div>
+      <div class="plan">
+        <label for="unico"><strong>PAGO ÚNICO</strong><br>$5,900 <span>Ahorra $400 al pagar en una sola exhibición.</span></label>
+      </div>
+      <div class="plan">
+        <label for="mensual"><strong>PAGO MENSUAL</strong><br>$2,100 <span>Realiza 3 pagos mensuales.</span></label>
+      </div>
+      <div class="stripe-buttons">
+         <stripe-buy-button
+            buy-button-id="buy_btn_1OurNQCiGkywhmkuimUxFNd8"
+            publishable-key="pk_live_51OuqPCCiGkywhmkuV2nok90bajPjNUHxaG9zVsaV9rxUW5DHk68o9X5bME8vma7Ks6x2ZAUDCSWbfHWnXGLR5KhZ00xrK59zi2">
+         </stripe-buy-button>
+         <stripe-buy-button
+              buy-button-id="buy_btn_1PnpRyCiGkywhmku2TZTVfd2"
+              publishable-key="pk_live_51OuqPCCiGkywhmkuV2nok90bajPjNUHxaG9zVsaV9rxUW5DHk68o9X5bME8vma7Ks6x2ZAUDCSWbfHWnXGLR5KhZ00xrK59zi2">
+         </stripe-buy-button>
+      </div>
+    `;
+  }
+
+  // Mostrar el modal
   modal.style.display = "block";
 }
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("myModalCompra");
