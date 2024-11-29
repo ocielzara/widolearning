@@ -1527,16 +1527,14 @@ function mostrarModalCompra(cursoName, tipoCurso1) {
   // Agregar contenido según el tipo
   if (tipoCurso1 === "asesorias2") {
     paymentPlans.innerHTML += `
-      <p>Aquí te explicaré cómo funciona esta calculadora. Según las horas que elijas, ese será el monto a pagar.</p>
-      <p>Si seleccionas 5 horas, recibirás un descuento de $15 por hora, y si seleccionas 10 horas o más, el descuento será de $30 por hora.</p>
       <div class="plan">
         <label for="hora"><strong>PRECIO POR HORA</strong><br>$290</label>
       </div>
       <div class="plan">
-        <label for="cincoHoras"><strong>PRECIO POR 5 HORAS O MÁS</strong><br>$275 por hora (Total: $1375)</label>
+        <label for="cincoHoras"><strong>PRECIO POR 5 HORAS O MÁS</strong><br>$275 por hora (Total: $1,375)</label>
       </div>
       <div class="plan">
-        <label for="diezHoras"><strong>PRECIO POR 10 HORAS O MÁS</strong><br>$260 por hora</label>
+        <label for="diezHoras"><strong>PRECIO POR 10 HORAS O MÁS</strong><br>$260 por hora (Total: $2,600)</label>
       </div>
       <div class="stripe-buttons">
         <stripe-buy-button
