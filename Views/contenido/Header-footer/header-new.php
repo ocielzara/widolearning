@@ -24,13 +24,10 @@
             <img src="public/images/home/logo2.png" alt="Logo" class="logo-img">
         </a>
         <ul class="navbar">
-            <li><a href="widolearn.com" class="active">Inicio</a></li>
-            <li><a href="">Cursos</a></li>
-            <li><a href="">Profesores</a></li>
-            <li><a href="javascript:void(0);" onclick="redirigirAsesoria()">Asesorias</a></li>
-            <li><a href="" >Precios</a></li>
-          
-            
+            <li><a href="index.php?c=Asesoria&a=inicio2" class="<?= isset($activeLink) && $activeLink == 'inicio' ? 'active' : '' ?>">Inicio</a></li>
+            <li><a href="index.php?c=Asesoria&a=cursosSection" class="<?= isset($activeLink) && $activeLink == 'cursos' ? 'active' : '' ?>">Cursos</a></li>
+            <li><a href="index.php?c=Asesoria&a=maestrosSection" class="<?= isset($activeLink) && $activeLink == 'profesores' ? 'active' : '' ?>">Profesores</a></li>
+            <li><a href="index.php?c=Asesoria&a=ver" class="<?= isset($activeLink) && $activeLink == 'asesoria' ? 'active' : '' ?>">Asesorias</a></li>
 
             <?php
             // session_start(); // Descomentar si es necesario

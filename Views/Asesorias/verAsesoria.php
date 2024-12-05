@@ -42,6 +42,17 @@
     </style>
 
     <link rel="stylesheet" href="public/styles/styles.css">
+
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="public/images/home/iconWido.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="public/images/home/iconWido.png">
+
+   
+  
+    <!--------------------------------STRIPE----------------------------------->
+    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+
 </head>
 
 <body>
@@ -120,6 +131,8 @@
 
         hoursInput.addEventListener('input', updateCost);
     </script>
+    
+<script src="public/JS/API.js"></script>
 </body>
 
 </html>

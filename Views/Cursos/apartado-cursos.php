@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos Section</title>
+    <link rel="stylesheet" href="public/styles/main/cursos.css">
+   
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="public/images/home/iconWido.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="public/images/home/iconWido.png">
+
+   
+  
+    <!--------------------------------STRIPE----------------------------------->
+    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+
+    <style>
+        h2{
+            font-size: 28px;
+        }
+    </style>
+</head>
+
+<body>
+
+ <!--========== HEADER ==========-->
+ <?php include 'Views/contenido/Header-footer/header-new.php'; ?>
+    <!--==========         ==========-->
+
+    <!--========== Secciones para los cursos ==========-->
+    <section class="corse-container" id="contenido-areas" style="margin-top: 155px;">
+
+        <div style="display:flex; justify-content:right;">
+            <input type="text" id="searchInput1" placeholder="Buscar cursos..." oninput="buscarCursos()">
+        </div>
+
+        <div class="subheading">
+            <h2>CURSOS CON MAYOR DEMANDA</h2>
+            <div class="line-container">
+                <span class="line"></span>
+                <span class="circle"></span>
+            </div>
+        </div>
+
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtnn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="content-cursos" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtnn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
+        </div>
+
+        <div class="subheading">
+            <h2>CURSOS DE PROGRAMACIÓN</h2>
+            <div class="line-container">
+                <span class="line"></span>
+                <span class="circle"></span>
+            </div>
+        </div>
+
+        <div id="carousel-container-programacion">
+            <button class="boton-atras" id="prevBtn-programacion"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="programacion" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtn-programacion"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
+        </div>
+
+        <div class="subheading">
+            <h2>CURSOS DE ADMINISTRACIÓN Y FINANZAS</h2>
+            <div class="line-container">
+                <span class="line"></span>
+                <span class="circle"></span>
+            </div>
+        </div>
+
+        <div id="carousel-container-administracion">
+            <button class="boton-atras" id="prevBtn-administracion"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="administracion" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+
+            <button class="boton-adelante" id="nextBtn-administracion"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
+        </div>
+    </section>
+
+    <section class="corse-container"
+        <div id="asesorias-Cursos">
+        <div class="subheading">
+            <h2>ASESORÍAS ACADEMICAS/LABORALES</h2>
+            <div class="line-container">
+                <span class="line"></span>
+                <span class="circle"></span>
+            </div>
+        </div>
+
+        <div id="carousel-container">
+            <button class="boton-atras" id="prevBtn"><i class="ri-arrow-drop-left-line"></i></button> <!-- Botón para ir a la izquierda -->
+
+            <div id="asesorias2" class="contenedor-tarjetas"></div> <!-- Contenedor de tarjetas -->
+            <button button class="boton-adelante" id="nextBtn"><i class="ri-arrow-drop-right-line"></i></button> <!-- Botón para ir a la derecha -->
+        </div>
+        </div>
+
+    </section>
+
+</body>
+  <script src="public/JS/swiper-bundle.min.js"></script>
+    <!--=============== MAIN JS ===============-->
+    <script src="public/JS/script.js"></script>
+    <script src="public/JS/API.js"></script>
+
+</html>

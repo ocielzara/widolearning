@@ -1491,10 +1491,7 @@ function redirigirTemario(idCurso) {
   window.location.href = url;
 }
 
-function redirigirAsesoria() {
-  const url = `${baseUrl}/index.php?c=Asesoria&a=ver`;
-  window.location.href = url;
-}
+
 
 function redirigirClaseMuestra(idCurso, nombreCurso) {
   const url = `${baseUrl}/index.php?c=Usuarios&a=claseMuestraNavegacion&idCurso=${idCurso}&nombreCurso=${encodeURIComponent(nombreCurso)}`;
@@ -1506,6 +1503,25 @@ function redirigirHistorial() {
   window.location.href = url;
 }
 
+function redirigirCursos() {
+  const url = `${baseUrl}/index.php?c=Asesoria&a=cursosSection`; // Asegúrate de que esta URL esté correcta
+  window.location.href = url;
+}
+
+function redirigirAsesoria() {
+  const url = `${baseUrl}/index.php?c=Asesoria&a=ver`;
+  window.location.href = url;
+}
+
+function redirigirMaestros() {
+  const url = `${baseUrl}/index.php?c=Asesoria&a=maestrosSection`;
+  window.location.href = url;
+}
+
+function redirigirInicio() {
+  const url = `${baseUrl}/index.php?c=Asesoria&a=inicio2`;
+  window.location.href = url;
+}
 
 //NEW JULIO 24
 function mostrarModalCompra(cursoName, tipoCurso1) {
@@ -1561,11 +1577,15 @@ function mostrarModalCompra(cursoName, tipoCurso1) {
       <div class="plan">
         <label for="mensual"><strong>PAGO MENSUAL</strong><br>$2,100 <span>Realiza 3 pagos mensuales.</span></label>
       </div>
-      <div class="stripe-buttons">
-         <stripe-buy-button
-            buy-button-id="buy_btn_1OurNQCiGkywhmkuimUxFNd8"
-            publishable-key="pk_live_51OuqPCCiGkywhmkuV2nok90bajPjNUHxaG9zVsaV9rxUW5DHk68o9X5bME8vma7Ks6x2ZAUDCSWbfHWnXGLR5KhZ00xrK59zi2">
-         </stripe-buy-button>
+
+
+      <stripe-buy-button
+  buy-button-id="buy_btn_1QQh5ECiGkywhmkuoAJGcG53"
+  publishable-key="pk_live_51OuqPCCiGkywhmkuV2nok90bajPjNUHxaG9zVsaV9rxUW5DHk68o9X5bME8vma7Ks6x2ZAUDCSWbfHWnXGLR5KhZ00xrK59zi2"
+>
+</stripe-buy-button>
+
+
          <stripe-buy-button
               buy-button-id="buy_btn_1PnpRyCiGkywhmku2TZTVfd2"
               publishable-key="pk_live_51OuqPCCiGkywhmkuV2nok90bajPjNUHxaG9zVsaV9rxUW5DHk68o9X5bME8vma7Ks6x2ZAUDCSWbfHWnXGLR5KhZ00xrK59zi2">
