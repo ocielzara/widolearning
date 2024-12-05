@@ -1,3 +1,12 @@
+<?php
+// Verificar si la sesión ya está activa antes de llamarla
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Solo inicia la sesión si no está activa
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,10 +33,25 @@
             <img src="public/images/home/logo2.png" alt="Logo" class="logo-img">
         </a>
         <ul class="navbar">
-            <li><a href="index.php?c=Asesoria&a=inicio2" class="<?= isset($activeLink) && $activeLink == 'inicio' ? 'active' : '' ?>">Inicio</a></li>
-            <li><a href="index.php?c=Asesoria&a=cursosSection" class="<?= isset($activeLink) && $activeLink == 'cursos' ? 'active' : '' ?>">Cursos</a></li>
-            <li><a href="index.php?c=Asesoria&a=maestrosSection" class="<?= isset($activeLink) && $activeLink == 'profesores' ? 'active' : '' ?>">Profesores</a></li>
-            <li><a href="index.php?c=Asesoria&a=ver" class="<?= isset($activeLink) && $activeLink == 'asesoria' ? 'active' : '' ?>">Asesorias</a></li>
+            <li>
+                <a href="index.php?c=Asesoria&a=inicio2<?= isset($_SESSION['id_usuario']) ? '&n=' . htmlspecialchars($_SESSION['id_usuario']) : '' ?>"
+                    class="<?= isset($activeLink) && $activeLink == 'inicio' ? 'active' : '' ?>">Inicio</a>
+            </li>
+
+            <li>
+                <a href="index.php?c=Asesoria&a=cursosSection<?= isset($_SESSION['id_usuario']) ? '&n=' . htmlspecialchars($_SESSION['id_usuario']) : '' ?>"
+                    class="<?= isset($activeLink) && $activeLink == 'cursos' ? 'active' : '' ?>">Cursos</a>
+            </li>
+
+            <li>
+                <a href="index.php?c=Asesoria&a=maestrosSection<?= isset($_SESSION['id_usuario']) ? '&n=' . htmlspecialchars($_SESSION['id_usuario']) : '' ?>"
+                    class="<?= isset($activeLink) && $activeLink == 'profesores' ? 'active' : '' ?>">Profesores</a>
+            </li>
+
+            <li>
+                <a href="index.php?c=Asesoria&a=ver<?= isset($_SESSION['id_usuario']) ? '&n=' . htmlspecialchars($_SESSION['id_usuario']) : '' ?>"
+                    class="<?= isset($activeLink) && $activeLink == 'asesoria' ? 'active' : '' ?>">Asesorías</a>
+            </li>
 
             <?php
             // session_start(); // Descomentar si es necesario
